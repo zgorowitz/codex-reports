@@ -70,38 +70,79 @@
     }
     .meta { color: #c9d3df; }
     .insights {
-      display: grid;
-      grid-template-columns: minmax(240px, .9fr) minmax(0, 1.6fr);
-      gap: 16px;
       background:
         linear-gradient(135deg, rgba(255,255,255,.96), rgba(245,248,250,.98)),
         radial-gradient(circle at 0 0, rgba(36, 84, 166, .12), transparent 32%);
     }
-    .insight-lede p {
+    .insights p {
       margin: 8px 0 0;
       font-size: clamp(18px, 2.4vw, 28px);
-      line-height: 1.15;
+      line-height: 1.22;
       letter-spacing: -.03em;
       font-weight: 760;
     }
-    .insight-grid {
+    .section-head {
+      display: flex;
+      align-items: baseline;
+      justify-content: space-between;
+      gap: 12px;
+      margin-bottom: 14px;
+    }
+    .section-head h2 { margin-bottom: 0; }
+    .section-kicker {
+      color: var(--muted);
+      font-size: 12px;
+      font-weight: 650;
+      text-transform: uppercase;
+      letter-spacing: .04em;
+    }
+    .table-plus-read {
       display: grid;
-      grid-template-columns: repeat(3, minmax(0, 1fr));
-      gap: 10px;
+      grid-template-columns: minmax(0, 1fr) minmax(230px, 280px);
+      gap: 14px;
+      align-items: start;
     }
-    .insight-card {
+    .table-read {
       border: 1px solid var(--line);
-      border-radius: 10px;
-      padding: 12px;
-      background: #fff;
-      min-width: 0;
+      border-radius: 12px;
+      padding: 14px;
+      background: linear-gradient(180deg, #ffffff, #f8fafc);
+      position: sticky;
+      top: 58px;
     }
-    .insight-card strong {
+    .table-read p {
+      margin: 8px 0 12px;
+      color: var(--muted);
+    }
+    .table-read ul {
+      display: grid;
+      gap: 10px;
+      list-style: none;
+      padding: 0;
+      margin: 0 0 12px;
+    }
+    .table-read li {
+      border-top: 1px solid var(--line);
+      padding-top: 10px;
+    }
+    .table-read li strong,
+    .table-read li span,
+    .idea-box strong,
+    .idea-box span {
       display: block;
-      margin-top: 6px;
+    }
+    .table-read li span,
+    .idea-box span {
       font-size: 13px;
       line-height: 1.3;
     }
+    .idea-box {
+      border-radius: 10px;
+      background: #102033;
+      color: #fff;
+      padding: 12px;
+    }
+    .idea-box span { color: #d5dee8; margin-top: 4px; }
     .cards {
       display: flex;
       gap: 12px;
@@ -343,20 +384,9 @@
       h1 { font-size: 23px; }
       .value { font-size: 20px; }
       section { padding: 14px; }
-      .insights {
-        grid-template-columns: 1fr;
-      }
-      .insight-grid {
-        display: flex;
-        overflow-x: auto;
-        margin-left: -14px;
-        margin-right: -14px;
-        padding-left: 14px;
-        padding-right: 14px;
-      }
-      .insight-card {
-        flex: 0 0 min(78vw, 280px);
-      }
+      .insights p { font-size: 18px; }
+      .table-plus-read { grid-template-columns: 1fr; }
+      .table-read { position: static; }
       .cards {
         margin-left: -16px;
         margin-right: -16px;
@@ -414,7 +444,7 @@
 <body>
   <header>
     <h1>Daily View Report</h1>
-    <div class="meta">Anchor date 2026-05-14 · Inventory snapshot 2026-05-15 · Generated 2026-05-15 14:41 EDT</div>
+    <div class="meta">Anchor date 2026-05-14 · Inventory snapshot 2026-05-15 · Generated 2026-05-15 14:47 EDT</div>
   </header>
   <main>
     <nav class="nav" aria-label="Report sections">
@@ -435,28 +465,23 @@
     </div>
     
     <section id="insights" class="insights">
-      <div class="insight-lede">
-        <div class="label">Executive read</div>
-        <p>
-          Sales are <span class="down">-$844.56</span> versus yesterday,
-          with 6 sharp movers up, 7 down,
-          and 12 products on low-stock watch.
-        </p>
-      </div>
-      <div class="insight-grid">
-        <div class="insight-card"><div class="label">Biggest gain</div><strong>PD-LAVENDER-MCT-10-RL / B0G63YF4ZD · +$230.24</strong></div>
-        <div class="insight-card"><div class="label">Biggest drop</div><strong>HS0002-BOX_FBA / B0CT3H57C3 · -$516.00</strong></div>
-        <div class="insight-card"><div class="label">Tightest stock</div><strong>- / B0DDT7GP79 · 4.00 (4.0 days cover)</strong></div>
-      </div>
+      <div class="label">AI executive analysis</div>
+      <p>
+        Sales are <span class="down">-$844.56</span> versus yesterday.
+        The sharpest positive move is PD-LAVENDER-MCT-10-RL / B0G63YF4ZD · +$230.24, while the biggest downside move is HS0002-BOX_FBA / B0CT3H57C3 · -$516.00.
+        There are 12 products on the low-stock watchlist; the tightest current signal is - / B0DDT7GP79 has 4.00 (4.0 days cover).
+        Prioritize margin review on the downside movers before increasing ad spend, and check inventory coverage before leaning into winners.
+      </p>
     </section>
     
-    <section>
-      <h2>Report Map</h2>
-      <div class="muted">main changes: 12, drastic up: 6, drastic down: 7, low stock: 12, stock opportunities: 1</div>
-    </section>
     
     <section id="main_changes">
-      <h2>Main Product Changes</h2>
+      <div class="section-head">
+        <h2>Main Product Changes</h2>
+        <span class="section-kicker">Ranked by movement impact</span>
+      </div>
+      <div class="table-plus-read">
+        
       <div class="table-scroll" role="region" aria-label="Main Product Changes table" tabindex="0">
         <table>
           <thead>
@@ -673,6 +698,23 @@
         </tr>
         </tbody>
         </table>
+      </div>
+    
+        
+      <aside class="table-read" aria-label="Main products read">
+        <div class="label">AI read of table</div>
+        <p>The main product table is concentrated around a few high-impact movers. Start with the products where sales and profit diverge, then check whether ad spend moved with or against revenue.</p>
+        <ul>
+          <li><strong>Sales swing</strong><span>HS0002_FBA / B0CSKFKGWW moved -$862.07.</span></li>
+          <li><strong>Profit pressure</strong><span>HS0002-BOX_FBA / B0CT3H57C3 moved -$268.71.</span></li>
+          <li><strong>Spend watch</strong><span>EO-ROSEHIP-1oz_FBA / B0FBSPBMNN moved +$85.68.</span></li>
+        </ul>
+        <div class="idea-box">
+          <strong>Ideas</strong>
+          <span>Review campaign changes for spend-heavy movers, check stock before scaling winners, and inspect margin drops before adding budget.</span>
+        </div>
+      </aside>
+    
       </div>
     </section>
     
@@ -1497,6 +1539,7 @@
     
     <section id="stock_opportunities">
       <h2>Growth With Stock Risk</h2>
+      
       <div class="table-scroll" role="region" aria-label="Growth With Stock Risk table" tabindex="0">
         <table>
           <thead>
@@ -1527,6 +1570,7 @@
         </tbody>
         </table>
       </div>
+    
     </section>
     
     
