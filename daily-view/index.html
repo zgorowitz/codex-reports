@@ -1,0 +1,2847 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Daily View Report - 2026-05-14</title>
+  <style>
+    :root {
+      color-scheme: light;
+      --ink: #172026;
+      --muted: #6a737d;
+      --line: #d9dee5;
+      --panel: #ffffff;
+      --bg: #f4f6f8;
+      --good: #087443;
+      --bad: #b42318;
+      --warn: #9a6700;
+      --accent: #2454a6;
+    }
+    * { box-sizing: border-box; }
+    body {
+      margin: 0;
+      color: var(--ink);
+      background: var(--bg);
+      font: 14px/1.45 -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+    }
+    header {
+      background: #102033;
+      color: white;
+      padding: 28px 34px;
+    }
+    h1 { margin: 0 0 8px; font-size: 28px; letter-spacing: 0; }
+    h2 { margin: 0 0 14px; font-size: 18px; letter-spacing: 0; }
+    h3 { margin: 0 0 12px; font-size: 15px; }
+    main { padding: 24px 34px 40px; }
+    section {
+      background: var(--panel);
+      border: 1px solid var(--line);
+      border-radius: 8px;
+      margin: 0 0 20px;
+      padding: 18px;
+      overflow: hidden;
+    }
+    .meta { color: #c9d3df; }
+    .cards {
+      display: flex;
+      gap: 12px;
+      margin-bottom: 20px;
+      overflow-x: auto;
+      padding: 2px 2px 12px;
+      scroll-snap-type: x mandatory;
+      scrollbar-width: thin;
+      -webkit-overflow-scrolling: touch;
+    }
+    .card {
+      flex: 0 0 clamp(180px, 23vw, 245px);
+      scroll-snap-align: start;
+      background: var(--panel);
+      border: 1px solid var(--line);
+      border-radius: 8px;
+      padding: 14px;
+    }
+    .label { color: var(--muted); font-size: 12px; text-transform: uppercase; letter-spacing: .04em; }
+    .value { font-size: 24px; font-weight: 700; margin-top: 4px; }
+    .sub { color: var(--muted); margin-top: 2px; }
+    table {
+      width: 100%;
+      border-collapse: collapse;
+      min-width: 980px;
+    }
+    th, td {
+      border-bottom: 1px solid var(--line);
+      padding: 9px 8px;
+      text-align: left;
+      vertical-align: middle;
+    }
+    th {
+      color: var(--muted);
+      font-size: 12px;
+      font-weight: 650;
+      text-transform: uppercase;
+      letter-spacing: .04em;
+      background: #f8fafc;
+    }
+    tr:last-child td { border-bottom: 0; }
+    .num { text-align: right; white-space: nowrap; }
+    .item-col,
+    .item-cell {
+      width: 128px;
+      min-width: 128px;
+      max-width: 128px;
+    }
+    .product {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      min-width: 0;
+      width: 112px;
+    }
+    .product img {
+      width: 38px;
+      height: 38px;
+      border-radius: 6px;
+      object-fit: cover;
+      border: 1px solid var(--line);
+      background: #fff;
+    }
+    .product-meta { min-width: 0; }
+    .sku { font-weight: 700; }
+    .asin { color: var(--muted); font-size: 11px; margin-top: 1px; }
+    .sku,
+    .asin {
+      max-width: 10ch;
+      overflow: hidden;
+      text-overflow: ellipsis;
+      white-space: nowrap;
+    }
+    .metric-value { font-weight: 650; }
+    .metric-delta {
+      color: var(--muted);
+      font-size: 11px;
+      font-weight: 500;
+      margin-top: 2px;
+    }
+    .muted { color: var(--muted); font-size: 12px; }
+    .up { color: var(--good); font-weight: 650; }
+    .down { color: var(--bad); font-weight: 650; }
+    .flat { color: var(--muted); }
+    .empty {
+      color: var(--muted);
+      border: 1px dashed var(--line);
+      border-radius: 8px;
+      padding: 18px;
+      background: #fbfcfd;
+    }
+    .table-scroll {
+      overflow-x: auto;
+      border-radius: 8px;
+      -webkit-overflow-scrolling: touch;
+    }
+    .movers-grid {
+      display: grid;
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+      gap: 16px;
+      align-items: start;
+    }
+    .mover-panel {
+      min-width: 0;
+    }
+    .mover-panel .item-col,
+    .mover-panel .item-cell {
+      width: 58px;
+      min-width: 58px;
+      max-width: 58px;
+    }
+    .mover-panel .product {
+      width: 42px;
+      gap: 0;
+    }
+    .mover-panel .product-meta {
+      display: none;
+    }
+    .compact-table {
+      min-width: 620px;
+    }
+    .category-table {
+      min-width: 760px;
+    }
+    .category-table tbody tr {
+      animation: category-row-in .42s ease both;
+      animation-delay: calc(var(--row-index, 0) * 35ms);
+    }
+    .category-name { font-weight: 700; }
+    .category-metric {
+      display: grid;
+      gap: 4px;
+      min-width: 118px;
+    }
+    .category-metric-top {
+      display: flex;
+      justify-content: flex-end;
+      align-items: baseline;
+      gap: 8px;
+    }
+    .category-current { font-weight: 750; }
+    .category-change {
+      font-size: 10px;
+      font-weight: 700;
+    }
+    .category-avg {
+      color: var(--muted);
+      font-size: 11px;
+      font-weight: 500;
+    }
+    .category-bars {
+      display: grid;
+      gap: 3px;
+      margin-left: auto;
+      width: min(116px, 100%);
+    }
+    .category-bars span {
+      display: block;
+      height: 4px;
+      margin-left: auto;
+      border-radius: 999px;
+      transform-origin: right;
+      animation: category-bar-in .7s cubic-bezier(.2, .8, .2, 1) both;
+      width: var(--bar-width);
+    }
+    .bar-current { background: var(--muted); }
+    .bar-current.up { background: var(--good); }
+    .bar-current.down { background: var(--bad); }
+    .bar-avg {
+      background: #d8dee7;
+      opacity: .85;
+    }
+    @keyframes category-row-in {
+      from { opacity: 0; transform: translateY(6px); }
+      to { opacity: 1; transform: translateY(0); }
+    }
+    @keyframes category-bar-in {
+      from { transform: scaleX(0); }
+      to { transform: scaleX(1); }
+    }
+    @media (min-width: 1180px) {
+      .mover-panel .item-col,
+      .mover-panel .item-cell {
+        width: 128px;
+        min-width: 128px;
+        max-width: 128px;
+      }
+      .mover-panel .product {
+        width: 112px;
+        gap: 8px;
+      }
+      .mover-panel .product-meta {
+        display: block;
+      }
+    }
+    @media (max-width: 720px) {
+      header, main { padding-left: 16px; padding-right: 16px; }
+      h1 { font-size: 23px; }
+      .value { font-size: 20px; }
+      section { padding: 14px; }
+      .cards {
+        margin-left: -16px;
+        margin-right: -16px;
+        padding-left: 16px;
+        padding-right: 16px;
+      }
+      .card { flex-basis: min(82vw, 310px); }
+      .movers-grid {
+        display: flex;
+        gap: 12px;
+        margin-left: -16px;
+        margin-right: -16px;
+        overflow-x: auto;
+        padding-left: 16px;
+        padding-right: 16px;
+        scroll-snap-type: x mandatory;
+        -webkit-overflow-scrolling: touch;
+      }
+      .mover-panel {
+        flex: 0 0 min(88vw, 360px);
+        scroll-snap-align: start;
+      }
+      .table-scroll {
+        overflow-x: auto;
+        border-radius: 8px;
+      }
+      table {
+        width: max-content;
+        min-width: 720px;
+      }
+      .compact-table { min-width: 520px; }
+      .category-table { min-width: 660px; }
+      .item-col,
+      .item-cell {
+        width: 58px;
+        min-width: 58px;
+        max-width: 58px;
+      }
+      .product {
+        width: 42px;
+        min-width: 0;
+        gap: 0;
+      }
+      .product-meta { display: none; }
+      .product img {
+        width: 42px;
+        height: 42px;
+      }
+      .category-bars {
+        width: min(150px, 100%);
+      }
+    }
+    </style>
+</head>
+<body>
+  <header>
+    <h1>Daily View Report</h1>
+    <div class="meta">Anchor date 2026-05-14 · Inventory snapshot 2026-05-15 · Generated 2026-05-15 14:18 EDT</div>
+  </header>
+  <main>
+    <div class="cards">
+      <div class="card"><div class="label">Products</div><div class="value">65</div><div class="sub">with 30d movement</div></div>
+      <div class="card"><div class="label">Units</div><div class="value">1,841</div><div class="sub">today</div></div>
+      <div class="card"><div class="label">Sales</div><div class="value">$20,494.57</div><div class="sub"><span class="down">-$844.56</span> vs yesterday</div></div>
+      <div class="card"><div class="label">Profit</div><div class="value">$4,864.31</div><div class="sub">margin 23.7%</div></div>
+      <div class="card"><div class="label">Ad Spend</div><div class="value">$2,595.30</div><div class="sub">TACOS 12.7%</div></div>
+      <div class="card"><div class="label">Inventory</div><div class="value">91,474</div><div class="sub">latest snapshot</div></div>
+    </div>
+    <section>
+      <h2>Report Map</h2>
+      <div class="muted">main changes: 12, drastic up: 6, drastic down: 7, low stock: 12, stock opportunities: 1</div>
+    </section>
+    
+    <section>
+      <h2>Main Product Changes</h2>
+      <div class="table-scroll" role="region" aria-label="Main Product Changes table" tabindex="0">
+        <table>
+          <thead>
+            <tr>
+              <th class="item-col">Item</th>
+              <th class="num">Units</th>
+              <th class="num">Sales</th>
+              <th class="num">Profit</th>
+              <th class="num">Ad spend</th>
+            </tr>
+          </thead>
+          <tbody>
+        <tr>
+          <td data-label="Item" class="item-cell">
+      <div class="product">
+        <img src="https://m.media-amazon.com/images/I/71JjVPJf4-L.jpg" alt="" loading="lazy">
+        <div class="product-meta">
+          <div class="sku">HS0002_FBA</div>
+          <div class="asin">B0CSKFKGWW</div>
+        </div>
+      </div>
+    </td>
+          <td data-label="Units" class="num"><div class="metric-value">487<div class="metric-delta"><span class="down">-103</span></div></div></td>
+          <td data-label="Sales" class="num"><div class="metric-value">$4,572.53<div class="metric-delta"><span class="down">-$862.07</span></div></div></td>
+          <td data-label="Profit" class="num"><div class="metric-value">$935.63<div class="metric-delta"><span class="up">+$50.56</span></div></div></td>
+          <td data-label="Ad spend" class="num"><div class="metric-value">$538.06<div class="metric-delta"><span class="down">-$315.09</span></div></div></td>
+        </tr>
+        
+
+        <tr>
+          <td data-label="Item" class="item-cell">
+      <div class="product">
+        <img src="https://m.media-amazon.com/images/I/81VFYuBxKeL.jpg" alt="" loading="lazy">
+        <div class="product-meta">
+          <div class="sku">HS0002-BOX_FBA</div>
+          <div class="asin">B0CT3H57C3</div>
+        </div>
+      </div>
+    </td>
+          <td data-label="Units" class="num"><div class="metric-value">1.00<div class="metric-delta"><span class="down">-4.00</span></div></div></td>
+          <td data-label="Sales" class="num"><div class="metric-value">$129.00<div class="metric-delta"><span class="down">-$516.00</span></div></div></td>
+          <td data-label="Profit" class="num"><div class="metric-value">$46.49<div class="metric-delta"><span class="down">-$268.71</span></div></div></td>
+          <td data-label="Ad spend" class="num"><div class="metric-value">$7.66<div class="metric-delta"><span class="up">+$4.11</span></div></div></td>
+        </tr>
+        
+
+        <tr>
+          <td data-label="Item" class="item-cell">
+      <div class="product">
+        <img src="https://m.media-amazon.com/images/I/71i3iGExFEL.jpg" alt="" loading="lazy">
+        <div class="product-meta">
+          <div class="sku">EO-ROSEHIP-1oz_FBA</div>
+          <div class="asin">B0FBSPBMNN</div>
+        </div>
+      </div>
+    </td>
+          <td data-label="Units" class="num"><div class="metric-value">166<div class="metric-delta"><span class="up">+34.00</span></div></div></td>
+          <td data-label="Sales" class="num"><div class="metric-value">$1,689.04<div class="metric-delta"><span class="up">+$351.79</span></div></div></td>
+          <td data-label="Profit" class="num"><div class="metric-value">$314.70<div class="metric-delta"><span class="up">+$127.98</span></div></div></td>
+          <td data-label="Ad spend" class="num"><div class="metric-value">$459.04<div class="metric-delta"><span class="up">+$85.68</span></div></div></td>
+        </tr>
+        
+
+        <tr>
+          <td data-label="Item" class="item-cell">
+      <div class="product">
+        <img src="https://m.media-amazon.com/images/I/71muweHmR8L.jpg" alt="" loading="lazy">
+        <div class="product-meta">
+          <div class="sku">PL6328-00G_FBA</div>
+          <div class="asin">B0CLH141QC</div>
+        </div>
+      </div>
+    </td>
+          <td data-label="Units" class="num"><div class="metric-value">23.00<div class="metric-delta"><span class="up">+8.00</span></div></div></td>
+          <td data-label="Sales" class="num"><div class="metric-value">$559.77<div class="metric-delta"><span class="up">+$229.91</span></div></div></td>
+          <td data-label="Profit" class="num"><div class="metric-value">$158.17<div class="metric-delta"><span class="up">+$208.28</span></div></div></td>
+          <td data-label="Ad spend" class="num"><div class="metric-value">$35.23<div class="metric-delta"><span class="up">+$0.34</span></div></div></td>
+        </tr>
+        
+
+        <tr>
+          <td data-label="Item" class="item-cell">
+      <div class="product">
+        <img src="https://m.media-amazon.com/images/I/914BlwK0OkL.jpg" alt="" loading="lazy">
+        <div class="product-meta">
+          <div class="sku">GK0487_FBA</div>
+          <div class="asin">B07DT6KJWQ</div>
+        </div>
+      </div>
+    </td>
+          <td data-label="Units" class="num"><div class="metric-value">96.00<div class="metric-delta"><span class="up">+16.00</span></div></div></td>
+          <td data-label="Sales" class="num"><div class="metric-value">$1,677.99<div class="metric-delta"><span class="up">+$282.79</span></div></div></td>
+          <td data-label="Profit" class="num"><div class="metric-value">$441.14<div class="metric-delta"><span class="up">+$121.64</span></div></div></td>
+          <td data-label="Ad spend" class="num"><div class="metric-value">$122.38<div class="metric-delta"><span class="down">-$12.40</span></div></div></td>
+        </tr>
+        
+
+        <tr>
+          <td data-label="Item" class="item-cell">
+      <div class="product">
+        <img src="https://m.media-amazon.com/images/I/71mZ3GlUcYL.jpg" alt="" loading="lazy">
+        <div class="product-meta">
+          <div class="sku">HB0024</div>
+          <div class="asin">B0D268LC2Z</div>
+        </div>
+      </div>
+    </td>
+          <td data-label="Units" class="num"><div class="metric-value">33.00<div class="metric-delta"><span class="down">-14.00</span></div></div></td>
+          <td data-label="Sales" class="num"><div class="metric-value">$557.95<div class="metric-delta"><span class="down">-$240.58</span></div></div></td>
+          <td data-label="Profit" class="num"><div class="metric-value">$135.21<div class="metric-delta"><span class="down">-$154.04</span></div></div></td>
+          <td data-label="Ad spend" class="num"><div class="metric-value">$98.42<div class="metric-delta"><span class="down">-$3.41</span></div></div></td>
+        </tr>
+        
+
+        <tr>
+          <td data-label="Item" class="item-cell">
+      <div class="product">
+        <img src="https://m.media-amazon.com/images/I/71V2PwzlFcS.jpg" alt="" loading="lazy">
+        <div class="product-meta">
+          <div class="sku">NC4297_FBA</div>
+          <div class="asin">B0D978Q2WT</div>
+        </div>
+      </div>
+    </td>
+          <td data-label="Units" class="num"><div class="metric-value">124<div class="metric-delta"><span class="down">-22.00</span></div></div></td>
+          <td data-label="Sales" class="num"><div class="metric-value">$1,238.76<div class="metric-delta"><span class="down">-$219.29</span></div></div></td>
+          <td data-label="Profit" class="num"><div class="metric-value">$295.16<div class="metric-delta"><span class="down">-$123.80</span></div></div></td>
+          <td data-label="Ad spend" class="num"><div class="metric-value">$66.84<div class="metric-delta"><span class="down">-$17.82</span></div></div></td>
+        </tr>
+        
+
+        <tr>
+          <td data-label="Item" class="item-cell">
+      <div class="product">
+        <img src="https://m.media-amazon.com/images/I/71otxvUW+TL.jpg" alt="" loading="lazy">
+        <div class="product-meta">
+          <div class="sku">PB-10_FBA</div>
+          <div class="asin">B0B7CMYRX6</div>
+        </div>
+      </div>
+    </td>
+          <td data-label="Units" class="num"><div class="metric-value">66.00<div class="metric-delta"><span class="down">-27.00</span></div></div></td>
+          <td data-label="Sales" class="num"><div class="metric-value">$617.12<div class="metric-delta"><span class="down">-$226.50</span></div></div></td>
+          <td data-label="Profit" class="num"><div class="metric-value">$179.63<div class="metric-delta"><span class="down">-$126.45</span></div></div></td>
+          <td data-label="Ad spend" class="num"><div class="metric-value">$43.70<div class="metric-delta"><span class="up">+$0.21</span></div></div></td>
+        </tr>
+        
+
+        <tr>
+          <td data-label="Item" class="item-cell">
+      <div class="product">
+        <img src="https://m.media-amazon.com/images/I/71Cw9sUaOrL.jpg" alt="" loading="lazy">
+        <div class="product-meta">
+          <div class="sku">PD-TEATREE-MCT-2oz</div>
+          <div class="asin">B0GK86VLMJ</div>
+        </div>
+      </div>
+    </td>
+          <td data-label="Units" class="num"><div class="metric-value">89.00<div class="metric-delta"><span class="down">-6.00</span></div></div></td>
+          <td data-label="Sales" class="num"><div class="metric-value">$875.14<div class="metric-delta"><span class="down">-$69.65</span></div></div></td>
+          <td data-label="Profit" class="num"><div class="metric-value">$14.66<div class="metric-delta"><span class="down">-$180.20</span></div></div></td>
+          <td data-label="Ad spend" class="num"><div class="metric-value">$246.29<div class="metric-delta"><span class="down">-$11.93</span></div></div></td>
+        </tr>
+        
+
+        <tr>
+          <td data-label="Item" class="item-cell">
+      <div class="product">
+        <img src="https://m.media-amazon.com/images/I/81XL9U355hL.jpg" alt="" loading="lazy">
+        <div class="product-meta">
+          <div class="sku">NC4059_FBA</div>
+          <div class="asin">B0DSHDK6MJ</div>
+        </div>
+      </div>
+    </td>
+          <td data-label="Units" class="num"><div class="metric-value">54.00<div class="metric-delta"><span class="down">-6.00</span></div></div></td>
+          <td data-label="Sales" class="num"><div class="metric-value">$809.46<div class="metric-delta"><span class="down">-$219.94</span></div></div></td>
+          <td data-label="Profit" class="num"><div class="metric-value">$245.17<div class="metric-delta"><span class="down">-$83.60</span></div></div></td>
+          <td data-label="Ad spend" class="num"><div class="metric-value">$127.17<div class="metric-delta"><span class="up">+$3.07</span></div></div></td>
+        </tr>
+        
+
+        <tr>
+          <td data-label="Item" class="item-cell">
+      <div class="product">
+        <img src="https://m.media-amazon.com/images/I/81ekfPEgdFL.jpg" alt="" loading="lazy">
+        <div class="product-meta">
+          <div class="sku">PD-LAVENDER-MCT-10-RL</div>
+          <div class="asin">B0G63YF4ZD</div>
+        </div>
+      </div>
+    </td>
+          <td data-label="Units" class="num"><div class="metric-value">56.00<div class="metric-delta"><span class="up">+24.00</span></div></div></td>
+          <td data-label="Sales" class="num"><div class="metric-value">$549.42<div class="metric-delta"><span class="up">+$230.24</span></div></div></td>
+          <td data-label="Profit" class="num"><div class="metric-value">$111.93<div class="metric-delta"><span class="up">+$33.70</span></div></div></td>
+          <td data-label="Ad spend" class="num"><div class="metric-value">$130.76<div class="metric-delta"><span class="up">+$41.76</span></div></div></td>
+        </tr>
+        
+
+        <tr>
+          <td data-label="Item" class="item-cell">
+      <div class="product">
+        <img src="https://m.media-amazon.com/images/I/71wA+fXx7zL.jpg" alt="" loading="lazy">
+        <div class="product-meta">
+          <div class="sku">EO-JOJOBA-1oz</div>
+          <div class="asin">B0CQZL389H</div>
+        </div>
+      </div>
+    </td>
+          <td data-label="Units" class="num"><div class="metric-value">155<div class="metric-delta"><span class="up">+23.00</span></div></div></td>
+          <td data-label="Sales" class="num"><div class="metric-value">$1,336.85<div class="metric-delta"><span class="up">+$227.97</span></div></div></td>
+          <td data-label="Profit" class="num"><div class="metric-value">$250.73<div class="metric-delta"><span class="up">+$39.19</span></div></div></td>
+          <td data-label="Ad spend" class="num"><div class="metric-value">$198.72<div class="metric-delta"><span class="down">-$10.67</span></div></div></td>
+        </tr>
+        </tbody>
+        </table>
+      </div>
+    </section>
+    
+    
+    <section>
+      <h2>Drastic Moves vs Yesterday</h2>
+      <div class="movers-grid">
+        
+    <div class="mover-panel">
+      <h3>Moves Up</h3>
+      <div class="table-scroll" role="region" aria-label="Moves Up table" tabindex="0">
+        <table class="compact-table">
+          <thead>
+            <tr>
+              <th class="item-col">Item</th>
+              <th class="num">Sales</th>
+              <th class="num">Profit</th>
+              <th class="num">Ad spend</th>
+            </tr>
+          </thead>
+          <tbody>
+        <tr>
+          <td data-label="Item" class="item-cell">
+      <div class="product">
+        <img src="https://m.media-amazon.com/images/I/81ekfPEgdFL.jpg" alt="" loading="lazy">
+        <div class="product-meta">
+          <div class="sku">PD-LAVENDER-MCT-10-RL</div>
+          <div class="asin">B0G63YF4ZD</div>
+        </div>
+      </div>
+    </td>
+          <td data-label="Sales" class="num"><div class="metric-value">$549.42<div class="metric-delta"><span class="up">+$230.24</span></div></div></td>
+          <td data-label="Profit" class="num"><div class="metric-value">$111.93<div class="metric-delta"><span class="up">+$33.70</span></div></div></td>
+          <td data-label="Ad spend" class="num"><div class="metric-value">$130.76<div class="metric-delta"><span class="up">+$41.76</span></div></div></td>
+        </tr>
+        
+
+        <tr>
+          <td data-label="Item" class="item-cell">
+      <div class="product">
+        <img src="https://m.media-amazon.com/images/I/71muweHmR8L.jpg" alt="" loading="lazy">
+        <div class="product-meta">
+          <div class="sku">PL6328-00G_FBA</div>
+          <div class="asin">B0CLH141QC</div>
+        </div>
+      </div>
+    </td>
+          <td data-label="Sales" class="num"><div class="metric-value">$559.77<div class="metric-delta"><span class="up">+$229.91</span></div></div></td>
+          <td data-label="Profit" class="num"><div class="metric-value">$158.17<div class="metric-delta"><span class="up">+$208.28</span></div></div></td>
+          <td data-label="Ad spend" class="num"><div class="metric-value">$35.23<div class="metric-delta"><span class="up">+$0.34</span></div></div></td>
+        </tr>
+        
+
+        <tr>
+          <td data-label="Item" class="item-cell">
+      <div class="product">
+        <img src="https://m.media-amazon.com/images/I/71TJzv+K0xL.jpg" alt="" loading="lazy">
+        <div class="product-meta">
+          <div class="sku">KT8002-BK_FBA</div>
+          <div class="asin">B07D1WLHTG</div>
+        </div>
+      </div>
+    </td>
+          <td data-label="Sales" class="num"><div class="metric-value">$311.85<div class="metric-delta"><span class="up">+$165.92</span></div></div></td>
+          <td data-label="Profit" class="num"><div class="metric-value">$60.21<div class="metric-delta"><span class="up">+$25.75</span></div></div></td>
+          <td data-label="Ad spend" class="num"><div class="metric-value">$34.96<div class="metric-delta"><span class="up">+$18.68</span></div></div></td>
+        </tr>
+        
+
+        <tr>
+          <td data-label="Item" class="item-cell">
+      <div class="product">
+        <img src="https://m.media-amazon.com/images/I/91KShcbS6oL.jpg" alt="" loading="lazy">
+        <div class="product-meta">
+          <div class="sku">NC4085_FBA</div>
+          <div class="asin">B082MV956V</div>
+        </div>
+      </div>
+    </td>
+          <td data-label="Sales" class="num"><div class="metric-value">$99.96<div class="metric-delta"><span class="up">+$49.98</span></div></div></td>
+          <td data-label="Profit" class="num"><div class="metric-value">$37.47<div class="metric-delta"><span class="up">+$12.75</span></div></div></td>
+          <td data-label="Ad spend" class="num"><div class="metric-value">$15.79<div class="metric-delta"><span class="down">-$3.18</span></div></div></td>
+        </tr>
+        
+
+        <tr>
+          <td data-label="Item" class="item-cell">
+      <div class="product">
+        <img src="https://m.media-amazon.com/images/I/61VwfRe8tOL.jpg" alt="" loading="lazy">
+        <div class="product-meta">
+          <div class="sku">HS0002-10_FBA</div>
+          <div class="asin">B0C7XRRFC9</div>
+        </div>
+      </div>
+    </td>
+          <td data-label="Sales" class="num"><div class="metric-value">$32.16<div class="metric-delta"><span class="up">+$23.17</span></div></div></td>
+          <td data-label="Profit" class="num"><div class="metric-value">$13.24<div class="metric-delta"><span class="up">+$9.58</span></div></div></td>
+          <td data-label="Ad spend" class="num"><div class="metric-value">$0.30<div class="metric-delta"><span class="down">-$0.30</span></div></div></td>
+        </tr>
+        
+
+        <tr>
+          <td data-label="Item" class="item-cell">
+      <div class="product">
+        <img src="https://m.media-amazon.com/images/I/71a5eedi2bL.jpg" alt="" loading="lazy">
+        <div class="product-meta">
+          <div class="sku">HB0005_PRG</div>
+          <div class="asin">B08NDR5ZWK</div>
+        </div>
+      </div>
+    </td>
+          <td data-label="Sales" class="num"><div class="metric-value">$27.11<div class="metric-delta"><span class="up">+$7.13</span></div></div></td>
+          <td data-label="Profit" class="num"><div class="metric-value">$7.07<div class="metric-delta"><span class="down">-$1.08</span></div></div></td>
+          <td data-label="Ad spend" class="num"><div class="metric-value">$5.75<div class="metric-delta"><span class="up">+$3.60</span></div></div></td>
+        </tr>
+        </tbody>
+        </table>
+      </div>
+    </div>
+    
+        
+    <div class="mover-panel">
+      <h3>Moves Down</h3>
+      <div class="table-scroll" role="region" aria-label="Moves Down table" tabindex="0">
+        <table class="compact-table">
+          <thead>
+            <tr>
+              <th class="item-col">Item</th>
+              <th class="num">Sales</th>
+              <th class="num">Profit</th>
+              <th class="num">Ad spend</th>
+            </tr>
+          </thead>
+          <tbody>
+        <tr>
+          <td data-label="Item" class="item-cell">
+      <div class="product">
+        <img src="https://m.media-amazon.com/images/I/81VFYuBxKeL.jpg" alt="" loading="lazy">
+        <div class="product-meta">
+          <div class="sku">HS0002-BOX_FBA</div>
+          <div class="asin">B0CT3H57C3</div>
+        </div>
+      </div>
+    </td>
+          <td data-label="Sales" class="num"><div class="metric-value">$129.00<div class="metric-delta"><span class="down">-$516.00</span></div></div></td>
+          <td data-label="Profit" class="num"><div class="metric-value">$46.49<div class="metric-delta"><span class="down">-$268.71</span></div></div></td>
+          <td data-label="Ad spend" class="num"><div class="metric-value">$7.66<div class="metric-delta"><span class="up">+$4.11</span></div></div></td>
+        </tr>
+        
+
+        <tr>
+          <td data-label="Item" class="item-cell">
+      <div class="product">
+        <img src="https://m.media-amazon.com/images/I/81q5b9buIsL.jpg" alt="" loading="lazy">
+        <div class="product-meta">
+          <div class="sku">PD-6PC-SET1</div>
+          <div class="asin">PD-RL-SET</div>
+        </div>
+      </div>
+    </td>
+          <td data-label="Sales" class="num"><div class="metric-value">$0.00<div class="metric-delta"><span class="down">-$104.97</span></div></div></td>
+          <td data-label="Profit" class="num"><div class="metric-value">-$3.31<div class="metric-delta"><span class="down">-$38.06</span></div></div></td>
+          <td data-label="Ad spend" class="num"><div class="metric-value">$3.31<div class="metric-delta"><span class="down">-$21.55</span></div></div></td>
+        </tr>
+        
+
+        <tr>
+          <td data-label="Item" class="item-cell">
+      <div class="product">
+        <img src="https://m.media-amazon.com/images/I/71ntcrOSwZL.jpg" alt="" loading="lazy">
+        <div class="product-meta">
+          <div class="sku">GK0858_FBA</div>
+          <div class="asin">B08CX1D4R3</div>
+        </div>
+      </div>
+    </td>
+          <td data-label="Sales" class="num"><div class="metric-value">$119.96<div class="metric-delta"><span class="down">-$89.97</span></div></div></td>
+          <td data-label="Profit" class="num"><div class="metric-value">$14.72<div class="metric-delta"><span class="down">-$45.09</span></div></div></td>
+          <td data-label="Ad spend" class="num"><div class="metric-value">$20.18<div class="metric-delta"><span class="up">+$2.08</span></div></div></td>
+        </tr>
+        
+
+        <tr>
+          <td data-label="Item" class="item-cell">
+      <div class="product">
+        <img src="https://m.media-amazon.com/images/I/71HVlg56pML.jpg" alt="" loading="lazy">
+        <div class="product-meta">
+          <div class="sku">KT8153_FBA</div>
+          <div class="asin">B07K4WPNH6</div>
+        </div>
+      </div>
+    </td>
+          <td data-label="Sales" class="num"><div class="metric-value">$79.96<div class="metric-delta"><span class="down">-$79.96</span></div></div></td>
+          <td data-label="Profit" class="num"><div class="metric-value">$19.00<div class="metric-delta"><span class="down">-$8.33</span></div></div></td>
+          <td data-label="Ad spend" class="num"><div class="metric-value">$7.20<div class="metric-delta"><span class="down">-$1.08</span></div></div></td>
+        </tr>
+        
+
+        <tr>
+          <td data-label="Item" class="item-cell">
+      <div class="product">
+        <img src="https://m.media-amazon.com/images/I/71KQSjadjFL.jpg" alt="" loading="lazy">
+        <div class="product-meta">
+          <div class="sku">BN1663_FBA</div>
+          <div class="asin">B077QPVJ67</div>
+        </div>
+      </div>
+    </td>
+          <td data-label="Sales" class="num"><div class="metric-value">$14.24<div class="metric-delta"><span class="down">-$30.73</span></div></div></td>
+          <td data-label="Profit" class="num"><div class="metric-value">$3.67<div class="metric-delta"><span class="down">-$8.71</span></div></div></td>
+          <td data-label="Ad spend" class="num"><div class="metric-value">$1.20<div class="metric-delta"><span class="down">-$2.47</span></div></div></td>
+        </tr>
+        
+
+        <tr>
+          <td data-label="Item" class="item-cell">
+      <div class="product">
+        <img src="https://m.media-amazon.com/images/I/81ryEZ-F+-L.jpg" alt="" loading="lazy">
+        <div class="product-meta">
+          <div class="sku">BR3791_FBA</div>
+          <div class="asin">B077ZFZX7S</div>
+        </div>
+      </div>
+    </td>
+          <td data-label="Sales" class="num"><div class="metric-value">$11.99<div class="metric-delta"><span class="down">-$17.98</span></div></div></td>
+          <td data-label="Profit" class="num"><div class="metric-value">$4.86<div class="metric-delta"><span class="down">-$1.05</span></div></div></td>
+          <td data-label="Ad spend" class="num"><div class="metric-value">$0.37<div class="metric-delta"><span class="up">+$0.09</span></div></div></td>
+        </tr>
+        
+
+        <tr>
+          <td data-label="Item" class="item-cell">
+      <div class="product">
+        <img src="https://m.media-amazon.com/images/I/61Swt-Poq1L.jpg" alt="" loading="lazy">
+        <div class="product-meta">
+          <div class="sku">FJ9991-B_FBA</div>
+          <div class="asin">B0CKVFYDJZ</div>
+        </div>
+      </div>
+    </td>
+          <td data-label="Sales" class="num"><div class="metric-value">$0.00<div class="metric-delta"><span class="down">-$17.56</span></div></div></td>
+          <td data-label="Profit" class="num"><div class="metric-value">-$1.39<div class="metric-delta"><span class="down">-$7.28</span></div></div></td>
+          <td data-label="Ad spend" class="num"><div class="metric-value">$1.39<div class="metric-delta"><span class="up">+$0.84</span></div></div></td>
+        </tr>
+        </tbody>
+        </table>
+      </div>
+    </div>
+    
+      </div>
+    </section>
+    
+    
+    <section>
+      <h2>Low Stock Watchlist</h2>
+      <div class="table-scroll" role="region" aria-label="Low Stock Watchlist table" tabindex="0">
+        <table>
+          <thead>
+            <tr>
+              <th class="item-col">Item</th>
+              <th class="num">Units</th>
+              <th class="num">Ad spend</th>
+              <th class="num">Inventory</th>
+            </tr>
+          </thead>
+          <tbody>
+        <tr>
+          <td data-label="Item" class="item-cell">
+      <div class="product">
+        <img src="https://m.media-amazon.com/images/I/71mZ3GlUcYL.jpg" alt="" loading="lazy">
+        <div class="product-meta">
+          <div class="sku">HB0024</div>
+          <div class="asin">B0D268LC2Z</div>
+        </div>
+      </div>
+    </td>
+          <td data-label="Units" class="num"><div class="metric-value">33.00<div class="metric-delta"><span class="down">-14.00</span></div></div></td>
+          <td data-label="Ad spend" class="num"><div class="metric-value">$98.42<div class="metric-delta"><span class="down">-$3.41</span></div></div></td>
+          <td data-label="Inventory" class="num"><div class="metric-value">662<div class="metric-delta">15.8 days cover</div></div></td>
+        </tr>
+        
+
+        <tr>
+          <td data-label="Item" class="item-cell">
+      <div class="product">
+        <img src="https://m.media-amazon.com/images/I/81qpUKfhv8L.jpg" alt="" loading="lazy">
+        <div class="product-meta">
+          <div class="sku">GK0278_FBA</div>
+          <div class="asin">B0B9QZCJQZ</div>
+        </div>
+      </div>
+    </td>
+          <td data-label="Units" class="num"><div class="metric-value">9.00<div class="metric-delta"><span class="down">-4.00</span></div></div></td>
+          <td data-label="Ad spend" class="num"><div class="metric-value">$17.15<div class="metric-delta"><span class="up">+$4.88</span></div></div></td>
+          <td data-label="Inventory" class="num"><div class="metric-value">132<div class="metric-delta">19.5 days cover</div></div></td>
+        </tr>
+        
+
+        <tr>
+          <td data-label="Item" class="item-cell">
+      <div class="product">
+        <img src="https://m.media-amazon.com/images/I/81p4f01eGTL.jpg" alt="" loading="lazy">
+        <div class="product-meta">
+          <div class="sku">GK0954</div>
+          <div class="asin">B0D9KZXQL3</div>
+        </div>
+      </div>
+    </td>
+          <td data-label="Units" class="num"><div class="metric-value">1.00<div class="metric-delta"><span class="up">+1.00</span></div></div></td>
+          <td data-label="Ad spend" class="num"><div class="metric-value">$0.00<div class="metric-delta"><span class="flat">$0.00</span></div></div></td>
+          <td data-label="Inventory" class="num"><div class="metric-value">21.00<div class="metric-delta">42.0 days cover</div></div></td>
+        </tr>
+        
+
+        <tr>
+          <td data-label="Item" class="item-cell">
+      <div class="product">
+        <img src="https://m.media-amazon.com/images/I/71Q2VWvpYML.jpg" alt="" loading="lazy">
+        <div class="product-meta">
+          <div class="sku">-</div>
+          <div class="asin">B00M8HC272</div>
+        </div>
+      </div>
+    </td>
+          <td data-label="Units" class="num"><div class="metric-value">0.00<div class="metric-delta"><span class="flat">0.00</span></div></div></td>
+          <td data-label="Ad spend" class="num"><div class="metric-value">$0.00<div class="metric-delta"><span class="flat">$0.00</span></div></div></td>
+          <td data-label="Inventory" class="num"><div class="metric-value">16.00<div class="metric-delta">480.0 days cover</div></div></td>
+        </tr>
+        
+
+        <tr>
+          <td data-label="Item" class="item-cell">
+      <div class="product">
+        <img src="https://m.media-amazon.com/images/I/71XZ6ZR4LUL.jpg" alt="" loading="lazy">
+        <div class="product-meta">
+          <div class="sku">-</div>
+          <div class="asin">B07BT5S1QK</div>
+        </div>
+      </div>
+    </td>
+          <td data-label="Units" class="num"><div class="metric-value">0.00<div class="metric-delta"><span class="flat">0.00</span></div></div></td>
+          <td data-label="Ad spend" class="num"><div class="metric-value">$0.00<div class="metric-delta"><span class="flat">$0.00</span></div></div></td>
+          <td data-label="Inventory" class="num"><div class="metric-value">0.00<div class="metric-delta">0.0 days cover</div></div></td>
+        </tr>
+        
+
+        <tr>
+          <td data-label="Item" class="item-cell">
+      <div class="product">
+        <img src="https://m.media-amazon.com/images/I/81uYExbCExL.jpg" alt="" loading="lazy">
+        <div class="product-meta">
+          <div class="sku">-</div>
+          <div class="asin">B082P8LS2X</div>
+        </div>
+      </div>
+    </td>
+          <td data-label="Units" class="num"><div class="metric-value">0.00<div class="metric-delta"><span class="flat">0.00</span></div></div></td>
+          <td data-label="Ad spend" class="num"><div class="metric-value">$0.00<div class="metric-delta"><span class="flat">$0.00</span></div></div></td>
+          <td data-label="Inventory" class="num"><div class="metric-value">1.00<div class="metric-delta">15.0 days cover</div></div></td>
+        </tr>
+        
+
+        <tr>
+          <td data-label="Item" class="item-cell">
+      <div class="product">
+        <img src="https://m.media-amazon.com/images/I/61suvKoJDSL.jpg" alt="" loading="lazy">
+        <div class="product-meta">
+          <div class="sku">-</div>
+          <div class="asin">B0CKVVV9NR</div>
+        </div>
+      </div>
+    </td>
+          <td data-label="Units" class="num"><div class="metric-value">0.00<div class="metric-delta"><span class="flat">0.00</span></div></div></td>
+          <td data-label="Ad spend" class="num"><div class="metric-value">$0.00<div class="metric-delta"><span class="flat">$0.00</span></div></div></td>
+          <td data-label="Inventory" class="num"><div class="metric-value">0.00<div class="metric-delta">0.0 days cover</div></div></td>
+        </tr>
+        
+
+        <tr>
+          <td data-label="Item" class="item-cell">
+      <div class="product">
+        <img src="https://m.media-amazon.com/images/I/81hXrCqoZpL.jpg" alt="" loading="lazy">
+        <div class="product-meta">
+          <div class="sku">-</div>
+          <div class="asin">B0DCL58D4C</div>
+        </div>
+      </div>
+    </td>
+          <td data-label="Units" class="num"><div class="metric-value">0.00<div class="metric-delta"><span class="flat">0.00</span></div></div></td>
+          <td data-label="Ad spend" class="num"><div class="metric-value">$0.00<div class="metric-delta"><span class="flat">$0.00</span></div></div></td>
+          <td data-label="Inventory" class="num"><div class="metric-value">4.00<div class="metric-delta">10.9 days cover</div></div></td>
+        </tr>
+        
+
+        <tr>
+          <td data-label="Item" class="item-cell">
+      <div class="product">
+        <img src="https://m.media-amazon.com/images/I/71J4ZtgdnbL.jpg" alt="" loading="lazy">
+        <div class="product-meta">
+          <div class="sku">-</div>
+          <div class="asin">B0DDT7GP79</div>
+        </div>
+      </div>
+    </td>
+          <td data-label="Units" class="num"><div class="metric-value">0.00<div class="metric-delta"><span class="flat">0.00</span></div></div></td>
+          <td data-label="Ad spend" class="num"><div class="metric-value">$0.00<div class="metric-delta"><span class="flat">$0.00</span></div></div></td>
+          <td data-label="Inventory" class="num"><div class="metric-value">4.00<div class="metric-delta">4.0 days cover</div></div></td>
+        </tr>
+        
+
+        <tr>
+          <td data-label="Item" class="item-cell">
+      <div class="product">
+        <img src="https://m.media-amazon.com/images/I/71uMrVg2pNL.jpg" alt="" loading="lazy">
+        <div class="product-meta">
+          <div class="sku">BR4238_FBA</div>
+          <div class="asin">B0F7QKYY9L</div>
+        </div>
+      </div>
+    </td>
+          <td data-label="Units" class="num"><div class="metric-value">0.00<div class="metric-delta"><span class="flat">0.00</span></div></div></td>
+          <td data-label="Ad spend" class="num"><div class="metric-value">$0.21<div class="metric-delta"><span class="flat">$0.00</span></div></div></td>
+          <td data-label="Inventory" class="num"><div class="metric-value">18.00<div class="metric-delta">36.0 days cover</div></div></td>
+        </tr>
+        
+
+        <tr>
+          <td data-label="Item" class="item-cell">
+      <div class="product">
+        <img src="https://m.media-amazon.com/images/I/61bVsBjIdcL.jpg" alt="" loading="lazy">
+        <div class="product-meta">
+          <div class="sku">-</div>
+          <div class="asin">B0F8PM57CS</div>
+        </div>
+      </div>
+    </td>
+          <td data-label="Units" class="num"><div class="metric-value">0.00<div class="metric-delta"><span class="flat">0.00</span></div></div></td>
+          <td data-label="Ad spend" class="num"><div class="metric-value">$0.00<div class="metric-delta"><span class="flat">$0.00</span></div></div></td>
+          <td data-label="Inventory" class="num"><div class="metric-value">29.00<div class="metric-delta">39.5 days cover</div></div></td>
+        </tr>
+        
+
+        <tr>
+          <td data-label="Item" class="item-cell">
+      <div class="product">
+        <img src="https://m.media-amazon.com/images/I/714Z8B9IjFL.jpg" alt="" loading="lazy">
+        <div class="product-meta">
+          <div class="sku">HB0026</div>
+          <div class="asin">B0FFF83WFD</div>
+        </div>
+      </div>
+    </td>
+          <td data-label="Units" class="num"><div class="metric-value">0.00<div class="metric-delta"><span class="flat">0.00</span></div></div></td>
+          <td data-label="Ad spend" class="num"><div class="metric-value">$1.50<div class="metric-delta"><span class="up">+$0.07</span></div></div></td>
+          <td data-label="Inventory" class="num"><div class="metric-value">24.00<div class="metric-delta">120.0 days cover</div></div></td>
+        </tr>
+        </tbody>
+        </table>
+      </div>
+    </section>
+    
+    
+    <section>
+      <h2>Category Today vs 30d Average</h2>
+      <div class="table-scroll" role="region" aria-label="Category Today vs 30d Average table" tabindex="0">
+        <table class="category-table">
+          <thead>
+            <tr>
+              <th>Category</th>
+              <th class="num">Units</th>
+              <th class="num">Sales</th>
+              <th class="num">Profit</th>
+              <th class="num">Ad spend</th>
+            </tr>
+          </thead>
+          <tbody>
+        <tr style="--row-index: 0">
+          <td data-label="Category" class="category-name">#PA</td>
+          <td data-label="Units" class="num">
+      <div class="category-metric">
+        <div class="category-metric-top">
+          <span class="category-current">628</span>
+          <span class="category-change down"><span class="down">-11.5%</span></span>
+        </div>
+        <div class="category-avg">709</div>
+        <div class="category-bars" aria-hidden="true">
+          <span class="bar-current down" style="--bar-width: 88.5%"></span>
+          <span class="bar-avg" style="--bar-width: 100.0%"></span>
+        </div>
+      </div>
+    </td>
+          <td data-label="Sales" class="num">
+      <div class="category-metric">
+        <div class="category-metric-top">
+          <span class="category-current">$6,330.45</span>
+          <span class="category-change down"><span class="down">-17.3%</span></span>
+        </div>
+        <div class="category-avg">$7,652.15</div>
+        <div class="category-bars" aria-hidden="true">
+          <span class="bar-current down" style="--bar-width: 82.7%"></span>
+          <span class="bar-avg" style="--bar-width: 100.0%"></span>
+        </div>
+      </div>
+    </td>
+          <td data-label="Profit" class="num">
+      <div class="category-metric">
+        <div class="category-metric-top">
+          <span class="category-current">$1,449.66</span>
+          <span class="category-change down"><span class="down">-23.5%</span></span>
+        </div>
+        <div class="category-avg">$1,894.22</div>
+        <div class="category-bars" aria-hidden="true">
+          <span class="bar-current down" style="--bar-width: 76.5%"></span>
+          <span class="bar-avg" style="--bar-width: 100.0%"></span>
+        </div>
+      </div>
+    </td>
+          <td data-label="Ad spend" class="num">
+      <div class="category-metric">
+        <div class="category-metric-top">
+          <span class="category-current">$729.05</span>
+          <span class="category-change down"><span class="down">-46.6%</span></span>
+        </div>
+        <div class="category-avg">$1,365.07</div>
+        <div class="category-bars" aria-hidden="true">
+          <span class="bar-current down" style="--bar-width: 53.4%"></span>
+          <span class="bar-avg" style="--bar-width: 100.0%"></span>
+        </div>
+      </div>
+    </td>
+        </tr>
+        
+
+        <tr style="--row-index: 1">
+          <td data-label="Category" class="category-name">#EO</td>
+          <td data-label="Units" class="num">
+      <div class="category-metric">
+        <div class="category-metric-top">
+          <span class="category-current">636</span>
+          <span class="category-change up"><span class="up">+56.5%</span></span>
+        </div>
+        <div class="category-avg">406</div>
+        <div class="category-bars" aria-hidden="true">
+          <span class="bar-current up" style="--bar-width: 100.0%"></span>
+          <span class="bar-avg" style="--bar-width: 63.9%"></span>
+        </div>
+      </div>
+    </td>
+          <td data-label="Sales" class="num">
+      <div class="category-metric">
+        <div class="category-metric-top">
+          <span class="category-current">$5,723.15</span>
+          <span class="category-change up"><span class="up">+46.5%</span></span>
+        </div>
+        <div class="category-avg">$3,905.90</div>
+        <div class="category-bars" aria-hidden="true">
+          <span class="bar-current up" style="--bar-width: 100.0%"></span>
+          <span class="bar-avg" style="--bar-width: 68.2%"></span>
+        </div>
+      </div>
+    </td>
+          <td data-label="Profit" class="num">
+      <div class="category-metric">
+        <div class="category-metric-top">
+          <span class="category-current">$827.58</span>
+          <span class="category-change up"><span class="up">+22.2%</span></span>
+        </div>
+        <div class="category-avg">$677.23</div>
+        <div class="category-bars" aria-hidden="true">
+          <span class="bar-current up" style="--bar-width: 100.0%"></span>
+          <span class="bar-avg" style="--bar-width: 81.8%"></span>
+        </div>
+      </div>
+    </td>
+          <td data-label="Ad spend" class="num">
+      <div class="category-metric">
+        <div class="category-metric-top">
+          <span class="category-current">$1,241.41</span>
+          <span class="category-change up"><span class="up">+32.3%</span></span>
+        </div>
+        <div class="category-avg">$938.53</div>
+        <div class="category-bars" aria-hidden="true">
+          <span class="bar-current up" style="--bar-width: 100.0%"></span>
+          <span class="bar-avg" style="--bar-width: 75.6%"></span>
+        </div>
+      </div>
+    </td>
+        </tr>
+        
+
+        <tr style="--row-index: 2">
+          <td data-label="Category" class="category-name">#NC</td>
+          <td data-label="Units" class="num">
+      <div class="category-metric">
+        <div class="category-metric-top">
+          <span class="category-current">293</span>
+          <span class="category-change down"><span class="down">-13.8%</span></span>
+        </div>
+        <div class="category-avg">340</div>
+        <div class="category-bars" aria-hidden="true">
+          <span class="bar-current down" style="--bar-width: 86.2%"></span>
+          <span class="bar-avg" style="--bar-width: 100.0%"></span>
+        </div>
+      </div>
+    </td>
+          <td data-label="Sales" class="num">
+      <div class="category-metric">
+        <div class="category-metric-top">
+          <span class="category-current">$4,026.07</span>
+          <span class="category-change down"><span class="down">-13.2%</span></span>
+        </div>
+        <div class="category-avg">$4,636.57</div>
+        <div class="category-bars" aria-hidden="true">
+          <span class="bar-current down" style="--bar-width: 86.8%"></span>
+          <span class="bar-avg" style="--bar-width: 100.0%"></span>
+        </div>
+      </div>
+    </td>
+          <td data-label="Profit" class="num">
+      <div class="category-metric">
+        <div class="category-metric-top">
+          <span class="category-current">$1,458.57</span>
+          <span class="category-change down"><span class="down">-20.2%</span></span>
+        </div>
+        <div class="category-avg">$1,826.95</div>
+        <div class="category-bars" aria-hidden="true">
+          <span class="bar-current down" style="--bar-width: 79.8%"></span>
+          <span class="bar-avg" style="--bar-width: 100.0%"></span>
+        </div>
+      </div>
+    </td>
+          <td data-label="Ad spend" class="num">
+      <div class="category-metric">
+        <div class="category-metric-top">
+          <span class="category-current">$330.60</span>
+          <span class="category-change down"><span class="down">-19.0%</span></span>
+        </div>
+        <div class="category-avg">$408.09</div>
+        <div class="category-bars" aria-hidden="true">
+          <span class="bar-current down" style="--bar-width: 81.0%"></span>
+          <span class="bar-avg" style="--bar-width: 100.0%"></span>
+        </div>
+      </div>
+    </td>
+        </tr>
+        
+
+        <tr style="--row-index: 3">
+          <td data-label="Category" class="category-name">#GK</td>
+          <td data-label="Units" class="num">
+      <div class="category-metric">
+        <div class="category-metric-top">
+          <span class="category-current">183</span>
+          <span class="category-change up"><span class="up">+22.6%</span></span>
+        </div>
+        <div class="category-avg">149</div>
+        <div class="category-bars" aria-hidden="true">
+          <span class="bar-current up" style="--bar-width: 100.0%"></span>
+          <span class="bar-avg" style="--bar-width: 81.5%"></span>
+        </div>
+      </div>
+    </td>
+          <td data-label="Sales" class="num">
+      <div class="category-metric">
+        <div class="category-metric-top">
+          <span class="category-current">$3,576.12</span>
+          <span class="category-change up"><span class="up">+25.9%</span></span>
+        </div>
+        <div class="category-avg">$2,840.68</div>
+        <div class="category-bars" aria-hidden="true">
+          <span class="bar-current up" style="--bar-width: 100.0%"></span>
+          <span class="bar-avg" style="--bar-width: 79.4%"></span>
+        </div>
+      </div>
+    </td>
+          <td data-label="Profit" class="num">
+      <div class="category-metric">
+        <div class="category-metric-top">
+          <span class="category-current">$877.62</span>
+          <span class="category-change up"><span class="up">+35.4%</span></span>
+        </div>
+        <div class="category-avg">$648.31</div>
+        <div class="category-bars" aria-hidden="true">
+          <span class="bar-current up" style="--bar-width: 100.0%"></span>
+          <span class="bar-avg" style="--bar-width: 73.9%"></span>
+        </div>
+      </div>
+    </td>
+          <td data-label="Ad spend" class="num">
+      <div class="category-metric">
+        <div class="category-metric-top">
+          <span class="category-current">$274.43</span>
+          <span class="category-change down"><span class="down">-2.2%</span></span>
+        </div>
+        <div class="category-avg">$280.52</div>
+        <div class="category-bars" aria-hidden="true">
+          <span class="bar-current down" style="--bar-width: 97.8%"></span>
+          <span class="bar-avg" style="--bar-width: 100.0%"></span>
+        </div>
+      </div>
+    </td>
+        </tr>
+        
+
+        <tr style="--row-index: 4">
+          <td data-label="Category" class="category-name">#BJ</td>
+          <td data-label="Units" class="num">
+      <div class="category-metric">
+        <div class="category-metric-top">
+          <span class="category-current">97.00</span>
+          <span class="category-change down"><span class="down">-3.8%</span></span>
+        </div>
+        <div class="category-avg">101</div>
+        <div class="category-bars" aria-hidden="true">
+          <span class="bar-current down" style="--bar-width: 96.2%"></span>
+          <span class="bar-avg" style="--bar-width: 100.0%"></span>
+        </div>
+      </div>
+    </td>
+          <td data-label="Sales" class="num">
+      <div class="category-metric">
+        <div class="category-metric-top">
+          <span class="category-current">$678.82</span>
+          <span class="category-change down"><span class="down">-8.3%</span></span>
+        </div>
+        <div class="category-avg">$740.32</div>
+        <div class="category-bars" aria-hidden="true">
+          <span class="bar-current down" style="--bar-width: 91.7%"></span>
+          <span class="bar-avg" style="--bar-width: 100.0%"></span>
+        </div>
+      </div>
+    </td>
+          <td data-label="Profit" class="num">
+      <div class="category-metric">
+        <div class="category-metric-top">
+          <span class="category-current">$170.40</span>
+          <span class="category-change down"><span class="down">-12.9%</span></span>
+        </div>
+        <div class="category-avg">$195.73</div>
+        <div class="category-bars" aria-hidden="true">
+          <span class="bar-current down" style="--bar-width: 87.1%"></span>
+          <span class="bar-avg" style="--bar-width: 100.0%"></span>
+        </div>
+      </div>
+    </td>
+          <td data-label="Ad spend" class="num">
+      <div class="category-metric">
+        <div class="category-metric-top">
+          <span class="category-current">$16.93</span>
+          <span class="category-change down"><span class="down">-13.6%</span></span>
+        </div>
+        <div class="category-avg">$19.60</div>
+        <div class="category-bars" aria-hidden="true">
+          <span class="bar-current down" style="--bar-width: 86.4%"></span>
+          <span class="bar-avg" style="--bar-width: 100.0%"></span>
+        </div>
+      </div>
+    </td>
+        </tr>
+        
+
+        <tr style="--row-index: 5">
+          <td data-label="Category" class="category-name">#FJ</td>
+          <td data-label="Units" class="num">
+      <div class="category-metric">
+        <div class="category-metric-top">
+          <span class="category-current">4.00</span>
+          <span class="category-change up"><span class="up">+103.4%</span></span>
+        </div>
+        <div class="category-avg">1.97</div>
+        <div class="category-bars" aria-hidden="true">
+          <span class="bar-current up" style="--bar-width: 100.0%"></span>
+          <span class="bar-avg" style="--bar-width: 49.2%"></span>
+        </div>
+      </div>
+    </td>
+          <td data-label="Sales" class="num">
+      <div class="category-metric">
+        <div class="category-metric-top">
+          <span class="category-current">$159.96</span>
+          <span class="category-change up"><span class="up">+127.9%</span></span>
+        </div>
+        <div class="category-avg">$70.19</div>
+        <div class="category-bars" aria-hidden="true">
+          <span class="bar-current up" style="--bar-width: 100.0%"></span>
+          <span class="bar-avg" style="--bar-width: 43.9%"></span>
+        </div>
+      </div>
+    </td>
+          <td data-label="Profit" class="num">
+      <div class="category-metric">
+        <div class="category-metric-top">
+          <span class="category-current">$80.48</span>
+          <span class="category-change up"><span class="up">+184.8%</span></span>
+        </div>
+        <div class="category-avg">$28.26</div>
+        <div class="category-bars" aria-hidden="true">
+          <span class="bar-current up" style="--bar-width: 100.0%"></span>
+          <span class="bar-avg" style="--bar-width: 35.1%"></span>
+        </div>
+      </div>
+    </td>
+          <td data-label="Ad spend" class="num">
+      <div class="category-metric">
+        <div class="category-metric-top">
+          <span class="category-current">$2.88</span>
+          <span class="category-change down"><span class="down">-19.2%</span></span>
+        </div>
+        <div class="category-avg">$3.57</div>
+        <div class="category-bars" aria-hidden="true">
+          <span class="bar-current down" style="--bar-width: 80.8%"></span>
+          <span class="bar-avg" style="--bar-width: 100.0%"></span>
+        </div>
+      </div>
+    </td>
+        </tr>
+        </tbody>
+        </table>
+      </div>
+    </section>
+    
+    
+    <section>
+      <h2>Growth With Stock Risk</h2>
+      <div class="table-scroll" role="region" aria-label="Growth With Stock Risk table" tabindex="0">
+        <table>
+          <thead>
+            <tr>
+              <th class="item-col">Item</th>
+              <th class="num">Units</th>
+              <th class="num">Sales</th>
+              <th class="num">Profit</th>
+              <th class="num">Ad spend</th>
+            </tr>
+          </thead>
+          <tbody>
+        <tr>
+          <td data-label="Item" class="item-cell">
+      <div class="product">
+        <img src="https://m.media-amazon.com/images/I/81qpUKfhv8L.jpg" alt="" loading="lazy">
+        <div class="product-meta">
+          <div class="sku">GK0278_FBA</div>
+          <div class="asin">B0B9QZCJQZ</div>
+        </div>
+      </div>
+    </td>
+          <td data-label="Units" class="num"><div class="metric-value">9.00<div class="metric-delta"><span class="down">-4.00</span></div></div></td>
+          <td data-label="Sales" class="num"><div class="metric-value">$162.91<div class="metric-delta"><span class="down">-$70.96</span></div></div></td>
+          <td data-label="Profit" class="num"><div class="metric-value">$20.05<div class="metric-delta"><span class="down">-$28.18</span></div></div></td>
+          <td data-label="Ad spend" class="num"><div class="metric-value">$17.15<div class="metric-delta"><span class="up">+$4.88</span></div></div></td>
+        </tr>
+        </tbody>
+        </table>
+      </div>
+    </section>
+    
+    
+    <section>
+      <h2>Full Parent ASIN Table</h2>
+      <div class="table-scroll" role="region" aria-label="Full Parent ASIN table" tabindex="0">
+        <table>
+          <thead>
+            <tr>
+              <th class="item-col">Item</th>
+              <th>Category</th>
+              <th class="num">Units</th>
+              <th class="num">Sales</th>
+              <th class="num">Profit</th>
+              <th class="num">Ad spend</th>
+              <th class="num">Inventory</th>
+              <th class="num">Fees</th>
+              <th class="num">Margin</th>
+              <th class="num">TACOS</th>
+            </tr>
+          </thead>
+          <tbody>
+        <tr>
+          <td data-label="Item" class="item-cell">
+      <div class="product">
+        <img src="https://m.media-amazon.com/images/I/71JjVPJf4-L.jpg" alt="" loading="lazy">
+        <div class="product-meta">
+          <div class="sku">HS0002_FBA</div>
+          <div class="asin">B0CSKFKGWW</div>
+        </div>
+      </div>
+    </td>
+          <td data-label="Category">#PA</td>
+          <td data-label="Units" class="num"><div class="metric-value">487<div class="metric-delta"><span class="down">-36.77</span></div></div></td>
+          <td data-label="Sales" class="num"><div class="metric-value">$4,572.53<div class="metric-delta"><span class="down">-$652.88</span></div></div></td>
+          <td data-label="Profit" class="num"><div class="metric-value">$935.63<div class="metric-delta"><span class="down">-$258.96</span></div></div></td>
+          <td data-label="Ad spend" class="num"><div class="metric-value">$538.06<div class="metric-delta"><span class="down">-$430.05</span></div></div></td>
+          <td data-label="Inventory" class="num"><div class="metric-value">21,712<div class="metric-delta">41.5 days cover</div></div></td>
+          <td data-label="Fees" class="num">48.1%</td>
+          <td data-label="Margin" class="num">20.5%</td>
+          <td data-label="TACOS" class="num">11.8%</td>
+        </tr>
+        
+
+        <tr>
+          <td data-label="Item" class="item-cell">
+      <div class="product">
+        <img src="https://m.media-amazon.com/images/I/71i3iGExFEL.jpg" alt="" loading="lazy">
+        <div class="product-meta">
+          <div class="sku">EO-ROSEHIP-1oz_FBA</div>
+          <div class="asin">B0FBSPBMNN</div>
+        </div>
+      </div>
+    </td>
+          <td data-label="Category">#EO</td>
+          <td data-label="Units" class="num"><div class="metric-value">166<div class="metric-delta"><span class="up">+62.63</span></div></div></td>
+          <td data-label="Sales" class="num"><div class="metric-value">$1,689.04<div class="metric-delta"><span class="up">+$557.44</span></div></div></td>
+          <td data-label="Profit" class="num"><div class="metric-value">$314.70<div class="metric-delta"><span class="up">+$99.99</span></div></div></td>
+          <td data-label="Ad spend" class="num"><div class="metric-value">$459.04<div class="metric-delta"><span class="up">+$180.65</span></div></div></td>
+          <td data-label="Inventory" class="num"><div class="metric-value">4,701<div class="metric-delta">45.5 days cover</div></div></td>
+          <td data-label="Fees" class="num">39.0%</td>
+          <td data-label="Margin" class="num">18.6%</td>
+          <td data-label="TACOS" class="num">27.2%</td>
+        </tr>
+        
+
+        <tr>
+          <td data-label="Item" class="item-cell">
+      <div class="product">
+        <img src="https://m.media-amazon.com/images/I/914BlwK0OkL.jpg" alt="" loading="lazy">
+        <div class="product-meta">
+          <div class="sku">GK0487_FBA</div>
+          <div class="asin">B07DT6KJWQ</div>
+        </div>
+      </div>
+    </td>
+          <td data-label="Category">#GK</td>
+          <td data-label="Units" class="num"><div class="metric-value">96.00<div class="metric-delta"><span class="up">+15.23</span></div></div></td>
+          <td data-label="Sales" class="num"><div class="metric-value">$1,677.99<div class="metric-delta"><span class="up">+$323.80</span></div></div></td>
+          <td data-label="Profit" class="num"><div class="metric-value">$441.14<div class="metric-delta"><span class="up">+$98.58</span></div></div></td>
+          <td data-label="Ad spend" class="num"><div class="metric-value">$122.38<div class="metric-delta"><span class="down">-$7.91</span></div></div></td>
+          <td data-label="Inventory" class="num"><div class="metric-value">2,762<div class="metric-delta">34.2 days cover</div></div></td>
+          <td data-label="Fees" class="num">46.3%</td>
+          <td data-label="Margin" class="num">26.3%</td>
+          <td data-label="TACOS" class="num">7.3%</td>
+        </tr>
+        
+
+        <tr>
+          <td data-label="Item" class="item-cell">
+      <div class="product">
+        <img src="https://m.media-amazon.com/images/I/81wGSqkNJlL.jpg" alt="" loading="lazy">
+        <div class="product-meta">
+          <div class="sku">NC4058_FBA</div>
+          <div class="asin">B082L68NLX</div>
+        </div>
+      </div>
+    </td>
+          <td data-label="Category">#NC</td>
+          <td data-label="Units" class="num"><div class="metric-value">77.00<div class="metric-delta"><span class="down">-7.10</span></div></div></td>
+          <td data-label="Sales" class="num"><div class="metric-value">$1,538.23<div class="metric-delta"><span class="down">-$94.51</span></div></div></td>
+          <td data-label="Profit" class="num"><div class="metric-value">$749.82<div class="metric-delta"><span class="down">-$15.65</span></div></div></td>
+          <td data-label="Ad spend" class="num"><div class="metric-value">$105.31<div class="metric-delta"><span class="down">-$34.84</span></div></div></td>
+          <td data-label="Inventory" class="num"><div class="metric-value">10,194<div class="metric-delta">121.2 days cover</div></div></td>
+          <td data-label="Fees" class="num">37.0%</td>
+          <td data-label="Margin" class="num">48.7%</td>
+          <td data-label="TACOS" class="num">6.8%</td>
+        </tr>
+        
+
+        <tr>
+          <td data-label="Item" class="item-cell">
+      <div class="product">
+        <img src="https://m.media-amazon.com/images/I/71wA+fXx7zL.jpg" alt="" loading="lazy">
+        <div class="product-meta">
+          <div class="sku">EO-JOJOBA-1oz</div>
+          <div class="asin">B0CQZL389H</div>
+        </div>
+      </div>
+    </td>
+          <td data-label="Category">#EO</td>
+          <td data-label="Units" class="num"><div class="metric-value">155<div class="metric-delta"><span class="up">+42.80</span></div></div></td>
+          <td data-label="Sales" class="num"><div class="metric-value">$1,336.85<div class="metric-delta"><span class="up">+$390.52</span></div></div></td>
+          <td data-label="Profit" class="num"><div class="metric-value">$250.73<div class="metric-delta"><span class="up">+$50.57</span></div></div></td>
+          <td data-label="Ad spend" class="num"><div class="metric-value">$198.72<div class="metric-delta"><span class="up">+$19.77</span></div></div></td>
+          <td data-label="Inventory" class="num"><div class="metric-value">5,680<div class="metric-delta">50.6 days cover</div></div></td>
+          <td data-label="Fees" class="num">55.5%</td>
+          <td data-label="Margin" class="num">18.8%</td>
+          <td data-label="TACOS" class="num">14.9%</td>
+        </tr>
+        
+
+        <tr>
+          <td data-label="Item" class="item-cell">
+      <div class="product">
+        <img src="https://m.media-amazon.com/images/I/71V2PwzlFcS.jpg" alt="" loading="lazy">
+        <div class="product-meta">
+          <div class="sku">NC4297_FBA</div>
+          <div class="asin">B0D978Q2WT</div>
+        </div>
+      </div>
+    </td>
+          <td data-label="Category">#NC</td>
+          <td data-label="Units" class="num"><div class="metric-value">124<div class="metric-delta"><span class="down">-49.40</span></div></div></td>
+          <td data-label="Sales" class="num"><div class="metric-value">$1,238.76<div class="metric-delta"><span class="down">-$487.82</span></div></div></td>
+          <td data-label="Profit" class="num"><div class="metric-value">$295.16<div class="metric-delta"><span class="down">-$328.54</span></div></div></td>
+          <td data-label="Ad spend" class="num"><div class="metric-value">$66.84<div class="metric-delta"><span class="down">-$42.22</span></div></div></td>
+          <td data-label="Inventory" class="num"><div class="metric-value">11,773<div class="metric-delta">67.9 days cover</div></div></td>
+          <td data-label="Fees" class="num">47.3%</td>
+          <td data-label="Margin" class="num">23.8%</td>
+          <td data-label="TACOS" class="num">5.4%</td>
+        </tr>
+        
+
+        <tr>
+          <td data-label="Item" class="item-cell">
+      <div class="product">
+        <img src="https://m.media-amazon.com/images/I/71V-9CRKXxL.jpg" alt="" loading="lazy">
+        <div class="product-meta">
+          <div class="sku">EO-CASTOR-1oz</div>
+          <div class="asin">B0DJBNM8RF</div>
+        </div>
+      </div>
+    </td>
+          <td data-label="Category">#EO</td>
+          <td data-label="Units" class="num"><div class="metric-value">164<div class="metric-delta"><span class="up">+82.57</span></div></div></td>
+          <td data-label="Sales" class="num"><div class="metric-value">$1,172.75<div class="metric-delta"><span class="up">+$525.39</span></div></div></td>
+          <td data-label="Profit" class="num"><div class="metric-value">$129.49<div class="metric-delta"><span class="up">+$45.34</span></div></div></td>
+          <td data-label="Ad spend" class="num"><div class="metric-value">$199.85<div class="metric-delta"><span class="up">+$78.95</span></div></div></td>
+          <td data-label="Inventory" class="num"><div class="metric-value">3,498<div class="metric-delta">43.0 days cover</div></div></td>
+          <td data-label="Fees" class="num">54.5%</td>
+          <td data-label="Margin" class="num">11.0%</td>
+          <td data-label="TACOS" class="num">17.0%</td>
+        </tr>
+        
+
+        <tr>
+          <td data-label="Item" class="item-cell">
+      <div class="product">
+        <img src="https://m.media-amazon.com/images/I/71Cw9sUaOrL.jpg" alt="" loading="lazy">
+        <div class="product-meta">
+          <div class="sku">PD-TEATREE-MCT-2oz</div>
+          <div class="asin">B0GK86VLMJ</div>
+        </div>
+      </div>
+    </td>
+          <td data-label="Category">#EO</td>
+          <td data-label="Units" class="num"><div class="metric-value">89.00<div class="metric-delta"><span class="up">+29.07</span></div></div></td>
+          <td data-label="Sales" class="num"><div class="metric-value">$875.14<div class="metric-delta"><span class="up">+$278.51</span></div></div></td>
+          <td data-label="Profit" class="num"><div class="metric-value">$14.66<div class="metric-delta"><span class="down">-$35.02</span></div></div></td>
+          <td data-label="Ad spend" class="num"><div class="metric-value">$246.29<div class="metric-delta"><span class="up">+$38.14</span></div></div></td>
+          <td data-label="Inventory" class="num"><div class="metric-value">3,250<div class="metric-delta">54.2 days cover</div></div></td>
+          <td data-label="Fees" class="num">57.9%</td>
+          <td data-label="Margin" class="num">1.7%</td>
+          <td data-label="TACOS" class="num">28.1%</td>
+        </tr>
+        
+
+        <tr>
+          <td data-label="Item" class="item-cell">
+      <div class="product">
+        <img src="https://m.media-amazon.com/images/I/81XL9U355hL.jpg" alt="" loading="lazy">
+        <div class="product-meta">
+          <div class="sku">NC4059_FBA</div>
+          <div class="asin">B0DSHDK6MJ</div>
+        </div>
+      </div>
+    </td>
+          <td data-label="Category">#NC</td>
+          <td data-label="Units" class="num"><div class="metric-value">54.00<div class="metric-delta"><span class="up">+6.53</span></div></div></td>
+          <td data-label="Sales" class="num"><div class="metric-value">$809.46<div class="metric-delta"><span class="up">+$43.31</span></div></div></td>
+          <td data-label="Profit" class="num"><div class="metric-value">$245.17<div class="metric-delta"><span class="up">+$8.37</span></div></div></td>
+          <td data-label="Ad spend" class="num"><div class="metric-value">$127.17<div class="metric-delta"><span class="up">+$5.05</span></div></div></td>
+          <td data-label="Inventory" class="num"><div class="metric-value">3,487<div class="metric-delta">73.5 days cover</div></div></td>
+          <td data-label="Fees" class="num">41.0%</td>
+          <td data-label="Margin" class="num">30.3%</td>
+          <td data-label="TACOS" class="num">15.7%</td>
+        </tr>
+        
+
+        <tr>
+          <td data-label="Item" class="item-cell">
+      <div class="product">
+        <img src="https://m.media-amazon.com/images/I/71otxvUW+TL.jpg" alt="" loading="lazy">
+        <div class="product-meta">
+          <div class="sku">PB-10_FBA</div>
+          <div class="asin">B0B7CMYRX6</div>
+        </div>
+      </div>
+    </td>
+          <td data-label="Category">#PA</td>
+          <td data-label="Units" class="num"><div class="metric-value">66.00<div class="metric-delta"><span class="down">-34.17</span></div></div></td>
+          <td data-label="Sales" class="num"><div class="metric-value">$617.12<div class="metric-delta"><span class="down">-$366.66</span></div></div></td>
+          <td data-label="Profit" class="num"><div class="metric-value">$179.63<div class="metric-delta"><span class="down">-$38.17</span></div></div></td>
+          <td data-label="Ad spend" class="num"><div class="metric-value">$43.70<div class="metric-delta"><span class="down">-$175.48</span></div></div></td>
+          <td data-label="Inventory" class="num"><div class="metric-value">4,244<div class="metric-delta">42.4 days cover</div></div></td>
+          <td data-label="Fees" class="num">43.2%</td>
+          <td data-label="Margin" class="num">29.1%</td>
+          <td data-label="TACOS" class="num">7.1%</td>
+        </tr>
+        
+
+        <tr>
+          <td data-label="Item" class="item-cell">
+      <div class="product">
+        <img src="https://m.media-amazon.com/images/I/71muweHmR8L.jpg" alt="" loading="lazy">
+        <div class="product-meta">
+          <div class="sku">PL6328-00G_FBA</div>
+          <div class="asin">B0CLH141QC</div>
+        </div>
+      </div>
+    </td>
+          <td data-label="Category">#GK</td>
+          <td data-label="Units" class="num"><div class="metric-value">23.00<div class="metric-delta"><span class="up">+4.97</span></div></div></td>
+          <td data-label="Sales" class="num"><div class="metric-value">$559.77<div class="metric-delta"><span class="up">+$163.69</span></div></div></td>
+          <td data-label="Profit" class="num"><div class="metric-value">$158.17<div class="metric-delta"><span class="up">+$88.68</span></div></div></td>
+          <td data-label="Ad spend" class="num"><div class="metric-value">$35.23<div class="metric-delta"><span class="down">-$15.41</span></div></div></td>
+          <td data-label="Inventory" class="num"><div class="metric-value">561<div class="metric-delta">31.1 days cover</div></div></td>
+          <td data-label="Fees" class="num">34.8%</td>
+          <td data-label="Margin" class="num">28.3%</td>
+          <td data-label="TACOS" class="num">6.3%</td>
+        </tr>
+        
+
+        <tr>
+          <td data-label="Item" class="item-cell">
+      <div class="product">
+        <img src="https://m.media-amazon.com/images/I/71mZ3GlUcYL.jpg" alt="" loading="lazy">
+        <div class="product-meta">
+          <div class="sku">HB0024</div>
+          <div class="asin">B0D268LC2Z</div>
+        </div>
+      </div>
+    </td>
+          <td data-label="Category">#PA</td>
+          <td data-label="Units" class="num"><div class="metric-value">33.00<div class="metric-delta"><span class="down">-8.83</span></div></div></td>
+          <td data-label="Sales" class="num"><div class="metric-value">$557.95<div class="metric-delta"><span class="down">-$129.32</span></div></div></td>
+          <td data-label="Profit" class="num"><div class="metric-value">$135.21<div class="metric-delta"><span class="down">-$55.02</span></div></div></td>
+          <td data-label="Ad spend" class="num"><div class="metric-value">$98.42<div class="metric-delta"><span class="down">-$17.81</span></div></div></td>
+          <td data-label="Inventory" class="num"><div class="metric-value">662<div class="metric-delta">15.8 days cover</div></div></td>
+          <td data-label="Fees" class="num">39.7%</td>
+          <td data-label="Margin" class="num">24.2%</td>
+          <td data-label="TACOS" class="num">17.6%</td>
+        </tr>
+        
+
+        <tr>
+          <td data-label="Item" class="item-cell">
+      <div class="product">
+        <img src="https://m.media-amazon.com/images/I/81ekfPEgdFL.jpg" alt="" loading="lazy">
+        <div class="product-meta">
+          <div class="sku">PD-LAVENDER-MCT-10-RL</div>
+          <div class="asin">B0G63YF4ZD</div>
+        </div>
+      </div>
+    </td>
+          <td data-label="Category">#EO</td>
+          <td data-label="Units" class="num"><div class="metric-value">56.00<div class="metric-delta"><span class="up">+18.20</span></div></div></td>
+          <td data-label="Sales" class="num"><div class="metric-value">$549.42<div class="metric-delta"><span class="up">+$176.75</span></div></div></td>
+          <td data-label="Profit" class="num"><div class="metric-value">$111.93<div class="metric-delta"><span class="up">+$38.31</span></div></div></td>
+          <td data-label="Ad spend" class="num"><div class="metric-value">$130.76<div class="metric-delta"><span class="up">+$18.63</span></div></div></td>
+          <td data-label="Inventory" class="num"><div class="metric-value">1,967<div class="metric-delta">52.0 days cover</div></div></td>
+          <td data-label="Fees" class="num">47.1%</td>
+          <td data-label="Margin" class="num">20.4%</td>
+          <td data-label="TACOS" class="num">23.8%</td>
+        </tr>
+        
+
+        <tr>
+          <td data-label="Item" class="item-cell">
+      <div class="product">
+        <img src="https://m.media-amazon.com/images/I/71WDOcSjxSL.jpg" alt="" loading="lazy">
+        <div class="product-meta">
+          <div class="sku">PN18G-10</div>
+          <div class="asin">B0B781QSH6</div>
+        </div>
+      </div>
+    </td>
+          <td data-label="Category">#BJ</td>
+          <td data-label="Units" class="num"><div class="metric-value">85.00<div class="metric-delta"><span class="down">-1.27</span></div></div></td>
+          <td data-label="Sales" class="num"><div class="metric-value">$484.69<div class="metric-delta"><span class="down">-$25.53</span></div></div></td>
+          <td data-label="Profit" class="num"><div class="metric-value">$124.38<div class="metric-delta"><span class="down">-$13.70</span></div></div></td>
+          <td data-label="Ad spend" class="num"><div class="metric-value">$0.00<div class="metric-delta"><span class="flat">$0.00</span></div></div></td>
+          <td data-label="Inventory" class="num"><div class="metric-value">6,158<div class="metric-delta">71.4 days cover</div></div></td>
+          <td data-label="Fees" class="num">63.1%</td>
+          <td data-label="Margin" class="num">25.7%</td>
+          <td data-label="TACOS" class="num">0.0%</td>
+        </tr>
+        
+
+        <tr>
+          <td data-label="Item" class="item-cell">
+      <div class="product">
+        <img src="https://m.media-amazon.com/images/I/81qT68bXdAL.jpg" alt="" loading="lazy">
+        <div class="product-meta">
+          <div class="sku">GK0541_FBA</div>
+          <div class="asin">B08VFBQDPF</div>
+        </div>
+      </div>
+    </td>
+          <td data-label="Category">#GK</td>
+          <td data-label="Units" class="num"><div class="metric-value">21.00<div class="metric-delta"><span class="up">+2.43</span></div></div></td>
+          <td data-label="Sales" class="num"><div class="metric-value">$435.79<div class="metric-delta"><span class="up">+$53.27</span></div></div></td>
+          <td data-label="Profit" class="num"><div class="metric-value">$71.08<div class="metric-delta"><span class="down">-$13.42</span></div></div></td>
+          <td data-label="Ad spend" class="num"><div class="metric-value">$34.13<div class="metric-delta"><span class="down">-$3.38</span></div></div></td>
+          <td data-label="Inventory" class="num"><div class="metric-value">707<div class="metric-delta">38.1 days cover</div></div></td>
+          <td data-label="Fees" class="num">38.1%</td>
+          <td data-label="Margin" class="num">16.3%</td>
+          <td data-label="TACOS" class="num">7.8%</td>
+        </tr>
+        
+
+        <tr>
+          <td data-label="Item" class="item-cell">
+      <div class="product">
+        <img src="https://m.media-amazon.com/images/I/71TJzv+K0xL.jpg" alt="" loading="lazy">
+        <div class="product-meta">
+          <div class="sku">KT8002-BK_FBA</div>
+          <div class="asin">B07D1WLHTG</div>
+        </div>
+      </div>
+    </td>
+          <td data-label="Category">#GK</td>
+          <td data-label="Units" class="num"><div class="metric-value">15.00<div class="metric-delta"><span class="up">+6.90</span></div></div></td>
+          <td data-label="Sales" class="num"><div class="metric-value">$311.85<div class="metric-delta"><span class="up">+$145.72</span></div></div></td>
+          <td data-label="Profit" class="num"><div class="metric-value">$60.21<div class="metric-delta"><span class="up">+$34.95</span></div></div></td>
+          <td data-label="Ad spend" class="num"><div class="metric-value">$34.96<div class="metric-delta"><span class="up">+$11.84</span></div></div></td>
+          <td data-label="Inventory" class="num"><div class="metric-value">248<div class="metric-delta">30.6 days cover</div></div></td>
+          <td data-label="Fees" class="num">42.0%</td>
+          <td data-label="Margin" class="num">19.3%</td>
+          <td data-label="TACOS" class="num">11.2%</td>
+        </tr>
+        
+
+        <tr>
+          <td data-label="Item" class="item-cell">
+      <div class="product">
+        <img src="https://m.media-amazon.com/images/I/81hHrcbpY9L.jpg" alt="" loading="lazy">
+        <div class="product-meta">
+          <div class="sku">GK0715_FBA</div>
+          <div class="asin">B0863C6PQS</div>
+        </div>
+      </div>
+    </td>
+          <td data-label="Category">#GK</td>
+          <td data-label="Units" class="num"><div class="metric-value">14.00<div class="metric-delta"><span class="up">+5.83</span></div></div></td>
+          <td data-label="Sales" class="num"><div class="metric-value">$287.86<div class="metric-delta"><span class="up">+$121.27</span></div></div></td>
+          <td data-label="Profit" class="num"><div class="metric-value">$106.12<div class="metric-delta"><span class="up">+$55.60</span></div></div></td>
+          <td data-label="Ad spend" class="num"><div class="metric-value">$10.40<div class="metric-delta"><span class="down">-$0.54</span></div></div></td>
+          <td data-label="Inventory" class="num"><div class="metric-value">327<div class="metric-delta">40.0 days cover</div></div></td>
+          <td data-label="Fees" class="num">40.0%</td>
+          <td data-label="Margin" class="num">36.9%</td>
+          <td data-label="TACOS" class="num">3.6%</td>
+        </tr>
+        
+
+        <tr>
+          <td data-label="Item" class="item-cell">
+      <div class="product">
+        <img src="https://m.media-amazon.com/images/I/71NAirbcH3L.jpg" alt="" loading="lazy">
+        <div class="product-meta">
+          <div class="sku">HB0006_FBA</div>
+          <div class="asin">B0B7RC5ZX5</div>
+        </div>
+      </div>
+    </td>
+          <td data-label="Category">#PA</td>
+          <td data-label="Units" class="num"><div class="metric-value">14.00<div class="metric-delta"><span class="up">+3.37</span></div></div></td>
+          <td data-label="Sales" class="num"><div class="metric-value">$221.86<div class="metric-delta"><span class="up">+$60.43</span></div></div></td>
+          <td data-label="Profit" class="num"><div class="metric-value">$76.60<div class="metric-delta"><span class="up">+$25.31</span></div></div></td>
+          <td data-label="Ad spend" class="num"><div class="metric-value">$15.85<div class="metric-delta"><span class="down">-$7.13</span></div></div></td>
+          <td data-label="Inventory" class="num"><div class="metric-value">369<div class="metric-delta">34.7 days cover</div></div></td>
+          <td data-label="Fees" class="num">40.0%</td>
+          <td data-label="Margin" class="num">34.5%</td>
+          <td data-label="TACOS" class="num">7.1%</td>
+        </tr>
+        
+
+        <tr>
+          <td data-label="Item" class="item-cell">
+      <div class="product">
+        <img src="https://m.media-amazon.com/images/I/71si9VYKN-L.jpg" alt="" loading="lazy">
+        <div class="product-meta">
+          <div class="sku">NC4388</div>
+          <div class="asin">B0CYQ1NCCC</div>
+        </div>
+      </div>
+    </td>
+          <td data-label="Category">#NC</td>
+          <td data-label="Units" class="num"><div class="metric-value">22.00<div class="metric-delta"><span class="up">+4.20</span></div></div></td>
+          <td data-label="Sales" class="num"><div class="metric-value">$219.78<div class="metric-delta"><span class="up">+$43.02</span></div></div></td>
+          <td data-label="Profit" class="num"><div class="metric-value">$81.77<div class="metric-delta"><span class="up">+$16.69</span></div></div></td>
+          <td data-label="Ad spend" class="num"><div class="metric-value">$10.83<div class="metric-delta"><span class="up">+$1.48</span></div></div></td>
+          <td data-label="Inventory" class="num"><div class="metric-value">1,826<div class="metric-delta">102.6 days cover</div></div></td>
+          <td data-label="Fees" class="num">41.2%</td>
+          <td data-label="Margin" class="num">37.2%</td>
+          <td data-label="TACOS" class="num">4.9%</td>
+        </tr>
+        
+
+        <tr>
+          <td data-label="Item" class="item-cell">
+      <div class="product">
+        <img src="https://m.media-amazon.com/images/I/81qpUKfhv8L.jpg" alt="" loading="lazy">
+        <div class="product-meta">
+          <div class="sku">GK0278_FBA</div>
+          <div class="asin">B0B9QZCJQZ</div>
+        </div>
+      </div>
+    </td>
+          <td data-label="Category">#GK</td>
+          <td data-label="Units" class="num"><div class="metric-value">9.00<div class="metric-delta"><span class="up">+2.23</span></div></div></td>
+          <td data-label="Sales" class="num"><div class="metric-value">$162.91<div class="metric-delta"><span class="up">+$43.97</span></div></div></td>
+          <td data-label="Profit" class="num"><div class="metric-value">$20.05<div class="metric-delta"><span class="up">+$1.70</span></div></div></td>
+          <td data-label="Ad spend" class="num"><div class="metric-value">$17.15<div class="metric-delta"><span class="up">+$7.66</span></div></div></td>
+          <td data-label="Inventory" class="num"><div class="metric-value">132<div class="metric-delta">19.5 days cover</div></div></td>
+          <td data-label="Fees" class="num">45.3%</td>
+          <td data-label="Margin" class="num">12.3%</td>
+          <td data-label="TACOS" class="num">10.5%</td>
+        </tr>
+        
+
+        <tr>
+          <td data-label="Item" class="item-cell">
+      <div class="product">
+        <img src="https://m.media-amazon.com/images/I/71m3L+1L0vL.jpg" alt="" loading="lazy">
+        <div class="product-meta">
+          <div class="sku">FJ9804_FBA</div>
+          <div class="asin">B072JBNW1W</div>
+        </div>
+      </div>
+    </td>
+          <td data-label="Category">#FJ</td>
+          <td data-label="Units" class="num"><div class="metric-value">4.00<div class="metric-delta"><span class="up">+2.33</span></div></div></td>
+          <td data-label="Sales" class="num"><div class="metric-value">$159.96<div class="metric-delta"><span class="up">+$95.04</span></div></div></td>
+          <td data-label="Profit" class="num"><div class="metric-value">$81.87<div class="metric-delta"><span class="up">+$52.15</span></div></div></td>
+          <td data-label="Ad spend" class="num"><div class="metric-value">$1.49<div class="metric-delta"><span class="down">-$1.77</span></div></div></td>
+          <td data-label="Inventory" class="num"><div class="metric-value">159<div class="metric-delta">95.4 days cover</div></div></td>
+          <td data-label="Fees" class="num">30.9%</td>
+          <td data-label="Margin" class="num">51.2%</td>
+          <td data-label="TACOS" class="num">0.9%</td>
+        </tr>
+        
+
+        <tr>
+          <td data-label="Item" class="item-cell">
+      <div class="product">
+        <img src="https://m.media-amazon.com/images/I/71LL3UeNxEL.jpg" alt="" loading="lazy">
+        <div class="product-meta">
+          <div class="sku">JOJOBA_FBA</div>
+          <div class="asin">B095YP4V34</div>
+        </div>
+      </div>
+    </td>
+          <td data-label="Category">#PA</td>
+          <td data-label="Units" class="num"><div class="metric-value">18.00<div class="metric-delta"><span class="down">-3.63</span></div></div></td>
+          <td data-label="Sales" class="num"><div class="metric-value">$148.82<div class="metric-delta"><span class="down">-$31.66</span></div></div></td>
+          <td data-label="Profit" class="num"><div class="metric-value">$50.23<div class="metric-delta"><span class="down">-$11.90</span></div></div></td>
+          <td data-label="Ad spend" class="num"><div class="metric-value">$17.81<div class="metric-delta"><span class="down">-$2.29</span></div></div></td>
+          <td data-label="Inventory" class="num"><div class="metric-value">740<div class="metric-delta">34.2 days cover</div></div></td>
+          <td data-label="Fees" class="num">45.3%</td>
+          <td data-label="Margin" class="num">33.8%</td>
+          <td data-label="TACOS" class="num">12.0%</td>
+        </tr>
+        
+
+        <tr>
+          <td data-label="Item" class="item-cell">
+      <div class="product">
+        <img src="https://m.media-amazon.com/images/I/81VFYuBxKeL.jpg" alt="" loading="lazy">
+        <div class="product-meta">
+          <div class="sku">HS0002-BOX_FBA</div>
+          <div class="asin">B0CT3H57C3</div>
+        </div>
+      </div>
+    </td>
+          <td data-label="Category">#PA</td>
+          <td data-label="Units" class="num"><div class="metric-value">1.00<div class="metric-delta"><span class="down">-1.30</span></div></div></td>
+          <td data-label="Sales" class="num"><div class="metric-value">$129.00<div class="metric-delta"><span class="down">-$159.70</span></div></div></td>
+          <td data-label="Profit" class="num"><div class="metric-value">$46.49<div class="metric-delta"><span class="down">-$89.44</span></div></div></td>
+          <td data-label="Ad spend" class="num"><div class="metric-value">$7.66<div class="metric-delta"><span class="up">+$3.82</span></div></div></td>
+          <td data-label="Inventory" class="num"><div class="metric-value">51.00<div class="metric-delta">22.2 days cover</div></div></td>
+          <td data-label="Fees" class="num">28.6%</td>
+          <td data-label="Margin" class="num">36.0%</td>
+          <td data-label="TACOS" class="num">5.9%</td>
+        </tr>
+        
+
+        <tr>
+          <td data-label="Item" class="item-cell">
+      <div class="product">
+        <img src="https://m.media-amazon.com/images/I/71ntcrOSwZL.jpg" alt="" loading="lazy">
+        <div class="product-meta">
+          <div class="sku">GK0858_FBA</div>
+          <div class="asin">B08CX1D4R3</div>
+        </div>
+      </div>
+    </td>
+          <td data-label="Category">#GK</td>
+          <td data-label="Units" class="num"><div class="metric-value">4.00<div class="metric-delta"><span class="down">-4.10</span></div></div></td>
+          <td data-label="Sales" class="num"><div class="metric-value">$119.96<div class="metric-delta"><span class="down">-$122.68</span></div></div></td>
+          <td data-label="Profit" class="num"><div class="metric-value">$14.72<div class="metric-delta"><span class="down">-$41.11</span></div></div></td>
+          <td data-label="Ad spend" class="num"><div class="metric-value">$20.18<div class="metric-delta"><span class="up">+$1.82</span></div></div></td>
+          <td data-label="Inventory" class="num"><div class="metric-value">298<div class="metric-delta">36.8 days cover</div></div></td>
+          <td data-label="Fees" class="num">35.1%</td>
+          <td data-label="Margin" class="num">12.3%</td>
+          <td data-label="TACOS" class="num">16.8%</td>
+        </tr>
+        
+
+        <tr>
+          <td data-label="Item" class="item-cell">
+      <div class="product">
+        <img src="https://m.media-amazon.com/images/I/81hkC6xFs9L.jpg" alt="" loading="lazy">
+        <div class="product-meta">
+          <div class="sku">NC4328_FBA</div>
+          <div class="asin">B0CYT45ZJM</div>
+        </div>
+      </div>
+    </td>
+          <td data-label="Category">#NC</td>
+          <td data-label="Units" class="num"><div class="metric-value">12.00<div class="metric-delta"><span class="up">+5.70</span></div></div></td>
+          <td data-label="Sales" class="num"><div class="metric-value">$119.88<div class="metric-delta"><span class="up">+$56.11</span></div></div></td>
+          <td data-label="Profit" class="num"><div class="metric-value">$49.18<div class="metric-delta"><span class="up">+$29.61</span></div></div></td>
+          <td data-label="Ad spend" class="num"><div class="metric-value">$4.66<div class="metric-delta"><span class="up">+$0.43</span></div></div></td>
+          <td data-label="Inventory" class="num"><div class="metric-value">1,228<div class="metric-delta">194.9 days cover</div></div></td>
+          <td data-label="Fees" class="num">44.9%</td>
+          <td data-label="Margin" class="num">41.0%</td>
+          <td data-label="TACOS" class="num">3.9%</td>
+        </tr>
+        
+
+        <tr>
+          <td data-label="Item" class="item-cell">
+      <div class="product">
+        <img src="https://m.media-amazon.com/images/I/91KShcbS6oL.jpg" alt="" loading="lazy">
+        <div class="product-meta">
+          <div class="sku">NC4085_FBA</div>
+          <div class="asin">B082MV956V</div>
+        </div>
+      </div>
+    </td>
+          <td data-label="Category">#NC</td>
+          <td data-label="Units" class="num"><div class="metric-value">4.00<div class="metric-delta"><span class="down">-6.97</span></div></div></td>
+          <td data-label="Sales" class="num"><div class="metric-value">$99.96<div class="metric-delta"><span class="down">-$169.27</span></div></div></td>
+          <td data-label="Profit" class="num"><div class="metric-value">$37.47<div class="metric-delta"><span class="down">-$77.86</span></div></div></td>
+          <td data-label="Ad spend" class="num"><div class="metric-value">$15.79<div class="metric-delta"><span class="down">-$7.40</span></div></div></td>
+          <td data-label="Inventory" class="num"><div class="metric-value">889<div class="metric-delta">81.1 days cover</div></div></td>
+          <td data-label="Fees" class="num">35.9%</td>
+          <td data-label="Margin" class="num">37.5%</td>
+          <td data-label="TACOS" class="num">15.8%</td>
+        </tr>
+        
+
+        <tr>
+          <td data-label="Item" class="item-cell">
+      <div class="product">
+        <img src="https://m.media-amazon.com/images/I/71kGKtStmSL.jpg" alt="" loading="lazy">
+        <div class="product-meta">
+          <div class="sku">EO-CASTOR-1.7oz-RL</div>
+          <div class="asin">B0GK71XT2L</div>
+        </div>
+      </div>
+    </td>
+          <td data-label="Category">#EO</td>
+          <td data-label="Units" class="num"><div class="metric-value">5.00<div class="metric-delta"><span class="down">-2.63</span></div></div></td>
+          <td data-label="Sales" class="num"><div class="metric-value">$99.95<div class="metric-delta"><span class="down">-$49.81</span></div></div></td>
+          <td data-label="Profit" class="num"><div class="metric-value">$10.88<div class="metric-delta"><span class="down">-$30.50</span></div></div></td>
+          <td data-label="Ad spend" class="num"><div class="metric-value">$3.44<div class="metric-delta"><span class="down">-$20.23</span></div></div></td>
+          <td data-label="Inventory" class="num"><div class="metric-value">250<div class="metric-delta">32.8 days cover</div></div></td>
+          <td data-label="Fees" class="num">35.5%</td>
+          <td data-label="Margin" class="num">10.9%</td>
+          <td data-label="TACOS" class="num">3.4%</td>
+        </tr>
+        
+
+        <tr>
+          <td data-label="Item" class="item-cell">
+      <div class="product">
+        <img src="https://m.media-amazon.com/images/I/71HVlg56pML.jpg" alt="" loading="lazy">
+        <div class="product-meta">
+          <div class="sku">KT8153_FBA</div>
+          <div class="asin">B07K4WPNH6</div>
+        </div>
+      </div>
+    </td>
+          <td data-label="Category">#BJ</td>
+          <td data-label="Units" class="num"><div class="metric-value">4.00<div class="metric-delta"><span class="up">+0.30</span></div></div></td>
+          <td data-label="Sales" class="num"><div class="metric-value">$79.96<div class="metric-delta"><span class="up">+$5.10</span></div></div></td>
+          <td data-label="Profit" class="num"><div class="metric-value">$19.00<div class="metric-delta"><span class="up">+$5.24</span></div></div></td>
+          <td data-label="Ad spend" class="num"><div class="metric-value">$7.20<div class="metric-delta"><span class="down">-$0.31</span></div></div></td>
+          <td data-label="Inventory" class="num"><div class="metric-value">192<div class="metric-delta">51.9 days cover</div></div></td>
+          <td data-label="Fees" class="num">40.5%</td>
+          <td data-label="Margin" class="num">23.8%</td>
+          <td data-label="TACOS" class="num">9.0%</td>
+        </tr>
+        
+
+        <tr>
+          <td data-label="Item" class="item-cell">
+      <div class="product">
+        <img src="https://m.media-amazon.com/images/I/71ofJ4UMa3L.jpg" alt="" loading="lazy">
+        <div class="product-meta">
+          <div class="sku">KT8100_FBA</div>
+          <div class="asin">B0B7M64LGZ</div>
+        </div>
+      </div>
+    </td>
+          <td data-label="Category">#BJ</td>
+          <td data-label="Units" class="num"><div class="metric-value">4.00<div class="metric-delta"><span class="up">+0.53</span></div></div></td>
+          <td data-label="Sales" class="num"><div class="metric-value">$67.96<div class="metric-delta"><span class="up">+$9.15</span></div></div></td>
+          <td data-label="Profit" class="num"><div class="metric-value">$20.32<div class="metric-delta"><span class="up">+$4.95</span></div></div></td>
+          <td data-label="Ad spend" class="num"><div class="metric-value">$5.80<div class="metric-delta"><span class="down">-$0.60</span></div></div></td>
+          <td data-label="Inventory" class="num"><div class="metric-value">214<div class="metric-delta">61.7 days cover</div></div></td>
+          <td data-label="Fees" class="num">42.7%</td>
+          <td data-label="Margin" class="num">29.9%</td>
+          <td data-label="TACOS" class="num">8.5%</td>
+        </tr>
+        
+
+        <tr>
+          <td data-label="Item" class="item-cell">
+      <div class="product">
+        <img src="https://m.media-amazon.com/images/I/61VwfRe8tOL.jpg" alt="" loading="lazy">
+        <div class="product-meta">
+          <div class="sku">HS0002-10_FBA</div>
+          <div class="asin">B0C7XRRFC9</div>
+        </div>
+      </div>
+    </td>
+          <td data-label="Category">#PA</td>
+          <td data-label="Units" class="num"><div class="metric-value">4.00<div class="metric-delta"><span class="up">+0.77</span></div></div></td>
+          <td data-label="Sales" class="num"><div class="metric-value">$32.16<div class="metric-delta"><span class="up">+$4.43</span></div></div></td>
+          <td data-label="Profit" class="num"><div class="metric-value">$13.24<div class="metric-delta"><span class="up">+$8.61</span></div></div></td>
+          <td data-label="Ad spend" class="num"><div class="metric-value">$0.30<div class="metric-delta"><span class="down">-$6.94</span></div></div></td>
+          <td data-label="Inventory" class="num"><div class="metric-value">215<div class="metric-delta">66.5 days cover</div></div></td>
+          <td data-label="Fees" class="num">45.5%</td>
+          <td data-label="Margin" class="num">41.2%</td>
+          <td data-label="TACOS" class="num">0.9%</td>
+        </tr>
+        
+
+        <tr>
+          <td data-label="Item" class="item-cell">
+      <div class="product">
+        <img src="https://m.media-amazon.com/images/I/71a5eedi2bL.jpg" alt="" loading="lazy">
+        <div class="product-meta">
+          <div class="sku">HB0005_PRG</div>
+          <div class="asin">B08NDR5ZWK</div>
+        </div>
+      </div>
+    </td>
+          <td data-label="Category">#PA</td>
+          <td data-label="Units" class="num"><div class="metric-value">3.00<div class="metric-delta"><span class="down">-1.20</span></div></div></td>
+          <td data-label="Sales" class="num"><div class="metric-value">$27.11<div class="metric-delta"><span class="down">-$13.68</span></div></div></td>
+          <td data-label="Profit" class="num"><div class="metric-value">$7.07<div class="metric-delta"><span class="down">-$8.27</span></div></div></td>
+          <td data-label="Ad spend" class="num"><div class="metric-value">$5.75<div class="metric-delta"><span class="up">+$2.45</span></div></div></td>
+          <td data-label="Inventory" class="num"><div class="metric-value">225<div class="metric-delta">53.6 days cover</div></div></td>
+          <td data-label="Fees" class="num">39.4%</td>
+          <td data-label="Margin" class="num">26.1%</td>
+          <td data-label="TACOS" class="num">21.2%</td>
+        </tr>
+        
+
+        <tr>
+          <td data-label="Item" class="item-cell">
+      <div class="product">
+        <img src="https://m.media-amazon.com/images/I/51bSz1yYwcL.jpg" alt="" loading="lazy">
+        <div class="product-meta">
+          <div class="sku">HA-4oz-SP</div>
+          <div class="asin">B0F13L4L69</div>
+        </div>
+      </div>
+    </td>
+          <td data-label="Category">#PA</td>
+          <td data-label="Units" class="num"><div class="metric-value">2.00<div class="metric-delta"><span class="up">+1.07</span></div></div></td>
+          <td data-label="Sales" class="num"><div class="metric-value">$23.90<div class="metric-delta"><span class="up">+$11.99</span></div></div></td>
+          <td data-label="Profit" class="num"><div class="metric-value">$7.06<div class="metric-delta"><span class="up">+$5.62</span></div></div></td>
+          <td data-label="Ad spend" class="num"><div class="metric-value">$0.00<div class="metric-delta"><span class="down">-$1.02</span></div></div></td>
+          <td data-label="Inventory" class="num"><div class="metric-value">1,431<div class="metric-delta">1,533.2 days cover</div></div></td>
+          <td data-label="Fees" class="num">49.5%</td>
+          <td data-label="Margin" class="num">29.5%</td>
+          <td data-label="TACOS" class="num">0.0%</td>
+        </tr>
+        
+
+        <tr>
+          <td data-label="Item" class="item-cell">
+      <div class="product">
+        <img src="https://m.media-amazon.com/images/I/81p4f01eGTL.jpg" alt="" loading="lazy">
+        <div class="product-meta">
+          <div class="sku">GK0954</div>
+          <div class="asin">B0D9KZXQL3</div>
+        </div>
+      </div>
+    </td>
+          <td data-label="Category">#GK</td>
+          <td data-label="Units" class="num"><div class="metric-value">1.00<div class="metric-delta"><span class="up">+0.50</span></div></div></td>
+          <td data-label="Sales" class="num"><div class="metric-value">$19.99<div class="metric-delta"><span class="up">+$9.99</span></div></div></td>
+          <td data-label="Profit" class="num"><div class="metric-value">$6.13<div class="metric-delta"><span class="up">+$3.08</span></div></div></td>
+          <td data-label="Ad spend" class="num"><div class="metric-value">$0.00<div class="metric-delta"><span class="flat">$0.00</span></div></div></td>
+          <td data-label="Inventory" class="num"><div class="metric-value">21.00<div class="metric-delta">42.0 days cover</div></div></td>
+          <td data-label="Fees" class="num">39.3%</td>
+          <td data-label="Margin" class="num">30.7%</td>
+          <td data-label="TACOS" class="num">0.0%</td>
+        </tr>
+        
+
+        <tr>
+          <td data-label="Item" class="item-cell">
+      <div class="product">
+        <img src="https://m.media-amazon.com/images/I/71t1XHcrkKL.jpg" alt="" loading="lazy">
+        <div class="product-meta">
+          <div class="sku">BN1798_FBA</div>
+          <div class="asin">B07CT714N2</div>
+        </div>
+      </div>
+    </td>
+          <td data-label="Category">#BJ</td>
+          <td data-label="Units" class="num"><div class="metric-value">2.00<div class="metric-delta"><span class="up">+0.60</span></div></div></td>
+          <td data-label="Sales" class="num"><div class="metric-value">$19.98<div class="metric-delta"><span class="up">+$6.53</span></div></div></td>
+          <td data-label="Profit" class="num"><div class="metric-value">-$0.71<div class="metric-delta"><span class="down">-$3.44</span></div></div></td>
+          <td data-label="Ad spend" class="num"><div class="metric-value">$1.24<div class="metric-delta"><span class="up">+$0.60</span></div></div></td>
+          <td data-label="Inventory" class="num"><div class="metric-value">111<div class="metric-delta">79.3 days cover</div></div></td>
+          <td data-label="Fees" class="num">45.2%</td>
+          <td data-label="Margin" class="num">-3.6%</td>
+          <td data-label="TACOS" class="num">6.2%</td>
+        </tr>
+        
+
+        <tr>
+          <td data-label="Item" class="item-cell">
+      <div class="product">
+        <img src="https://m.media-amazon.com/images/I/71KQSjadjFL.jpg" alt="" loading="lazy">
+        <div class="product-meta">
+          <div class="sku">BN1663_FBA</div>
+          <div class="asin">B077QPVJ67</div>
+        </div>
+      </div>
+    </td>
+          <td data-label="Category">#BJ</td>
+          <td data-label="Units" class="num"><div class="metric-value">1.00<div class="metric-delta"><span class="down">-0.17</span></div></div></td>
+          <td data-label="Sales" class="num"><div class="metric-value">$14.24<div class="metric-delta"><span class="down">-$3.25</span></div></div></td>
+          <td data-label="Profit" class="num"><div class="metric-value">$3.67<div class="metric-delta"><span class="up">+$1.32</span></div></div></td>
+          <td data-label="Ad spend" class="num"><div class="metric-value">$1.20<div class="metric-delta"><span class="down">-$2.54</span></div></div></td>
+          <td data-label="Inventory" class="num"><div class="metric-value">45.00<div class="metric-delta">38.6 days cover</div></div></td>
+          <td data-label="Fees" class="num">43.3%</td>
+          <td data-label="Margin" class="num">25.8%</td>
+          <td data-label="TACOS" class="num">8.4%</td>
+        </tr>
+        
+
+        <tr>
+          <td data-label="Item" class="item-cell">
+      <div class="product">
+        <img src="https://m.media-amazon.com/images/I/81ryEZ-F+-L.jpg" alt="" loading="lazy">
+        <div class="product-meta">
+          <div class="sku">BR3791_FBA</div>
+          <div class="asin">B077ZFZX7S</div>
+        </div>
+      </div>
+    </td>
+          <td data-label="Category">#BJ</td>
+          <td data-label="Units" class="num"><div class="metric-value">1.00<div class="metric-delta"><span class="down">-2.27</span></div></div></td>
+          <td data-label="Sales" class="num"><div class="metric-value">$11.99<div class="metric-delta"><span class="down">-$23.56</span></div></div></td>
+          <td data-label="Profit" class="num"><div class="metric-value">$4.86<div class="metric-delta"><span class="down">-$9.08</span></div></div></td>
+          <td data-label="Ad spend" class="num"><div class="metric-value">$0.37<div class="metric-delta"><span class="up">+$0.06</span></div></div></td>
+          <td data-label="Inventory" class="num"><div class="metric-value">277<div class="metric-delta">84.8 days cover</div></div></td>
+          <td data-label="Fees" class="num">48.7%</td>
+          <td data-label="Margin" class="num">40.5%</td>
+          <td data-label="TACOS" class="num">3.1%</td>
+        </tr>
+        
+
+        <tr>
+          <td data-label="Item" class="item-cell">
+      <div class="product">
+        <img src="https://m.media-amazon.com/images/I/71Q2VWvpYML.jpg" alt="" loading="lazy">
+        <div class="product-meta">
+          <div class="sku">-</div>
+          <div class="asin">B00M8HC272</div>
+        </div>
+      </div>
+    </td>
+          <td data-label="Category">#GK</td>
+          <td data-label="Units" class="num"><div class="metric-value">0.00<div class="metric-delta"><span class="down">-0.03</span></div></div></td>
+          <td data-label="Sales" class="num"><div class="metric-value">$0.00<div class="metric-delta"><span class="down">-$0.57</span></div></div></td>
+          <td data-label="Profit" class="num"><div class="metric-value">$0.00<div class="metric-delta"><span class="down">-$0.06</span></div></div></td>
+          <td data-label="Ad spend" class="num"><div class="metric-value">$0.00<div class="metric-delta"><span class="flat">$0.00</span></div></div></td>
+          <td data-label="Inventory" class="num"><div class="metric-value">16.00<div class="metric-delta">480.0 days cover</div></div></td>
+          <td data-label="Fees" class="num">-</td>
+          <td data-label="Margin" class="num">-</td>
+          <td data-label="TACOS" class="num">-</td>
+        </tr>
+        
+
+        <tr>
+          <td data-label="Item" class="item-cell">
+      <div class="product">
+        <img src="https://m.media-amazon.com/images/I/71vgNaDD+NL.jpg" alt="" loading="lazy">
+        <div class="product-meta">
+          <div class="sku">-</div>
+          <div class="asin">B00XK3GUI0</div>
+        </div>
+      </div>
+    </td>
+          <td data-label="Category">#GK</td>
+          <td data-label="Units" class="num"><div class="metric-value">0.00<div class="metric-delta"><span class="down">-0.03</span></div></div></td>
+          <td data-label="Sales" class="num"><div class="metric-value">$0.00<div class="metric-delta"><span class="down">-$0.47</span></div></div></td>
+          <td data-label="Profit" class="num"><div class="metric-value">$0.00<div class="metric-delta"><span class="up">+$0.63</span></div></div></td>
+          <td data-label="Ad spend" class="num"><div class="metric-value">$0.00<div class="metric-delta"><span class="flat">$0.00</span></div></div></td>
+          <td data-label="Inventory" class="num"><div class="metric-value">69.00<div class="metric-delta">2,070.0 days cover</div></div></td>
+          <td data-label="Fees" class="num">-</td>
+          <td data-label="Margin" class="num">-</td>
+          <td data-label="TACOS" class="num">-</td>
+        </tr>
+        
+
+        <tr>
+          <td data-label="Item" class="item-cell">
+      <div class="product">
+        <img src="https://m.media-amazon.com/images/I/61nvBOOWxWL.jpg" alt="" loading="lazy">
+        <div class="product-meta">
+          <div class="sku">-</div>
+          <div class="asin">B016YL499G</div>
+        </div>
+      </div>
+    </td>
+          <td data-label="Category">#BJ</td>
+          <td data-label="Units" class="num"><div class="metric-value">0.00<div class="metric-delta"><span class="flat">0.00</span></div></div></td>
+          <td data-label="Sales" class="num"><div class="metric-value">$0.00<div class="metric-delta"><span class="flat">$0.00</span></div></div></td>
+          <td data-label="Profit" class="num"><div class="metric-value">$0.00<div class="metric-delta"><span class="up">+$0.13</span></div></div></td>
+          <td data-label="Ad spend" class="num"><div class="metric-value">$0.00<div class="metric-delta"><span class="down">-$0.03</span></div></div></td>
+          <td data-label="Inventory" class="num"><div class="metric-value">9.00<div class="metric-delta">- days cover</div></div></td>
+          <td data-label="Fees" class="num">-</td>
+          <td data-label="Margin" class="num">-</td>
+          <td data-label="TACOS" class="num">-</td>
+        </tr>
+        
+
+        <tr>
+          <td data-label="Item" class="item-cell">
+      <div class="product">
+        <img src="https://m.media-amazon.com/images/I/71YXB5n6G3L.jpg" alt="" loading="lazy">
+        <div class="product-meta">
+          <div class="sku">-</div>
+          <div class="asin">B01EGMDDUQ</div>
+        </div>
+      </div>
+    </td>
+          <td data-label="Category">#BJ</td>
+          <td data-label="Units" class="num"><div class="metric-value">0.00<div class="metric-delta"><span class="down">-0.40</span></div></div></td>
+          <td data-label="Sales" class="num"><div class="metric-value">$0.00<div class="metric-delta"><span class="down">-$4.20</span></div></div></td>
+          <td data-label="Profit" class="num"><div class="metric-value">$0.00<div class="metric-delta"><span class="down">-$0.72</span></div></div></td>
+          <td data-label="Ad spend" class="num"><div class="metric-value">$0.00<div class="metric-delta"><span class="down">-$0.02</span></div></div></td>
+          <td data-label="Inventory" class="num"><div class="metric-value">41.00<div class="metric-delta">102.5 days cover</div></div></td>
+          <td data-label="Fees" class="num">-</td>
+          <td data-label="Margin" class="num">-</td>
+          <td data-label="TACOS" class="num">-</td>
+        </tr>
+        
+
+        <tr>
+          <td data-label="Item" class="item-cell">
+      <div class="product">
+        <img src="https://m.media-amazon.com/images/I/71ozi9ikKXL.jpg" alt="" loading="lazy">
+        <div class="product-meta">
+          <div class="sku">-</div>
+          <div class="asin">B079F1VG49</div>
+        </div>
+      </div>
+    </td>
+          <td data-label="Category">#GK</td>
+          <td data-label="Units" class="num"><div class="metric-value">0.00<div class="metric-delta"><span class="flat">0.00</span></div></div></td>
+          <td data-label="Sales" class="num"><div class="metric-value">$0.00<div class="metric-delta"><span class="flat">$0.00</span></div></div></td>
+          <td data-label="Profit" class="num"><div class="metric-value">$0.00<div class="metric-delta"><span class="up">+$0.29</span></div></div></td>
+          <td data-label="Ad spend" class="num"><div class="metric-value">$0.00<div class="metric-delta"><span class="flat">$0.00</span></div></div></td>
+          <td data-label="Inventory" class="num"><div class="metric-value">25.00<div class="metric-delta">- days cover</div></div></td>
+          <td data-label="Fees" class="num">-</td>
+          <td data-label="Margin" class="num">-</td>
+          <td data-label="TACOS" class="num">-</td>
+        </tr>
+        
+
+        <tr>
+          <td data-label="Item" class="item-cell">
+      <div class="product">
+        <img src="https://m.media-amazon.com/images/I/71XZ6ZR4LUL.jpg" alt="" loading="lazy">
+        <div class="product-meta">
+          <div class="sku">-</div>
+          <div class="asin">B07BT5S1QK</div>
+        </div>
+      </div>
+    </td>
+          <td data-label="Category">#GK</td>
+          <td data-label="Units" class="num"><div class="metric-value">0.00<div class="metric-delta"><span class="down">-0.03</span></div></div></td>
+          <td data-label="Sales" class="num"><div class="metric-value">$0.00<div class="metric-delta"><span class="down">-$0.43</span></div></div></td>
+          <td data-label="Profit" class="num"><div class="metric-value">$0.00<div class="metric-delta"><span class="down">-$0.09</span></div></div></td>
+          <td data-label="Ad spend" class="num"><div class="metric-value">$0.00<div class="metric-delta"><span class="down">-$0.04</span></div></div></td>
+          <td data-label="Inventory" class="num"><div class="metric-value">0.00<div class="metric-delta">0.0 days cover</div></div></td>
+          <td data-label="Fees" class="num">-</td>
+          <td data-label="Margin" class="num">-</td>
+          <td data-label="TACOS" class="num">-</td>
+        </tr>
+        
+
+        <tr>
+          <td data-label="Item" class="item-cell">
+      <div class="product">
+        <img src="https://m.media-amazon.com/images/I/71XqPHKdq9L.jpg" alt="" loading="lazy">
+        <div class="product-meta">
+          <div class="sku">-</div>
+          <div class="asin">B07CGPHFTY</div>
+        </div>
+      </div>
+    </td>
+          <td data-label="Category">#BJ</td>
+          <td data-label="Units" class="num"><div class="metric-value">0.00<div class="metric-delta"><span class="flat">0.00</span></div></div></td>
+          <td data-label="Sales" class="num"><div class="metric-value">$0.00<div class="metric-delta"><span class="flat">$0.00</span></div></div></td>
+          <td data-label="Profit" class="num"><div class="metric-value">$0.00<div class="metric-delta"><span class="up">+$0.04</span></div></div></td>
+          <td data-label="Ad spend" class="num"><div class="metric-value">$0.00<div class="metric-delta"><span class="flat">$0.00</span></div></div></td>
+          <td data-label="Inventory" class="num"><div class="metric-value">3.00<div class="metric-delta">- days cover</div></div></td>
+          <td data-label="Fees" class="num">-</td>
+          <td data-label="Margin" class="num">-</td>
+          <td data-label="TACOS" class="num">-</td>
+        </tr>
+        
+
+        <tr>
+          <td data-label="Item" class="item-cell">
+      <div class="product">
+        <img src="https://m.media-amazon.com/images/I/61ZsPywqvHL.jpg" alt="" loading="lazy">
+        <div class="product-meta">
+          <div class="sku">-</div>
+          <div class="asin">B07F1FKCDH</div>
+        </div>
+      </div>
+    </td>
+          <td data-label="Category">#BJ</td>
+          <td data-label="Units" class="num"><div class="metric-value">0.00<div class="metric-delta"><span class="flat">0.00</span></div></div></td>
+          <td data-label="Sales" class="num"><div class="metric-value">$0.00<div class="metric-delta"><span class="flat">$0.00</span></div></div></td>
+          <td data-label="Profit" class="num"><div class="metric-value">$0.00<div class="metric-delta"><span class="up">+$0.01</span></div></div></td>
+          <td data-label="Ad spend" class="num"><div class="metric-value">$0.00<div class="metric-delta"><span class="flat">$0.00</span></div></div></td>
+          <td data-label="Inventory" class="num"><div class="metric-value">1.00<div class="metric-delta">- days cover</div></div></td>
+          <td data-label="Fees" class="num">-</td>
+          <td data-label="Margin" class="num">-</td>
+          <td data-label="TACOS" class="num">-</td>
+        </tr>
+        
+
+        <tr>
+          <td data-label="Item" class="item-cell">
+      <div class="product">
+        
+        <div class="product-meta">
+          <div class="sku">-</div>
+          <div class="asin">B07K819DSN</div>
+        </div>
+      </div>
+    </td>
+          <td data-label="Category">#BJ</td>
+          <td data-label="Units" class="num"><div class="metric-value">0.00<div class="metric-delta"><span class="flat">0.00</span></div></div></td>
+          <td data-label="Sales" class="num"><div class="metric-value">$0.00<div class="metric-delta"><span class="flat">$0.00</span></div></div></td>
+          <td data-label="Profit" class="num"><div class="metric-value">$0.00<div class="metric-delta"><span class="up">+$0.01</span></div></div></td>
+          <td data-label="Ad spend" class="num"><div class="metric-value">$0.00<div class="metric-delta"><span class="flat">$0.00</span></div></div></td>
+          <td data-label="Inventory" class="num"><div class="metric-value">0.00<div class="metric-delta">- days cover</div></div></td>
+          <td data-label="Fees" class="num">-</td>
+          <td data-label="Margin" class="num">-</td>
+          <td data-label="TACOS" class="num">-</td>
+        </tr>
+        
+
+        <tr>
+          <td data-label="Item" class="item-cell">
+      <div class="product">
+        <img src="https://m.media-amazon.com/images/I/71pspOlgDVL.jpg" alt="" loading="lazy">
+        <div class="product-meta">
+          <div class="sku">-</div>
+          <div class="asin">B081B7C2FP</div>
+        </div>
+      </div>
+    </td>
+          <td data-label="Category">#GK</td>
+          <td data-label="Units" class="num"><div class="metric-value">0.00<div class="metric-delta"><span class="flat">0.00</span></div></div></td>
+          <td data-label="Sales" class="num"><div class="metric-value">$0.00<div class="metric-delta"><span class="flat">$0.00</span></div></div></td>
+          <td data-label="Profit" class="num"><div class="metric-value">$0.00<div class="metric-delta"><span class="up">+$0.01</span></div></div></td>
+          <td data-label="Ad spend" class="num"><div class="metric-value">$0.00<div class="metric-delta"><span class="flat">$0.00</span></div></div></td>
+          <td data-label="Inventory" class="num"><div class="metric-value">1.00<div class="metric-delta">- days cover</div></div></td>
+          <td data-label="Fees" class="num">-</td>
+          <td data-label="Margin" class="num">-</td>
+          <td data-label="TACOS" class="num">-</td>
+        </tr>
+        
+
+        <tr>
+          <td data-label="Item" class="item-cell">
+      <div class="product">
+        <img src="https://m.media-amazon.com/images/I/81uYExbCExL.jpg" alt="" loading="lazy">
+        <div class="product-meta">
+          <div class="sku">-</div>
+          <div class="asin">B082P8LS2X</div>
+        </div>
+      </div>
+    </td>
+          <td data-label="Category">#NC</td>
+          <td data-label="Units" class="num"><div class="metric-value">0.00<div class="metric-delta"><span class="down">-0.07</span></div></div></td>
+          <td data-label="Sales" class="num"><div class="metric-value">$0.00<div class="metric-delta"><span class="down">-$1.33</span></div></div></td>
+          <td data-label="Profit" class="num"><div class="metric-value">$0.00<div class="metric-delta"><span class="down">-$1.01</span></div></div></td>
+          <td data-label="Ad spend" class="num"><div class="metric-value">$0.00<div class="metric-delta"><span class="flat">$0.00</span></div></div></td>
+          <td data-label="Inventory" class="num"><div class="metric-value">1.00<div class="metric-delta">15.0 days cover</div></div></td>
+          <td data-label="Fees" class="num">-</td>
+          <td data-label="Margin" class="num">-</td>
+          <td data-label="TACOS" class="num">-</td>
+        </tr>
+        
+
+        <tr>
+          <td data-label="Item" class="item-cell">
+      <div class="product">
+        <img src="https://m.media-amazon.com/images/I/716x2Vhv6kS.jpg" alt="" loading="lazy">
+        <div class="product-meta">
+          <div class="sku">-</div>
+          <div class="asin">B09VJV491B</div>
+        </div>
+      </div>
+    </td>
+          <td data-label="Category">#BJ</td>
+          <td data-label="Units" class="num"><div class="metric-value">0.00<div class="metric-delta"><span class="flat">0.00</span></div></div></td>
+          <td data-label="Sales" class="num"><div class="metric-value">$0.00<div class="metric-delta"><span class="flat">$0.00</span></div></div></td>
+          <td data-label="Profit" class="num"><div class="metric-value">$0.00<div class="metric-delta"><span class="up">+$0.17</span></div></div></td>
+          <td data-label="Ad spend" class="num"><div class="metric-value">$0.00<div class="metric-delta"><span class="flat">$0.00</span></div></div></td>
+          <td data-label="Inventory" class="num"><div class="metric-value">11.00<div class="metric-delta">- days cover</div></div></td>
+          <td data-label="Fees" class="num">-</td>
+          <td data-label="Margin" class="num">-</td>
+          <td data-label="TACOS" class="num">-</td>
+        </tr>
+        
+
+        <tr>
+          <td data-label="Item" class="item-cell">
+      <div class="product">
+        
+        <div class="product-meta">
+          <div class="sku">-</div>
+          <div class="asin">B0CG1QB37V</div>
+        </div>
+      </div>
+    </td>
+          <td data-label="Category">#PA</td>
+          <td data-label="Units" class="num"><div class="metric-value">0.00<div class="metric-delta"><span class="flat">0.00</span></div></div></td>
+          <td data-label="Sales" class="num"><div class="metric-value">$0.00<div class="metric-delta"><span class="flat">$0.00</span></div></div></td>
+          <td data-label="Profit" class="num"><div class="metric-value">$0.00<div class="metric-delta"><span class="up">+$0.40</span></div></div></td>
+          <td data-label="Ad spend" class="num"><div class="metric-value">$0.00<div class="metric-delta"><span class="flat">$0.00</span></div></div></td>
+          <td data-label="Inventory" class="num"><div class="metric-value">1.00<div class="metric-delta">- days cover</div></div></td>
+          <td data-label="Fees" class="num">-</td>
+          <td data-label="Margin" class="num">-</td>
+          <td data-label="TACOS" class="num">-</td>
+        </tr>
+        
+
+        <tr>
+          <td data-label="Item" class="item-cell">
+      <div class="product">
+        <img src="https://m.media-amazon.com/images/I/81ohbvEk1eL.jpg" alt="" loading="lazy">
+        <div class="product-meta">
+          <div class="sku">-</div>
+          <div class="asin">B0CJ1MKYQD</div>
+        </div>
+      </div>
+    </td>
+          <td data-label="Category">#GK</td>
+          <td data-label="Units" class="num"><div class="metric-value">0.00<div class="metric-delta"><span class="flat">0.00</span></div></div></td>
+          <td data-label="Sales" class="num"><div class="metric-value">$0.00<div class="metric-delta"><span class="flat">$0.00</span></div></div></td>
+          <td data-label="Profit" class="num"><div class="metric-value">$0.00<div class="metric-delta"><span class="up">+$0.01</span></div></div></td>
+          <td data-label="Ad spend" class="num"><div class="metric-value">$0.00<div class="metric-delta"><span class="flat">$0.00</span></div></div></td>
+          <td data-label="Inventory" class="num"><div class="metric-value">1.00<div class="metric-delta">- days cover</div></div></td>
+          <td data-label="Fees" class="num">-</td>
+          <td data-label="Margin" class="num">-</td>
+          <td data-label="TACOS" class="num">-</td>
+        </tr>
+        
+
+        <tr>
+          <td data-label="Item" class="item-cell">
+      <div class="product">
+        <img src="https://m.media-amazon.com/images/I/61Swt-Poq1L.jpg" alt="" loading="lazy">
+        <div class="product-meta">
+          <div class="sku">FJ9991-B_FBA</div>
+          <div class="asin">B0CKVFYDJZ</div>
+        </div>
+      </div>
+    </td>
+          <td data-label="Category">#FJ</td>
+          <td data-label="Units" class="num"><div class="metric-value">0.00<div class="metric-delta"><span class="down">-0.27</span></div></div></td>
+          <td data-label="Sales" class="num"><div class="metric-value">$0.00<div class="metric-delta"><span class="down">-$4.64</span></div></div></td>
+          <td data-label="Profit" class="num"><div class="metric-value">-$1.39<div class="metric-delta"><span class="up">+$0.28</span></div></div></td>
+          <td data-label="Ad spend" class="num"><div class="metric-value">$1.39<div class="metric-delta"><span class="up">+$1.09</span></div></div></td>
+          <td data-label="Inventory" class="num"><div class="metric-value">216<div class="metric-delta">810.0 days cover</div></div></td>
+          <td data-label="Fees" class="num">-</td>
+          <td data-label="Margin" class="num">-</td>
+          <td data-label="TACOS" class="num">-</td>
+        </tr>
+        
+
+        <tr>
+          <td data-label="Item" class="item-cell">
+      <div class="product">
+        <img src="https://m.media-amazon.com/images/I/61suvKoJDSL.jpg" alt="" loading="lazy">
+        <div class="product-meta">
+          <div class="sku">-</div>
+          <div class="asin">B0CKVVV9NR</div>
+        </div>
+      </div>
+    </td>
+          <td data-label="Category">#FJ</td>
+          <td data-label="Units" class="num"><div class="metric-value">0.00<div class="metric-delta"><span class="down">-0.03</span></div></div></td>
+          <td data-label="Sales" class="num"><div class="metric-value">$0.00<div class="metric-delta"><span class="down">-$0.63</span></div></div></td>
+          <td data-label="Profit" class="num"><div class="metric-value">$0.00<div class="metric-delta"><span class="down">-$0.27</span></div></div></td>
+          <td data-label="Ad spend" class="num"><div class="metric-value">$0.00<div class="metric-delta"><span class="flat">$0.00</span></div></div></td>
+          <td data-label="Inventory" class="num"><div class="metric-value">0.00<div class="metric-delta">0.0 days cover</div></div></td>
+          <td data-label="Fees" class="num">-</td>
+          <td data-label="Margin" class="num">-</td>
+          <td data-label="TACOS" class="num">-</td>
+        </tr>
+        
+
+        <tr>
+          <td data-label="Item" class="item-cell">
+      <div class="product">
+        <img src="https://m.media-amazon.com/images/I/81hXrCqoZpL.jpg" alt="" loading="lazy">
+        <div class="product-meta">
+          <div class="sku">-</div>
+          <div class="asin">B0DCL58D4C</div>
+        </div>
+      </div>
+    </td>
+          <td data-label="Category">#PA</td>
+          <td data-label="Units" class="num"><div class="metric-value">0.00<div class="metric-delta"><span class="down">-0.37</span></div></div></td>
+          <td data-label="Sales" class="num"><div class="metric-value">$0.00<div class="metric-delta"><span class="down">-$40.66</span></div></div></td>
+          <td data-label="Profit" class="num"><div class="metric-value">$0.00<div class="metric-delta"><span class="down">-$21.96</span></div></div></td>
+          <td data-label="Ad spend" class="num"><div class="metric-value">$0.00<div class="metric-delta"><span class="down">-$0.06</span></div></div></td>
+          <td data-label="Inventory" class="num"><div class="metric-value">4.00<div class="metric-delta">10.9 days cover</div></div></td>
+          <td data-label="Fees" class="num">-</td>
+          <td data-label="Margin" class="num">-</td>
+          <td data-label="TACOS" class="num">-</td>
+        </tr>
+        
+
+        <tr>
+          <td data-label="Item" class="item-cell">
+      <div class="product">
+        <img src="https://m.media-amazon.com/images/I/71J4ZtgdnbL.jpg" alt="" loading="lazy">
+        <div class="product-meta">
+          <div class="sku">-</div>
+          <div class="asin">B0DDT7GP79</div>
+        </div>
+      </div>
+    </td>
+          <td data-label="Category">#EO</td>
+          <td data-label="Units" class="num"><div class="metric-value">0.00<div class="metric-delta"><span class="down">-1.00</span></div></div></td>
+          <td data-label="Sales" class="num"><div class="metric-value">$0.00<div class="metric-delta"><span class="down">-$9.71</span></div></div></td>
+          <td data-label="Profit" class="num"><div class="metric-value">$0.00<div class="metric-delta"><span class="down">-$4.13</span></div></div></td>
+          <td data-label="Ad spend" class="num"><div class="metric-value">$0.00<div class="metric-delta"><span class="down">-$0.30</span></div></div></td>
+          <td data-label="Inventory" class="num"><div class="metric-value">4.00<div class="metric-delta">4.0 days cover</div></div></td>
+          <td data-label="Fees" class="num">-</td>
+          <td data-label="Margin" class="num">-</td>
+          <td data-label="TACOS" class="num">-</td>
+        </tr>
+        
+
+        <tr>
+          <td data-label="Item" class="item-cell">
+      <div class="product">
+        
+        <div class="product-meta">
+          <div class="sku">-</div>
+          <div class="asin">B0DRMPQGPF</div>
+        </div>
+      </div>
+    </td>
+          <td data-label="Category">#EO</td>
+          <td data-label="Units" class="num"><div class="metric-value">0.00<div class="metric-delta"><span class="flat">0.00</span></div></div></td>
+          <td data-label="Sales" class="num"><div class="metric-value">$0.00<div class="metric-delta"><span class="flat">$0.00</span></div></div></td>
+          <td data-label="Profit" class="num"><div class="metric-value">$0.00<div class="metric-delta"><span class="up">+$0.00</span></div></div></td>
+          <td data-label="Ad spend" class="num"><div class="metric-value">$0.00<div class="metric-delta"><span class="flat">$0.00</span></div></div></td>
+          <td data-label="Inventory" class="num"><div class="metric-value">1.00<div class="metric-delta">- days cover</div></div></td>
+          <td data-label="Fees" class="num">-</td>
+          <td data-label="Margin" class="num">-</td>
+          <td data-label="TACOS" class="num">-</td>
+        </tr>
+        
+
+        <tr>
+          <td data-label="Item" class="item-cell">
+      <div class="product">
+        <img src="https://m.media-amazon.com/images/I/71uMrVg2pNL.jpg" alt="" loading="lazy">
+        <div class="product-meta">
+          <div class="sku">BR4238_FBA</div>
+          <div class="asin">B0F7QKYY9L</div>
+        </div>
+      </div>
+    </td>
+          <td data-label="Category">#BJ</td>
+          <td data-label="Units" class="num"><div class="metric-value">0.00<div class="metric-delta"><span class="down">-0.50</span></div></div></td>
+          <td data-label="Sales" class="num"><div class="metric-value">$0.00<div class="metric-delta"><span class="down">-$9.96</span></div></div></td>
+          <td data-label="Profit" class="num"><div class="metric-value">-$0.21<div class="metric-delta"><span class="down">-$4.30</span></div></div></td>
+          <td data-label="Ad spend" class="num"><div class="metric-value">$0.21<div class="metric-delta"><span class="up">+$0.11</span></div></div></td>
+          <td data-label="Inventory" class="num"><div class="metric-value">18.00<div class="metric-delta">36.0 days cover</div></div></td>
+          <td data-label="Fees" class="num">-</td>
+          <td data-label="Margin" class="num">-</td>
+          <td data-label="TACOS" class="num">-</td>
+        </tr>
+        
+
+        <tr>
+          <td data-label="Item" class="item-cell">
+      <div class="product">
+        <img src="https://m.media-amazon.com/images/I/61bVsBjIdcL.jpg" alt="" loading="lazy">
+        <div class="product-meta">
+          <div class="sku">-</div>
+          <div class="asin">B0F8PM57CS</div>
+        </div>
+      </div>
+    </td>
+          <td data-label="Category">#EO</td>
+          <td data-label="Units" class="num"><div class="metric-value">0.00<div class="metric-delta"><span class="down">-0.73</span></div></div></td>
+          <td data-label="Sales" class="num"><div class="metric-value">$0.00<div class="metric-delta"><span class="down">-$9.40</span></div></div></td>
+          <td data-label="Profit" class="num"><div class="metric-value">$0.00<div class="metric-delta"><span class="down">-$3.62</span></div></div></td>
+          <td data-label="Ad spend" class="num"><div class="metric-value">$0.00<div class="metric-delta"><span class="down">-$0.17</span></div></div></td>
+          <td data-label="Inventory" class="num"><div class="metric-value">29.00<div class="metric-delta">39.5 days cover</div></div></td>
+          <td data-label="Fees" class="num">-</td>
+          <td data-label="Margin" class="num">-</td>
+          <td data-label="TACOS" class="num">-</td>
+        </tr>
+        
+
+        <tr>
+          <td data-label="Item" class="item-cell">
+      <div class="product">
+        <img src="https://m.media-amazon.com/images/I/81nGkuNHj1L.jpg" alt="" loading="lazy">
+        <div class="product-meta">
+          <div class="sku">-</div>
+          <div class="asin">B0F9KT4YN9</div>
+        </div>
+      </div>
+    </td>
+          <td data-label="Category">#EO</td>
+          <td data-label="Units" class="num"><div class="metric-value">0.00<div class="metric-delta"><span class="flat">0.00</span></div></div></td>
+          <td data-label="Sales" class="num"><div class="metric-value">$0.00<div class="metric-delta"><span class="flat">$0.00</span></div></div></td>
+          <td data-label="Profit" class="num"><div class="metric-value">$0.00<div class="metric-delta"><span class="up">+$0.20</span></div></div></td>
+          <td data-label="Ad spend" class="num"><div class="metric-value">$0.00<div class="metric-delta"><span class="down">-$0.11</span></div></div></td>
+          <td data-label="Inventory" class="num"><div class="metric-value">4.00<div class="metric-delta">- days cover</div></div></td>
+          <td data-label="Fees" class="num">-</td>
+          <td data-label="Margin" class="num">-</td>
+          <td data-label="TACOS" class="num">-</td>
+        </tr>
+        
+
+        <tr>
+          <td data-label="Item" class="item-cell">
+      <div class="product">
+        <img src="https://m.media-amazon.com/images/I/714Z8B9IjFL.jpg" alt="" loading="lazy">
+        <div class="product-meta">
+          <div class="sku">HB0026</div>
+          <div class="asin">B0FFF83WFD</div>
+        </div>
+      </div>
+    </td>
+          <td data-label="Category">#PA</td>
+          <td data-label="Units" class="num"><div class="metric-value">0.00<div class="metric-delta"><span class="down">-0.20</span></div></div></td>
+          <td data-label="Sales" class="num"><div class="metric-value">$0.00<div class="metric-delta"><span class="down">-$4.00</span></div></div></td>
+          <td data-label="Profit" class="num"><div class="metric-value">-$1.50<div class="metric-delta"><span class="down">-$0.77</span></div></div></td>
+          <td data-label="Ad spend" class="num"><div class="metric-value">$1.50<div class="metric-delta"><span class="down">-$1.50</span></div></div></td>
+          <td data-label="Inventory" class="num"><div class="metric-value">24.00<div class="metric-delta">120.0 days cover</div></div></td>
+          <td data-label="Fees" class="num">-</td>
+          <td data-label="Margin" class="num">-</td>
+          <td data-label="TACOS" class="num">-</td>
+        </tr>
+        
+
+        <tr>
+          <td data-label="Item" class="item-cell">
+      <div class="product">
+        <img src="https://m.media-amazon.com/images/I/71n1tsIKOWL.jpg" alt="" loading="lazy">
+        <div class="product-meta">
+          <div class="sku">-</div>
+          <div class="asin">B0FHW7GJL1</div>
+        </div>
+      </div>
+    </td>
+          <td data-label="Category">#EO</td>
+          <td data-label="Units" class="num"><div class="metric-value">0.00<div class="metric-delta"><span class="down">-0.10</span></div></div></td>
+          <td data-label="Sales" class="num"><div class="metric-value">$0.00<div class="metric-delta"><span class="down">-$1.97</span></div></div></td>
+          <td data-label="Profit" class="num"><div class="metric-value">$0.00<div class="metric-delta"><span class="up">+$0.05</span></div></div></td>
+          <td data-label="Ad spend" class="num"><div class="metric-value">$0.00<div class="metric-delta"><span class="flat">$0.00</span></div></div></td>
+          <td data-label="Inventory" class="num"><div class="metric-value">40.00<div class="metric-delta">400.0 days cover</div></div></td>
+          <td data-label="Fees" class="num">-</td>
+          <td data-label="Margin" class="num">-</td>
+          <td data-label="TACOS" class="num">-</td>
+        </tr>
+        
+
+        <tr>
+          <td data-label="Item" class="item-cell">
+      <div class="product">
+        <img src="https://m.media-amazon.com/images/I/81oK1iR4VkL.jpg" alt="" loading="lazy">
+        <div class="product-meta">
+          <div class="sku">EO-JOJOBA-1oz-KIT</div>
+          <div class="asin">B0FKD8FVQM</div>
+        </div>
+      </div>
+    </td>
+          <td data-label="Category">#EO</td>
+          <td data-label="Units" class="num"><div class="metric-value">1.00<div class="metric-delta"><span class="down">-0.40</span></div></div></td>
+          <td data-label="Sales" class="num"><div class="metric-value">$0.00<div class="metric-delta"><span class="down">-$13.65</span></div></div></td>
+          <td data-label="Profit" class="num"><div class="metric-value">-$1.50<div class="metric-delta"><span class="down">-$6.15</span></div></div></td>
+          <td data-label="Ad spend" class="num"><div class="metric-value">$0.00<div class="metric-delta"><span class="down">-$0.20</span></div></div></td>
+          <td data-label="Inventory" class="num"><div class="metric-value">117<div class="metric-delta">83.6 days cover</div></div></td>
+          <td data-label="Fees" class="num">-</td>
+          <td data-label="Margin" class="num">-</td>
+          <td data-label="TACOS" class="num">-</td>
+        </tr>
+        
+
+        <tr>
+          <td data-label="Item" class="item-cell">
+      <div class="product">
+        <img src="https://m.media-amazon.com/images/I/71I0W6eBHML.jpg" alt="" loading="lazy">
+        <div class="product-meta">
+          <div class="sku">KT8215_FBA</div>
+          <div class="asin">BJ</div>
+        </div>
+      </div>
+    </td>
+          <td data-label="Category">#BJ</td>
+          <td data-label="Units" class="num"><div class="metric-value">0.00<div class="metric-delta"><span class="down">-0.67</span></div></div></td>
+          <td data-label="Sales" class="num"><div class="metric-value">$0.00<div class="metric-delta"><span class="down">-$15.78</span></div></div></td>
+          <td data-label="Profit" class="num"><div class="metric-value">-$0.91<div class="metric-delta"><span class="down">-$5.95</span></div></div></td>
+          <td data-label="Ad spend" class="num"><div class="metric-value">$0.91<div class="metric-delta"><span class="up">+$0.06</span></div></div></td>
+          <td data-label="Inventory" class="num"><div class="metric-value">89.00<div class="metric-delta">133.5 days cover</div></div></td>
+          <td data-label="Fees" class="num">-</td>
+          <td data-label="Margin" class="num">-</td>
+          <td data-label="TACOS" class="num">-</td>
+        </tr>
+        
+
+        <tr>
+          <td data-label="Item" class="item-cell">
+      <div class="product">
+        <img src="https://m.media-amazon.com/images/I/71nnqxxE+XL.jpg" alt="" loading="lazy">
+        <div class="product-meta">
+          <div class="sku">-</div>
+          <div class="asin">GK</div>
+        </div>
+      </div>
+    </td>
+          <td data-label="Category">#GK</td>
+          <td data-label="Units" class="num"><div class="metric-value">0.00<div class="metric-delta"><span class="down">-0.13</span></div></div></td>
+          <td data-label="Sales" class="num"><div class="metric-value">$0.00<div class="metric-delta"><span class="down">-$2.13</span></div></div></td>
+          <td data-label="Profit" class="num"><div class="metric-value">$0.00<div class="metric-delta"><span class="up">+$0.47</span></div></div></td>
+          <td data-label="Ad spend" class="num"><div class="metric-value">$0.00<div class="metric-delta"><span class="down">-$0.13</span></div></div></td>
+          <td data-label="Inventory" class="num"><div class="metric-value">95.00<div class="metric-delta">712.5 days cover</div></div></td>
+          <td data-label="Fees" class="num">-</td>
+          <td data-label="Margin" class="num">-</td>
+          <td data-label="TACOS" class="num">-</td>
+        </tr>
+        
+
+        <tr>
+          <td data-label="Item" class="item-cell">
+      <div class="product">
+        <img src="https://m.media-amazon.com/images/I/61xPrgqjmcL.jpg" alt="" loading="lazy">
+        <div class="product-meta">
+          <div class="sku">-</div>
+          <div class="asin">NULL</div>
+        </div>
+      </div>
+    </td>
+          <td data-label="Category">#FJ</td>
+          <td data-label="Units" class="num"><div class="metric-value">0.00<div class="metric-delta"><span class="flat">0.00</span></div></div></td>
+          <td data-label="Sales" class="num"><div class="metric-value">$0.00<div class="metric-delta"><span class="flat">$0.00</span></div></div></td>
+          <td data-label="Profit" class="num"><div class="metric-value">$0.00<div class="metric-delta"><span class="up">+$0.06</span></div></div></td>
+          <td data-label="Ad spend" class="num"><div class="metric-value">$0.00<div class="metric-delta"><span class="flat">$0.00</span></div></div></td>
+          <td data-label="Inventory" class="num"><div class="metric-value">5.00<div class="metric-delta">- days cover</div></div></td>
+          <td data-label="Fees" class="num">-</td>
+          <td data-label="Margin" class="num">-</td>
+          <td data-label="TACOS" class="num">-</td>
+        </tr>
+        
+
+        <tr>
+          <td data-label="Item" class="item-cell">
+      <div class="product">
+        <img src="https://m.media-amazon.com/images/I/81q5b9buIsL.jpg" alt="" loading="lazy">
+        <div class="product-meta">
+          <div class="sku">PD-6PC-SET1</div>
+          <div class="asin">PD-RL-SET</div>
+        </div>
+      </div>
+    </td>
+          <td data-label="Category">#EO</td>
+          <td data-label="Units" class="num"><div class="metric-value">0.00<div class="metric-delta"><span class="down">-0.73</span></div></div></td>
+          <td data-label="Sales" class="num"><div class="metric-value">$0.00<div class="metric-delta"><span class="down">-$26.83</span></div></div></td>
+          <td data-label="Profit" class="num"><div class="metric-value">-$3.31<div class="metric-delta"><span class="down">-$4.68</span></div></div></td>
+          <td data-label="Ad spend" class="num"><div class="metric-value">$3.31<div class="metric-delta"><span class="down">-$12.24</span></div></div></td>
+          <td data-label="Inventory" class="num"><div class="metric-value">45.00<div class="metric-delta">61.4 days cover</div></div></td>
+          <td data-label="Fees" class="num">-</td>
+          <td data-label="Margin" class="num">-</td>
+          <td data-label="TACOS" class="num">-</td>
+        </tr>
+        </tbody>
+        </table>
+      </div>
+    </section>
+    
+  </main>
+</body>
+</html>
