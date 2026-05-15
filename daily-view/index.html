@@ -74,13 +74,45 @@
         linear-gradient(135deg, rgba(255,255,255,.96), rgba(245,248,250,.98)),
         radial-gradient(circle at 0 0, rgba(36, 84, 166, .12), transparent 32%);
     }
-    .insights p {
+    .insight-headline {
       margin: 8px 0 0;
       font-size: clamp(18px, 2.4vw, 28px);
       line-height: 1.22;
       letter-spacing: -.03em;
       font-weight: 760;
     }
+    .analysis-grid {
+      display: grid;
+      grid-template-columns: repeat(3, minmax(0, 1fr));
+      gap: 12px;
+      margin-top: 16px;
+    }
+    .analysis-item {
+      border-top: 1px solid var(--line);
+      padding-top: 12px;
+    }
+    .analysis-item > span {
+      color: var(--muted);
+      display: block;
+      font-size: 11px;
+      font-weight: 750;
+      letter-spacing: .08em;
+      margin-bottom: 5px;
+      text-transform: uppercase;
+    }
+    .analysis-item p {
+      color: var(--muted);
+      font-size: 13px;
+      line-height: 1.45;
+      margin: 0;
+    }
+    .analysis-item.action {
+      border-color: rgba(36, 84, 166, .28);
+      background: rgba(36, 84, 166, .05);
+      border-radius: 10px;
+      padding: 12px;
+    }
+    .analysis-item.action p { color: var(--ink); }
     .section-head {
       display: flex;
       align-items: baseline;
@@ -384,7 +416,8 @@
       h1 { font-size: 23px; }
       .value { font-size: 20px; }
       section { padding: 14px; }
-      .insights p { font-size: 18px; }
+      .insight-headline { font-size: 18px; }
+      .analysis-grid { grid-template-columns: 1fr; }
       .table-plus-read { grid-template-columns: 1fr; }
       .table-read { position: static; }
       .cards {
@@ -444,7 +477,7 @@
 <body>
   <header>
     <h1>Daily View Report</h1>
-    <div class="meta">Anchor date 2026-05-14 · Inventory snapshot 2026-05-15 · Generated 2026-05-15 14:47 EDT</div>
+    <div class="meta">Anchor date 2026-05-14 · Inventory snapshot 2026-05-15 · Generated 2026-05-15 14:52 EDT</div>
   </header>
   <main>
     <nav class="nav" aria-label="Report sections">
@@ -466,12 +499,21 @@
     
     <section id="insights" class="insights">
       <div class="label">AI executive analysis</div>
-      <p>
-        Sales are <span class="down">-$844.56</span> versus yesterday.
-        The sharpest positive move is PD-LAVENDER-MCT-10-RL / B0G63YF4ZD · +$230.24, while the biggest downside move is HS0002-BOX_FBA / B0CT3H57C3 · -$516.00.
-        There are 12 products on the low-stock watchlist; the tightest current signal is - / B0DDT7GP79 has 4.00 (4.0 days cover).
-        Prioritize margin review on the downside movers before increasing ad spend, and check inventory coverage before leaning into winners.
-      </p>
+      <p class="insight-headline">Sales are <span class="down">-$844.56</span> versus yesterday.</p>
+      <div class="analysis-grid">
+        <div class="analysis-item">
+          <span>Movers</span>
+          <p>The sharpest positive move is PD-LAVENDER-MCT-10-RL / B0G63YF4ZD · +$230.24, while the biggest downside move is HS0002-BOX_FBA / B0CT3H57C3 · -$516.00.</p>
+        </div>
+        <div class="analysis-item">
+          <span>Stock</span>
+          <p>There are 12 products on the low-stock watchlist; the tightest current signal is - / B0DDT7GP79 has 4.00 (4.0 days cover).</p>
+        </div>
+        <div class="analysis-item action">
+          <span>Action</span>
+          <p>Prioritize margin review on downside movers before increasing ad spend, and check inventory coverage before leaning into winners.</p>
+        </div>
+      </div>
     </section>
     
     
