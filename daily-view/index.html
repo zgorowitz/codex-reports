@@ -199,7 +199,8 @@
     table {
       width: 100%;
       border-collapse: collapse;
-      min-width: 980px;
+      min-width: 650px;
+      table-layout: fixed;
     }
     th, td {
       border-bottom: 1px solid var(--line);
@@ -219,19 +220,25 @@
       z-index: 2;
     }
     tr:last-child td { border-bottom: 0; }
-    .num { text-align: right; white-space: nowrap; }
+    .num {
+      text-align: right;
+      white-space: nowrap;
+      width: 8ch;
+      min-width: 8ch;
+      max-width: 8ch;
+    }
     .item-col,
     .item-cell {
-      width: 210px;
-      min-width: 210px;
-      max-width: 210px;
+      width: 220px;
+      min-width: 220px;
+      max-width: 220px;
     }
     .product {
       display: flex;
       align-items: center;
       gap: 8px;
       min-width: 0;
-      width: 194px;
+      width: 204px;
     }
     .product img {
       width: 38px;
@@ -316,12 +323,18 @@
       margin-top: 5px;
       max-width: 140px;
     }
-    .metric-value { font-weight: 650; }
+    .metric-value {
+      font-variant-numeric: tabular-nums;
+      font-weight: 650;
+      line-height: 1.12;
+    }
     .metric-delta {
       color: var(--muted);
       font-size: 11px;
       font-weight: 500;
       margin-top: 2px;
+      overflow: hidden;
+      text-overflow: clip;
     }
     .muted { color: var(--muted); font-size: 12px; }
     .severity {
@@ -396,19 +409,19 @@
     }
     .mover-panel .item-col,
     .mover-panel .item-cell {
-      width: 58px;
-      min-width: 58px;
-      max-width: 58px;
+      width: 190px;
+      min-width: 190px;
+      max-width: 190px;
     }
     .mover-panel .product {
-      width: 42px;
-      gap: 0;
+      width: 174px;
+      gap: 8px;
     }
     .mover-panel .product-meta {
-      display: none;
+      display: block;
     }
     .compact-table {
-      min-width: 620px;
+      min-width: 470px;
     }
     .category-grid {
       display: grid;
@@ -541,9 +554,9 @@
       }
       table {
         width: max-content;
-        min-width: 720px;
+        min-width: 570px;
       }
-      .compact-table { min-width: 520px; }
+      .compact-table { min-width: 430px; }
       .category-grid { grid-template-columns: 1fr; }
       .item-col,
       .item-cell {
@@ -570,7 +583,7 @@
 <body>
   <header>
     <h1>Daily View Report</h1>
-    <div class="meta">Anchor date 2026-05-14 · Inventory snapshot 2026-05-15 · Generated 2026-05-15 15:13 EDT</div>
+    <div class="meta">Anchor date 2026-05-14 · Inventory snapshot 2026-05-15 · Generated 2026-05-15 15:19 EDT</div>
   </header>
   <main>
     <nav class="nav" aria-label="Report sections">
@@ -655,9 +668,9 @@
       </details>
     </td>
           <td data-label="Units" class="num"><div class="metric-value">487<div class="metric-delta"><span class="down">-103</span></div></div></td>
-          <td data-label="Sales" class="num"><div class="metric-value">$4,572.53<div class="metric-delta"><span class="down">-$862.07</span></div></div></td>
-          <td data-label="Profit" class="num"><div class="metric-value">$935.63<div class="metric-delta"><span class="up">+$50.56</span></div></div></td>
-          <td data-label="Ad spend" class="num"><div class="metric-value">$538.06<div class="metric-delta"><span class="down">-$315.09</span></div></div></td>
+          <td data-label="Sales" class="num"><div class="metric-value">$4,573<div class="metric-delta"><span class="down">-$862</span></div></div></td>
+          <td data-label="Profit" class="num"><div class="metric-value">$936<div class="metric-delta"><span class="up">+$51</span></div></div></td>
+          <td data-label="Ad spend" class="num"><div class="metric-value">$538<div class="metric-delta"><span class="down">-$315</span></div></div></td>
         </tr>
         
 
@@ -686,10 +699,10 @@
         </div>
       </details>
     </td>
-          <td data-label="Units" class="num"><div class="metric-value">1.00<div class="metric-delta"><span class="down">-4.00</span></div></div></td>
-          <td data-label="Sales" class="num"><div class="metric-value">$129.00<div class="metric-delta"><span class="down">-$516.00</span></div></div></td>
-          <td data-label="Profit" class="num"><div class="metric-value">$46.49<div class="metric-delta"><span class="down">-$268.71</span></div></div></td>
-          <td data-label="Ad spend" class="num"><div class="metric-value">$7.66<div class="metric-delta"><span class="up">+$4.11</span></div></div></td>
+          <td data-label="Units" class="num"><div class="metric-value">1<div class="metric-delta"><span class="down">-4</span></div></div></td>
+          <td data-label="Sales" class="num"><div class="metric-value">$129<div class="metric-delta"><span class="down">-$516</span></div></div></td>
+          <td data-label="Profit" class="num"><div class="metric-value">$46<div class="metric-delta"><span class="down">-$269</span></div></div></td>
+          <td data-label="Ad spend" class="num"><div class="metric-value">$8<div class="metric-delta"><span class="up">+$4</span></div></div></td>
         </tr>
         
 
@@ -718,10 +731,10 @@
         </div>
       </details>
     </td>
-          <td data-label="Units" class="num"><div class="metric-value">166<div class="metric-delta"><span class="up">+34.00</span></div></div></td>
-          <td data-label="Sales" class="num"><div class="metric-value">$1,689.04<div class="metric-delta"><span class="up">+$351.79</span></div></div></td>
-          <td data-label="Profit" class="num"><div class="metric-value">$314.70<div class="metric-delta"><span class="up">+$127.98</span></div></div></td>
-          <td data-label="Ad spend" class="num"><div class="metric-value">$459.04<div class="metric-delta"><span class="up">+$85.68</span></div></div></td>
+          <td data-label="Units" class="num"><div class="metric-value">166<div class="metric-delta"><span class="up">+34</span></div></div></td>
+          <td data-label="Sales" class="num"><div class="metric-value">$1,689<div class="metric-delta"><span class="up">+$352</span></div></div></td>
+          <td data-label="Profit" class="num"><div class="metric-value">$315<div class="metric-delta"><span class="up">+$128</span></div></div></td>
+          <td data-label="Ad spend" class="num"><div class="metric-value">$459<div class="metric-delta"><span class="up">+$86</span></div></div></td>
         </tr>
         
 
@@ -750,10 +763,10 @@
         </div>
       </details>
     </td>
-          <td data-label="Units" class="num"><div class="metric-value">23.00<div class="metric-delta"><span class="up">+8.00</span></div></div></td>
-          <td data-label="Sales" class="num"><div class="metric-value">$559.77<div class="metric-delta"><span class="up">+$229.91</span></div></div></td>
-          <td data-label="Profit" class="num"><div class="metric-value">$158.17<div class="metric-delta"><span class="up">+$208.28</span></div></div></td>
-          <td data-label="Ad spend" class="num"><div class="metric-value">$35.23<div class="metric-delta"><span class="up">+$0.34</span></div></div></td>
+          <td data-label="Units" class="num"><div class="metric-value">23<div class="metric-delta"><span class="up">+8</span></div></div></td>
+          <td data-label="Sales" class="num"><div class="metric-value">$560<div class="metric-delta"><span class="up">+$230</span></div></div></td>
+          <td data-label="Profit" class="num"><div class="metric-value">$158<div class="metric-delta"><span class="up">+$208</span></div></div></td>
+          <td data-label="Ad spend" class="num"><div class="metric-value">$35<div class="metric-delta"><span class="up">+$0</span></div></div></td>
         </tr>
         
 
@@ -782,10 +795,10 @@
         </div>
       </details>
     </td>
-          <td data-label="Units" class="num"><div class="metric-value">96.00<div class="metric-delta"><span class="up">+16.00</span></div></div></td>
-          <td data-label="Sales" class="num"><div class="metric-value">$1,677.99<div class="metric-delta"><span class="up">+$282.79</span></div></div></td>
-          <td data-label="Profit" class="num"><div class="metric-value">$441.14<div class="metric-delta"><span class="up">+$121.64</span></div></div></td>
-          <td data-label="Ad spend" class="num"><div class="metric-value">$122.38<div class="metric-delta"><span class="down">-$12.40</span></div></div></td>
+          <td data-label="Units" class="num"><div class="metric-value">96<div class="metric-delta"><span class="up">+16</span></div></div></td>
+          <td data-label="Sales" class="num"><div class="metric-value">$1,678<div class="metric-delta"><span class="up">+$283</span></div></div></td>
+          <td data-label="Profit" class="num"><div class="metric-value">$441<div class="metric-delta"><span class="up">+$122</span></div></div></td>
+          <td data-label="Ad spend" class="num"><div class="metric-value">$122<div class="metric-delta"><span class="down">-$12</span></div></div></td>
         </tr>
         
 
@@ -814,10 +827,10 @@
         </div>
       </details>
     </td>
-          <td data-label="Units" class="num"><div class="metric-value">33.00<div class="metric-delta"><span class="down">-14.00</span></div></div></td>
-          <td data-label="Sales" class="num"><div class="metric-value">$557.95<div class="metric-delta"><span class="down">-$240.58</span></div></div></td>
-          <td data-label="Profit" class="num"><div class="metric-value">$135.21<div class="metric-delta"><span class="down">-$154.04</span></div></div></td>
-          <td data-label="Ad spend" class="num"><div class="metric-value">$98.42<div class="metric-delta"><span class="down">-$3.41</span></div></div></td>
+          <td data-label="Units" class="num"><div class="metric-value">33<div class="metric-delta"><span class="down">-14</span></div></div></td>
+          <td data-label="Sales" class="num"><div class="metric-value">$558<div class="metric-delta"><span class="down">-$241</span></div></div></td>
+          <td data-label="Profit" class="num"><div class="metric-value">$135<div class="metric-delta"><span class="down">-$154</span></div></div></td>
+          <td data-label="Ad spend" class="num"><div class="metric-value">$98<div class="metric-delta"><span class="down">-$3</span></div></div></td>
         </tr>
         
 
@@ -846,10 +859,10 @@
         </div>
       </details>
     </td>
-          <td data-label="Units" class="num"><div class="metric-value">124<div class="metric-delta"><span class="down">-22.00</span></div></div></td>
-          <td data-label="Sales" class="num"><div class="metric-value">$1,238.76<div class="metric-delta"><span class="down">-$219.29</span></div></div></td>
-          <td data-label="Profit" class="num"><div class="metric-value">$295.16<div class="metric-delta"><span class="down">-$123.80</span></div></div></td>
-          <td data-label="Ad spend" class="num"><div class="metric-value">$66.84<div class="metric-delta"><span class="down">-$17.82</span></div></div></td>
+          <td data-label="Units" class="num"><div class="metric-value">124<div class="metric-delta"><span class="down">-22</span></div></div></td>
+          <td data-label="Sales" class="num"><div class="metric-value">$1,239<div class="metric-delta"><span class="down">-$219</span></div></div></td>
+          <td data-label="Profit" class="num"><div class="metric-value">$295<div class="metric-delta"><span class="down">-$124</span></div></div></td>
+          <td data-label="Ad spend" class="num"><div class="metric-value">$67<div class="metric-delta"><span class="down">-$18</span></div></div></td>
         </tr>
         
 
@@ -878,10 +891,10 @@
         </div>
       </details>
     </td>
-          <td data-label="Units" class="num"><div class="metric-value">66.00<div class="metric-delta"><span class="down">-27.00</span></div></div></td>
-          <td data-label="Sales" class="num"><div class="metric-value">$617.12<div class="metric-delta"><span class="down">-$226.50</span></div></div></td>
-          <td data-label="Profit" class="num"><div class="metric-value">$179.63<div class="metric-delta"><span class="down">-$126.45</span></div></div></td>
-          <td data-label="Ad spend" class="num"><div class="metric-value">$43.70<div class="metric-delta"><span class="up">+$0.21</span></div></div></td>
+          <td data-label="Units" class="num"><div class="metric-value">66<div class="metric-delta"><span class="down">-27</span></div></div></td>
+          <td data-label="Sales" class="num"><div class="metric-value">$617<div class="metric-delta"><span class="down">-$226</span></div></div></td>
+          <td data-label="Profit" class="num"><div class="metric-value">$180<div class="metric-delta"><span class="down">-$126</span></div></div></td>
+          <td data-label="Ad spend" class="num"><div class="metric-value">$44<div class="metric-delta"><span class="up">+$0</span></div></div></td>
         </tr>
         
 
@@ -910,10 +923,10 @@
         </div>
       </details>
     </td>
-          <td data-label="Units" class="num"><div class="metric-value">89.00<div class="metric-delta"><span class="down">-6.00</span></div></div></td>
-          <td data-label="Sales" class="num"><div class="metric-value">$875.14<div class="metric-delta"><span class="down">-$69.65</span></div></div></td>
-          <td data-label="Profit" class="num"><div class="metric-value">$14.66<div class="metric-delta"><span class="down">-$180.20</span></div></div></td>
-          <td data-label="Ad spend" class="num"><div class="metric-value">$246.29<div class="metric-delta"><span class="down">-$11.93</span></div></div></td>
+          <td data-label="Units" class="num"><div class="metric-value">89<div class="metric-delta"><span class="down">-6</span></div></div></td>
+          <td data-label="Sales" class="num"><div class="metric-value">$875<div class="metric-delta"><span class="down">-$70</span></div></div></td>
+          <td data-label="Profit" class="num"><div class="metric-value">$15<div class="metric-delta"><span class="down">-$180</span></div></div></td>
+          <td data-label="Ad spend" class="num"><div class="metric-value">$246<div class="metric-delta"><span class="down">-$12</span></div></div></td>
         </tr>
         
 
@@ -942,10 +955,10 @@
         </div>
       </details>
     </td>
-          <td data-label="Units" class="num"><div class="metric-value">54.00<div class="metric-delta"><span class="down">-6.00</span></div></div></td>
-          <td data-label="Sales" class="num"><div class="metric-value">$809.46<div class="metric-delta"><span class="down">-$219.94</span></div></div></td>
-          <td data-label="Profit" class="num"><div class="metric-value">$245.17<div class="metric-delta"><span class="down">-$83.60</span></div></div></td>
-          <td data-label="Ad spend" class="num"><div class="metric-value">$127.17<div class="metric-delta"><span class="up">+$3.07</span></div></div></td>
+          <td data-label="Units" class="num"><div class="metric-value">54<div class="metric-delta"><span class="down">-6</span></div></div></td>
+          <td data-label="Sales" class="num"><div class="metric-value">$809<div class="metric-delta"><span class="down">-$220</span></div></div></td>
+          <td data-label="Profit" class="num"><div class="metric-value">$245<div class="metric-delta"><span class="down">-$84</span></div></div></td>
+          <td data-label="Ad spend" class="num"><div class="metric-value">$127<div class="metric-delta"><span class="up">+$3</span></div></div></td>
         </tr>
         
 
@@ -974,10 +987,10 @@
         </div>
       </details>
     </td>
-          <td data-label="Units" class="num"><div class="metric-value">56.00<div class="metric-delta"><span class="up">+24.00</span></div></div></td>
-          <td data-label="Sales" class="num"><div class="metric-value">$549.42<div class="metric-delta"><span class="up">+$230.24</span></div></div></td>
-          <td data-label="Profit" class="num"><div class="metric-value">$111.93<div class="metric-delta"><span class="up">+$33.70</span></div></div></td>
-          <td data-label="Ad spend" class="num"><div class="metric-value">$130.76<div class="metric-delta"><span class="up">+$41.76</span></div></div></td>
+          <td data-label="Units" class="num"><div class="metric-value">56<div class="metric-delta"><span class="up">+24</span></div></div></td>
+          <td data-label="Sales" class="num"><div class="metric-value">$549<div class="metric-delta"><span class="up">+$230</span></div></div></td>
+          <td data-label="Profit" class="num"><div class="metric-value">$112<div class="metric-delta"><span class="up">+$34</span></div></div></td>
+          <td data-label="Ad spend" class="num"><div class="metric-value">$131<div class="metric-delta"><span class="up">+$42</span></div></div></td>
         </tr>
         
 
@@ -1006,10 +1019,10 @@
         </div>
       </details>
     </td>
-          <td data-label="Units" class="num"><div class="metric-value">155<div class="metric-delta"><span class="up">+23.00</span></div></div></td>
-          <td data-label="Sales" class="num"><div class="metric-value">$1,336.85<div class="metric-delta"><span class="up">+$227.97</span></div></div></td>
-          <td data-label="Profit" class="num"><div class="metric-value">$250.73<div class="metric-delta"><span class="up">+$39.19</span></div></div></td>
-          <td data-label="Ad spend" class="num"><div class="metric-value">$198.72<div class="metric-delta"><span class="down">-$10.67</span></div></div></td>
+          <td data-label="Units" class="num"><div class="metric-value">155<div class="metric-delta"><span class="up">+23</span></div></div></td>
+          <td data-label="Sales" class="num"><div class="metric-value">$1,337<div class="metric-delta"><span class="up">+$228</span></div></div></td>
+          <td data-label="Profit" class="num"><div class="metric-value">$251<div class="metric-delta"><span class="up">+$39</span></div></div></td>
+          <td data-label="Ad spend" class="num"><div class="metric-value">$199<div class="metric-delta"><span class="down">-$11</span></div></div></td>
         </tr>
         </tbody>
         </table>
@@ -1076,9 +1089,9 @@
         </div>
       </details>
     </td>
-          <td data-label="Sales" class="num"><div class="metric-value">$549.42<div class="metric-delta"><span class="up">+$230.24</span></div></div></td>
-          <td data-label="Profit" class="num"><div class="metric-value">$111.93<div class="metric-delta"><span class="up">+$33.70</span></div></div></td>
-          <td data-label="Ad spend" class="num"><div class="metric-value">$130.76<div class="metric-delta"><span class="up">+$41.76</span></div></div></td>
+          <td data-label="Sales" class="num"><div class="metric-value">$549<div class="metric-delta"><span class="up">+$230</span></div></div></td>
+          <td data-label="Profit" class="num"><div class="metric-value">$112<div class="metric-delta"><span class="up">+$34</span></div></div></td>
+          <td data-label="Ad spend" class="num"><div class="metric-value">$131<div class="metric-delta"><span class="up">+$42</span></div></div></td>
         </tr>
         
 
@@ -1107,9 +1120,9 @@
         </div>
       </details>
     </td>
-          <td data-label="Sales" class="num"><div class="metric-value">$559.77<div class="metric-delta"><span class="up">+$229.91</span></div></div></td>
-          <td data-label="Profit" class="num"><div class="metric-value">$158.17<div class="metric-delta"><span class="up">+$208.28</span></div></div></td>
-          <td data-label="Ad spend" class="num"><div class="metric-value">$35.23<div class="metric-delta"><span class="up">+$0.34</span></div></div></td>
+          <td data-label="Sales" class="num"><div class="metric-value">$560<div class="metric-delta"><span class="up">+$230</span></div></div></td>
+          <td data-label="Profit" class="num"><div class="metric-value">$158<div class="metric-delta"><span class="up">+$208</span></div></div></td>
+          <td data-label="Ad spend" class="num"><div class="metric-value">$35<div class="metric-delta"><span class="up">+$0</span></div></div></td>
         </tr>
         
 
@@ -1138,9 +1151,9 @@
         </div>
       </details>
     </td>
-          <td data-label="Sales" class="num"><div class="metric-value">$311.85<div class="metric-delta"><span class="up">+$165.92</span></div></div></td>
-          <td data-label="Profit" class="num"><div class="metric-value">$60.21<div class="metric-delta"><span class="up">+$25.75</span></div></div></td>
-          <td data-label="Ad spend" class="num"><div class="metric-value">$34.96<div class="metric-delta"><span class="up">+$18.68</span></div></div></td>
+          <td data-label="Sales" class="num"><div class="metric-value">$312<div class="metric-delta"><span class="up">+$166</span></div></div></td>
+          <td data-label="Profit" class="num"><div class="metric-value">$60<div class="metric-delta"><span class="up">+$26</span></div></div></td>
+          <td data-label="Ad spend" class="num"><div class="metric-value">$35<div class="metric-delta"><span class="up">+$19</span></div></div></td>
         </tr>
         
 
@@ -1169,9 +1182,9 @@
         </div>
       </details>
     </td>
-          <td data-label="Sales" class="num"><div class="metric-value">$99.96<div class="metric-delta"><span class="up">+$49.98</span></div></div></td>
-          <td data-label="Profit" class="num"><div class="metric-value">$37.47<div class="metric-delta"><span class="up">+$12.75</span></div></div></td>
-          <td data-label="Ad spend" class="num"><div class="metric-value">$15.79<div class="metric-delta"><span class="down">-$3.18</span></div></div></td>
+          <td data-label="Sales" class="num"><div class="metric-value">$100<div class="metric-delta"><span class="up">+$50</span></div></div></td>
+          <td data-label="Profit" class="num"><div class="metric-value">$37<div class="metric-delta"><span class="up">+$13</span></div></div></td>
+          <td data-label="Ad spend" class="num"><div class="metric-value">$16<div class="metric-delta"><span class="down">-$3</span></div></div></td>
         </tr>
         
 
@@ -1200,9 +1213,9 @@
         </div>
       </details>
     </td>
-          <td data-label="Sales" class="num"><div class="metric-value">$32.16<div class="metric-delta"><span class="up">+$23.17</span></div></div></td>
-          <td data-label="Profit" class="num"><div class="metric-value">$13.24<div class="metric-delta"><span class="up">+$9.58</span></div></div></td>
-          <td data-label="Ad spend" class="num"><div class="metric-value">$0.30<div class="metric-delta"><span class="down">-$0.30</span></div></div></td>
+          <td data-label="Sales" class="num"><div class="metric-value">$32<div class="metric-delta"><span class="up">+$23</span></div></div></td>
+          <td data-label="Profit" class="num"><div class="metric-value">$13<div class="metric-delta"><span class="up">+$10</span></div></div></td>
+          <td data-label="Ad spend" class="num"><div class="metric-value">$0<div class="metric-delta"><span class="down">$0</span></div></div></td>
         </tr>
         
 
@@ -1231,9 +1244,9 @@
         </div>
       </details>
     </td>
-          <td data-label="Sales" class="num"><div class="metric-value">$27.11<div class="metric-delta"><span class="up">+$7.13</span></div></div></td>
-          <td data-label="Profit" class="num"><div class="metric-value">$7.07<div class="metric-delta"><span class="down">-$1.08</span></div></div></td>
-          <td data-label="Ad spend" class="num"><div class="metric-value">$5.75<div class="metric-delta"><span class="up">+$3.60</span></div></div></td>
+          <td data-label="Sales" class="num"><div class="metric-value">$27<div class="metric-delta"><span class="up">+$7</span></div></div></td>
+          <td data-label="Profit" class="num"><div class="metric-value">$7<div class="metric-delta"><span class="down">-$1</span></div></div></td>
+          <td data-label="Ad spend" class="num"><div class="metric-value">$6<div class="metric-delta"><span class="up">+$4</span></div></div></td>
         </tr>
         </tbody>
         </table>
@@ -1279,9 +1292,9 @@
         </div>
       </details>
     </td>
-          <td data-label="Sales" class="num"><div class="metric-value">$129.00<div class="metric-delta"><span class="down">-$516.00</span></div></div></td>
-          <td data-label="Profit" class="num"><div class="metric-value">$46.49<div class="metric-delta"><span class="down">-$268.71</span></div></div></td>
-          <td data-label="Ad spend" class="num"><div class="metric-value">$7.66<div class="metric-delta"><span class="up">+$4.11</span></div></div></td>
+          <td data-label="Sales" class="num"><div class="metric-value">$129<div class="metric-delta"><span class="down">-$516</span></div></div></td>
+          <td data-label="Profit" class="num"><div class="metric-value">$46<div class="metric-delta"><span class="down">-$269</span></div></div></td>
+          <td data-label="Ad spend" class="num"><div class="metric-value">$8<div class="metric-delta"><span class="up">+$4</span></div></div></td>
         </tr>
         
 
@@ -1310,9 +1323,9 @@
         </div>
       </details>
     </td>
-          <td data-label="Sales" class="num"><div class="metric-value">$0.00<div class="metric-delta"><span class="down">-$104.97</span></div></div></td>
-          <td data-label="Profit" class="num"><div class="metric-value">-$3.31<div class="metric-delta"><span class="down">-$38.06</span></div></div></td>
-          <td data-label="Ad spend" class="num"><div class="metric-value">$3.31<div class="metric-delta"><span class="down">-$21.55</span></div></div></td>
+          <td data-label="Sales" class="num"><div class="metric-value">$0<div class="metric-delta"><span class="down">-$105</span></div></div></td>
+          <td data-label="Profit" class="num"><div class="metric-value">-$3<div class="metric-delta"><span class="down">-$38</span></div></div></td>
+          <td data-label="Ad spend" class="num"><div class="metric-value">$3<div class="metric-delta"><span class="down">-$22</span></div></div></td>
         </tr>
         
 
@@ -1341,9 +1354,9 @@
         </div>
       </details>
     </td>
-          <td data-label="Sales" class="num"><div class="metric-value">$119.96<div class="metric-delta"><span class="down">-$89.97</span></div></div></td>
-          <td data-label="Profit" class="num"><div class="metric-value">$14.72<div class="metric-delta"><span class="down">-$45.09</span></div></div></td>
-          <td data-label="Ad spend" class="num"><div class="metric-value">$20.18<div class="metric-delta"><span class="up">+$2.08</span></div></div></td>
+          <td data-label="Sales" class="num"><div class="metric-value">$120<div class="metric-delta"><span class="down">-$90</span></div></div></td>
+          <td data-label="Profit" class="num"><div class="metric-value">$15<div class="metric-delta"><span class="down">-$45</span></div></div></td>
+          <td data-label="Ad spend" class="num"><div class="metric-value">$20<div class="metric-delta"><span class="up">+$2</span></div></div></td>
         </tr>
         
 
@@ -1372,9 +1385,9 @@
         </div>
       </details>
     </td>
-          <td data-label="Sales" class="num"><div class="metric-value">$79.96<div class="metric-delta"><span class="down">-$79.96</span></div></div></td>
-          <td data-label="Profit" class="num"><div class="metric-value">$19.00<div class="metric-delta"><span class="down">-$8.33</span></div></div></td>
-          <td data-label="Ad spend" class="num"><div class="metric-value">$7.20<div class="metric-delta"><span class="down">-$1.08</span></div></div></td>
+          <td data-label="Sales" class="num"><div class="metric-value">$80<div class="metric-delta"><span class="down">-$80</span></div></div></td>
+          <td data-label="Profit" class="num"><div class="metric-value">$19<div class="metric-delta"><span class="down">-$8</span></div></div></td>
+          <td data-label="Ad spend" class="num"><div class="metric-value">$7<div class="metric-delta"><span class="down">-$1</span></div></div></td>
         </tr>
         
 
@@ -1403,9 +1416,9 @@
         </div>
       </details>
     </td>
-          <td data-label="Sales" class="num"><div class="metric-value">$14.24<div class="metric-delta"><span class="down">-$30.73</span></div></div></td>
-          <td data-label="Profit" class="num"><div class="metric-value">$3.67<div class="metric-delta"><span class="down">-$8.71</span></div></div></td>
-          <td data-label="Ad spend" class="num"><div class="metric-value">$1.20<div class="metric-delta"><span class="down">-$2.47</span></div></div></td>
+          <td data-label="Sales" class="num"><div class="metric-value">$14<div class="metric-delta"><span class="down">-$31</span></div></div></td>
+          <td data-label="Profit" class="num"><div class="metric-value">$4<div class="metric-delta"><span class="down">-$9</span></div></div></td>
+          <td data-label="Ad spend" class="num"><div class="metric-value">$1<div class="metric-delta"><span class="down">-$2</span></div></div></td>
         </tr>
         
 
@@ -1434,9 +1447,9 @@
         </div>
       </details>
     </td>
-          <td data-label="Sales" class="num"><div class="metric-value">$11.99<div class="metric-delta"><span class="down">-$17.98</span></div></div></td>
-          <td data-label="Profit" class="num"><div class="metric-value">$4.86<div class="metric-delta"><span class="down">-$1.05</span></div></div></td>
-          <td data-label="Ad spend" class="num"><div class="metric-value">$0.37<div class="metric-delta"><span class="up">+$0.09</span></div></div></td>
+          <td data-label="Sales" class="num"><div class="metric-value">$12<div class="metric-delta"><span class="down">-$18</span></div></div></td>
+          <td data-label="Profit" class="num"><div class="metric-value">$5<div class="metric-delta"><span class="down">-$1</span></div></div></td>
+          <td data-label="Ad spend" class="num"><div class="metric-value">$0<div class="metric-delta"><span class="up">+$0</span></div></div></td>
         </tr>
         
 
@@ -1465,9 +1478,9 @@
         </div>
       </details>
     </td>
-          <td data-label="Sales" class="num"><div class="metric-value">$0.00<div class="metric-delta"><span class="down">-$17.56</span></div></div></td>
-          <td data-label="Profit" class="num"><div class="metric-value">-$1.39<div class="metric-delta"><span class="down">-$7.28</span></div></div></td>
-          <td data-label="Ad spend" class="num"><div class="metric-value">$1.39<div class="metric-delta"><span class="up">+$0.84</span></div></div></td>
+          <td data-label="Sales" class="num"><div class="metric-value">$0<div class="metric-delta"><span class="down">-$18</span></div></div></td>
+          <td data-label="Profit" class="num"><div class="metric-value">-$1<div class="metric-delta"><span class="down">-$7</span></div></div></td>
+          <td data-label="Ad spend" class="num"><div class="metric-value">$1<div class="metric-delta"><span class="up">+$1</span></div></div></td>
         </tr>
         </tbody>
         </table>
@@ -1516,8 +1529,8 @@
         </div>
       </details>
     </td>
-          <td data-label="Units" class="num"><div class="metric-value">33.00<div class="metric-delta"><span class="down">-14.00</span></div></div></td>
-          <td data-label="Ad spend" class="num"><div class="metric-value">$98.42<div class="metric-delta"><span class="down">-$3.41</span></div></div></td>
+          <td data-label="Units" class="num"><div class="metric-value">33<div class="metric-delta"><span class="down">-14</span></div></div></td>
+          <td data-label="Ad spend" class="num"><div class="metric-value">$98<div class="metric-delta"><span class="down">-$3</span></div></div></td>
           <td data-label="Inventory" class="num"><div class="metric-value">662<div class="metric-delta">15.8 days cover</div></div></td>
         </tr>
         
@@ -1547,8 +1560,8 @@
         </div>
       </details>
     </td>
-          <td data-label="Units" class="num"><div class="metric-value">9.00<div class="metric-delta"><span class="down">-4.00</span></div></div></td>
-          <td data-label="Ad spend" class="num"><div class="metric-value">$17.15<div class="metric-delta"><span class="up">+$4.88</span></div></div></td>
+          <td data-label="Units" class="num"><div class="metric-value">9<div class="metric-delta"><span class="down">-4</span></div></div></td>
+          <td data-label="Ad spend" class="num"><div class="metric-value">$17<div class="metric-delta"><span class="up">+$5</span></div></div></td>
           <td data-label="Inventory" class="num"><div class="metric-value">132<div class="metric-delta">19.5 days cover</div></div></td>
         </tr>
         
@@ -1578,8 +1591,8 @@
         </div>
       </details>
     </td>
-          <td data-label="Units" class="num"><div class="metric-value">1.00<div class="metric-delta"><span class="up">+1.00</span></div></div></td>
-          <td data-label="Ad spend" class="num"><div class="metric-value">$0.00<div class="metric-delta"><span class="flat">$0.00</span></div></div></td>
+          <td data-label="Units" class="num"><div class="metric-value">1<div class="metric-delta"><span class="up">+1</span></div></div></td>
+          <td data-label="Ad spend" class="num"><div class="metric-value">$0<div class="metric-delta"><span class="flat">$0</span></div></div></td>
           <td data-label="Inventory" class="num"><div class="metric-value">21.00<div class="metric-delta">42.0 days cover</div></div></td>
         </tr>
         
@@ -1609,8 +1622,8 @@
         </div>
       </details>
     </td>
-          <td data-label="Units" class="num"><div class="metric-value">0.00<div class="metric-delta"><span class="flat">0.00</span></div></div></td>
-          <td data-label="Ad spend" class="num"><div class="metric-value">$0.00<div class="metric-delta"><span class="flat">$0.00</span></div></div></td>
+          <td data-label="Units" class="num"><div class="metric-value">0<div class="metric-delta"><span class="flat">0</span></div></div></td>
+          <td data-label="Ad spend" class="num"><div class="metric-value">$0<div class="metric-delta"><span class="flat">$0</span></div></div></td>
           <td data-label="Inventory" class="num"><div class="metric-value">16.00<div class="metric-delta">480.0 days cover</div></div></td>
         </tr>
         
@@ -1640,8 +1653,8 @@
         </div>
       </details>
     </td>
-          <td data-label="Units" class="num"><div class="metric-value">0.00<div class="metric-delta"><span class="flat">0.00</span></div></div></td>
-          <td data-label="Ad spend" class="num"><div class="metric-value">$0.00<div class="metric-delta"><span class="flat">$0.00</span></div></div></td>
+          <td data-label="Units" class="num"><div class="metric-value">0<div class="metric-delta"><span class="flat">0</span></div></div></td>
+          <td data-label="Ad spend" class="num"><div class="metric-value">$0<div class="metric-delta"><span class="flat">$0</span></div></div></td>
           <td data-label="Inventory" class="num"><div class="metric-value">0.00<div class="metric-delta">0.0 days cover</div></div></td>
         </tr>
         
@@ -1671,8 +1684,8 @@
         </div>
       </details>
     </td>
-          <td data-label="Units" class="num"><div class="metric-value">0.00<div class="metric-delta"><span class="flat">0.00</span></div></div></td>
-          <td data-label="Ad spend" class="num"><div class="metric-value">$0.00<div class="metric-delta"><span class="flat">$0.00</span></div></div></td>
+          <td data-label="Units" class="num"><div class="metric-value">0<div class="metric-delta"><span class="flat">0</span></div></div></td>
+          <td data-label="Ad spend" class="num"><div class="metric-value">$0<div class="metric-delta"><span class="flat">$0</span></div></div></td>
           <td data-label="Inventory" class="num"><div class="metric-value">1.00<div class="metric-delta">15.0 days cover</div></div></td>
         </tr>
         
@@ -1702,8 +1715,8 @@
         </div>
       </details>
     </td>
-          <td data-label="Units" class="num"><div class="metric-value">0.00<div class="metric-delta"><span class="flat">0.00</span></div></div></td>
-          <td data-label="Ad spend" class="num"><div class="metric-value">$0.00<div class="metric-delta"><span class="flat">$0.00</span></div></div></td>
+          <td data-label="Units" class="num"><div class="metric-value">0<div class="metric-delta"><span class="flat">0</span></div></div></td>
+          <td data-label="Ad spend" class="num"><div class="metric-value">$0<div class="metric-delta"><span class="flat">$0</span></div></div></td>
           <td data-label="Inventory" class="num"><div class="metric-value">0.00<div class="metric-delta">0.0 days cover</div></div></td>
         </tr>
         
@@ -1733,8 +1746,8 @@
         </div>
       </details>
     </td>
-          <td data-label="Units" class="num"><div class="metric-value">0.00<div class="metric-delta"><span class="flat">0.00</span></div></div></td>
-          <td data-label="Ad spend" class="num"><div class="metric-value">$0.00<div class="metric-delta"><span class="flat">$0.00</span></div></div></td>
+          <td data-label="Units" class="num"><div class="metric-value">0<div class="metric-delta"><span class="flat">0</span></div></div></td>
+          <td data-label="Ad spend" class="num"><div class="metric-value">$0<div class="metric-delta"><span class="flat">$0</span></div></div></td>
           <td data-label="Inventory" class="num"><div class="metric-value">4.00<div class="metric-delta">10.9 days cover</div></div></td>
         </tr>
         
@@ -1764,8 +1777,8 @@
         </div>
       </details>
     </td>
-          <td data-label="Units" class="num"><div class="metric-value">0.00<div class="metric-delta"><span class="flat">0.00</span></div></div></td>
-          <td data-label="Ad spend" class="num"><div class="metric-value">$0.00<div class="metric-delta"><span class="flat">$0.00</span></div></div></td>
+          <td data-label="Units" class="num"><div class="metric-value">0<div class="metric-delta"><span class="flat">0</span></div></div></td>
+          <td data-label="Ad spend" class="num"><div class="metric-value">$0<div class="metric-delta"><span class="flat">$0</span></div></div></td>
           <td data-label="Inventory" class="num"><div class="metric-value">4.00<div class="metric-delta">4.0 days cover</div></div></td>
         </tr>
         
@@ -1795,8 +1808,8 @@
         </div>
       </details>
     </td>
-          <td data-label="Units" class="num"><div class="metric-value">0.00<div class="metric-delta"><span class="flat">0.00</span></div></div></td>
-          <td data-label="Ad spend" class="num"><div class="metric-value">$0.21<div class="metric-delta"><span class="flat">$0.00</span></div></div></td>
+          <td data-label="Units" class="num"><div class="metric-value">0<div class="metric-delta"><span class="flat">0</span></div></div></td>
+          <td data-label="Ad spend" class="num"><div class="metric-value">$0<div class="metric-delta"><span class="flat">$0</span></div></div></td>
           <td data-label="Inventory" class="num"><div class="metric-value">18.00<div class="metric-delta">36.0 days cover</div></div></td>
         </tr>
         
@@ -1826,8 +1839,8 @@
         </div>
       </details>
     </td>
-          <td data-label="Units" class="num"><div class="metric-value">0.00<div class="metric-delta"><span class="flat">0.00</span></div></div></td>
-          <td data-label="Ad spend" class="num"><div class="metric-value">$0.00<div class="metric-delta"><span class="flat">$0.00</span></div></div></td>
+          <td data-label="Units" class="num"><div class="metric-value">0<div class="metric-delta"><span class="flat">0</span></div></div></td>
+          <td data-label="Ad spend" class="num"><div class="metric-value">$0<div class="metric-delta"><span class="flat">$0</span></div></div></td>
           <td data-label="Inventory" class="num"><div class="metric-value">29.00<div class="metric-delta">39.5 days cover</div></div></td>
         </tr>
         
@@ -1857,8 +1870,8 @@
         </div>
       </details>
     </td>
-          <td data-label="Units" class="num"><div class="metric-value">0.00<div class="metric-delta"><span class="flat">0.00</span></div></div></td>
-          <td data-label="Ad spend" class="num"><div class="metric-value">$1.50<div class="metric-delta"><span class="up">+$0.07</span></div></div></td>
+          <td data-label="Units" class="num"><div class="metric-value">0<div class="metric-delta"><span class="flat">0</span></div></div></td>
+          <td data-label="Ad spend" class="num"><div class="metric-value">$2<div class="metric-delta"><span class="up">+$0</span></div></div></td>
           <td data-label="Inventory" class="num"><div class="metric-value">24.00<div class="metric-delta">120.0 days cover</div></div></td>
         </tr>
         </tbody>
@@ -2008,10 +2021,10 @@
         </div>
       </details>
     </td>
-          <td data-label="Units" class="num"><div class="metric-value">9.00<div class="metric-delta"><span class="down">-4.00</span></div></div></td>
-          <td data-label="Sales" class="num"><div class="metric-value">$162.91<div class="metric-delta"><span class="down">-$70.96</span></div></div></td>
-          <td data-label="Profit" class="num"><div class="metric-value">$20.05<div class="metric-delta"><span class="down">-$28.18</span></div></div></td>
-          <td data-label="Ad spend" class="num"><div class="metric-value">$17.15<div class="metric-delta"><span class="up">+$4.88</span></div></div></td>
+          <td data-label="Units" class="num"><div class="metric-value">9<div class="metric-delta"><span class="down">-4</span></div></div></td>
+          <td data-label="Sales" class="num"><div class="metric-value">$163<div class="metric-delta"><span class="down">-$71</span></div></div></td>
+          <td data-label="Profit" class="num"><div class="metric-value">$20<div class="metric-delta"><span class="down">-$28</span></div></div></td>
+          <td data-label="Ad spend" class="num"><div class="metric-value">$17<div class="metric-delta"><span class="up">+$5</span></div></div></td>
         </tr>
         </tbody>
         </table>
@@ -2031,7 +2044,6 @@
           <thead>
             <tr>
               <th class="item-col">Item</th>
-              <th>Category</th>
               <th class="num">Units</th>
               <th class="num">Sales</th>
               <th class="num">Profit</th>
@@ -2040,6 +2052,7 @@
               <th class="num">Fees</th>
               <th class="num">Margin</th>
               <th class="num">TACOS</th>
+              <th>Category</th>
             </tr>
           </thead>
           <tbody>
@@ -2068,15 +2081,15 @@
         </div>
       </details>
     </td>
-          <td data-label="Category">#PA</td>
-          <td data-label="Units" class="num"><div class="metric-value">487<div class="metric-delta"><span class="down">-36.77</span></div></div></td>
-          <td data-label="Sales" class="num"><div class="metric-value">$4,572.53<div class="metric-delta"><span class="down">-$652.88</span></div></div></td>
-          <td data-label="Profit" class="num"><div class="metric-value">$935.63<div class="metric-delta"><span class="down">-$258.96</span></div></div></td>
-          <td data-label="Ad spend" class="num"><div class="metric-value">$538.06<div class="metric-delta"><span class="down">-$430.05</span></div></div></td>
+          <td data-label="Units" class="num"><div class="metric-value">487<div class="metric-delta"><span class="down">-37</span></div></div></td>
+          <td data-label="Sales" class="num"><div class="metric-value">$4,573<div class="metric-delta"><span class="down">-$653</span></div></div></td>
+          <td data-label="Profit" class="num"><div class="metric-value">$936<div class="metric-delta"><span class="down">-$259</span></div></div></td>
+          <td data-label="Ad spend" class="num"><div class="metric-value">$538<div class="metric-delta"><span class="down">-$430</span></div></div></td>
           <td data-label="Inventory" class="num"><div class="metric-value">21,712<div class="metric-delta">41.5 days cover</div></div></td>
           <td data-label="Fees" class="num">48.1%</td>
           <td data-label="Margin" class="num">20.5%</td>
           <td data-label="TACOS" class="num">11.8%</td>
+          <td data-label="Category">#PA</td>
         </tr>
         
 
@@ -2105,15 +2118,15 @@
         </div>
       </details>
     </td>
-          <td data-label="Category">#EO</td>
-          <td data-label="Units" class="num"><div class="metric-value">166<div class="metric-delta"><span class="up">+62.63</span></div></div></td>
-          <td data-label="Sales" class="num"><div class="metric-value">$1,689.04<div class="metric-delta"><span class="up">+$557.44</span></div></div></td>
-          <td data-label="Profit" class="num"><div class="metric-value">$314.70<div class="metric-delta"><span class="up">+$99.99</span></div></div></td>
-          <td data-label="Ad spend" class="num"><div class="metric-value">$459.04<div class="metric-delta"><span class="up">+$180.65</span></div></div></td>
+          <td data-label="Units" class="num"><div class="metric-value">166<div class="metric-delta"><span class="up">+63</span></div></div></td>
+          <td data-label="Sales" class="num"><div class="metric-value">$1,689<div class="metric-delta"><span class="up">+$557</span></div></div></td>
+          <td data-label="Profit" class="num"><div class="metric-value">$315<div class="metric-delta"><span class="up">+$100</span></div></div></td>
+          <td data-label="Ad spend" class="num"><div class="metric-value">$459<div class="metric-delta"><span class="up">+$181</span></div></div></td>
           <td data-label="Inventory" class="num"><div class="metric-value">4,701<div class="metric-delta">45.5 days cover</div></div></td>
           <td data-label="Fees" class="num">39.0%</td>
           <td data-label="Margin" class="num">18.6%</td>
           <td data-label="TACOS" class="num">27.2%</td>
+          <td data-label="Category">#EO</td>
         </tr>
         
 
@@ -2142,15 +2155,15 @@
         </div>
       </details>
     </td>
-          <td data-label="Category">#GK</td>
-          <td data-label="Units" class="num"><div class="metric-value">96.00<div class="metric-delta"><span class="up">+15.23</span></div></div></td>
-          <td data-label="Sales" class="num"><div class="metric-value">$1,677.99<div class="metric-delta"><span class="up">+$323.80</span></div></div></td>
-          <td data-label="Profit" class="num"><div class="metric-value">$441.14<div class="metric-delta"><span class="up">+$98.58</span></div></div></td>
-          <td data-label="Ad spend" class="num"><div class="metric-value">$122.38<div class="metric-delta"><span class="down">-$7.91</span></div></div></td>
+          <td data-label="Units" class="num"><div class="metric-value">96<div class="metric-delta"><span class="up">+15</span></div></div></td>
+          <td data-label="Sales" class="num"><div class="metric-value">$1,678<div class="metric-delta"><span class="up">+$324</span></div></div></td>
+          <td data-label="Profit" class="num"><div class="metric-value">$441<div class="metric-delta"><span class="up">+$99</span></div></div></td>
+          <td data-label="Ad spend" class="num"><div class="metric-value">$122<div class="metric-delta"><span class="down">-$8</span></div></div></td>
           <td data-label="Inventory" class="num"><div class="metric-value">2,762<div class="metric-delta">34.2 days cover</div></div></td>
           <td data-label="Fees" class="num">46.3%</td>
           <td data-label="Margin" class="num">26.3%</td>
           <td data-label="TACOS" class="num">7.3%</td>
+          <td data-label="Category">#GK</td>
         </tr>
         
 
@@ -2179,15 +2192,15 @@
         </div>
       </details>
     </td>
-          <td data-label="Category">#NC</td>
-          <td data-label="Units" class="num"><div class="metric-value">77.00<div class="metric-delta"><span class="down">-7.10</span></div></div></td>
-          <td data-label="Sales" class="num"><div class="metric-value">$1,538.23<div class="metric-delta"><span class="down">-$94.51</span></div></div></td>
-          <td data-label="Profit" class="num"><div class="metric-value">$749.82<div class="metric-delta"><span class="down">-$15.65</span></div></div></td>
-          <td data-label="Ad spend" class="num"><div class="metric-value">$105.31<div class="metric-delta"><span class="down">-$34.84</span></div></div></td>
+          <td data-label="Units" class="num"><div class="metric-value">77<div class="metric-delta"><span class="down">-7</span></div></div></td>
+          <td data-label="Sales" class="num"><div class="metric-value">$1,538<div class="metric-delta"><span class="down">-$95</span></div></div></td>
+          <td data-label="Profit" class="num"><div class="metric-value">$750<div class="metric-delta"><span class="down">-$16</span></div></div></td>
+          <td data-label="Ad spend" class="num"><div class="metric-value">$105<div class="metric-delta"><span class="down">-$35</span></div></div></td>
           <td data-label="Inventory" class="num"><div class="metric-value">10,194<div class="metric-delta">121.2 days cover</div></div></td>
           <td data-label="Fees" class="num">37.0%</td>
           <td data-label="Margin" class="num">48.7%</td>
           <td data-label="TACOS" class="num">6.8%</td>
+          <td data-label="Category">#NC</td>
         </tr>
         
 
@@ -2216,15 +2229,15 @@
         </div>
       </details>
     </td>
-          <td data-label="Category">#EO</td>
-          <td data-label="Units" class="num"><div class="metric-value">155<div class="metric-delta"><span class="up">+42.80</span></div></div></td>
-          <td data-label="Sales" class="num"><div class="metric-value">$1,336.85<div class="metric-delta"><span class="up">+$390.52</span></div></div></td>
-          <td data-label="Profit" class="num"><div class="metric-value">$250.73<div class="metric-delta"><span class="up">+$50.57</span></div></div></td>
-          <td data-label="Ad spend" class="num"><div class="metric-value">$198.72<div class="metric-delta"><span class="up">+$19.77</span></div></div></td>
+          <td data-label="Units" class="num"><div class="metric-value">155<div class="metric-delta"><span class="up">+43</span></div></div></td>
+          <td data-label="Sales" class="num"><div class="metric-value">$1,337<div class="metric-delta"><span class="up">+$391</span></div></div></td>
+          <td data-label="Profit" class="num"><div class="metric-value">$251<div class="metric-delta"><span class="up">+$51</span></div></div></td>
+          <td data-label="Ad spend" class="num"><div class="metric-value">$199<div class="metric-delta"><span class="up">+$20</span></div></div></td>
           <td data-label="Inventory" class="num"><div class="metric-value">5,680<div class="metric-delta">50.6 days cover</div></div></td>
           <td data-label="Fees" class="num">55.5%</td>
           <td data-label="Margin" class="num">18.8%</td>
           <td data-label="TACOS" class="num">14.9%</td>
+          <td data-label="Category">#EO</td>
         </tr>
         
 
@@ -2253,15 +2266,15 @@
         </div>
       </details>
     </td>
-          <td data-label="Category">#NC</td>
-          <td data-label="Units" class="num"><div class="metric-value">124<div class="metric-delta"><span class="down">-49.40</span></div></div></td>
-          <td data-label="Sales" class="num"><div class="metric-value">$1,238.76<div class="metric-delta"><span class="down">-$487.82</span></div></div></td>
-          <td data-label="Profit" class="num"><div class="metric-value">$295.16<div class="metric-delta"><span class="down">-$328.54</span></div></div></td>
-          <td data-label="Ad spend" class="num"><div class="metric-value">$66.84<div class="metric-delta"><span class="down">-$42.22</span></div></div></td>
+          <td data-label="Units" class="num"><div class="metric-value">124<div class="metric-delta"><span class="down">-49</span></div></div></td>
+          <td data-label="Sales" class="num"><div class="metric-value">$1,239<div class="metric-delta"><span class="down">-$488</span></div></div></td>
+          <td data-label="Profit" class="num"><div class="metric-value">$295<div class="metric-delta"><span class="down">-$329</span></div></div></td>
+          <td data-label="Ad spend" class="num"><div class="metric-value">$67<div class="metric-delta"><span class="down">-$42</span></div></div></td>
           <td data-label="Inventory" class="num"><div class="metric-value">11,773<div class="metric-delta">67.9 days cover</div></div></td>
           <td data-label="Fees" class="num">47.3%</td>
           <td data-label="Margin" class="num">23.8%</td>
           <td data-label="TACOS" class="num">5.4%</td>
+          <td data-label="Category">#NC</td>
         </tr>
         
 
@@ -2290,15 +2303,15 @@
         </div>
       </details>
     </td>
-          <td data-label="Category">#EO</td>
-          <td data-label="Units" class="num"><div class="metric-value">164<div class="metric-delta"><span class="up">+82.57</span></div></div></td>
-          <td data-label="Sales" class="num"><div class="metric-value">$1,172.75<div class="metric-delta"><span class="up">+$525.39</span></div></div></td>
-          <td data-label="Profit" class="num"><div class="metric-value">$129.49<div class="metric-delta"><span class="up">+$45.34</span></div></div></td>
-          <td data-label="Ad spend" class="num"><div class="metric-value">$199.85<div class="metric-delta"><span class="up">+$78.95</span></div></div></td>
+          <td data-label="Units" class="num"><div class="metric-value">164<div class="metric-delta"><span class="up">+83</span></div></div></td>
+          <td data-label="Sales" class="num"><div class="metric-value">$1,173<div class="metric-delta"><span class="up">+$525</span></div></div></td>
+          <td data-label="Profit" class="num"><div class="metric-value">$129<div class="metric-delta"><span class="up">+$45</span></div></div></td>
+          <td data-label="Ad spend" class="num"><div class="metric-value">$200<div class="metric-delta"><span class="up">+$79</span></div></div></td>
           <td data-label="Inventory" class="num"><div class="metric-value">3,498<div class="metric-delta">43.0 days cover</div></div></td>
           <td data-label="Fees" class="num">54.5%</td>
           <td data-label="Margin" class="num">11.0%</td>
           <td data-label="TACOS" class="num">17.0%</td>
+          <td data-label="Category">#EO</td>
         </tr>
         
 
@@ -2327,15 +2340,15 @@
         </div>
       </details>
     </td>
-          <td data-label="Category">#EO</td>
-          <td data-label="Units" class="num"><div class="metric-value">89.00<div class="metric-delta"><span class="up">+29.07</span></div></div></td>
-          <td data-label="Sales" class="num"><div class="metric-value">$875.14<div class="metric-delta"><span class="up">+$278.51</span></div></div></td>
-          <td data-label="Profit" class="num"><div class="metric-value">$14.66<div class="metric-delta"><span class="down">-$35.02</span></div></div></td>
-          <td data-label="Ad spend" class="num"><div class="metric-value">$246.29<div class="metric-delta"><span class="up">+$38.14</span></div></div></td>
+          <td data-label="Units" class="num"><div class="metric-value">89<div class="metric-delta"><span class="up">+29</span></div></div></td>
+          <td data-label="Sales" class="num"><div class="metric-value">$875<div class="metric-delta"><span class="up">+$279</span></div></div></td>
+          <td data-label="Profit" class="num"><div class="metric-value">$15<div class="metric-delta"><span class="down">-$35</span></div></div></td>
+          <td data-label="Ad spend" class="num"><div class="metric-value">$246<div class="metric-delta"><span class="up">+$38</span></div></div></td>
           <td data-label="Inventory" class="num"><div class="metric-value">3,250<div class="metric-delta">54.2 days cover</div></div></td>
           <td data-label="Fees" class="num">57.9%</td>
           <td data-label="Margin" class="num">1.7%</td>
           <td data-label="TACOS" class="num">28.1%</td>
+          <td data-label="Category">#EO</td>
         </tr>
         
 
@@ -2364,15 +2377,15 @@
         </div>
       </details>
     </td>
-          <td data-label="Category">#NC</td>
-          <td data-label="Units" class="num"><div class="metric-value">54.00<div class="metric-delta"><span class="up">+6.53</span></div></div></td>
-          <td data-label="Sales" class="num"><div class="metric-value">$809.46<div class="metric-delta"><span class="up">+$43.31</span></div></div></td>
-          <td data-label="Profit" class="num"><div class="metric-value">$245.17<div class="metric-delta"><span class="up">+$8.37</span></div></div></td>
-          <td data-label="Ad spend" class="num"><div class="metric-value">$127.17<div class="metric-delta"><span class="up">+$5.05</span></div></div></td>
+          <td data-label="Units" class="num"><div class="metric-value">54<div class="metric-delta"><span class="up">+7</span></div></div></td>
+          <td data-label="Sales" class="num"><div class="metric-value">$809<div class="metric-delta"><span class="up">+$43</span></div></div></td>
+          <td data-label="Profit" class="num"><div class="metric-value">$245<div class="metric-delta"><span class="up">+$8</span></div></div></td>
+          <td data-label="Ad spend" class="num"><div class="metric-value">$127<div class="metric-delta"><span class="up">+$5</span></div></div></td>
           <td data-label="Inventory" class="num"><div class="metric-value">3,487<div class="metric-delta">73.5 days cover</div></div></td>
           <td data-label="Fees" class="num">41.0%</td>
           <td data-label="Margin" class="num">30.3%</td>
           <td data-label="TACOS" class="num">15.7%</td>
+          <td data-label="Category">#NC</td>
         </tr>
         
 
@@ -2401,15 +2414,15 @@
         </div>
       </details>
     </td>
-          <td data-label="Category">#PA</td>
-          <td data-label="Units" class="num"><div class="metric-value">66.00<div class="metric-delta"><span class="down">-34.17</span></div></div></td>
-          <td data-label="Sales" class="num"><div class="metric-value">$617.12<div class="metric-delta"><span class="down">-$366.66</span></div></div></td>
-          <td data-label="Profit" class="num"><div class="metric-value">$179.63<div class="metric-delta"><span class="down">-$38.17</span></div></div></td>
-          <td data-label="Ad spend" class="num"><div class="metric-value">$43.70<div class="metric-delta"><span class="down">-$175.48</span></div></div></td>
+          <td data-label="Units" class="num"><div class="metric-value">66<div class="metric-delta"><span class="down">-34</span></div></div></td>
+          <td data-label="Sales" class="num"><div class="metric-value">$617<div class="metric-delta"><span class="down">-$367</span></div></div></td>
+          <td data-label="Profit" class="num"><div class="metric-value">$180<div class="metric-delta"><span class="down">-$38</span></div></div></td>
+          <td data-label="Ad spend" class="num"><div class="metric-value">$44<div class="metric-delta"><span class="down">-$175</span></div></div></td>
           <td data-label="Inventory" class="num"><div class="metric-value">4,244<div class="metric-delta">42.4 days cover</div></div></td>
           <td data-label="Fees" class="num">43.2%</td>
           <td data-label="Margin" class="num">29.1%</td>
           <td data-label="TACOS" class="num">7.1%</td>
+          <td data-label="Category">#PA</td>
         </tr>
         
 
@@ -2438,15 +2451,15 @@
         </div>
       </details>
     </td>
-          <td data-label="Category">#GK</td>
-          <td data-label="Units" class="num"><div class="metric-value">23.00<div class="metric-delta"><span class="up">+4.97</span></div></div></td>
-          <td data-label="Sales" class="num"><div class="metric-value">$559.77<div class="metric-delta"><span class="up">+$163.69</span></div></div></td>
-          <td data-label="Profit" class="num"><div class="metric-value">$158.17<div class="metric-delta"><span class="up">+$88.68</span></div></div></td>
-          <td data-label="Ad spend" class="num"><div class="metric-value">$35.23<div class="metric-delta"><span class="down">-$15.41</span></div></div></td>
+          <td data-label="Units" class="num"><div class="metric-value">23<div class="metric-delta"><span class="up">+5</span></div></div></td>
+          <td data-label="Sales" class="num"><div class="metric-value">$560<div class="metric-delta"><span class="up">+$164</span></div></div></td>
+          <td data-label="Profit" class="num"><div class="metric-value">$158<div class="metric-delta"><span class="up">+$89</span></div></div></td>
+          <td data-label="Ad spend" class="num"><div class="metric-value">$35<div class="metric-delta"><span class="down">-$15</span></div></div></td>
           <td data-label="Inventory" class="num"><div class="metric-value">561<div class="metric-delta">31.1 days cover</div></div></td>
           <td data-label="Fees" class="num">34.8%</td>
           <td data-label="Margin" class="num">28.3%</td>
           <td data-label="TACOS" class="num">6.3%</td>
+          <td data-label="Category">#GK</td>
         </tr>
         
 
@@ -2475,15 +2488,15 @@
         </div>
       </details>
     </td>
-          <td data-label="Category">#PA</td>
-          <td data-label="Units" class="num"><div class="metric-value">33.00<div class="metric-delta"><span class="down">-8.83</span></div></div></td>
-          <td data-label="Sales" class="num"><div class="metric-value">$557.95<div class="metric-delta"><span class="down">-$129.32</span></div></div></td>
-          <td data-label="Profit" class="num"><div class="metric-value">$135.21<div class="metric-delta"><span class="down">-$55.02</span></div></div></td>
-          <td data-label="Ad spend" class="num"><div class="metric-value">$98.42<div class="metric-delta"><span class="down">-$17.81</span></div></div></td>
+          <td data-label="Units" class="num"><div class="metric-value">33<div class="metric-delta"><span class="down">-9</span></div></div></td>
+          <td data-label="Sales" class="num"><div class="metric-value">$558<div class="metric-delta"><span class="down">-$129</span></div></div></td>
+          <td data-label="Profit" class="num"><div class="metric-value">$135<div class="metric-delta"><span class="down">-$55</span></div></div></td>
+          <td data-label="Ad spend" class="num"><div class="metric-value">$98<div class="metric-delta"><span class="down">-$18</span></div></div></td>
           <td data-label="Inventory" class="num"><div class="metric-value">662<div class="metric-delta">15.8 days cover</div></div></td>
           <td data-label="Fees" class="num">39.7%</td>
           <td data-label="Margin" class="num">24.2%</td>
           <td data-label="TACOS" class="num">17.6%</td>
+          <td data-label="Category">#PA</td>
         </tr>
         
 
@@ -2512,15 +2525,15 @@
         </div>
       </details>
     </td>
-          <td data-label="Category">#EO</td>
-          <td data-label="Units" class="num"><div class="metric-value">56.00<div class="metric-delta"><span class="up">+18.20</span></div></div></td>
-          <td data-label="Sales" class="num"><div class="metric-value">$549.42<div class="metric-delta"><span class="up">+$176.75</span></div></div></td>
-          <td data-label="Profit" class="num"><div class="metric-value">$111.93<div class="metric-delta"><span class="up">+$38.31</span></div></div></td>
-          <td data-label="Ad spend" class="num"><div class="metric-value">$130.76<div class="metric-delta"><span class="up">+$18.63</span></div></div></td>
+          <td data-label="Units" class="num"><div class="metric-value">56<div class="metric-delta"><span class="up">+18</span></div></div></td>
+          <td data-label="Sales" class="num"><div class="metric-value">$549<div class="metric-delta"><span class="up">+$177</span></div></div></td>
+          <td data-label="Profit" class="num"><div class="metric-value">$112<div class="metric-delta"><span class="up">+$38</span></div></div></td>
+          <td data-label="Ad spend" class="num"><div class="metric-value">$131<div class="metric-delta"><span class="up">+$19</span></div></div></td>
           <td data-label="Inventory" class="num"><div class="metric-value">1,967<div class="metric-delta">52.0 days cover</div></div></td>
           <td data-label="Fees" class="num">47.1%</td>
           <td data-label="Margin" class="num">20.4%</td>
           <td data-label="TACOS" class="num">23.8%</td>
+          <td data-label="Category">#EO</td>
         </tr>
         
 
@@ -2549,15 +2562,15 @@
         </div>
       </details>
     </td>
-          <td data-label="Category">#BJ</td>
-          <td data-label="Units" class="num"><div class="metric-value">85.00<div class="metric-delta"><span class="down">-1.27</span></div></div></td>
-          <td data-label="Sales" class="num"><div class="metric-value">$484.69<div class="metric-delta"><span class="down">-$25.53</span></div></div></td>
-          <td data-label="Profit" class="num"><div class="metric-value">$124.38<div class="metric-delta"><span class="down">-$13.70</span></div></div></td>
-          <td data-label="Ad spend" class="num"><div class="metric-value">$0.00<div class="metric-delta"><span class="flat">$0.00</span></div></div></td>
+          <td data-label="Units" class="num"><div class="metric-value">85<div class="metric-delta"><span class="down">-1</span></div></div></td>
+          <td data-label="Sales" class="num"><div class="metric-value">$485<div class="metric-delta"><span class="down">-$26</span></div></div></td>
+          <td data-label="Profit" class="num"><div class="metric-value">$124<div class="metric-delta"><span class="down">-$14</span></div></div></td>
+          <td data-label="Ad spend" class="num"><div class="metric-value">$0<div class="metric-delta"><span class="flat">$0</span></div></div></td>
           <td data-label="Inventory" class="num"><div class="metric-value">6,158<div class="metric-delta">71.4 days cover</div></div></td>
           <td data-label="Fees" class="num">63.1%</td>
           <td data-label="Margin" class="num">25.7%</td>
           <td data-label="TACOS" class="num">0.0%</td>
+          <td data-label="Category">#BJ</td>
         </tr>
         
 
@@ -2586,15 +2599,15 @@
         </div>
       </details>
     </td>
-          <td data-label="Category">#GK</td>
-          <td data-label="Units" class="num"><div class="metric-value">21.00<div class="metric-delta"><span class="up">+2.43</span></div></div></td>
-          <td data-label="Sales" class="num"><div class="metric-value">$435.79<div class="metric-delta"><span class="up">+$53.27</span></div></div></td>
-          <td data-label="Profit" class="num"><div class="metric-value">$71.08<div class="metric-delta"><span class="down">-$13.42</span></div></div></td>
-          <td data-label="Ad spend" class="num"><div class="metric-value">$34.13<div class="metric-delta"><span class="down">-$3.38</span></div></div></td>
+          <td data-label="Units" class="num"><div class="metric-value">21<div class="metric-delta"><span class="up">+2</span></div></div></td>
+          <td data-label="Sales" class="num"><div class="metric-value">$436<div class="metric-delta"><span class="up">+$53</span></div></div></td>
+          <td data-label="Profit" class="num"><div class="metric-value">$71<div class="metric-delta"><span class="down">-$13</span></div></div></td>
+          <td data-label="Ad spend" class="num"><div class="metric-value">$34<div class="metric-delta"><span class="down">-$3</span></div></div></td>
           <td data-label="Inventory" class="num"><div class="metric-value">707<div class="metric-delta">38.1 days cover</div></div></td>
           <td data-label="Fees" class="num">38.1%</td>
           <td data-label="Margin" class="num">16.3%</td>
           <td data-label="TACOS" class="num">7.8%</td>
+          <td data-label="Category">#GK</td>
         </tr>
         
 
@@ -2623,15 +2636,15 @@
         </div>
       </details>
     </td>
-          <td data-label="Category">#GK</td>
-          <td data-label="Units" class="num"><div class="metric-value">15.00<div class="metric-delta"><span class="up">+6.90</span></div></div></td>
-          <td data-label="Sales" class="num"><div class="metric-value">$311.85<div class="metric-delta"><span class="up">+$145.72</span></div></div></td>
-          <td data-label="Profit" class="num"><div class="metric-value">$60.21<div class="metric-delta"><span class="up">+$34.95</span></div></div></td>
-          <td data-label="Ad spend" class="num"><div class="metric-value">$34.96<div class="metric-delta"><span class="up">+$11.84</span></div></div></td>
+          <td data-label="Units" class="num"><div class="metric-value">15<div class="metric-delta"><span class="up">+7</span></div></div></td>
+          <td data-label="Sales" class="num"><div class="metric-value">$312<div class="metric-delta"><span class="up">+$146</span></div></div></td>
+          <td data-label="Profit" class="num"><div class="metric-value">$60<div class="metric-delta"><span class="up">+$35</span></div></div></td>
+          <td data-label="Ad spend" class="num"><div class="metric-value">$35<div class="metric-delta"><span class="up">+$12</span></div></div></td>
           <td data-label="Inventory" class="num"><div class="metric-value">248<div class="metric-delta">30.6 days cover</div></div></td>
           <td data-label="Fees" class="num">42.0%</td>
           <td data-label="Margin" class="num">19.3%</td>
           <td data-label="TACOS" class="num">11.2%</td>
+          <td data-label="Category">#GK</td>
         </tr>
         
 
@@ -2660,15 +2673,15 @@
         </div>
       </details>
     </td>
-          <td data-label="Category">#GK</td>
-          <td data-label="Units" class="num"><div class="metric-value">14.00<div class="metric-delta"><span class="up">+5.83</span></div></div></td>
-          <td data-label="Sales" class="num"><div class="metric-value">$287.86<div class="metric-delta"><span class="up">+$121.27</span></div></div></td>
-          <td data-label="Profit" class="num"><div class="metric-value">$106.12<div class="metric-delta"><span class="up">+$55.60</span></div></div></td>
-          <td data-label="Ad spend" class="num"><div class="metric-value">$10.40<div class="metric-delta"><span class="down">-$0.54</span></div></div></td>
+          <td data-label="Units" class="num"><div class="metric-value">14<div class="metric-delta"><span class="up">+6</span></div></div></td>
+          <td data-label="Sales" class="num"><div class="metric-value">$288<div class="metric-delta"><span class="up">+$121</span></div></div></td>
+          <td data-label="Profit" class="num"><div class="metric-value">$106<div class="metric-delta"><span class="up">+$56</span></div></div></td>
+          <td data-label="Ad spend" class="num"><div class="metric-value">$10<div class="metric-delta"><span class="down">-$1</span></div></div></td>
           <td data-label="Inventory" class="num"><div class="metric-value">327<div class="metric-delta">40.0 days cover</div></div></td>
           <td data-label="Fees" class="num">40.0%</td>
           <td data-label="Margin" class="num">36.9%</td>
           <td data-label="TACOS" class="num">3.6%</td>
+          <td data-label="Category">#GK</td>
         </tr>
         
 
@@ -2697,15 +2710,15 @@
         </div>
       </details>
     </td>
-          <td data-label="Category">#PA</td>
-          <td data-label="Units" class="num"><div class="metric-value">14.00<div class="metric-delta"><span class="up">+3.37</span></div></div></td>
-          <td data-label="Sales" class="num"><div class="metric-value">$221.86<div class="metric-delta"><span class="up">+$60.43</span></div></div></td>
-          <td data-label="Profit" class="num"><div class="metric-value">$76.60<div class="metric-delta"><span class="up">+$25.31</span></div></div></td>
-          <td data-label="Ad spend" class="num"><div class="metric-value">$15.85<div class="metric-delta"><span class="down">-$7.13</span></div></div></td>
+          <td data-label="Units" class="num"><div class="metric-value">14<div class="metric-delta"><span class="up">+3</span></div></div></td>
+          <td data-label="Sales" class="num"><div class="metric-value">$222<div class="metric-delta"><span class="up">+$60</span></div></div></td>
+          <td data-label="Profit" class="num"><div class="metric-value">$77<div class="metric-delta"><span class="up">+$25</span></div></div></td>
+          <td data-label="Ad spend" class="num"><div class="metric-value">$16<div class="metric-delta"><span class="down">-$7</span></div></div></td>
           <td data-label="Inventory" class="num"><div class="metric-value">369<div class="metric-delta">34.7 days cover</div></div></td>
           <td data-label="Fees" class="num">40.0%</td>
           <td data-label="Margin" class="num">34.5%</td>
           <td data-label="TACOS" class="num">7.1%</td>
+          <td data-label="Category">#PA</td>
         </tr>
         
 
@@ -2734,15 +2747,15 @@
         </div>
       </details>
     </td>
-          <td data-label="Category">#NC</td>
-          <td data-label="Units" class="num"><div class="metric-value">22.00<div class="metric-delta"><span class="up">+4.20</span></div></div></td>
-          <td data-label="Sales" class="num"><div class="metric-value">$219.78<div class="metric-delta"><span class="up">+$43.02</span></div></div></td>
-          <td data-label="Profit" class="num"><div class="metric-value">$81.77<div class="metric-delta"><span class="up">+$16.69</span></div></div></td>
-          <td data-label="Ad spend" class="num"><div class="metric-value">$10.83<div class="metric-delta"><span class="up">+$1.48</span></div></div></td>
+          <td data-label="Units" class="num"><div class="metric-value">22<div class="metric-delta"><span class="up">+4</span></div></div></td>
+          <td data-label="Sales" class="num"><div class="metric-value">$220<div class="metric-delta"><span class="up">+$43</span></div></div></td>
+          <td data-label="Profit" class="num"><div class="metric-value">$82<div class="metric-delta"><span class="up">+$17</span></div></div></td>
+          <td data-label="Ad spend" class="num"><div class="metric-value">$11<div class="metric-delta"><span class="up">+$1</span></div></div></td>
           <td data-label="Inventory" class="num"><div class="metric-value">1,826<div class="metric-delta">102.6 days cover</div></div></td>
           <td data-label="Fees" class="num">41.2%</td>
           <td data-label="Margin" class="num">37.2%</td>
           <td data-label="TACOS" class="num">4.9%</td>
+          <td data-label="Category">#NC</td>
         </tr>
         
 
@@ -2771,15 +2784,15 @@
         </div>
       </details>
     </td>
-          <td data-label="Category">#GK</td>
-          <td data-label="Units" class="num"><div class="metric-value">9.00<div class="metric-delta"><span class="up">+2.23</span></div></div></td>
-          <td data-label="Sales" class="num"><div class="metric-value">$162.91<div class="metric-delta"><span class="up">+$43.97</span></div></div></td>
-          <td data-label="Profit" class="num"><div class="metric-value">$20.05<div class="metric-delta"><span class="up">+$1.70</span></div></div></td>
-          <td data-label="Ad spend" class="num"><div class="metric-value">$17.15<div class="metric-delta"><span class="up">+$7.66</span></div></div></td>
+          <td data-label="Units" class="num"><div class="metric-value">9<div class="metric-delta"><span class="up">+2</span></div></div></td>
+          <td data-label="Sales" class="num"><div class="metric-value">$163<div class="metric-delta"><span class="up">+$44</span></div></div></td>
+          <td data-label="Profit" class="num"><div class="metric-value">$20<div class="metric-delta"><span class="up">+$2</span></div></div></td>
+          <td data-label="Ad spend" class="num"><div class="metric-value">$17<div class="metric-delta"><span class="up">+$8</span></div></div></td>
           <td data-label="Inventory" class="num"><div class="metric-value">132<div class="metric-delta">19.5 days cover</div></div></td>
           <td data-label="Fees" class="num">45.3%</td>
           <td data-label="Margin" class="num">12.3%</td>
           <td data-label="TACOS" class="num">10.5%</td>
+          <td data-label="Category">#GK</td>
         </tr>
         
 
@@ -2808,15 +2821,15 @@
         </div>
       </details>
     </td>
-          <td data-label="Category">#FJ</td>
-          <td data-label="Units" class="num"><div class="metric-value">4.00<div class="metric-delta"><span class="up">+2.33</span></div></div></td>
-          <td data-label="Sales" class="num"><div class="metric-value">$159.96<div class="metric-delta"><span class="up">+$95.04</span></div></div></td>
-          <td data-label="Profit" class="num"><div class="metric-value">$81.87<div class="metric-delta"><span class="up">+$52.15</span></div></div></td>
-          <td data-label="Ad spend" class="num"><div class="metric-value">$1.49<div class="metric-delta"><span class="down">-$1.77</span></div></div></td>
+          <td data-label="Units" class="num"><div class="metric-value">4<div class="metric-delta"><span class="up">+2</span></div></div></td>
+          <td data-label="Sales" class="num"><div class="metric-value">$160<div class="metric-delta"><span class="up">+$95</span></div></div></td>
+          <td data-label="Profit" class="num"><div class="metric-value">$82<div class="metric-delta"><span class="up">+$52</span></div></div></td>
+          <td data-label="Ad spend" class="num"><div class="metric-value">$1<div class="metric-delta"><span class="down">-$2</span></div></div></td>
           <td data-label="Inventory" class="num"><div class="metric-value">159<div class="metric-delta">95.4 days cover</div></div></td>
           <td data-label="Fees" class="num">30.9%</td>
           <td data-label="Margin" class="num">51.2%</td>
           <td data-label="TACOS" class="num">0.9%</td>
+          <td data-label="Category">#FJ</td>
         </tr>
         
 
@@ -2845,15 +2858,15 @@
         </div>
       </details>
     </td>
-          <td data-label="Category">#PA</td>
-          <td data-label="Units" class="num"><div class="metric-value">18.00<div class="metric-delta"><span class="down">-3.63</span></div></div></td>
-          <td data-label="Sales" class="num"><div class="metric-value">$148.82<div class="metric-delta"><span class="down">-$31.66</span></div></div></td>
-          <td data-label="Profit" class="num"><div class="metric-value">$50.23<div class="metric-delta"><span class="down">-$11.90</span></div></div></td>
-          <td data-label="Ad spend" class="num"><div class="metric-value">$17.81<div class="metric-delta"><span class="down">-$2.29</span></div></div></td>
+          <td data-label="Units" class="num"><div class="metric-value">18<div class="metric-delta"><span class="down">-4</span></div></div></td>
+          <td data-label="Sales" class="num"><div class="metric-value">$149<div class="metric-delta"><span class="down">-$32</span></div></div></td>
+          <td data-label="Profit" class="num"><div class="metric-value">$50<div class="metric-delta"><span class="down">-$12</span></div></div></td>
+          <td data-label="Ad spend" class="num"><div class="metric-value">$18<div class="metric-delta"><span class="down">-$2</span></div></div></td>
           <td data-label="Inventory" class="num"><div class="metric-value">740<div class="metric-delta">34.2 days cover</div></div></td>
           <td data-label="Fees" class="num">45.3%</td>
           <td data-label="Margin" class="num">33.8%</td>
           <td data-label="TACOS" class="num">12.0%</td>
+          <td data-label="Category">#PA</td>
         </tr>
         
 
@@ -2882,15 +2895,15 @@
         </div>
       </details>
     </td>
-          <td data-label="Category">#PA</td>
-          <td data-label="Units" class="num"><div class="metric-value">1.00<div class="metric-delta"><span class="down">-1.30</span></div></div></td>
-          <td data-label="Sales" class="num"><div class="metric-value">$129.00<div class="metric-delta"><span class="down">-$159.70</span></div></div></td>
-          <td data-label="Profit" class="num"><div class="metric-value">$46.49<div class="metric-delta"><span class="down">-$89.44</span></div></div></td>
-          <td data-label="Ad spend" class="num"><div class="metric-value">$7.66<div class="metric-delta"><span class="up">+$3.82</span></div></div></td>
+          <td data-label="Units" class="num"><div class="metric-value">1<div class="metric-delta"><span class="down">-1</span></div></div></td>
+          <td data-label="Sales" class="num"><div class="metric-value">$129<div class="metric-delta"><span class="down">-$160</span></div></div></td>
+          <td data-label="Profit" class="num"><div class="metric-value">$46<div class="metric-delta"><span class="down">-$89</span></div></div></td>
+          <td data-label="Ad spend" class="num"><div class="metric-value">$8<div class="metric-delta"><span class="up">+$4</span></div></div></td>
           <td data-label="Inventory" class="num"><div class="metric-value">51.00<div class="metric-delta">22.2 days cover</div></div></td>
           <td data-label="Fees" class="num">28.6%</td>
           <td data-label="Margin" class="num">36.0%</td>
           <td data-label="TACOS" class="num">5.9%</td>
+          <td data-label="Category">#PA</td>
         </tr>
         
 
@@ -2919,15 +2932,15 @@
         </div>
       </details>
     </td>
-          <td data-label="Category">#GK</td>
-          <td data-label="Units" class="num"><div class="metric-value">4.00<div class="metric-delta"><span class="down">-4.10</span></div></div></td>
-          <td data-label="Sales" class="num"><div class="metric-value">$119.96<div class="metric-delta"><span class="down">-$122.68</span></div></div></td>
-          <td data-label="Profit" class="num"><div class="metric-value">$14.72<div class="metric-delta"><span class="down">-$41.11</span></div></div></td>
-          <td data-label="Ad spend" class="num"><div class="metric-value">$20.18<div class="metric-delta"><span class="up">+$1.82</span></div></div></td>
+          <td data-label="Units" class="num"><div class="metric-value">4<div class="metric-delta"><span class="down">-4</span></div></div></td>
+          <td data-label="Sales" class="num"><div class="metric-value">$120<div class="metric-delta"><span class="down">-$123</span></div></div></td>
+          <td data-label="Profit" class="num"><div class="metric-value">$15<div class="metric-delta"><span class="down">-$41</span></div></div></td>
+          <td data-label="Ad spend" class="num"><div class="metric-value">$20<div class="metric-delta"><span class="up">+$2</span></div></div></td>
           <td data-label="Inventory" class="num"><div class="metric-value">298<div class="metric-delta">36.8 days cover</div></div></td>
           <td data-label="Fees" class="num">35.1%</td>
           <td data-label="Margin" class="num">12.3%</td>
           <td data-label="TACOS" class="num">16.8%</td>
+          <td data-label="Category">#GK</td>
         </tr>
         
 
@@ -2956,15 +2969,15 @@
         </div>
       </details>
     </td>
-          <td data-label="Category">#NC</td>
-          <td data-label="Units" class="num"><div class="metric-value">12.00<div class="metric-delta"><span class="up">+5.70</span></div></div></td>
-          <td data-label="Sales" class="num"><div class="metric-value">$119.88<div class="metric-delta"><span class="up">+$56.11</span></div></div></td>
-          <td data-label="Profit" class="num"><div class="metric-value">$49.18<div class="metric-delta"><span class="up">+$29.61</span></div></div></td>
-          <td data-label="Ad spend" class="num"><div class="metric-value">$4.66<div class="metric-delta"><span class="up">+$0.43</span></div></div></td>
+          <td data-label="Units" class="num"><div class="metric-value">12<div class="metric-delta"><span class="up">+6</span></div></div></td>
+          <td data-label="Sales" class="num"><div class="metric-value">$120<div class="metric-delta"><span class="up">+$56</span></div></div></td>
+          <td data-label="Profit" class="num"><div class="metric-value">$49<div class="metric-delta"><span class="up">+$30</span></div></div></td>
+          <td data-label="Ad spend" class="num"><div class="metric-value">$5<div class="metric-delta"><span class="up">+$0</span></div></div></td>
           <td data-label="Inventory" class="num"><div class="metric-value">1,228<div class="metric-delta">194.9 days cover</div></div></td>
           <td data-label="Fees" class="num">44.9%</td>
           <td data-label="Margin" class="num">41.0%</td>
           <td data-label="TACOS" class="num">3.9%</td>
+          <td data-label="Category">#NC</td>
         </tr>
         
 
@@ -2993,15 +3006,15 @@
         </div>
       </details>
     </td>
-          <td data-label="Category">#NC</td>
-          <td data-label="Units" class="num"><div class="metric-value">4.00<div class="metric-delta"><span class="down">-6.97</span></div></div></td>
-          <td data-label="Sales" class="num"><div class="metric-value">$99.96<div class="metric-delta"><span class="down">-$169.27</span></div></div></td>
-          <td data-label="Profit" class="num"><div class="metric-value">$37.47<div class="metric-delta"><span class="down">-$77.86</span></div></div></td>
-          <td data-label="Ad spend" class="num"><div class="metric-value">$15.79<div class="metric-delta"><span class="down">-$7.40</span></div></div></td>
+          <td data-label="Units" class="num"><div class="metric-value">4<div class="metric-delta"><span class="down">-7</span></div></div></td>
+          <td data-label="Sales" class="num"><div class="metric-value">$100<div class="metric-delta"><span class="down">-$169</span></div></div></td>
+          <td data-label="Profit" class="num"><div class="metric-value">$37<div class="metric-delta"><span class="down">-$78</span></div></div></td>
+          <td data-label="Ad spend" class="num"><div class="metric-value">$16<div class="metric-delta"><span class="down">-$7</span></div></div></td>
           <td data-label="Inventory" class="num"><div class="metric-value">889<div class="metric-delta">81.1 days cover</div></div></td>
           <td data-label="Fees" class="num">35.9%</td>
           <td data-label="Margin" class="num">37.5%</td>
           <td data-label="TACOS" class="num">15.8%</td>
+          <td data-label="Category">#NC</td>
         </tr>
         
 
@@ -3030,15 +3043,15 @@
         </div>
       </details>
     </td>
-          <td data-label="Category">#EO</td>
-          <td data-label="Units" class="num"><div class="metric-value">5.00<div class="metric-delta"><span class="down">-2.63</span></div></div></td>
-          <td data-label="Sales" class="num"><div class="metric-value">$99.95<div class="metric-delta"><span class="down">-$49.81</span></div></div></td>
-          <td data-label="Profit" class="num"><div class="metric-value">$10.88<div class="metric-delta"><span class="down">-$30.50</span></div></div></td>
-          <td data-label="Ad spend" class="num"><div class="metric-value">$3.44<div class="metric-delta"><span class="down">-$20.23</span></div></div></td>
+          <td data-label="Units" class="num"><div class="metric-value">5<div class="metric-delta"><span class="down">-3</span></div></div></td>
+          <td data-label="Sales" class="num"><div class="metric-value">$100<div class="metric-delta"><span class="down">-$50</span></div></div></td>
+          <td data-label="Profit" class="num"><div class="metric-value">$11<div class="metric-delta"><span class="down">-$30</span></div></div></td>
+          <td data-label="Ad spend" class="num"><div class="metric-value">$3<div class="metric-delta"><span class="down">-$20</span></div></div></td>
           <td data-label="Inventory" class="num"><div class="metric-value">250<div class="metric-delta">32.8 days cover</div></div></td>
           <td data-label="Fees" class="num">35.5%</td>
           <td data-label="Margin" class="num">10.9%</td>
           <td data-label="TACOS" class="num">3.4%</td>
+          <td data-label="Category">#EO</td>
         </tr>
         
 
@@ -3067,15 +3080,15 @@
         </div>
       </details>
     </td>
-          <td data-label="Category">#BJ</td>
-          <td data-label="Units" class="num"><div class="metric-value">4.00<div class="metric-delta"><span class="up">+0.30</span></div></div></td>
-          <td data-label="Sales" class="num"><div class="metric-value">$79.96<div class="metric-delta"><span class="up">+$5.10</span></div></div></td>
-          <td data-label="Profit" class="num"><div class="metric-value">$19.00<div class="metric-delta"><span class="up">+$5.24</span></div></div></td>
-          <td data-label="Ad spend" class="num"><div class="metric-value">$7.20<div class="metric-delta"><span class="down">-$0.31</span></div></div></td>
+          <td data-label="Units" class="num"><div class="metric-value">4<div class="metric-delta"><span class="up">+0</span></div></div></td>
+          <td data-label="Sales" class="num"><div class="metric-value">$80<div class="metric-delta"><span class="up">+$5</span></div></div></td>
+          <td data-label="Profit" class="num"><div class="metric-value">$19<div class="metric-delta"><span class="up">+$5</span></div></div></td>
+          <td data-label="Ad spend" class="num"><div class="metric-value">$7<div class="metric-delta"><span class="down">$0</span></div></div></td>
           <td data-label="Inventory" class="num"><div class="metric-value">192<div class="metric-delta">51.9 days cover</div></div></td>
           <td data-label="Fees" class="num">40.5%</td>
           <td data-label="Margin" class="num">23.8%</td>
           <td data-label="TACOS" class="num">9.0%</td>
+          <td data-label="Category">#BJ</td>
         </tr>
         
 
@@ -3104,15 +3117,15 @@
         </div>
       </details>
     </td>
-          <td data-label="Category">#BJ</td>
-          <td data-label="Units" class="num"><div class="metric-value">4.00<div class="metric-delta"><span class="up">+0.53</span></div></div></td>
-          <td data-label="Sales" class="num"><div class="metric-value">$67.96<div class="metric-delta"><span class="up">+$9.15</span></div></div></td>
-          <td data-label="Profit" class="num"><div class="metric-value">$20.32<div class="metric-delta"><span class="up">+$4.95</span></div></div></td>
-          <td data-label="Ad spend" class="num"><div class="metric-value">$5.80<div class="metric-delta"><span class="down">-$0.60</span></div></div></td>
+          <td data-label="Units" class="num"><div class="metric-value">4<div class="metric-delta"><span class="up">+1</span></div></div></td>
+          <td data-label="Sales" class="num"><div class="metric-value">$68<div class="metric-delta"><span class="up">+$9</span></div></div></td>
+          <td data-label="Profit" class="num"><div class="metric-value">$20<div class="metric-delta"><span class="up">+$5</span></div></div></td>
+          <td data-label="Ad spend" class="num"><div class="metric-value">$6<div class="metric-delta"><span class="down">-$1</span></div></div></td>
           <td data-label="Inventory" class="num"><div class="metric-value">214<div class="metric-delta">61.7 days cover</div></div></td>
           <td data-label="Fees" class="num">42.7%</td>
           <td data-label="Margin" class="num">29.9%</td>
           <td data-label="TACOS" class="num">8.5%</td>
+          <td data-label="Category">#BJ</td>
         </tr>
         
 
@@ -3141,15 +3154,15 @@
         </div>
       </details>
     </td>
-          <td data-label="Category">#PA</td>
-          <td data-label="Units" class="num"><div class="metric-value">4.00<div class="metric-delta"><span class="up">+0.77</span></div></div></td>
-          <td data-label="Sales" class="num"><div class="metric-value">$32.16<div class="metric-delta"><span class="up">+$4.43</span></div></div></td>
-          <td data-label="Profit" class="num"><div class="metric-value">$13.24<div class="metric-delta"><span class="up">+$8.61</span></div></div></td>
-          <td data-label="Ad spend" class="num"><div class="metric-value">$0.30<div class="metric-delta"><span class="down">-$6.94</span></div></div></td>
+          <td data-label="Units" class="num"><div class="metric-value">4<div class="metric-delta"><span class="up">+1</span></div></div></td>
+          <td data-label="Sales" class="num"><div class="metric-value">$32<div class="metric-delta"><span class="up">+$4</span></div></div></td>
+          <td data-label="Profit" class="num"><div class="metric-value">$13<div class="metric-delta"><span class="up">+$9</span></div></div></td>
+          <td data-label="Ad spend" class="num"><div class="metric-value">$0<div class="metric-delta"><span class="down">-$7</span></div></div></td>
           <td data-label="Inventory" class="num"><div class="metric-value">215<div class="metric-delta">66.5 days cover</div></div></td>
           <td data-label="Fees" class="num">45.5%</td>
           <td data-label="Margin" class="num">41.2%</td>
           <td data-label="TACOS" class="num">0.9%</td>
+          <td data-label="Category">#PA</td>
         </tr>
         
 
@@ -3178,15 +3191,15 @@
         </div>
       </details>
     </td>
-          <td data-label="Category">#PA</td>
-          <td data-label="Units" class="num"><div class="metric-value">3.00<div class="metric-delta"><span class="down">-1.20</span></div></div></td>
-          <td data-label="Sales" class="num"><div class="metric-value">$27.11<div class="metric-delta"><span class="down">-$13.68</span></div></div></td>
-          <td data-label="Profit" class="num"><div class="metric-value">$7.07<div class="metric-delta"><span class="down">-$8.27</span></div></div></td>
-          <td data-label="Ad spend" class="num"><div class="metric-value">$5.75<div class="metric-delta"><span class="up">+$2.45</span></div></div></td>
+          <td data-label="Units" class="num"><div class="metric-value">3<div class="metric-delta"><span class="down">-1</span></div></div></td>
+          <td data-label="Sales" class="num"><div class="metric-value">$27<div class="metric-delta"><span class="down">-$14</span></div></div></td>
+          <td data-label="Profit" class="num"><div class="metric-value">$7<div class="metric-delta"><span class="down">-$8</span></div></div></td>
+          <td data-label="Ad spend" class="num"><div class="metric-value">$6<div class="metric-delta"><span class="up">+$2</span></div></div></td>
           <td data-label="Inventory" class="num"><div class="metric-value">225<div class="metric-delta">53.6 days cover</div></div></td>
           <td data-label="Fees" class="num">39.4%</td>
           <td data-label="Margin" class="num">26.1%</td>
           <td data-label="TACOS" class="num">21.2%</td>
+          <td data-label="Category">#PA</td>
         </tr>
         
 
@@ -3215,15 +3228,15 @@
         </div>
       </details>
     </td>
-          <td data-label="Category">#PA</td>
-          <td data-label="Units" class="num"><div class="metric-value">2.00<div class="metric-delta"><span class="up">+1.07</span></div></div></td>
-          <td data-label="Sales" class="num"><div class="metric-value">$23.90<div class="metric-delta"><span class="up">+$11.99</span></div></div></td>
-          <td data-label="Profit" class="num"><div class="metric-value">$7.06<div class="metric-delta"><span class="up">+$5.62</span></div></div></td>
-          <td data-label="Ad spend" class="num"><div class="metric-value">$0.00<div class="metric-delta"><span class="down">-$1.02</span></div></div></td>
+          <td data-label="Units" class="num"><div class="metric-value">2<div class="metric-delta"><span class="up">+1</span></div></div></td>
+          <td data-label="Sales" class="num"><div class="metric-value">$24<div class="metric-delta"><span class="up">+$12</span></div></div></td>
+          <td data-label="Profit" class="num"><div class="metric-value">$7<div class="metric-delta"><span class="up">+$6</span></div></div></td>
+          <td data-label="Ad spend" class="num"><div class="metric-value">$0<div class="metric-delta"><span class="down">-$1</span></div></div></td>
           <td data-label="Inventory" class="num"><div class="metric-value">1,431<div class="metric-delta">1,533.2 days cover</div></div></td>
           <td data-label="Fees" class="num">49.5%</td>
           <td data-label="Margin" class="num">29.5%</td>
           <td data-label="TACOS" class="num">0.0%</td>
+          <td data-label="Category">#PA</td>
         </tr>
         
 
@@ -3252,15 +3265,15 @@
         </div>
       </details>
     </td>
-          <td data-label="Category">#GK</td>
-          <td data-label="Units" class="num"><div class="metric-value">1.00<div class="metric-delta"><span class="up">+0.50</span></div></div></td>
-          <td data-label="Sales" class="num"><div class="metric-value">$19.99<div class="metric-delta"><span class="up">+$9.99</span></div></div></td>
-          <td data-label="Profit" class="num"><div class="metric-value">$6.13<div class="metric-delta"><span class="up">+$3.08</span></div></div></td>
-          <td data-label="Ad spend" class="num"><div class="metric-value">$0.00<div class="metric-delta"><span class="flat">$0.00</span></div></div></td>
+          <td data-label="Units" class="num"><div class="metric-value">1<div class="metric-delta"><span class="up">+0</span></div></div></td>
+          <td data-label="Sales" class="num"><div class="metric-value">$20<div class="metric-delta"><span class="up">+$10</span></div></div></td>
+          <td data-label="Profit" class="num"><div class="metric-value">$6<div class="metric-delta"><span class="up">+$3</span></div></div></td>
+          <td data-label="Ad spend" class="num"><div class="metric-value">$0<div class="metric-delta"><span class="flat">$0</span></div></div></td>
           <td data-label="Inventory" class="num"><div class="metric-value">21.00<div class="metric-delta">42.0 days cover</div></div></td>
           <td data-label="Fees" class="num">39.3%</td>
           <td data-label="Margin" class="num">30.7%</td>
           <td data-label="TACOS" class="num">0.0%</td>
+          <td data-label="Category">#GK</td>
         </tr>
         
 
@@ -3289,15 +3302,15 @@
         </div>
       </details>
     </td>
-          <td data-label="Category">#BJ</td>
-          <td data-label="Units" class="num"><div class="metric-value">2.00<div class="metric-delta"><span class="up">+0.60</span></div></div></td>
-          <td data-label="Sales" class="num"><div class="metric-value">$19.98<div class="metric-delta"><span class="up">+$6.53</span></div></div></td>
-          <td data-label="Profit" class="num"><div class="metric-value">-$0.71<div class="metric-delta"><span class="down">-$3.44</span></div></div></td>
-          <td data-label="Ad spend" class="num"><div class="metric-value">$1.24<div class="metric-delta"><span class="up">+$0.60</span></div></div></td>
+          <td data-label="Units" class="num"><div class="metric-value">2<div class="metric-delta"><span class="up">+1</span></div></div></td>
+          <td data-label="Sales" class="num"><div class="metric-value">$20<div class="metric-delta"><span class="up">+$7</span></div></div></td>
+          <td data-label="Profit" class="num"><div class="metric-value">-$1<div class="metric-delta"><span class="down">-$3</span></div></div></td>
+          <td data-label="Ad spend" class="num"><div class="metric-value">$1<div class="metric-delta"><span class="up">+$1</span></div></div></td>
           <td data-label="Inventory" class="num"><div class="metric-value">111<div class="metric-delta">79.3 days cover</div></div></td>
           <td data-label="Fees" class="num">45.2%</td>
           <td data-label="Margin" class="num">-3.6%</td>
           <td data-label="TACOS" class="num">6.2%</td>
+          <td data-label="Category">#BJ</td>
         </tr>
         
 
@@ -3326,15 +3339,15 @@
         </div>
       </details>
     </td>
-          <td data-label="Category">#BJ</td>
-          <td data-label="Units" class="num"><div class="metric-value">1.00<div class="metric-delta"><span class="down">-0.17</span></div></div></td>
-          <td data-label="Sales" class="num"><div class="metric-value">$14.24<div class="metric-delta"><span class="down">-$3.25</span></div></div></td>
-          <td data-label="Profit" class="num"><div class="metric-value">$3.67<div class="metric-delta"><span class="up">+$1.32</span></div></div></td>
-          <td data-label="Ad spend" class="num"><div class="metric-value">$1.20<div class="metric-delta"><span class="down">-$2.54</span></div></div></td>
+          <td data-label="Units" class="num"><div class="metric-value">1<div class="metric-delta"><span class="down">0</span></div></div></td>
+          <td data-label="Sales" class="num"><div class="metric-value">$14<div class="metric-delta"><span class="down">-$3</span></div></div></td>
+          <td data-label="Profit" class="num"><div class="metric-value">$4<div class="metric-delta"><span class="up">+$1</span></div></div></td>
+          <td data-label="Ad spend" class="num"><div class="metric-value">$1<div class="metric-delta"><span class="down">-$3</span></div></div></td>
           <td data-label="Inventory" class="num"><div class="metric-value">45.00<div class="metric-delta">38.6 days cover</div></div></td>
           <td data-label="Fees" class="num">43.3%</td>
           <td data-label="Margin" class="num">25.8%</td>
           <td data-label="TACOS" class="num">8.4%</td>
+          <td data-label="Category">#BJ</td>
         </tr>
         
 
@@ -3363,15 +3376,15 @@
         </div>
       </details>
     </td>
-          <td data-label="Category">#BJ</td>
-          <td data-label="Units" class="num"><div class="metric-value">1.00<div class="metric-delta"><span class="down">-2.27</span></div></div></td>
-          <td data-label="Sales" class="num"><div class="metric-value">$11.99<div class="metric-delta"><span class="down">-$23.56</span></div></div></td>
-          <td data-label="Profit" class="num"><div class="metric-value">$4.86<div class="metric-delta"><span class="down">-$9.08</span></div></div></td>
-          <td data-label="Ad spend" class="num"><div class="metric-value">$0.37<div class="metric-delta"><span class="up">+$0.06</span></div></div></td>
+          <td data-label="Units" class="num"><div class="metric-value">1<div class="metric-delta"><span class="down">-2</span></div></div></td>
+          <td data-label="Sales" class="num"><div class="metric-value">$12<div class="metric-delta"><span class="down">-$24</span></div></div></td>
+          <td data-label="Profit" class="num"><div class="metric-value">$5<div class="metric-delta"><span class="down">-$9</span></div></div></td>
+          <td data-label="Ad spend" class="num"><div class="metric-value">$0<div class="metric-delta"><span class="up">+$0</span></div></div></td>
           <td data-label="Inventory" class="num"><div class="metric-value">277<div class="metric-delta">84.8 days cover</div></div></td>
           <td data-label="Fees" class="num">48.7%</td>
           <td data-label="Margin" class="num">40.5%</td>
           <td data-label="TACOS" class="num">3.1%</td>
+          <td data-label="Category">#BJ</td>
         </tr>
         
 
@@ -3400,15 +3413,15 @@
         </div>
       </details>
     </td>
-          <td data-label="Category">#GK</td>
-          <td data-label="Units" class="num"><div class="metric-value">0.00<div class="metric-delta"><span class="down">-0.03</span></div></div></td>
-          <td data-label="Sales" class="num"><div class="metric-value">$0.00<div class="metric-delta"><span class="down">-$0.57</span></div></div></td>
-          <td data-label="Profit" class="num"><div class="metric-value">$0.00<div class="metric-delta"><span class="down">-$0.06</span></div></div></td>
-          <td data-label="Ad spend" class="num"><div class="metric-value">$0.00<div class="metric-delta"><span class="flat">$0.00</span></div></div></td>
+          <td data-label="Units" class="num"><div class="metric-value">0<div class="metric-delta"><span class="down">0</span></div></div></td>
+          <td data-label="Sales" class="num"><div class="metric-value">$0<div class="metric-delta"><span class="down">-$1</span></div></div></td>
+          <td data-label="Profit" class="num"><div class="metric-value">$0<div class="metric-delta"><span class="down">$0</span></div></div></td>
+          <td data-label="Ad spend" class="num"><div class="metric-value">$0<div class="metric-delta"><span class="flat">$0</span></div></div></td>
           <td data-label="Inventory" class="num"><div class="metric-value">16.00<div class="metric-delta">480.0 days cover</div></div></td>
           <td data-label="Fees" class="num">-</td>
           <td data-label="Margin" class="num">-</td>
           <td data-label="TACOS" class="num">-</td>
+          <td data-label="Category">#GK</td>
         </tr>
         
 
@@ -3437,15 +3450,15 @@
         </div>
       </details>
     </td>
-          <td data-label="Category">#GK</td>
-          <td data-label="Units" class="num"><div class="metric-value">0.00<div class="metric-delta"><span class="down">-0.03</span></div></div></td>
-          <td data-label="Sales" class="num"><div class="metric-value">$0.00<div class="metric-delta"><span class="down">-$0.47</span></div></div></td>
-          <td data-label="Profit" class="num"><div class="metric-value">$0.00<div class="metric-delta"><span class="up">+$0.63</span></div></div></td>
-          <td data-label="Ad spend" class="num"><div class="metric-value">$0.00<div class="metric-delta"><span class="flat">$0.00</span></div></div></td>
+          <td data-label="Units" class="num"><div class="metric-value">0<div class="metric-delta"><span class="down">0</span></div></div></td>
+          <td data-label="Sales" class="num"><div class="metric-value">$0<div class="metric-delta"><span class="down">$0</span></div></div></td>
+          <td data-label="Profit" class="num"><div class="metric-value">$0<div class="metric-delta"><span class="up">+$1</span></div></div></td>
+          <td data-label="Ad spend" class="num"><div class="metric-value">$0<div class="metric-delta"><span class="flat">$0</span></div></div></td>
           <td data-label="Inventory" class="num"><div class="metric-value">69.00<div class="metric-delta">2,070.0 days cover</div></div></td>
           <td data-label="Fees" class="num">-</td>
           <td data-label="Margin" class="num">-</td>
           <td data-label="TACOS" class="num">-</td>
+          <td data-label="Category">#GK</td>
         </tr>
         
 
@@ -3474,15 +3487,15 @@
         </div>
       </details>
     </td>
-          <td data-label="Category">#BJ</td>
-          <td data-label="Units" class="num"><div class="metric-value">0.00<div class="metric-delta"><span class="flat">0.00</span></div></div></td>
-          <td data-label="Sales" class="num"><div class="metric-value">$0.00<div class="metric-delta"><span class="flat">$0.00</span></div></div></td>
-          <td data-label="Profit" class="num"><div class="metric-value">$0.00<div class="metric-delta"><span class="up">+$0.13</span></div></div></td>
-          <td data-label="Ad spend" class="num"><div class="metric-value">$0.00<div class="metric-delta"><span class="down">-$0.03</span></div></div></td>
+          <td data-label="Units" class="num"><div class="metric-value">0<div class="metric-delta"><span class="flat">0</span></div></div></td>
+          <td data-label="Sales" class="num"><div class="metric-value">$0<div class="metric-delta"><span class="flat">$0</span></div></div></td>
+          <td data-label="Profit" class="num"><div class="metric-value">$0<div class="metric-delta"><span class="up">+$0</span></div></div></td>
+          <td data-label="Ad spend" class="num"><div class="metric-value">$0<div class="metric-delta"><span class="down">$0</span></div></div></td>
           <td data-label="Inventory" class="num"><div class="metric-value">9.00<div class="metric-delta">- days cover</div></div></td>
           <td data-label="Fees" class="num">-</td>
           <td data-label="Margin" class="num">-</td>
           <td data-label="TACOS" class="num">-</td>
+          <td data-label="Category">#BJ</td>
         </tr>
         
 
@@ -3511,15 +3524,15 @@
         </div>
       </details>
     </td>
-          <td data-label="Category">#BJ</td>
-          <td data-label="Units" class="num"><div class="metric-value">0.00<div class="metric-delta"><span class="down">-0.40</span></div></div></td>
-          <td data-label="Sales" class="num"><div class="metric-value">$0.00<div class="metric-delta"><span class="down">-$4.20</span></div></div></td>
-          <td data-label="Profit" class="num"><div class="metric-value">$0.00<div class="metric-delta"><span class="down">-$0.72</span></div></div></td>
-          <td data-label="Ad spend" class="num"><div class="metric-value">$0.00<div class="metric-delta"><span class="down">-$0.02</span></div></div></td>
+          <td data-label="Units" class="num"><div class="metric-value">0<div class="metric-delta"><span class="down">0</span></div></div></td>
+          <td data-label="Sales" class="num"><div class="metric-value">$0<div class="metric-delta"><span class="down">-$4</span></div></div></td>
+          <td data-label="Profit" class="num"><div class="metric-value">$0<div class="metric-delta"><span class="down">-$1</span></div></div></td>
+          <td data-label="Ad spend" class="num"><div class="metric-value">$0<div class="metric-delta"><span class="down">$0</span></div></div></td>
           <td data-label="Inventory" class="num"><div class="metric-value">41.00<div class="metric-delta">102.5 days cover</div></div></td>
           <td data-label="Fees" class="num">-</td>
           <td data-label="Margin" class="num">-</td>
           <td data-label="TACOS" class="num">-</td>
+          <td data-label="Category">#BJ</td>
         </tr>
         
 
@@ -3548,15 +3561,15 @@
         </div>
       </details>
     </td>
-          <td data-label="Category">#GK</td>
-          <td data-label="Units" class="num"><div class="metric-value">0.00<div class="metric-delta"><span class="flat">0.00</span></div></div></td>
-          <td data-label="Sales" class="num"><div class="metric-value">$0.00<div class="metric-delta"><span class="flat">$0.00</span></div></div></td>
-          <td data-label="Profit" class="num"><div class="metric-value">$0.00<div class="metric-delta"><span class="up">+$0.29</span></div></div></td>
-          <td data-label="Ad spend" class="num"><div class="metric-value">$0.00<div class="metric-delta"><span class="flat">$0.00</span></div></div></td>
+          <td data-label="Units" class="num"><div class="metric-value">0<div class="metric-delta"><span class="flat">0</span></div></div></td>
+          <td data-label="Sales" class="num"><div class="metric-value">$0<div class="metric-delta"><span class="flat">$0</span></div></div></td>
+          <td data-label="Profit" class="num"><div class="metric-value">$0<div class="metric-delta"><span class="up">+$0</span></div></div></td>
+          <td data-label="Ad spend" class="num"><div class="metric-value">$0<div class="metric-delta"><span class="flat">$0</span></div></div></td>
           <td data-label="Inventory" class="num"><div class="metric-value">25.00<div class="metric-delta">- days cover</div></div></td>
           <td data-label="Fees" class="num">-</td>
           <td data-label="Margin" class="num">-</td>
           <td data-label="TACOS" class="num">-</td>
+          <td data-label="Category">#GK</td>
         </tr>
         
 
@@ -3585,15 +3598,15 @@
         </div>
       </details>
     </td>
-          <td data-label="Category">#GK</td>
-          <td data-label="Units" class="num"><div class="metric-value">0.00<div class="metric-delta"><span class="down">-0.03</span></div></div></td>
-          <td data-label="Sales" class="num"><div class="metric-value">$0.00<div class="metric-delta"><span class="down">-$0.43</span></div></div></td>
-          <td data-label="Profit" class="num"><div class="metric-value">$0.00<div class="metric-delta"><span class="down">-$0.09</span></div></div></td>
-          <td data-label="Ad spend" class="num"><div class="metric-value">$0.00<div class="metric-delta"><span class="down">-$0.04</span></div></div></td>
+          <td data-label="Units" class="num"><div class="metric-value">0<div class="metric-delta"><span class="down">0</span></div></div></td>
+          <td data-label="Sales" class="num"><div class="metric-value">$0<div class="metric-delta"><span class="down">$0</span></div></div></td>
+          <td data-label="Profit" class="num"><div class="metric-value">$0<div class="metric-delta"><span class="down">$0</span></div></div></td>
+          <td data-label="Ad spend" class="num"><div class="metric-value">$0<div class="metric-delta"><span class="down">$0</span></div></div></td>
           <td data-label="Inventory" class="num"><div class="metric-value">0.00<div class="metric-delta">0.0 days cover</div></div></td>
           <td data-label="Fees" class="num">-</td>
           <td data-label="Margin" class="num">-</td>
           <td data-label="TACOS" class="num">-</td>
+          <td data-label="Category">#GK</td>
         </tr>
         
 
@@ -3622,15 +3635,15 @@
         </div>
       </details>
     </td>
-          <td data-label="Category">#BJ</td>
-          <td data-label="Units" class="num"><div class="metric-value">0.00<div class="metric-delta"><span class="flat">0.00</span></div></div></td>
-          <td data-label="Sales" class="num"><div class="metric-value">$0.00<div class="metric-delta"><span class="flat">$0.00</span></div></div></td>
-          <td data-label="Profit" class="num"><div class="metric-value">$0.00<div class="metric-delta"><span class="up">+$0.04</span></div></div></td>
-          <td data-label="Ad spend" class="num"><div class="metric-value">$0.00<div class="metric-delta"><span class="flat">$0.00</span></div></div></td>
+          <td data-label="Units" class="num"><div class="metric-value">0<div class="metric-delta"><span class="flat">0</span></div></div></td>
+          <td data-label="Sales" class="num"><div class="metric-value">$0<div class="metric-delta"><span class="flat">$0</span></div></div></td>
+          <td data-label="Profit" class="num"><div class="metric-value">$0<div class="metric-delta"><span class="up">+$0</span></div></div></td>
+          <td data-label="Ad spend" class="num"><div class="metric-value">$0<div class="metric-delta"><span class="flat">$0</span></div></div></td>
           <td data-label="Inventory" class="num"><div class="metric-value">3.00<div class="metric-delta">- days cover</div></div></td>
           <td data-label="Fees" class="num">-</td>
           <td data-label="Margin" class="num">-</td>
           <td data-label="TACOS" class="num">-</td>
+          <td data-label="Category">#BJ</td>
         </tr>
         
 
@@ -3659,15 +3672,15 @@
         </div>
       </details>
     </td>
-          <td data-label="Category">#BJ</td>
-          <td data-label="Units" class="num"><div class="metric-value">0.00<div class="metric-delta"><span class="flat">0.00</span></div></div></td>
-          <td data-label="Sales" class="num"><div class="metric-value">$0.00<div class="metric-delta"><span class="flat">$0.00</span></div></div></td>
-          <td data-label="Profit" class="num"><div class="metric-value">$0.00<div class="metric-delta"><span class="up">+$0.01</span></div></div></td>
-          <td data-label="Ad spend" class="num"><div class="metric-value">$0.00<div class="metric-delta"><span class="flat">$0.00</span></div></div></td>
+          <td data-label="Units" class="num"><div class="metric-value">0<div class="metric-delta"><span class="flat">0</span></div></div></td>
+          <td data-label="Sales" class="num"><div class="metric-value">$0<div class="metric-delta"><span class="flat">$0</span></div></div></td>
+          <td data-label="Profit" class="num"><div class="metric-value">$0<div class="metric-delta"><span class="up">+$0</span></div></div></td>
+          <td data-label="Ad spend" class="num"><div class="metric-value">$0<div class="metric-delta"><span class="flat">$0</span></div></div></td>
           <td data-label="Inventory" class="num"><div class="metric-value">1.00<div class="metric-delta">- days cover</div></div></td>
           <td data-label="Fees" class="num">-</td>
           <td data-label="Margin" class="num">-</td>
           <td data-label="TACOS" class="num">-</td>
+          <td data-label="Category">#BJ</td>
         </tr>
         
 
@@ -3696,15 +3709,15 @@
         </div>
       </details>
     </td>
-          <td data-label="Category">#BJ</td>
-          <td data-label="Units" class="num"><div class="metric-value">0.00<div class="metric-delta"><span class="flat">0.00</span></div></div></td>
-          <td data-label="Sales" class="num"><div class="metric-value">$0.00<div class="metric-delta"><span class="flat">$0.00</span></div></div></td>
-          <td data-label="Profit" class="num"><div class="metric-value">$0.00<div class="metric-delta"><span class="up">+$0.01</span></div></div></td>
-          <td data-label="Ad spend" class="num"><div class="metric-value">$0.00<div class="metric-delta"><span class="flat">$0.00</span></div></div></td>
+          <td data-label="Units" class="num"><div class="metric-value">0<div class="metric-delta"><span class="flat">0</span></div></div></td>
+          <td data-label="Sales" class="num"><div class="metric-value">$0<div class="metric-delta"><span class="flat">$0</span></div></div></td>
+          <td data-label="Profit" class="num"><div class="metric-value">$0<div class="metric-delta"><span class="up">+$0</span></div></div></td>
+          <td data-label="Ad spend" class="num"><div class="metric-value">$0<div class="metric-delta"><span class="flat">$0</span></div></div></td>
           <td data-label="Inventory" class="num"><div class="metric-value">0.00<div class="metric-delta">- days cover</div></div></td>
           <td data-label="Fees" class="num">-</td>
           <td data-label="Margin" class="num">-</td>
           <td data-label="TACOS" class="num">-</td>
+          <td data-label="Category">#BJ</td>
         </tr>
         
 
@@ -3733,15 +3746,15 @@
         </div>
       </details>
     </td>
-          <td data-label="Category">#GK</td>
-          <td data-label="Units" class="num"><div class="metric-value">0.00<div class="metric-delta"><span class="flat">0.00</span></div></div></td>
-          <td data-label="Sales" class="num"><div class="metric-value">$0.00<div class="metric-delta"><span class="flat">$0.00</span></div></div></td>
-          <td data-label="Profit" class="num"><div class="metric-value">$0.00<div class="metric-delta"><span class="up">+$0.01</span></div></div></td>
-          <td data-label="Ad spend" class="num"><div class="metric-value">$0.00<div class="metric-delta"><span class="flat">$0.00</span></div></div></td>
+          <td data-label="Units" class="num"><div class="metric-value">0<div class="metric-delta"><span class="flat">0</span></div></div></td>
+          <td data-label="Sales" class="num"><div class="metric-value">$0<div class="metric-delta"><span class="flat">$0</span></div></div></td>
+          <td data-label="Profit" class="num"><div class="metric-value">$0<div class="metric-delta"><span class="up">+$0</span></div></div></td>
+          <td data-label="Ad spend" class="num"><div class="metric-value">$0<div class="metric-delta"><span class="flat">$0</span></div></div></td>
           <td data-label="Inventory" class="num"><div class="metric-value">1.00<div class="metric-delta">- days cover</div></div></td>
           <td data-label="Fees" class="num">-</td>
           <td data-label="Margin" class="num">-</td>
           <td data-label="TACOS" class="num">-</td>
+          <td data-label="Category">#GK</td>
         </tr>
         
 
@@ -3770,15 +3783,15 @@
         </div>
       </details>
     </td>
-          <td data-label="Category">#NC</td>
-          <td data-label="Units" class="num"><div class="metric-value">0.00<div class="metric-delta"><span class="down">-0.07</span></div></div></td>
-          <td data-label="Sales" class="num"><div class="metric-value">$0.00<div class="metric-delta"><span class="down">-$1.33</span></div></div></td>
-          <td data-label="Profit" class="num"><div class="metric-value">$0.00<div class="metric-delta"><span class="down">-$1.01</span></div></div></td>
-          <td data-label="Ad spend" class="num"><div class="metric-value">$0.00<div class="metric-delta"><span class="flat">$0.00</span></div></div></td>
+          <td data-label="Units" class="num"><div class="metric-value">0<div class="metric-delta"><span class="down">0</span></div></div></td>
+          <td data-label="Sales" class="num"><div class="metric-value">$0<div class="metric-delta"><span class="down">-$1</span></div></div></td>
+          <td data-label="Profit" class="num"><div class="metric-value">$0<div class="metric-delta"><span class="down">-$1</span></div></div></td>
+          <td data-label="Ad spend" class="num"><div class="metric-value">$0<div class="metric-delta"><span class="flat">$0</span></div></div></td>
           <td data-label="Inventory" class="num"><div class="metric-value">1.00<div class="metric-delta">15.0 days cover</div></div></td>
           <td data-label="Fees" class="num">-</td>
           <td data-label="Margin" class="num">-</td>
           <td data-label="TACOS" class="num">-</td>
+          <td data-label="Category">#NC</td>
         </tr>
         
 
@@ -3807,15 +3820,15 @@
         </div>
       </details>
     </td>
-          <td data-label="Category">#BJ</td>
-          <td data-label="Units" class="num"><div class="metric-value">0.00<div class="metric-delta"><span class="flat">0.00</span></div></div></td>
-          <td data-label="Sales" class="num"><div class="metric-value">$0.00<div class="metric-delta"><span class="flat">$0.00</span></div></div></td>
-          <td data-label="Profit" class="num"><div class="metric-value">$0.00<div class="metric-delta"><span class="up">+$0.17</span></div></div></td>
-          <td data-label="Ad spend" class="num"><div class="metric-value">$0.00<div class="metric-delta"><span class="flat">$0.00</span></div></div></td>
+          <td data-label="Units" class="num"><div class="metric-value">0<div class="metric-delta"><span class="flat">0</span></div></div></td>
+          <td data-label="Sales" class="num"><div class="metric-value">$0<div class="metric-delta"><span class="flat">$0</span></div></div></td>
+          <td data-label="Profit" class="num"><div class="metric-value">$0<div class="metric-delta"><span class="up">+$0</span></div></div></td>
+          <td data-label="Ad spend" class="num"><div class="metric-value">$0<div class="metric-delta"><span class="flat">$0</span></div></div></td>
           <td data-label="Inventory" class="num"><div class="metric-value">11.00<div class="metric-delta">- days cover</div></div></td>
           <td data-label="Fees" class="num">-</td>
           <td data-label="Margin" class="num">-</td>
           <td data-label="TACOS" class="num">-</td>
+          <td data-label="Category">#BJ</td>
         </tr>
         
 
@@ -3844,15 +3857,15 @@
         </div>
       </details>
     </td>
-          <td data-label="Category">#PA</td>
-          <td data-label="Units" class="num"><div class="metric-value">0.00<div class="metric-delta"><span class="flat">0.00</span></div></div></td>
-          <td data-label="Sales" class="num"><div class="metric-value">$0.00<div class="metric-delta"><span class="flat">$0.00</span></div></div></td>
-          <td data-label="Profit" class="num"><div class="metric-value">$0.00<div class="metric-delta"><span class="up">+$0.40</span></div></div></td>
-          <td data-label="Ad spend" class="num"><div class="metric-value">$0.00<div class="metric-delta"><span class="flat">$0.00</span></div></div></td>
+          <td data-label="Units" class="num"><div class="metric-value">0<div class="metric-delta"><span class="flat">0</span></div></div></td>
+          <td data-label="Sales" class="num"><div class="metric-value">$0<div class="metric-delta"><span class="flat">$0</span></div></div></td>
+          <td data-label="Profit" class="num"><div class="metric-value">$0<div class="metric-delta"><span class="up">+$0</span></div></div></td>
+          <td data-label="Ad spend" class="num"><div class="metric-value">$0<div class="metric-delta"><span class="flat">$0</span></div></div></td>
           <td data-label="Inventory" class="num"><div class="metric-value">1.00<div class="metric-delta">- days cover</div></div></td>
           <td data-label="Fees" class="num">-</td>
           <td data-label="Margin" class="num">-</td>
           <td data-label="TACOS" class="num">-</td>
+          <td data-label="Category">#PA</td>
         </tr>
         
 
@@ -3881,15 +3894,15 @@
         </div>
       </details>
     </td>
-          <td data-label="Category">#GK</td>
-          <td data-label="Units" class="num"><div class="metric-value">0.00<div class="metric-delta"><span class="flat">0.00</span></div></div></td>
-          <td data-label="Sales" class="num"><div class="metric-value">$0.00<div class="metric-delta"><span class="flat">$0.00</span></div></div></td>
-          <td data-label="Profit" class="num"><div class="metric-value">$0.00<div class="metric-delta"><span class="up">+$0.01</span></div></div></td>
-          <td data-label="Ad spend" class="num"><div class="metric-value">$0.00<div class="metric-delta"><span class="flat">$0.00</span></div></div></td>
+          <td data-label="Units" class="num"><div class="metric-value">0<div class="metric-delta"><span class="flat">0</span></div></div></td>
+          <td data-label="Sales" class="num"><div class="metric-value">$0<div class="metric-delta"><span class="flat">$0</span></div></div></td>
+          <td data-label="Profit" class="num"><div class="metric-value">$0<div class="metric-delta"><span class="up">+$0</span></div></div></td>
+          <td data-label="Ad spend" class="num"><div class="metric-value">$0<div class="metric-delta"><span class="flat">$0</span></div></div></td>
           <td data-label="Inventory" class="num"><div class="metric-value">1.00<div class="metric-delta">- days cover</div></div></td>
           <td data-label="Fees" class="num">-</td>
           <td data-label="Margin" class="num">-</td>
           <td data-label="TACOS" class="num">-</td>
+          <td data-label="Category">#GK</td>
         </tr>
         
 
@@ -3918,15 +3931,15 @@
         </div>
       </details>
     </td>
-          <td data-label="Category">#FJ</td>
-          <td data-label="Units" class="num"><div class="metric-value">0.00<div class="metric-delta"><span class="down">-0.27</span></div></div></td>
-          <td data-label="Sales" class="num"><div class="metric-value">$0.00<div class="metric-delta"><span class="down">-$4.64</span></div></div></td>
-          <td data-label="Profit" class="num"><div class="metric-value">-$1.39<div class="metric-delta"><span class="up">+$0.28</span></div></div></td>
-          <td data-label="Ad spend" class="num"><div class="metric-value">$1.39<div class="metric-delta"><span class="up">+$1.09</span></div></div></td>
+          <td data-label="Units" class="num"><div class="metric-value">0<div class="metric-delta"><span class="down">0</span></div></div></td>
+          <td data-label="Sales" class="num"><div class="metric-value">$0<div class="metric-delta"><span class="down">-$5</span></div></div></td>
+          <td data-label="Profit" class="num"><div class="metric-value">-$1<div class="metric-delta"><span class="up">+$0</span></div></div></td>
+          <td data-label="Ad spend" class="num"><div class="metric-value">$1<div class="metric-delta"><span class="up">+$1</span></div></div></td>
           <td data-label="Inventory" class="num"><div class="metric-value">216<div class="metric-delta">810.0 days cover</div></div></td>
           <td data-label="Fees" class="num">-</td>
           <td data-label="Margin" class="num">-</td>
           <td data-label="TACOS" class="num">-</td>
+          <td data-label="Category">#FJ</td>
         </tr>
         
 
@@ -3955,15 +3968,15 @@
         </div>
       </details>
     </td>
-          <td data-label="Category">#FJ</td>
-          <td data-label="Units" class="num"><div class="metric-value">0.00<div class="metric-delta"><span class="down">-0.03</span></div></div></td>
-          <td data-label="Sales" class="num"><div class="metric-value">$0.00<div class="metric-delta"><span class="down">-$0.63</span></div></div></td>
-          <td data-label="Profit" class="num"><div class="metric-value">$0.00<div class="metric-delta"><span class="down">-$0.27</span></div></div></td>
-          <td data-label="Ad spend" class="num"><div class="metric-value">$0.00<div class="metric-delta"><span class="flat">$0.00</span></div></div></td>
+          <td data-label="Units" class="num"><div class="metric-value">0<div class="metric-delta"><span class="down">0</span></div></div></td>
+          <td data-label="Sales" class="num"><div class="metric-value">$0<div class="metric-delta"><span class="down">-$1</span></div></div></td>
+          <td data-label="Profit" class="num"><div class="metric-value">$0<div class="metric-delta"><span class="down">$0</span></div></div></td>
+          <td data-label="Ad spend" class="num"><div class="metric-value">$0<div class="metric-delta"><span class="flat">$0</span></div></div></td>
           <td data-label="Inventory" class="num"><div class="metric-value">0.00<div class="metric-delta">0.0 days cover</div></div></td>
           <td data-label="Fees" class="num">-</td>
           <td data-label="Margin" class="num">-</td>
           <td data-label="TACOS" class="num">-</td>
+          <td data-label="Category">#FJ</td>
         </tr>
         
 
@@ -3992,15 +4005,15 @@
         </div>
       </details>
     </td>
-          <td data-label="Category">#PA</td>
-          <td data-label="Units" class="num"><div class="metric-value">0.00<div class="metric-delta"><span class="down">-0.37</span></div></div></td>
-          <td data-label="Sales" class="num"><div class="metric-value">$0.00<div class="metric-delta"><span class="down">-$40.66</span></div></div></td>
-          <td data-label="Profit" class="num"><div class="metric-value">$0.00<div class="metric-delta"><span class="down">-$21.96</span></div></div></td>
-          <td data-label="Ad spend" class="num"><div class="metric-value">$0.00<div class="metric-delta"><span class="down">-$0.06</span></div></div></td>
+          <td data-label="Units" class="num"><div class="metric-value">0<div class="metric-delta"><span class="down">0</span></div></div></td>
+          <td data-label="Sales" class="num"><div class="metric-value">$0<div class="metric-delta"><span class="down">-$41</span></div></div></td>
+          <td data-label="Profit" class="num"><div class="metric-value">$0<div class="metric-delta"><span class="down">-$22</span></div></div></td>
+          <td data-label="Ad spend" class="num"><div class="metric-value">$0<div class="metric-delta"><span class="down">$0</span></div></div></td>
           <td data-label="Inventory" class="num"><div class="metric-value">4.00<div class="metric-delta">10.9 days cover</div></div></td>
           <td data-label="Fees" class="num">-</td>
           <td data-label="Margin" class="num">-</td>
           <td data-label="TACOS" class="num">-</td>
+          <td data-label="Category">#PA</td>
         </tr>
         
 
@@ -4029,15 +4042,15 @@
         </div>
       </details>
     </td>
-          <td data-label="Category">#EO</td>
-          <td data-label="Units" class="num"><div class="metric-value">0.00<div class="metric-delta"><span class="down">-1.00</span></div></div></td>
-          <td data-label="Sales" class="num"><div class="metric-value">$0.00<div class="metric-delta"><span class="down">-$9.71</span></div></div></td>
-          <td data-label="Profit" class="num"><div class="metric-value">$0.00<div class="metric-delta"><span class="down">-$4.13</span></div></div></td>
-          <td data-label="Ad spend" class="num"><div class="metric-value">$0.00<div class="metric-delta"><span class="down">-$0.30</span></div></div></td>
+          <td data-label="Units" class="num"><div class="metric-value">0<div class="metric-delta"><span class="down">-1</span></div></div></td>
+          <td data-label="Sales" class="num"><div class="metric-value">$0<div class="metric-delta"><span class="down">-$10</span></div></div></td>
+          <td data-label="Profit" class="num"><div class="metric-value">$0<div class="metric-delta"><span class="down">-$4</span></div></div></td>
+          <td data-label="Ad spend" class="num"><div class="metric-value">$0<div class="metric-delta"><span class="down">$0</span></div></div></td>
           <td data-label="Inventory" class="num"><div class="metric-value">4.00<div class="metric-delta">4.0 days cover</div></div></td>
           <td data-label="Fees" class="num">-</td>
           <td data-label="Margin" class="num">-</td>
           <td data-label="TACOS" class="num">-</td>
+          <td data-label="Category">#EO</td>
         </tr>
         
 
@@ -4066,15 +4079,15 @@
         </div>
       </details>
     </td>
-          <td data-label="Category">#EO</td>
-          <td data-label="Units" class="num"><div class="metric-value">0.00<div class="metric-delta"><span class="flat">0.00</span></div></div></td>
-          <td data-label="Sales" class="num"><div class="metric-value">$0.00<div class="metric-delta"><span class="flat">$0.00</span></div></div></td>
-          <td data-label="Profit" class="num"><div class="metric-value">$0.00<div class="metric-delta"><span class="up">+$0.00</span></div></div></td>
-          <td data-label="Ad spend" class="num"><div class="metric-value">$0.00<div class="metric-delta"><span class="flat">$0.00</span></div></div></td>
+          <td data-label="Units" class="num"><div class="metric-value">0<div class="metric-delta"><span class="flat">0</span></div></div></td>
+          <td data-label="Sales" class="num"><div class="metric-value">$0<div class="metric-delta"><span class="flat">$0</span></div></div></td>
+          <td data-label="Profit" class="num"><div class="metric-value">$0<div class="metric-delta"><span class="up">+$0</span></div></div></td>
+          <td data-label="Ad spend" class="num"><div class="metric-value">$0<div class="metric-delta"><span class="flat">$0</span></div></div></td>
           <td data-label="Inventory" class="num"><div class="metric-value">1.00<div class="metric-delta">- days cover</div></div></td>
           <td data-label="Fees" class="num">-</td>
           <td data-label="Margin" class="num">-</td>
           <td data-label="TACOS" class="num">-</td>
+          <td data-label="Category">#EO</td>
         </tr>
         
 
@@ -4103,15 +4116,15 @@
         </div>
       </details>
     </td>
-          <td data-label="Category">#BJ</td>
-          <td data-label="Units" class="num"><div class="metric-value">0.00<div class="metric-delta"><span class="down">-0.50</span></div></div></td>
-          <td data-label="Sales" class="num"><div class="metric-value">$0.00<div class="metric-delta"><span class="down">-$9.96</span></div></div></td>
-          <td data-label="Profit" class="num"><div class="metric-value">-$0.21<div class="metric-delta"><span class="down">-$4.30</span></div></div></td>
-          <td data-label="Ad spend" class="num"><div class="metric-value">$0.21<div class="metric-delta"><span class="up">+$0.11</span></div></div></td>
+          <td data-label="Units" class="num"><div class="metric-value">0<div class="metric-delta"><span class="down">0</span></div></div></td>
+          <td data-label="Sales" class="num"><div class="metric-value">$0<div class="metric-delta"><span class="down">-$10</span></div></div></td>
+          <td data-label="Profit" class="num"><div class="metric-value">$0<div class="metric-delta"><span class="down">-$4</span></div></div></td>
+          <td data-label="Ad spend" class="num"><div class="metric-value">$0<div class="metric-delta"><span class="up">+$0</span></div></div></td>
           <td data-label="Inventory" class="num"><div class="metric-value">18.00<div class="metric-delta">36.0 days cover</div></div></td>
           <td data-label="Fees" class="num">-</td>
           <td data-label="Margin" class="num">-</td>
           <td data-label="TACOS" class="num">-</td>
+          <td data-label="Category">#BJ</td>
         </tr>
         
 
@@ -4140,15 +4153,15 @@
         </div>
       </details>
     </td>
-          <td data-label="Category">#EO</td>
-          <td data-label="Units" class="num"><div class="metric-value">0.00<div class="metric-delta"><span class="down">-0.73</span></div></div></td>
-          <td data-label="Sales" class="num"><div class="metric-value">$0.00<div class="metric-delta"><span class="down">-$9.40</span></div></div></td>
-          <td data-label="Profit" class="num"><div class="metric-value">$0.00<div class="metric-delta"><span class="down">-$3.62</span></div></div></td>
-          <td data-label="Ad spend" class="num"><div class="metric-value">$0.00<div class="metric-delta"><span class="down">-$0.17</span></div></div></td>
+          <td data-label="Units" class="num"><div class="metric-value">0<div class="metric-delta"><span class="down">-1</span></div></div></td>
+          <td data-label="Sales" class="num"><div class="metric-value">$0<div class="metric-delta"><span class="down">-$9</span></div></div></td>
+          <td data-label="Profit" class="num"><div class="metric-value">$0<div class="metric-delta"><span class="down">-$4</span></div></div></td>
+          <td data-label="Ad spend" class="num"><div class="metric-value">$0<div class="metric-delta"><span class="down">$0</span></div></div></td>
           <td data-label="Inventory" class="num"><div class="metric-value">29.00<div class="metric-delta">39.5 days cover</div></div></td>
           <td data-label="Fees" class="num">-</td>
           <td data-label="Margin" class="num">-</td>
           <td data-label="TACOS" class="num">-</td>
+          <td data-label="Category">#EO</td>
         </tr>
         
 
@@ -4177,15 +4190,15 @@
         </div>
       </details>
     </td>
-          <td data-label="Category">#EO</td>
-          <td data-label="Units" class="num"><div class="metric-value">0.00<div class="metric-delta"><span class="flat">0.00</span></div></div></td>
-          <td data-label="Sales" class="num"><div class="metric-value">$0.00<div class="metric-delta"><span class="flat">$0.00</span></div></div></td>
-          <td data-label="Profit" class="num"><div class="metric-value">$0.00<div class="metric-delta"><span class="up">+$0.20</span></div></div></td>
-          <td data-label="Ad spend" class="num"><div class="metric-value">$0.00<div class="metric-delta"><span class="down">-$0.11</span></div></div></td>
+          <td data-label="Units" class="num"><div class="metric-value">0<div class="metric-delta"><span class="flat">0</span></div></div></td>
+          <td data-label="Sales" class="num"><div class="metric-value">$0<div class="metric-delta"><span class="flat">$0</span></div></div></td>
+          <td data-label="Profit" class="num"><div class="metric-value">$0<div class="metric-delta"><span class="up">+$0</span></div></div></td>
+          <td data-label="Ad spend" class="num"><div class="metric-value">$0<div class="metric-delta"><span class="down">$0</span></div></div></td>
           <td data-label="Inventory" class="num"><div class="metric-value">4.00<div class="metric-delta">- days cover</div></div></td>
           <td data-label="Fees" class="num">-</td>
           <td data-label="Margin" class="num">-</td>
           <td data-label="TACOS" class="num">-</td>
+          <td data-label="Category">#EO</td>
         </tr>
         
 
@@ -4214,15 +4227,15 @@
         </div>
       </details>
     </td>
-          <td data-label="Category">#PA</td>
-          <td data-label="Units" class="num"><div class="metric-value">0.00<div class="metric-delta"><span class="down">-0.20</span></div></div></td>
-          <td data-label="Sales" class="num"><div class="metric-value">$0.00<div class="metric-delta"><span class="down">-$4.00</span></div></div></td>
-          <td data-label="Profit" class="num"><div class="metric-value">-$1.50<div class="metric-delta"><span class="down">-$0.77</span></div></div></td>
-          <td data-label="Ad spend" class="num"><div class="metric-value">$1.50<div class="metric-delta"><span class="down">-$1.50</span></div></div></td>
+          <td data-label="Units" class="num"><div class="metric-value">0<div class="metric-delta"><span class="down">0</span></div></div></td>
+          <td data-label="Sales" class="num"><div class="metric-value">$0<div class="metric-delta"><span class="down">-$4</span></div></div></td>
+          <td data-label="Profit" class="num"><div class="metric-value">-$2<div class="metric-delta"><span class="down">-$1</span></div></div></td>
+          <td data-label="Ad spend" class="num"><div class="metric-value">$2<div class="metric-delta"><span class="down">-$1</span></div></div></td>
           <td data-label="Inventory" class="num"><div class="metric-value">24.00<div class="metric-delta">120.0 days cover</div></div></td>
           <td data-label="Fees" class="num">-</td>
           <td data-label="Margin" class="num">-</td>
           <td data-label="TACOS" class="num">-</td>
+          <td data-label="Category">#PA</td>
         </tr>
         
 
@@ -4251,15 +4264,15 @@
         </div>
       </details>
     </td>
-          <td data-label="Category">#EO</td>
-          <td data-label="Units" class="num"><div class="metric-value">0.00<div class="metric-delta"><span class="down">-0.10</span></div></div></td>
-          <td data-label="Sales" class="num"><div class="metric-value">$0.00<div class="metric-delta"><span class="down">-$1.97</span></div></div></td>
-          <td data-label="Profit" class="num"><div class="metric-value">$0.00<div class="metric-delta"><span class="up">+$0.05</span></div></div></td>
-          <td data-label="Ad spend" class="num"><div class="metric-value">$0.00<div class="metric-delta"><span class="flat">$0.00</span></div></div></td>
+          <td data-label="Units" class="num"><div class="metric-value">0<div class="metric-delta"><span class="down">0</span></div></div></td>
+          <td data-label="Sales" class="num"><div class="metric-value">$0<div class="metric-delta"><span class="down">-$2</span></div></div></td>
+          <td data-label="Profit" class="num"><div class="metric-value">$0<div class="metric-delta"><span class="up">+$0</span></div></div></td>
+          <td data-label="Ad spend" class="num"><div class="metric-value">$0<div class="metric-delta"><span class="flat">$0</span></div></div></td>
           <td data-label="Inventory" class="num"><div class="metric-value">40.00<div class="metric-delta">400.0 days cover</div></div></td>
           <td data-label="Fees" class="num">-</td>
           <td data-label="Margin" class="num">-</td>
           <td data-label="TACOS" class="num">-</td>
+          <td data-label="Category">#EO</td>
         </tr>
         
 
@@ -4288,15 +4301,15 @@
         </div>
       </details>
     </td>
-          <td data-label="Category">#EO</td>
-          <td data-label="Units" class="num"><div class="metric-value">1.00<div class="metric-delta"><span class="down">-0.40</span></div></div></td>
-          <td data-label="Sales" class="num"><div class="metric-value">$0.00<div class="metric-delta"><span class="down">-$13.65</span></div></div></td>
-          <td data-label="Profit" class="num"><div class="metric-value">-$1.50<div class="metric-delta"><span class="down">-$6.15</span></div></div></td>
-          <td data-label="Ad spend" class="num"><div class="metric-value">$0.00<div class="metric-delta"><span class="down">-$0.20</span></div></div></td>
+          <td data-label="Units" class="num"><div class="metric-value">1<div class="metric-delta"><span class="down">0</span></div></div></td>
+          <td data-label="Sales" class="num"><div class="metric-value">$0<div class="metric-delta"><span class="down">-$14</span></div></div></td>
+          <td data-label="Profit" class="num"><div class="metric-value">-$2<div class="metric-delta"><span class="down">-$6</span></div></div></td>
+          <td data-label="Ad spend" class="num"><div class="metric-value">$0<div class="metric-delta"><span class="down">$0</span></div></div></td>
           <td data-label="Inventory" class="num"><div class="metric-value">117<div class="metric-delta">83.6 days cover</div></div></td>
           <td data-label="Fees" class="num">-</td>
           <td data-label="Margin" class="num">-</td>
           <td data-label="TACOS" class="num">-</td>
+          <td data-label="Category">#EO</td>
         </tr>
         
 
@@ -4325,15 +4338,15 @@
         </div>
       </details>
     </td>
-          <td data-label="Category">#BJ</td>
-          <td data-label="Units" class="num"><div class="metric-value">0.00<div class="metric-delta"><span class="down">-0.67</span></div></div></td>
-          <td data-label="Sales" class="num"><div class="metric-value">$0.00<div class="metric-delta"><span class="down">-$15.78</span></div></div></td>
-          <td data-label="Profit" class="num"><div class="metric-value">-$0.91<div class="metric-delta"><span class="down">-$5.95</span></div></div></td>
-          <td data-label="Ad spend" class="num"><div class="metric-value">$0.91<div class="metric-delta"><span class="up">+$0.06</span></div></div></td>
+          <td data-label="Units" class="num"><div class="metric-value">0<div class="metric-delta"><span class="down">-1</span></div></div></td>
+          <td data-label="Sales" class="num"><div class="metric-value">$0<div class="metric-delta"><span class="down">-$16</span></div></div></td>
+          <td data-label="Profit" class="num"><div class="metric-value">-$1<div class="metric-delta"><span class="down">-$6</span></div></div></td>
+          <td data-label="Ad spend" class="num"><div class="metric-value">$1<div class="metric-delta"><span class="up">+$0</span></div></div></td>
           <td data-label="Inventory" class="num"><div class="metric-value">89.00<div class="metric-delta">133.5 days cover</div></div></td>
           <td data-label="Fees" class="num">-</td>
           <td data-label="Margin" class="num">-</td>
           <td data-label="TACOS" class="num">-</td>
+          <td data-label="Category">#BJ</td>
         </tr>
         
 
@@ -4362,15 +4375,15 @@
         </div>
       </details>
     </td>
-          <td data-label="Category">#GK</td>
-          <td data-label="Units" class="num"><div class="metric-value">0.00<div class="metric-delta"><span class="down">-0.13</span></div></div></td>
-          <td data-label="Sales" class="num"><div class="metric-value">$0.00<div class="metric-delta"><span class="down">-$2.13</span></div></div></td>
-          <td data-label="Profit" class="num"><div class="metric-value">$0.00<div class="metric-delta"><span class="up">+$0.47</span></div></div></td>
-          <td data-label="Ad spend" class="num"><div class="metric-value">$0.00<div class="metric-delta"><span class="down">-$0.13</span></div></div></td>
+          <td data-label="Units" class="num"><div class="metric-value">0<div class="metric-delta"><span class="down">0</span></div></div></td>
+          <td data-label="Sales" class="num"><div class="metric-value">$0<div class="metric-delta"><span class="down">-$2</span></div></div></td>
+          <td data-label="Profit" class="num"><div class="metric-value">$0<div class="metric-delta"><span class="up">+$0</span></div></div></td>
+          <td data-label="Ad spend" class="num"><div class="metric-value">$0<div class="metric-delta"><span class="down">$0</span></div></div></td>
           <td data-label="Inventory" class="num"><div class="metric-value">95.00<div class="metric-delta">712.5 days cover</div></div></td>
           <td data-label="Fees" class="num">-</td>
           <td data-label="Margin" class="num">-</td>
           <td data-label="TACOS" class="num">-</td>
+          <td data-label="Category">#GK</td>
         </tr>
         
 
@@ -4399,15 +4412,15 @@
         </div>
       </details>
     </td>
-          <td data-label="Category">#FJ</td>
-          <td data-label="Units" class="num"><div class="metric-value">0.00<div class="metric-delta"><span class="flat">0.00</span></div></div></td>
-          <td data-label="Sales" class="num"><div class="metric-value">$0.00<div class="metric-delta"><span class="flat">$0.00</span></div></div></td>
-          <td data-label="Profit" class="num"><div class="metric-value">$0.00<div class="metric-delta"><span class="up">+$0.06</span></div></div></td>
-          <td data-label="Ad spend" class="num"><div class="metric-value">$0.00<div class="metric-delta"><span class="flat">$0.00</span></div></div></td>
+          <td data-label="Units" class="num"><div class="metric-value">0<div class="metric-delta"><span class="flat">0</span></div></div></td>
+          <td data-label="Sales" class="num"><div class="metric-value">$0<div class="metric-delta"><span class="flat">$0</span></div></div></td>
+          <td data-label="Profit" class="num"><div class="metric-value">$0<div class="metric-delta"><span class="up">+$0</span></div></div></td>
+          <td data-label="Ad spend" class="num"><div class="metric-value">$0<div class="metric-delta"><span class="flat">$0</span></div></div></td>
           <td data-label="Inventory" class="num"><div class="metric-value">5.00<div class="metric-delta">- days cover</div></div></td>
           <td data-label="Fees" class="num">-</td>
           <td data-label="Margin" class="num">-</td>
           <td data-label="TACOS" class="num">-</td>
+          <td data-label="Category">#FJ</td>
         </tr>
         
 
@@ -4436,15 +4449,15 @@
         </div>
       </details>
     </td>
-          <td data-label="Category">#EO</td>
-          <td data-label="Units" class="num"><div class="metric-value">0.00<div class="metric-delta"><span class="down">-0.73</span></div></div></td>
-          <td data-label="Sales" class="num"><div class="metric-value">$0.00<div class="metric-delta"><span class="down">-$26.83</span></div></div></td>
-          <td data-label="Profit" class="num"><div class="metric-value">-$3.31<div class="metric-delta"><span class="down">-$4.68</span></div></div></td>
-          <td data-label="Ad spend" class="num"><div class="metric-value">$3.31<div class="metric-delta"><span class="down">-$12.24</span></div></div></td>
+          <td data-label="Units" class="num"><div class="metric-value">0<div class="metric-delta"><span class="down">-1</span></div></div></td>
+          <td data-label="Sales" class="num"><div class="metric-value">$0<div class="metric-delta"><span class="down">-$27</span></div></div></td>
+          <td data-label="Profit" class="num"><div class="metric-value">-$3<div class="metric-delta"><span class="down">-$5</span></div></div></td>
+          <td data-label="Ad spend" class="num"><div class="metric-value">$3<div class="metric-delta"><span class="down">-$12</span></div></div></td>
           <td data-label="Inventory" class="num"><div class="metric-value">45.00<div class="metric-delta">61.4 days cover</div></div></td>
           <td data-label="Fees" class="num">-</td>
           <td data-label="Margin" class="num">-</td>
           <td data-label="TACOS" class="num">-</td>
+          <td data-label="Category">#EO</td>
         </tr>
         </tbody>
         </table>
