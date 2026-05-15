@@ -25,14 +25,41 @@
       font: 14px/1.45 -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
     }
     header {
-      background: #102033;
+      background:
+        radial-gradient(circle at 88% 18%, rgba(118, 181, 197, .35), transparent 28%),
+        linear-gradient(135deg, #0d1b24 0%, #102033 54%, #193545 100%);
       color: white;
-      padding: 28px 34px;
+      padding: 34px 34px 28px;
     }
-    h1 { margin: 0 0 8px; font-size: 28px; letter-spacing: 0; }
+    h1 { margin: 0 0 8px; font-size: clamp(28px, 5vw, 46px); letter-spacing: -.04em; }
     h2 { margin: 0 0 14px; font-size: 18px; letter-spacing: 0; }
     h3 { margin: 0 0 12px; font-size: 15px; }
     main { padding: 24px 34px 40px; }
+    .nav {
+      position: sticky;
+      top: 0;
+      z-index: 8;
+      display: flex;
+      gap: 8px;
+      overflow-x: auto;
+      margin: -24px -34px 22px;
+      padding: 10px 34px;
+      background: rgba(244, 246, 248, .92);
+      border-bottom: 1px solid var(--line);
+      backdrop-filter: blur(12px);
+      -webkit-overflow-scrolling: touch;
+    }
+    .nav a {
+      flex: 0 0 auto;
+      color: var(--ink);
+      text-decoration: none;
+      border: 1px solid var(--line);
+      background: rgba(255, 255, 255, .82);
+      border-radius: 999px;
+      padding: 7px 11px;
+      font-size: 12px;
+      font-weight: 650;
+    }
     section {
       background: var(--panel);
       border: 1px solid var(--line);
@@ -42,6 +69,39 @@
       overflow: hidden;
     }
     .meta { color: #c9d3df; }
+    .insights {
+      display: grid;
+      grid-template-columns: minmax(240px, .9fr) minmax(0, 1.6fr);
+      gap: 16px;
+      background:
+        linear-gradient(135deg, rgba(255,255,255,.96), rgba(245,248,250,.98)),
+        radial-gradient(circle at 0 0, rgba(36, 84, 166, .12), transparent 32%);
+    }
+    .insight-lede p {
+      margin: 8px 0 0;
+      font-size: clamp(18px, 2.4vw, 28px);
+      line-height: 1.15;
+      letter-spacing: -.03em;
+      font-weight: 760;
+    }
+    .insight-grid {
+      display: grid;
+      grid-template-columns: repeat(3, minmax(0, 1fr));
+      gap: 10px;
+    }
+    .insight-card {
+      border: 1px solid var(--line);
+      border-radius: 10px;
+      padding: 12px;
+      background: #fff;
+      min-width: 0;
+    }
+    .insight-card strong {
+      display: block;
+      margin-top: 6px;
+      font-size: 13px;
+      line-height: 1.3;
+    }
     .cards {
       display: flex;
       gap: 12px;
@@ -81,6 +141,9 @@
       text-transform: uppercase;
       letter-spacing: .04em;
       background: #f8fafc;
+      position: sticky;
+      top: 0;
+      z-index: 2;
     }
     tr:last-child td { border-bottom: 0; }
     .num { text-align: right; white-space: nowrap; }
@@ -108,6 +171,8 @@
     .product-meta { min-width: 0; }
     .sku { font-weight: 700; }
     .asin { color: var(--muted); font-size: 11px; margin-top: 1px; }
+    .asin a { color: inherit; text-decoration: none; }
+    .asin a:hover { color: var(--accent); text-decoration: underline; }
     .sku,
     .asin {
       max-width: 10ch;
@@ -137,6 +202,36 @@
       overflow-x: auto;
       border-radius: 8px;
       -webkit-overflow-scrolling: touch;
+      position: relative;
+    }
+    .item-cell,
+    .item-col {
+      position: sticky;
+      left: 0;
+      z-index: 3;
+      background: var(--panel);
+      box-shadow: 1px 0 0 var(--line);
+    }
+    th.item-col {
+      z-index: 4;
+      background: #f8fafc;
+    }
+    details summary {
+      display: flex;
+      justify-content: space-between;
+      gap: 12px;
+      cursor: pointer;
+      font-size: 18px;
+      font-weight: 750;
+      list-style: none;
+    }
+    details summary::-webkit-details-marker { display: none; }
+    .summary-meta {
+      color: var(--muted);
+      font-size: 12px;
+      font-weight: 650;
+      text-transform: uppercase;
+      letter-spacing: .04em;
     }
     .movers-grid {
       display: grid;
@@ -239,9 +334,29 @@
     }
     @media (max-width: 720px) {
       header, main { padding-left: 16px; padding-right: 16px; }
+      .nav {
+        margin-left: -16px;
+        margin-right: -16px;
+        padding-left: 16px;
+        padding-right: 16px;
+      }
       h1 { font-size: 23px; }
       .value { font-size: 20px; }
       section { padding: 14px; }
+      .insights {
+        grid-template-columns: 1fr;
+      }
+      .insight-grid {
+        display: flex;
+        overflow-x: auto;
+        margin-left: -14px;
+        margin-right: -14px;
+        padding-left: 14px;
+        padding-right: 14px;
+      }
+      .insight-card {
+        flex: 0 0 min(78vw, 280px);
+      }
       .cards {
         margin-left: -16px;
         margin-right: -16px;
@@ -299,9 +414,17 @@
 <body>
   <header>
     <h1>Daily View Report</h1>
-    <div class="meta">Anchor date 2026-05-14 · Inventory snapshot 2026-05-15 · Generated 2026-05-15 14:32 EDT</div>
+    <div class="meta">Anchor date 2026-05-14 · Inventory snapshot 2026-05-15 · Generated 2026-05-15 14:41 EDT</div>
   </header>
   <main>
+    <nav class="nav" aria-label="Report sections">
+      <a href="#insights">Insights</a>
+      <a href="#main_changes">Main changes</a>
+      <a href="#movers">Movers</a>
+      <a href="#low-stock">Low stock</a>
+      <a href="#categories">Categories</a>
+      <a href="#full-table">Full table</a>
+    </nav>
     <div class="cards">
       <div class="card"><div class="label">Products</div><div class="value">65</div><div class="sub">with 30d movement</div></div>
       <div class="card"><div class="label">Units</div><div class="value">1,841</div><div class="sub">today</div></div>
@@ -310,12 +433,29 @@
       <div class="card"><div class="label">Ad Spend</div><div class="value">$2,595.30</div><div class="sub">TACOS 12.7%</div></div>
       <div class="card"><div class="label">Inventory</div><div class="value">91,474</div><div class="sub">latest snapshot</div></div>
     </div>
+    
+    <section id="insights" class="insights">
+      <div class="insight-lede">
+        <div class="label">Executive read</div>
+        <p>
+          Sales are <span class="down">-$844.56</span> versus yesterday,
+          with 6 sharp movers up, 7 down,
+          and 12 products on low-stock watch.
+        </p>
+      </div>
+      <div class="insight-grid">
+        <div class="insight-card"><div class="label">Biggest gain</div><strong>PD-LAVENDER-MCT-10-RL / B0G63YF4ZD · +$230.24</strong></div>
+        <div class="insight-card"><div class="label">Biggest drop</div><strong>HS0002-BOX_FBA / B0CT3H57C3 · -$516.00</strong></div>
+        <div class="insight-card"><div class="label">Tightest stock</div><strong>- / B0DDT7GP79 · 4.00 (4.0 days cover)</strong></div>
+      </div>
+    </section>
+    
     <section>
       <h2>Report Map</h2>
       <div class="muted">main changes: 12, drastic up: 6, drastic down: 7, low stock: 12, stock opportunities: 1</div>
     </section>
     
-    <section>
+    <section id="main_changes">
       <h2>Main Product Changes</h2>
       <div class="table-scroll" role="region" aria-label="Main Product Changes table" tabindex="0">
         <table>
@@ -335,7 +475,7 @@
         <img src="https://m.media-amazon.com/images/I/71JjVPJf4-L.jpg" alt="" loading="lazy">
         <div class="product-meta">
           <div class="sku">HS0002_FBA</div>
-          <div class="asin">B0CSKFKGWW</div>
+          <div class="asin"><a href="https://www.amazon.com/dp/B0CSKFKGWW" target="_blank" rel="noopener">B0CSKFKGWW</a></div>
         </div>
       </div>
     </td>
@@ -352,7 +492,7 @@
         <img src="https://m.media-amazon.com/images/I/81VFYuBxKeL.jpg" alt="" loading="lazy">
         <div class="product-meta">
           <div class="sku">HS0002-BOX_FBA</div>
-          <div class="asin">B0CT3H57C3</div>
+          <div class="asin"><a href="https://www.amazon.com/dp/B0CT3H57C3" target="_blank" rel="noopener">B0CT3H57C3</a></div>
         </div>
       </div>
     </td>
@@ -369,7 +509,7 @@
         <img src="https://m.media-amazon.com/images/I/71i3iGExFEL.jpg" alt="" loading="lazy">
         <div class="product-meta">
           <div class="sku">EO-ROSEHIP-1oz_FBA</div>
-          <div class="asin">B0FBSPBMNN</div>
+          <div class="asin"><a href="https://www.amazon.com/dp/B0FBSPBMNN" target="_blank" rel="noopener">B0FBSPBMNN</a></div>
         </div>
       </div>
     </td>
@@ -386,7 +526,7 @@
         <img src="https://m.media-amazon.com/images/I/71muweHmR8L.jpg" alt="" loading="lazy">
         <div class="product-meta">
           <div class="sku">PL6328-00G_FBA</div>
-          <div class="asin">B0CLH141QC</div>
+          <div class="asin"><a href="https://www.amazon.com/dp/B0CLH141QC" target="_blank" rel="noopener">B0CLH141QC</a></div>
         </div>
       </div>
     </td>
@@ -403,7 +543,7 @@
         <img src="https://m.media-amazon.com/images/I/914BlwK0OkL.jpg" alt="" loading="lazy">
         <div class="product-meta">
           <div class="sku">GK0487_FBA</div>
-          <div class="asin">B07DT6KJWQ</div>
+          <div class="asin"><a href="https://www.amazon.com/dp/B07DT6KJWQ" target="_blank" rel="noopener">B07DT6KJWQ</a></div>
         </div>
       </div>
     </td>
@@ -420,7 +560,7 @@
         <img src="https://m.media-amazon.com/images/I/71mZ3GlUcYL.jpg" alt="" loading="lazy">
         <div class="product-meta">
           <div class="sku">HB0024</div>
-          <div class="asin">B0D268LC2Z</div>
+          <div class="asin"><a href="https://www.amazon.com/dp/B0D268LC2Z" target="_blank" rel="noopener">B0D268LC2Z</a></div>
         </div>
       </div>
     </td>
@@ -437,7 +577,7 @@
         <img src="https://m.media-amazon.com/images/I/71V2PwzlFcS.jpg" alt="" loading="lazy">
         <div class="product-meta">
           <div class="sku">NC4297_FBA</div>
-          <div class="asin">B0D978Q2WT</div>
+          <div class="asin"><a href="https://www.amazon.com/dp/B0D978Q2WT" target="_blank" rel="noopener">B0D978Q2WT</a></div>
         </div>
       </div>
     </td>
@@ -454,7 +594,7 @@
         <img src="https://m.media-amazon.com/images/I/71otxvUW+TL.jpg" alt="" loading="lazy">
         <div class="product-meta">
           <div class="sku">PB-10_FBA</div>
-          <div class="asin">B0B7CMYRX6</div>
+          <div class="asin"><a href="https://www.amazon.com/dp/B0B7CMYRX6" target="_blank" rel="noopener">B0B7CMYRX6</a></div>
         </div>
       </div>
     </td>
@@ -471,7 +611,7 @@
         <img src="https://m.media-amazon.com/images/I/71Cw9sUaOrL.jpg" alt="" loading="lazy">
         <div class="product-meta">
           <div class="sku">PD-TEATREE-MCT-2oz</div>
-          <div class="asin">B0GK86VLMJ</div>
+          <div class="asin"><a href="https://www.amazon.com/dp/B0GK86VLMJ" target="_blank" rel="noopener">B0GK86VLMJ</a></div>
         </div>
       </div>
     </td>
@@ -488,7 +628,7 @@
         <img src="https://m.media-amazon.com/images/I/81XL9U355hL.jpg" alt="" loading="lazy">
         <div class="product-meta">
           <div class="sku">NC4059_FBA</div>
-          <div class="asin">B0DSHDK6MJ</div>
+          <div class="asin"><a href="https://www.amazon.com/dp/B0DSHDK6MJ" target="_blank" rel="noopener">B0DSHDK6MJ</a></div>
         </div>
       </div>
     </td>
@@ -505,7 +645,7 @@
         <img src="https://m.media-amazon.com/images/I/81ekfPEgdFL.jpg" alt="" loading="lazy">
         <div class="product-meta">
           <div class="sku">PD-LAVENDER-MCT-10-RL</div>
-          <div class="asin">B0G63YF4ZD</div>
+          <div class="asin"><a href="https://www.amazon.com/dp/B0G63YF4ZD" target="_blank" rel="noopener">B0G63YF4ZD</a></div>
         </div>
       </div>
     </td>
@@ -522,7 +662,7 @@
         <img src="https://m.media-amazon.com/images/I/71wA+fXx7zL.jpg" alt="" loading="lazy">
         <div class="product-meta">
           <div class="sku">EO-JOJOBA-1oz</div>
-          <div class="asin">B0CQZL389H</div>
+          <div class="asin"><a href="https://www.amazon.com/dp/B0CQZL389H" target="_blank" rel="noopener">B0CQZL389H</a></div>
         </div>
       </div>
     </td>
@@ -537,7 +677,7 @@
     </section>
     
     
-    <section>
+    <section id="movers">
       <h2>Drastic Moves vs Yesterday</h2>
       <div class="movers-grid">
         
@@ -560,7 +700,7 @@
         <img src="https://m.media-amazon.com/images/I/81ekfPEgdFL.jpg" alt="" loading="lazy">
         <div class="product-meta">
           <div class="sku">PD-LAVENDER-MCT-10-RL</div>
-          <div class="asin">B0G63YF4ZD</div>
+          <div class="asin"><a href="https://www.amazon.com/dp/B0G63YF4ZD" target="_blank" rel="noopener">B0G63YF4ZD</a></div>
         </div>
       </div>
     </td>
@@ -576,7 +716,7 @@
         <img src="https://m.media-amazon.com/images/I/71muweHmR8L.jpg" alt="" loading="lazy">
         <div class="product-meta">
           <div class="sku">PL6328-00G_FBA</div>
-          <div class="asin">B0CLH141QC</div>
+          <div class="asin"><a href="https://www.amazon.com/dp/B0CLH141QC" target="_blank" rel="noopener">B0CLH141QC</a></div>
         </div>
       </div>
     </td>
@@ -592,7 +732,7 @@
         <img src="https://m.media-amazon.com/images/I/71TJzv+K0xL.jpg" alt="" loading="lazy">
         <div class="product-meta">
           <div class="sku">KT8002-BK_FBA</div>
-          <div class="asin">B07D1WLHTG</div>
+          <div class="asin"><a href="https://www.amazon.com/dp/B07D1WLHTG" target="_blank" rel="noopener">B07D1WLHTG</a></div>
         </div>
       </div>
     </td>
@@ -608,7 +748,7 @@
         <img src="https://m.media-amazon.com/images/I/91KShcbS6oL.jpg" alt="" loading="lazy">
         <div class="product-meta">
           <div class="sku">NC4085_FBA</div>
-          <div class="asin">B082MV956V</div>
+          <div class="asin"><a href="https://www.amazon.com/dp/B082MV956V" target="_blank" rel="noopener">B082MV956V</a></div>
         </div>
       </div>
     </td>
@@ -624,7 +764,7 @@
         <img src="https://m.media-amazon.com/images/I/61VwfRe8tOL.jpg" alt="" loading="lazy">
         <div class="product-meta">
           <div class="sku">HS0002-10_FBA</div>
-          <div class="asin">B0C7XRRFC9</div>
+          <div class="asin"><a href="https://www.amazon.com/dp/B0C7XRRFC9" target="_blank" rel="noopener">B0C7XRRFC9</a></div>
         </div>
       </div>
     </td>
@@ -640,7 +780,7 @@
         <img src="https://m.media-amazon.com/images/I/71a5eedi2bL.jpg" alt="" loading="lazy">
         <div class="product-meta">
           <div class="sku">HB0005_PRG</div>
-          <div class="asin">B08NDR5ZWK</div>
+          <div class="asin"><a href="https://www.amazon.com/dp/B08NDR5ZWK" target="_blank" rel="noopener">B08NDR5ZWK</a></div>
         </div>
       </div>
     </td>
@@ -673,7 +813,7 @@
         <img src="https://m.media-amazon.com/images/I/81VFYuBxKeL.jpg" alt="" loading="lazy">
         <div class="product-meta">
           <div class="sku">HS0002-BOX_FBA</div>
-          <div class="asin">B0CT3H57C3</div>
+          <div class="asin"><a href="https://www.amazon.com/dp/B0CT3H57C3" target="_blank" rel="noopener">B0CT3H57C3</a></div>
         </div>
       </div>
     </td>
@@ -689,7 +829,7 @@
         <img src="https://m.media-amazon.com/images/I/81q5b9buIsL.jpg" alt="" loading="lazy">
         <div class="product-meta">
           <div class="sku">PD-6PC-SET1</div>
-          <div class="asin">PD-RL-SET</div>
+          <div class="asin"><a href="https://www.amazon.com/dp/PD-RL-SET" target="_blank" rel="noopener">PD-RL-SET</a></div>
         </div>
       </div>
     </td>
@@ -705,7 +845,7 @@
         <img src="https://m.media-amazon.com/images/I/71ntcrOSwZL.jpg" alt="" loading="lazy">
         <div class="product-meta">
           <div class="sku">GK0858_FBA</div>
-          <div class="asin">B08CX1D4R3</div>
+          <div class="asin"><a href="https://www.amazon.com/dp/B08CX1D4R3" target="_blank" rel="noopener">B08CX1D4R3</a></div>
         </div>
       </div>
     </td>
@@ -721,7 +861,7 @@
         <img src="https://m.media-amazon.com/images/I/71HVlg56pML.jpg" alt="" loading="lazy">
         <div class="product-meta">
           <div class="sku">KT8153_FBA</div>
-          <div class="asin">B07K4WPNH6</div>
+          <div class="asin"><a href="https://www.amazon.com/dp/B07K4WPNH6" target="_blank" rel="noopener">B07K4WPNH6</a></div>
         </div>
       </div>
     </td>
@@ -737,7 +877,7 @@
         <img src="https://m.media-amazon.com/images/I/71KQSjadjFL.jpg" alt="" loading="lazy">
         <div class="product-meta">
           <div class="sku">BN1663_FBA</div>
-          <div class="asin">B077QPVJ67</div>
+          <div class="asin"><a href="https://www.amazon.com/dp/B077QPVJ67" target="_blank" rel="noopener">B077QPVJ67</a></div>
         </div>
       </div>
     </td>
@@ -753,7 +893,7 @@
         <img src="https://m.media-amazon.com/images/I/81ryEZ-F+-L.jpg" alt="" loading="lazy">
         <div class="product-meta">
           <div class="sku">BR3791_FBA</div>
-          <div class="asin">B077ZFZX7S</div>
+          <div class="asin"><a href="https://www.amazon.com/dp/B077ZFZX7S" target="_blank" rel="noopener">B077ZFZX7S</a></div>
         </div>
       </div>
     </td>
@@ -769,7 +909,7 @@
         <img src="https://m.media-amazon.com/images/I/61Swt-Poq1L.jpg" alt="" loading="lazy">
         <div class="product-meta">
           <div class="sku">FJ9991-B_FBA</div>
-          <div class="asin">B0CKVFYDJZ</div>
+          <div class="asin"><a href="https://www.amazon.com/dp/B0CKVFYDJZ" target="_blank" rel="noopener">B0CKVFYDJZ</a></div>
         </div>
       </div>
     </td>
@@ -786,7 +926,7 @@
     </section>
     
     
-    <section>
+    <section id="low-stock">
       <h2>Low Stock Watchlist</h2>
       <div class="table-scroll" role="region" aria-label="Low Stock Watchlist table" tabindex="0">
         <table>
@@ -805,7 +945,7 @@
         <img src="https://m.media-amazon.com/images/I/71mZ3GlUcYL.jpg" alt="" loading="lazy">
         <div class="product-meta">
           <div class="sku">HB0024</div>
-          <div class="asin">B0D268LC2Z</div>
+          <div class="asin"><a href="https://www.amazon.com/dp/B0D268LC2Z" target="_blank" rel="noopener">B0D268LC2Z</a></div>
         </div>
       </div>
     </td>
@@ -821,7 +961,7 @@
         <img src="https://m.media-amazon.com/images/I/81qpUKfhv8L.jpg" alt="" loading="lazy">
         <div class="product-meta">
           <div class="sku">GK0278_FBA</div>
-          <div class="asin">B0B9QZCJQZ</div>
+          <div class="asin"><a href="https://www.amazon.com/dp/B0B9QZCJQZ" target="_blank" rel="noopener">B0B9QZCJQZ</a></div>
         </div>
       </div>
     </td>
@@ -837,7 +977,7 @@
         <img src="https://m.media-amazon.com/images/I/81p4f01eGTL.jpg" alt="" loading="lazy">
         <div class="product-meta">
           <div class="sku">GK0954</div>
-          <div class="asin">B0D9KZXQL3</div>
+          <div class="asin"><a href="https://www.amazon.com/dp/B0D9KZXQL3" target="_blank" rel="noopener">B0D9KZXQL3</a></div>
         </div>
       </div>
     </td>
@@ -853,7 +993,7 @@
         <img src="https://m.media-amazon.com/images/I/71Q2VWvpYML.jpg" alt="" loading="lazy">
         <div class="product-meta">
           <div class="sku">-</div>
-          <div class="asin">B00M8HC272</div>
+          <div class="asin"><a href="https://www.amazon.com/dp/B00M8HC272" target="_blank" rel="noopener">B00M8HC272</a></div>
         </div>
       </div>
     </td>
@@ -869,7 +1009,7 @@
         <img src="https://m.media-amazon.com/images/I/71XZ6ZR4LUL.jpg" alt="" loading="lazy">
         <div class="product-meta">
           <div class="sku">-</div>
-          <div class="asin">B07BT5S1QK</div>
+          <div class="asin"><a href="https://www.amazon.com/dp/B07BT5S1QK" target="_blank" rel="noopener">B07BT5S1QK</a></div>
         </div>
       </div>
     </td>
@@ -885,7 +1025,7 @@
         <img src="https://m.media-amazon.com/images/I/81uYExbCExL.jpg" alt="" loading="lazy">
         <div class="product-meta">
           <div class="sku">-</div>
-          <div class="asin">B082P8LS2X</div>
+          <div class="asin"><a href="https://www.amazon.com/dp/B082P8LS2X" target="_blank" rel="noopener">B082P8LS2X</a></div>
         </div>
       </div>
     </td>
@@ -901,7 +1041,7 @@
         <img src="https://m.media-amazon.com/images/I/61suvKoJDSL.jpg" alt="" loading="lazy">
         <div class="product-meta">
           <div class="sku">-</div>
-          <div class="asin">B0CKVVV9NR</div>
+          <div class="asin"><a href="https://www.amazon.com/dp/B0CKVVV9NR" target="_blank" rel="noopener">B0CKVVV9NR</a></div>
         </div>
       </div>
     </td>
@@ -917,7 +1057,7 @@
         <img src="https://m.media-amazon.com/images/I/81hXrCqoZpL.jpg" alt="" loading="lazy">
         <div class="product-meta">
           <div class="sku">-</div>
-          <div class="asin">B0DCL58D4C</div>
+          <div class="asin"><a href="https://www.amazon.com/dp/B0DCL58D4C" target="_blank" rel="noopener">B0DCL58D4C</a></div>
         </div>
       </div>
     </td>
@@ -933,7 +1073,7 @@
         <img src="https://m.media-amazon.com/images/I/71J4ZtgdnbL.jpg" alt="" loading="lazy">
         <div class="product-meta">
           <div class="sku">-</div>
-          <div class="asin">B0DDT7GP79</div>
+          <div class="asin"><a href="https://www.amazon.com/dp/B0DDT7GP79" target="_blank" rel="noopener">B0DDT7GP79</a></div>
         </div>
       </div>
     </td>
@@ -949,7 +1089,7 @@
         <img src="https://m.media-amazon.com/images/I/71uMrVg2pNL.jpg" alt="" loading="lazy">
         <div class="product-meta">
           <div class="sku">BR4238_FBA</div>
-          <div class="asin">B0F7QKYY9L</div>
+          <div class="asin"><a href="https://www.amazon.com/dp/B0F7QKYY9L" target="_blank" rel="noopener">B0F7QKYY9L</a></div>
         </div>
       </div>
     </td>
@@ -965,7 +1105,7 @@
         <img src="https://m.media-amazon.com/images/I/61bVsBjIdcL.jpg" alt="" loading="lazy">
         <div class="product-meta">
           <div class="sku">-</div>
-          <div class="asin">B0F8PM57CS</div>
+          <div class="asin"><a href="https://www.amazon.com/dp/B0F8PM57CS" target="_blank" rel="noopener">B0F8PM57CS</a></div>
         </div>
       </div>
     </td>
@@ -981,7 +1121,7 @@
         <img src="https://m.media-amazon.com/images/I/714Z8B9IjFL.jpg" alt="" loading="lazy">
         <div class="product-meta">
           <div class="sku">HB0026</div>
-          <div class="asin">B0FFF83WFD</div>
+          <div class="asin"><a href="https://www.amazon.com/dp/B0FFF83WFD" target="_blank" rel="noopener">B0FFF83WFD</a></div>
         </div>
       </div>
     </td>
@@ -995,7 +1135,7 @@
     </section>
     
     
-    <section>
+    <section id="categories">
       <h2>Category Today vs 30d Average</h2>
       <div class="table-scroll" role="region" aria-label="Category Today vs 30d Average table" tabindex="0">
         <table class="category-table">
@@ -1355,7 +1495,7 @@
     </section>
     
     
-    <section>
+    <section id="stock_opportunities">
       <h2>Growth With Stock Risk</h2>
       <div class="table-scroll" role="region" aria-label="Growth With Stock Risk table" tabindex="0">
         <table>
@@ -1375,7 +1515,7 @@
         <img src="https://m.media-amazon.com/images/I/81qpUKfhv8L.jpg" alt="" loading="lazy">
         <div class="product-meta">
           <div class="sku">GK0278_FBA</div>
-          <div class="asin">B0B9QZCJQZ</div>
+          <div class="asin"><a href="https://www.amazon.com/dp/B0B9QZCJQZ" target="_blank" rel="noopener">B0B9QZCJQZ</a></div>
         </div>
       </div>
     </td>
@@ -1390,8 +1530,12 @@
     </section>
     
     
-    <section>
-      <h2>Full Parent ASIN Table</h2>
+    <section id="full-table">
+      <details>
+      <summary>
+        <span>Full Parent ASIN Table</span>
+        <span class="summary-meta">65 rows</span>
+      </summary>
       <div class="table-scroll" role="region" aria-label="Full Parent ASIN table" tabindex="0">
         <table>
           <thead>
@@ -1415,7 +1559,7 @@
         <img src="https://m.media-amazon.com/images/I/71JjVPJf4-L.jpg" alt="" loading="lazy">
         <div class="product-meta">
           <div class="sku">HS0002_FBA</div>
-          <div class="asin">B0CSKFKGWW</div>
+          <div class="asin"><a href="https://www.amazon.com/dp/B0CSKFKGWW" target="_blank" rel="noopener">B0CSKFKGWW</a></div>
         </div>
       </div>
     </td>
@@ -1437,7 +1581,7 @@
         <img src="https://m.media-amazon.com/images/I/71i3iGExFEL.jpg" alt="" loading="lazy">
         <div class="product-meta">
           <div class="sku">EO-ROSEHIP-1oz_FBA</div>
-          <div class="asin">B0FBSPBMNN</div>
+          <div class="asin"><a href="https://www.amazon.com/dp/B0FBSPBMNN" target="_blank" rel="noopener">B0FBSPBMNN</a></div>
         </div>
       </div>
     </td>
@@ -1459,7 +1603,7 @@
         <img src="https://m.media-amazon.com/images/I/914BlwK0OkL.jpg" alt="" loading="lazy">
         <div class="product-meta">
           <div class="sku">GK0487_FBA</div>
-          <div class="asin">B07DT6KJWQ</div>
+          <div class="asin"><a href="https://www.amazon.com/dp/B07DT6KJWQ" target="_blank" rel="noopener">B07DT6KJWQ</a></div>
         </div>
       </div>
     </td>
@@ -1481,7 +1625,7 @@
         <img src="https://m.media-amazon.com/images/I/81wGSqkNJlL.jpg" alt="" loading="lazy">
         <div class="product-meta">
           <div class="sku">NC4058_FBA</div>
-          <div class="asin">B082L68NLX</div>
+          <div class="asin"><a href="https://www.amazon.com/dp/B082L68NLX" target="_blank" rel="noopener">B082L68NLX</a></div>
         </div>
       </div>
     </td>
@@ -1503,7 +1647,7 @@
         <img src="https://m.media-amazon.com/images/I/71wA+fXx7zL.jpg" alt="" loading="lazy">
         <div class="product-meta">
           <div class="sku">EO-JOJOBA-1oz</div>
-          <div class="asin">B0CQZL389H</div>
+          <div class="asin"><a href="https://www.amazon.com/dp/B0CQZL389H" target="_blank" rel="noopener">B0CQZL389H</a></div>
         </div>
       </div>
     </td>
@@ -1525,7 +1669,7 @@
         <img src="https://m.media-amazon.com/images/I/71V2PwzlFcS.jpg" alt="" loading="lazy">
         <div class="product-meta">
           <div class="sku">NC4297_FBA</div>
-          <div class="asin">B0D978Q2WT</div>
+          <div class="asin"><a href="https://www.amazon.com/dp/B0D978Q2WT" target="_blank" rel="noopener">B0D978Q2WT</a></div>
         </div>
       </div>
     </td>
@@ -1547,7 +1691,7 @@
         <img src="https://m.media-amazon.com/images/I/71V-9CRKXxL.jpg" alt="" loading="lazy">
         <div class="product-meta">
           <div class="sku">EO-CASTOR-1oz</div>
-          <div class="asin">B0DJBNM8RF</div>
+          <div class="asin"><a href="https://www.amazon.com/dp/B0DJBNM8RF" target="_blank" rel="noopener">B0DJBNM8RF</a></div>
         </div>
       </div>
     </td>
@@ -1569,7 +1713,7 @@
         <img src="https://m.media-amazon.com/images/I/71Cw9sUaOrL.jpg" alt="" loading="lazy">
         <div class="product-meta">
           <div class="sku">PD-TEATREE-MCT-2oz</div>
-          <div class="asin">B0GK86VLMJ</div>
+          <div class="asin"><a href="https://www.amazon.com/dp/B0GK86VLMJ" target="_blank" rel="noopener">B0GK86VLMJ</a></div>
         </div>
       </div>
     </td>
@@ -1591,7 +1735,7 @@
         <img src="https://m.media-amazon.com/images/I/81XL9U355hL.jpg" alt="" loading="lazy">
         <div class="product-meta">
           <div class="sku">NC4059_FBA</div>
-          <div class="asin">B0DSHDK6MJ</div>
+          <div class="asin"><a href="https://www.amazon.com/dp/B0DSHDK6MJ" target="_blank" rel="noopener">B0DSHDK6MJ</a></div>
         </div>
       </div>
     </td>
@@ -1613,7 +1757,7 @@
         <img src="https://m.media-amazon.com/images/I/71otxvUW+TL.jpg" alt="" loading="lazy">
         <div class="product-meta">
           <div class="sku">PB-10_FBA</div>
-          <div class="asin">B0B7CMYRX6</div>
+          <div class="asin"><a href="https://www.amazon.com/dp/B0B7CMYRX6" target="_blank" rel="noopener">B0B7CMYRX6</a></div>
         </div>
       </div>
     </td>
@@ -1635,7 +1779,7 @@
         <img src="https://m.media-amazon.com/images/I/71muweHmR8L.jpg" alt="" loading="lazy">
         <div class="product-meta">
           <div class="sku">PL6328-00G_FBA</div>
-          <div class="asin">B0CLH141QC</div>
+          <div class="asin"><a href="https://www.amazon.com/dp/B0CLH141QC" target="_blank" rel="noopener">B0CLH141QC</a></div>
         </div>
       </div>
     </td>
@@ -1657,7 +1801,7 @@
         <img src="https://m.media-amazon.com/images/I/71mZ3GlUcYL.jpg" alt="" loading="lazy">
         <div class="product-meta">
           <div class="sku">HB0024</div>
-          <div class="asin">B0D268LC2Z</div>
+          <div class="asin"><a href="https://www.amazon.com/dp/B0D268LC2Z" target="_blank" rel="noopener">B0D268LC2Z</a></div>
         </div>
       </div>
     </td>
@@ -1679,7 +1823,7 @@
         <img src="https://m.media-amazon.com/images/I/81ekfPEgdFL.jpg" alt="" loading="lazy">
         <div class="product-meta">
           <div class="sku">PD-LAVENDER-MCT-10-RL</div>
-          <div class="asin">B0G63YF4ZD</div>
+          <div class="asin"><a href="https://www.amazon.com/dp/B0G63YF4ZD" target="_blank" rel="noopener">B0G63YF4ZD</a></div>
         </div>
       </div>
     </td>
@@ -1701,7 +1845,7 @@
         <img src="https://m.media-amazon.com/images/I/71WDOcSjxSL.jpg" alt="" loading="lazy">
         <div class="product-meta">
           <div class="sku">PN18G-10</div>
-          <div class="asin">B0B781QSH6</div>
+          <div class="asin"><a href="https://www.amazon.com/dp/B0B781QSH6" target="_blank" rel="noopener">B0B781QSH6</a></div>
         </div>
       </div>
     </td>
@@ -1723,7 +1867,7 @@
         <img src="https://m.media-amazon.com/images/I/81qT68bXdAL.jpg" alt="" loading="lazy">
         <div class="product-meta">
           <div class="sku">GK0541_FBA</div>
-          <div class="asin">B08VFBQDPF</div>
+          <div class="asin"><a href="https://www.amazon.com/dp/B08VFBQDPF" target="_blank" rel="noopener">B08VFBQDPF</a></div>
         </div>
       </div>
     </td>
@@ -1745,7 +1889,7 @@
         <img src="https://m.media-amazon.com/images/I/71TJzv+K0xL.jpg" alt="" loading="lazy">
         <div class="product-meta">
           <div class="sku">KT8002-BK_FBA</div>
-          <div class="asin">B07D1WLHTG</div>
+          <div class="asin"><a href="https://www.amazon.com/dp/B07D1WLHTG" target="_blank" rel="noopener">B07D1WLHTG</a></div>
         </div>
       </div>
     </td>
@@ -1767,7 +1911,7 @@
         <img src="https://m.media-amazon.com/images/I/81hHrcbpY9L.jpg" alt="" loading="lazy">
         <div class="product-meta">
           <div class="sku">GK0715_FBA</div>
-          <div class="asin">B0863C6PQS</div>
+          <div class="asin"><a href="https://www.amazon.com/dp/B0863C6PQS" target="_blank" rel="noopener">B0863C6PQS</a></div>
         </div>
       </div>
     </td>
@@ -1789,7 +1933,7 @@
         <img src="https://m.media-amazon.com/images/I/71NAirbcH3L.jpg" alt="" loading="lazy">
         <div class="product-meta">
           <div class="sku">HB0006_FBA</div>
-          <div class="asin">B0B7RC5ZX5</div>
+          <div class="asin"><a href="https://www.amazon.com/dp/B0B7RC5ZX5" target="_blank" rel="noopener">B0B7RC5ZX5</a></div>
         </div>
       </div>
     </td>
@@ -1811,7 +1955,7 @@
         <img src="https://m.media-amazon.com/images/I/71si9VYKN-L.jpg" alt="" loading="lazy">
         <div class="product-meta">
           <div class="sku">NC4388</div>
-          <div class="asin">B0CYQ1NCCC</div>
+          <div class="asin"><a href="https://www.amazon.com/dp/B0CYQ1NCCC" target="_blank" rel="noopener">B0CYQ1NCCC</a></div>
         </div>
       </div>
     </td>
@@ -1833,7 +1977,7 @@
         <img src="https://m.media-amazon.com/images/I/81qpUKfhv8L.jpg" alt="" loading="lazy">
         <div class="product-meta">
           <div class="sku">GK0278_FBA</div>
-          <div class="asin">B0B9QZCJQZ</div>
+          <div class="asin"><a href="https://www.amazon.com/dp/B0B9QZCJQZ" target="_blank" rel="noopener">B0B9QZCJQZ</a></div>
         </div>
       </div>
     </td>
@@ -1855,7 +1999,7 @@
         <img src="https://m.media-amazon.com/images/I/71m3L+1L0vL.jpg" alt="" loading="lazy">
         <div class="product-meta">
           <div class="sku">FJ9804_FBA</div>
-          <div class="asin">B072JBNW1W</div>
+          <div class="asin"><a href="https://www.amazon.com/dp/B072JBNW1W" target="_blank" rel="noopener">B072JBNW1W</a></div>
         </div>
       </div>
     </td>
@@ -1877,7 +2021,7 @@
         <img src="https://m.media-amazon.com/images/I/71LL3UeNxEL.jpg" alt="" loading="lazy">
         <div class="product-meta">
           <div class="sku">JOJOBA_FBA</div>
-          <div class="asin">B095YP4V34</div>
+          <div class="asin"><a href="https://www.amazon.com/dp/B095YP4V34" target="_blank" rel="noopener">B095YP4V34</a></div>
         </div>
       </div>
     </td>
@@ -1899,7 +2043,7 @@
         <img src="https://m.media-amazon.com/images/I/81VFYuBxKeL.jpg" alt="" loading="lazy">
         <div class="product-meta">
           <div class="sku">HS0002-BOX_FBA</div>
-          <div class="asin">B0CT3H57C3</div>
+          <div class="asin"><a href="https://www.amazon.com/dp/B0CT3H57C3" target="_blank" rel="noopener">B0CT3H57C3</a></div>
         </div>
       </div>
     </td>
@@ -1921,7 +2065,7 @@
         <img src="https://m.media-amazon.com/images/I/71ntcrOSwZL.jpg" alt="" loading="lazy">
         <div class="product-meta">
           <div class="sku">GK0858_FBA</div>
-          <div class="asin">B08CX1D4R3</div>
+          <div class="asin"><a href="https://www.amazon.com/dp/B08CX1D4R3" target="_blank" rel="noopener">B08CX1D4R3</a></div>
         </div>
       </div>
     </td>
@@ -1943,7 +2087,7 @@
         <img src="https://m.media-amazon.com/images/I/81hkC6xFs9L.jpg" alt="" loading="lazy">
         <div class="product-meta">
           <div class="sku">NC4328_FBA</div>
-          <div class="asin">B0CYT45ZJM</div>
+          <div class="asin"><a href="https://www.amazon.com/dp/B0CYT45ZJM" target="_blank" rel="noopener">B0CYT45ZJM</a></div>
         </div>
       </div>
     </td>
@@ -1965,7 +2109,7 @@
         <img src="https://m.media-amazon.com/images/I/91KShcbS6oL.jpg" alt="" loading="lazy">
         <div class="product-meta">
           <div class="sku">NC4085_FBA</div>
-          <div class="asin">B082MV956V</div>
+          <div class="asin"><a href="https://www.amazon.com/dp/B082MV956V" target="_blank" rel="noopener">B082MV956V</a></div>
         </div>
       </div>
     </td>
@@ -1987,7 +2131,7 @@
         <img src="https://m.media-amazon.com/images/I/71kGKtStmSL.jpg" alt="" loading="lazy">
         <div class="product-meta">
           <div class="sku">EO-CASTOR-1.7oz-RL</div>
-          <div class="asin">B0GK71XT2L</div>
+          <div class="asin"><a href="https://www.amazon.com/dp/B0GK71XT2L" target="_blank" rel="noopener">B0GK71XT2L</a></div>
         </div>
       </div>
     </td>
@@ -2009,7 +2153,7 @@
         <img src="https://m.media-amazon.com/images/I/71HVlg56pML.jpg" alt="" loading="lazy">
         <div class="product-meta">
           <div class="sku">KT8153_FBA</div>
-          <div class="asin">B07K4WPNH6</div>
+          <div class="asin"><a href="https://www.amazon.com/dp/B07K4WPNH6" target="_blank" rel="noopener">B07K4WPNH6</a></div>
         </div>
       </div>
     </td>
@@ -2031,7 +2175,7 @@
         <img src="https://m.media-amazon.com/images/I/71ofJ4UMa3L.jpg" alt="" loading="lazy">
         <div class="product-meta">
           <div class="sku">KT8100_FBA</div>
-          <div class="asin">B0B7M64LGZ</div>
+          <div class="asin"><a href="https://www.amazon.com/dp/B0B7M64LGZ" target="_blank" rel="noopener">B0B7M64LGZ</a></div>
         </div>
       </div>
     </td>
@@ -2053,7 +2197,7 @@
         <img src="https://m.media-amazon.com/images/I/61VwfRe8tOL.jpg" alt="" loading="lazy">
         <div class="product-meta">
           <div class="sku">HS0002-10_FBA</div>
-          <div class="asin">B0C7XRRFC9</div>
+          <div class="asin"><a href="https://www.amazon.com/dp/B0C7XRRFC9" target="_blank" rel="noopener">B0C7XRRFC9</a></div>
         </div>
       </div>
     </td>
@@ -2075,7 +2219,7 @@
         <img src="https://m.media-amazon.com/images/I/71a5eedi2bL.jpg" alt="" loading="lazy">
         <div class="product-meta">
           <div class="sku">HB0005_PRG</div>
-          <div class="asin">B08NDR5ZWK</div>
+          <div class="asin"><a href="https://www.amazon.com/dp/B08NDR5ZWK" target="_blank" rel="noopener">B08NDR5ZWK</a></div>
         </div>
       </div>
     </td>
@@ -2097,7 +2241,7 @@
         <img src="https://m.media-amazon.com/images/I/51bSz1yYwcL.jpg" alt="" loading="lazy">
         <div class="product-meta">
           <div class="sku">HA-4oz-SP</div>
-          <div class="asin">B0F13L4L69</div>
+          <div class="asin"><a href="https://www.amazon.com/dp/B0F13L4L69" target="_blank" rel="noopener">B0F13L4L69</a></div>
         </div>
       </div>
     </td>
@@ -2119,7 +2263,7 @@
         <img src="https://m.media-amazon.com/images/I/81p4f01eGTL.jpg" alt="" loading="lazy">
         <div class="product-meta">
           <div class="sku">GK0954</div>
-          <div class="asin">B0D9KZXQL3</div>
+          <div class="asin"><a href="https://www.amazon.com/dp/B0D9KZXQL3" target="_blank" rel="noopener">B0D9KZXQL3</a></div>
         </div>
       </div>
     </td>
@@ -2141,7 +2285,7 @@
         <img src="https://m.media-amazon.com/images/I/71t1XHcrkKL.jpg" alt="" loading="lazy">
         <div class="product-meta">
           <div class="sku">BN1798_FBA</div>
-          <div class="asin">B07CT714N2</div>
+          <div class="asin"><a href="https://www.amazon.com/dp/B07CT714N2" target="_blank" rel="noopener">B07CT714N2</a></div>
         </div>
       </div>
     </td>
@@ -2163,7 +2307,7 @@
         <img src="https://m.media-amazon.com/images/I/71KQSjadjFL.jpg" alt="" loading="lazy">
         <div class="product-meta">
           <div class="sku">BN1663_FBA</div>
-          <div class="asin">B077QPVJ67</div>
+          <div class="asin"><a href="https://www.amazon.com/dp/B077QPVJ67" target="_blank" rel="noopener">B077QPVJ67</a></div>
         </div>
       </div>
     </td>
@@ -2185,7 +2329,7 @@
         <img src="https://m.media-amazon.com/images/I/81ryEZ-F+-L.jpg" alt="" loading="lazy">
         <div class="product-meta">
           <div class="sku">BR3791_FBA</div>
-          <div class="asin">B077ZFZX7S</div>
+          <div class="asin"><a href="https://www.amazon.com/dp/B077ZFZX7S" target="_blank" rel="noopener">B077ZFZX7S</a></div>
         </div>
       </div>
     </td>
@@ -2207,7 +2351,7 @@
         <img src="https://m.media-amazon.com/images/I/71Q2VWvpYML.jpg" alt="" loading="lazy">
         <div class="product-meta">
           <div class="sku">-</div>
-          <div class="asin">B00M8HC272</div>
+          <div class="asin"><a href="https://www.amazon.com/dp/B00M8HC272" target="_blank" rel="noopener">B00M8HC272</a></div>
         </div>
       </div>
     </td>
@@ -2229,7 +2373,7 @@
         <img src="https://m.media-amazon.com/images/I/71vgNaDD+NL.jpg" alt="" loading="lazy">
         <div class="product-meta">
           <div class="sku">-</div>
-          <div class="asin">B00XK3GUI0</div>
+          <div class="asin"><a href="https://www.amazon.com/dp/B00XK3GUI0" target="_blank" rel="noopener">B00XK3GUI0</a></div>
         </div>
       </div>
     </td>
@@ -2251,7 +2395,7 @@
         <img src="https://m.media-amazon.com/images/I/61nvBOOWxWL.jpg" alt="" loading="lazy">
         <div class="product-meta">
           <div class="sku">-</div>
-          <div class="asin">B016YL499G</div>
+          <div class="asin"><a href="https://www.amazon.com/dp/B016YL499G" target="_blank" rel="noopener">B016YL499G</a></div>
         </div>
       </div>
     </td>
@@ -2273,7 +2417,7 @@
         <img src="https://m.media-amazon.com/images/I/71YXB5n6G3L.jpg" alt="" loading="lazy">
         <div class="product-meta">
           <div class="sku">-</div>
-          <div class="asin">B01EGMDDUQ</div>
+          <div class="asin"><a href="https://www.amazon.com/dp/B01EGMDDUQ" target="_blank" rel="noopener">B01EGMDDUQ</a></div>
         </div>
       </div>
     </td>
@@ -2295,7 +2439,7 @@
         <img src="https://m.media-amazon.com/images/I/71ozi9ikKXL.jpg" alt="" loading="lazy">
         <div class="product-meta">
           <div class="sku">-</div>
-          <div class="asin">B079F1VG49</div>
+          <div class="asin"><a href="https://www.amazon.com/dp/B079F1VG49" target="_blank" rel="noopener">B079F1VG49</a></div>
         </div>
       </div>
     </td>
@@ -2317,7 +2461,7 @@
         <img src="https://m.media-amazon.com/images/I/71XZ6ZR4LUL.jpg" alt="" loading="lazy">
         <div class="product-meta">
           <div class="sku">-</div>
-          <div class="asin">B07BT5S1QK</div>
+          <div class="asin"><a href="https://www.amazon.com/dp/B07BT5S1QK" target="_blank" rel="noopener">B07BT5S1QK</a></div>
         </div>
       </div>
     </td>
@@ -2339,7 +2483,7 @@
         <img src="https://m.media-amazon.com/images/I/71XqPHKdq9L.jpg" alt="" loading="lazy">
         <div class="product-meta">
           <div class="sku">-</div>
-          <div class="asin">B07CGPHFTY</div>
+          <div class="asin"><a href="https://www.amazon.com/dp/B07CGPHFTY" target="_blank" rel="noopener">B07CGPHFTY</a></div>
         </div>
       </div>
     </td>
@@ -2361,7 +2505,7 @@
         <img src="https://m.media-amazon.com/images/I/61ZsPywqvHL.jpg" alt="" loading="lazy">
         <div class="product-meta">
           <div class="sku">-</div>
-          <div class="asin">B07F1FKCDH</div>
+          <div class="asin"><a href="https://www.amazon.com/dp/B07F1FKCDH" target="_blank" rel="noopener">B07F1FKCDH</a></div>
         </div>
       </div>
     </td>
@@ -2383,7 +2527,7 @@
         
         <div class="product-meta">
           <div class="sku">-</div>
-          <div class="asin">B07K819DSN</div>
+          <div class="asin"><a href="https://www.amazon.com/dp/B07K819DSN" target="_blank" rel="noopener">B07K819DSN</a></div>
         </div>
       </div>
     </td>
@@ -2405,7 +2549,7 @@
         <img src="https://m.media-amazon.com/images/I/71pspOlgDVL.jpg" alt="" loading="lazy">
         <div class="product-meta">
           <div class="sku">-</div>
-          <div class="asin">B081B7C2FP</div>
+          <div class="asin"><a href="https://www.amazon.com/dp/B081B7C2FP" target="_blank" rel="noopener">B081B7C2FP</a></div>
         </div>
       </div>
     </td>
@@ -2427,7 +2571,7 @@
         <img src="https://m.media-amazon.com/images/I/81uYExbCExL.jpg" alt="" loading="lazy">
         <div class="product-meta">
           <div class="sku">-</div>
-          <div class="asin">B082P8LS2X</div>
+          <div class="asin"><a href="https://www.amazon.com/dp/B082P8LS2X" target="_blank" rel="noopener">B082P8LS2X</a></div>
         </div>
       </div>
     </td>
@@ -2449,7 +2593,7 @@
         <img src="https://m.media-amazon.com/images/I/716x2Vhv6kS.jpg" alt="" loading="lazy">
         <div class="product-meta">
           <div class="sku">-</div>
-          <div class="asin">B09VJV491B</div>
+          <div class="asin"><a href="https://www.amazon.com/dp/B09VJV491B" target="_blank" rel="noopener">B09VJV491B</a></div>
         </div>
       </div>
     </td>
@@ -2471,7 +2615,7 @@
         
         <div class="product-meta">
           <div class="sku">-</div>
-          <div class="asin">B0CG1QB37V</div>
+          <div class="asin"><a href="https://www.amazon.com/dp/B0CG1QB37V" target="_blank" rel="noopener">B0CG1QB37V</a></div>
         </div>
       </div>
     </td>
@@ -2493,7 +2637,7 @@
         <img src="https://m.media-amazon.com/images/I/81ohbvEk1eL.jpg" alt="" loading="lazy">
         <div class="product-meta">
           <div class="sku">-</div>
-          <div class="asin">B0CJ1MKYQD</div>
+          <div class="asin"><a href="https://www.amazon.com/dp/B0CJ1MKYQD" target="_blank" rel="noopener">B0CJ1MKYQD</a></div>
         </div>
       </div>
     </td>
@@ -2515,7 +2659,7 @@
         <img src="https://m.media-amazon.com/images/I/61Swt-Poq1L.jpg" alt="" loading="lazy">
         <div class="product-meta">
           <div class="sku">FJ9991-B_FBA</div>
-          <div class="asin">B0CKVFYDJZ</div>
+          <div class="asin"><a href="https://www.amazon.com/dp/B0CKVFYDJZ" target="_blank" rel="noopener">B0CKVFYDJZ</a></div>
         </div>
       </div>
     </td>
@@ -2537,7 +2681,7 @@
         <img src="https://m.media-amazon.com/images/I/61suvKoJDSL.jpg" alt="" loading="lazy">
         <div class="product-meta">
           <div class="sku">-</div>
-          <div class="asin">B0CKVVV9NR</div>
+          <div class="asin"><a href="https://www.amazon.com/dp/B0CKVVV9NR" target="_blank" rel="noopener">B0CKVVV9NR</a></div>
         </div>
       </div>
     </td>
@@ -2559,7 +2703,7 @@
         <img src="https://m.media-amazon.com/images/I/81hXrCqoZpL.jpg" alt="" loading="lazy">
         <div class="product-meta">
           <div class="sku">-</div>
-          <div class="asin">B0DCL58D4C</div>
+          <div class="asin"><a href="https://www.amazon.com/dp/B0DCL58D4C" target="_blank" rel="noopener">B0DCL58D4C</a></div>
         </div>
       </div>
     </td>
@@ -2581,7 +2725,7 @@
         <img src="https://m.media-amazon.com/images/I/71J4ZtgdnbL.jpg" alt="" loading="lazy">
         <div class="product-meta">
           <div class="sku">-</div>
-          <div class="asin">B0DDT7GP79</div>
+          <div class="asin"><a href="https://www.amazon.com/dp/B0DDT7GP79" target="_blank" rel="noopener">B0DDT7GP79</a></div>
         </div>
       </div>
     </td>
@@ -2603,7 +2747,7 @@
         
         <div class="product-meta">
           <div class="sku">-</div>
-          <div class="asin">B0DRMPQGPF</div>
+          <div class="asin"><a href="https://www.amazon.com/dp/B0DRMPQGPF" target="_blank" rel="noopener">B0DRMPQGPF</a></div>
         </div>
       </div>
     </td>
@@ -2625,7 +2769,7 @@
         <img src="https://m.media-amazon.com/images/I/71uMrVg2pNL.jpg" alt="" loading="lazy">
         <div class="product-meta">
           <div class="sku">BR4238_FBA</div>
-          <div class="asin">B0F7QKYY9L</div>
+          <div class="asin"><a href="https://www.amazon.com/dp/B0F7QKYY9L" target="_blank" rel="noopener">B0F7QKYY9L</a></div>
         </div>
       </div>
     </td>
@@ -2647,7 +2791,7 @@
         <img src="https://m.media-amazon.com/images/I/61bVsBjIdcL.jpg" alt="" loading="lazy">
         <div class="product-meta">
           <div class="sku">-</div>
-          <div class="asin">B0F8PM57CS</div>
+          <div class="asin"><a href="https://www.amazon.com/dp/B0F8PM57CS" target="_blank" rel="noopener">B0F8PM57CS</a></div>
         </div>
       </div>
     </td>
@@ -2669,7 +2813,7 @@
         <img src="https://m.media-amazon.com/images/I/81nGkuNHj1L.jpg" alt="" loading="lazy">
         <div class="product-meta">
           <div class="sku">-</div>
-          <div class="asin">B0F9KT4YN9</div>
+          <div class="asin"><a href="https://www.amazon.com/dp/B0F9KT4YN9" target="_blank" rel="noopener">B0F9KT4YN9</a></div>
         </div>
       </div>
     </td>
@@ -2691,7 +2835,7 @@
         <img src="https://m.media-amazon.com/images/I/714Z8B9IjFL.jpg" alt="" loading="lazy">
         <div class="product-meta">
           <div class="sku">HB0026</div>
-          <div class="asin">B0FFF83WFD</div>
+          <div class="asin"><a href="https://www.amazon.com/dp/B0FFF83WFD" target="_blank" rel="noopener">B0FFF83WFD</a></div>
         </div>
       </div>
     </td>
@@ -2713,7 +2857,7 @@
         <img src="https://m.media-amazon.com/images/I/71n1tsIKOWL.jpg" alt="" loading="lazy">
         <div class="product-meta">
           <div class="sku">-</div>
-          <div class="asin">B0FHW7GJL1</div>
+          <div class="asin"><a href="https://www.amazon.com/dp/B0FHW7GJL1" target="_blank" rel="noopener">B0FHW7GJL1</a></div>
         </div>
       </div>
     </td>
@@ -2735,7 +2879,7 @@
         <img src="https://m.media-amazon.com/images/I/81oK1iR4VkL.jpg" alt="" loading="lazy">
         <div class="product-meta">
           <div class="sku">EO-JOJOBA-1oz-KIT</div>
-          <div class="asin">B0FKD8FVQM</div>
+          <div class="asin"><a href="https://www.amazon.com/dp/B0FKD8FVQM" target="_blank" rel="noopener">B0FKD8FVQM</a></div>
         </div>
       </div>
     </td>
@@ -2757,7 +2901,7 @@
         <img src="https://m.media-amazon.com/images/I/71I0W6eBHML.jpg" alt="" loading="lazy">
         <div class="product-meta">
           <div class="sku">KT8215_FBA</div>
-          <div class="asin">BJ</div>
+          <div class="asin"><a href="https://www.amazon.com/dp/BJ" target="_blank" rel="noopener">BJ</a></div>
         </div>
       </div>
     </td>
@@ -2779,7 +2923,7 @@
         <img src="https://m.media-amazon.com/images/I/71nnqxxE+XL.jpg" alt="" loading="lazy">
         <div class="product-meta">
           <div class="sku">-</div>
-          <div class="asin">GK</div>
+          <div class="asin"><a href="https://www.amazon.com/dp/GK" target="_blank" rel="noopener">GK</a></div>
         </div>
       </div>
     </td>
@@ -2801,7 +2945,7 @@
         <img src="https://m.media-amazon.com/images/I/61xPrgqjmcL.jpg" alt="" loading="lazy">
         <div class="product-meta">
           <div class="sku">-</div>
-          <div class="asin">NULL</div>
+          <div class="asin"><a href="https://www.amazon.com/dp/NULL" target="_blank" rel="noopener">NULL</a></div>
         </div>
       </div>
     </td>
@@ -2823,7 +2967,7 @@
         <img src="https://m.media-amazon.com/images/I/81q5b9buIsL.jpg" alt="" loading="lazy">
         <div class="product-meta">
           <div class="sku">PD-6PC-SET1</div>
-          <div class="asin">PD-RL-SET</div>
+          <div class="asin"><a href="https://www.amazon.com/dp/PD-RL-SET" target="_blank" rel="noopener">PD-RL-SET</a></div>
         </div>
       </div>
     </td>
@@ -2840,6 +2984,7 @@
         </tbody>
         </table>
       </div>
+      </details>
     </section>
     
   </main>
