@@ -222,16 +222,16 @@
     .num { text-align: right; white-space: nowrap; }
     .item-col,
     .item-cell {
-      width: 128px;
-      min-width: 128px;
-      max-width: 128px;
+      width: 210px;
+      min-width: 210px;
+      max-width: 210px;
     }
     .product {
       display: flex;
       align-items: center;
       gap: 8px;
       min-width: 0;
-      width: 112px;
+      width: 194px;
     }
     .product img {
       width: 38px;
@@ -241,7 +241,10 @@
       border: 1px solid var(--line);
       background: #fff;
     }
-    .product-meta { min-width: 0; }
+    .product-meta {
+      min-width: 0;
+      display: block;
+    }
     .product-details {
       position: relative;
     }
@@ -301,10 +304,17 @@
     .asin a:hover { color: var(--accent); text-decoration: underline; }
     .sku,
     .asin {
-      max-width: 10ch;
+      max-width: 18ch;
       overflow: hidden;
       text-overflow: ellipsis;
       white-space: nowrap;
+    }
+    .product-badges {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 4px;
+      margin-top: 5px;
+      max-width: 140px;
     }
     .metric-value { font-weight: 650; }
     .metric-delta {
@@ -321,8 +331,8 @@
       font-size: 10px;
       font-weight: 750;
       letter-spacing: .03em;
-      margin: 0 4px 4px 0;
-      padding: 4px 7px;
+      margin: 0;
+      padding: 3px 7px;
       text-transform: uppercase;
       white-space: nowrap;
     }
@@ -476,12 +486,12 @@
     @media (min-width: 1180px) {
       .mover-panel .item-col,
       .mover-panel .item-cell {
-        width: 128px;
-        min-width: 128px;
-        max-width: 128px;
+        width: 190px;
+        min-width: 190px;
+        max-width: 190px;
       }
       .mover-panel .product {
-        width: 112px;
+        width: 174px;
         gap: 8px;
       }
       .mover-panel .product-meta {
@@ -560,7 +570,7 @@
 <body>
   <header>
     <h1>Daily View Report</h1>
-    <div class="meta">Anchor date 2026-05-14 · Inventory snapshot 2026-05-15 · Generated 2026-05-15 15:09 EDT</div>
+    <div class="meta">Anchor date 2026-05-14 · Inventory snapshot 2026-05-15 · Generated 2026-05-15 15:13 EDT</div>
   </header>
   <main>
     <nav class="nav" aria-label="Report sections">
@@ -612,7 +622,6 @@
           <thead>
             <tr>
               <th class="item-col">Item</th>
-              <th>Severity</th>
               <th class="num">Units</th>
               <th class="num">Sales</th>
               <th class="num">Profit</th>
@@ -629,6 +638,7 @@
             <span class="product-meta">
               <span class="sku">HS0002_FBA</span>
               <span class="asin"><a href="https://www.amazon.com/dp/B0CSKFKGWW" target="_blank" rel="noopener">B0CSKFKGWW</a></span>
+              <span class="product-badges"><span class="severity bad">Sales drop</span></span>
             </span>
           </span>
         </summary>
@@ -644,7 +654,6 @@
         </div>
       </details>
     </td>
-          <td data-label="Severity"><span class="severity bad">Sales drop</span></td>
           <td data-label="Units" class="num"><div class="metric-value">487<div class="metric-delta"><span class="down">-103</span></div></div></td>
           <td data-label="Sales" class="num"><div class="metric-value">$4,572.53<div class="metric-delta"><span class="down">-$862.07</span></div></div></td>
           <td data-label="Profit" class="num"><div class="metric-value">$935.63<div class="metric-delta"><span class="up">+$50.56</span></div></div></td>
@@ -661,6 +670,7 @@
             <span class="product-meta">
               <span class="sku">HS0002-BOX_FBA</span>
               <span class="asin"><a href="https://www.amazon.com/dp/B0CT3H57C3" target="_blank" rel="noopener">B0CT3H57C3</a></span>
+              <span class="product-badges"><span class="severity bad">Sales drop</span> <span class="severity bad">Profit hit</span></span>
             </span>
           </span>
         </summary>
@@ -676,7 +686,6 @@
         </div>
       </details>
     </td>
-          <td data-label="Severity"><span class="severity bad">Sales drop</span> <span class="severity bad">Profit hit</span></td>
           <td data-label="Units" class="num"><div class="metric-value">1.00<div class="metric-delta"><span class="down">-4.00</span></div></div></td>
           <td data-label="Sales" class="num"><div class="metric-value">$129.00<div class="metric-delta"><span class="down">-$516.00</span></div></div></td>
           <td data-label="Profit" class="num"><div class="metric-value">$46.49<div class="metric-delta"><span class="down">-$268.71</span></div></div></td>
@@ -693,6 +702,7 @@
             <span class="product-meta">
               <span class="sku">EO-ROSEHIP-1oz_FBA</span>
               <span class="asin"><a href="https://www.amazon.com/dp/B0FBSPBMNN" target="_blank" rel="noopener">B0FBSPBMNN</a></span>
+              <span class="product-badges"><span class="severity good">Sales lift</span></span>
             </span>
           </span>
         </summary>
@@ -708,7 +718,6 @@
         </div>
       </details>
     </td>
-          <td data-label="Severity"><span class="severity good">Sales lift</span></td>
           <td data-label="Units" class="num"><div class="metric-value">166<div class="metric-delta"><span class="up">+34.00</span></div></div></td>
           <td data-label="Sales" class="num"><div class="metric-value">$1,689.04<div class="metric-delta"><span class="up">+$351.79</span></div></div></td>
           <td data-label="Profit" class="num"><div class="metric-value">$314.70<div class="metric-delta"><span class="up">+$127.98</span></div></div></td>
@@ -725,6 +734,7 @@
             <span class="product-meta">
               <span class="sku">PL6328-00G_FBA</span>
               <span class="asin"><a href="https://www.amazon.com/dp/B0CLH141QC" target="_blank" rel="noopener">B0CLH141QC</a></span>
+              <span class="product-badges"><span class="severity good">Sales lift</span></span>
             </span>
           </span>
         </summary>
@@ -740,7 +750,6 @@
         </div>
       </details>
     </td>
-          <td data-label="Severity"><span class="severity good">Sales lift</span></td>
           <td data-label="Units" class="num"><div class="metric-value">23.00<div class="metric-delta"><span class="up">+8.00</span></div></div></td>
           <td data-label="Sales" class="num"><div class="metric-value">$559.77<div class="metric-delta"><span class="up">+$229.91</span></div></div></td>
           <td data-label="Profit" class="num"><div class="metric-value">$158.17<div class="metric-delta"><span class="up">+$208.28</span></div></div></td>
@@ -757,6 +766,7 @@
             <span class="product-meta">
               <span class="sku">GK0487_FBA</span>
               <span class="asin"><a href="https://www.amazon.com/dp/B07DT6KJWQ" target="_blank" rel="noopener">B07DT6KJWQ</a></span>
+              <span class="product-badges"><span class="severity good">Sales lift</span></span>
             </span>
           </span>
         </summary>
@@ -772,7 +782,6 @@
         </div>
       </details>
     </td>
-          <td data-label="Severity"><span class="severity good">Sales lift</span></td>
           <td data-label="Units" class="num"><div class="metric-value">96.00<div class="metric-delta"><span class="up">+16.00</span></div></div></td>
           <td data-label="Sales" class="num"><div class="metric-value">$1,677.99<div class="metric-delta"><span class="up">+$282.79</span></div></div></td>
           <td data-label="Profit" class="num"><div class="metric-value">$441.14<div class="metric-delta"><span class="up">+$121.64</span></div></div></td>
@@ -789,6 +798,7 @@
             <span class="product-meta">
               <span class="sku">HB0024</span>
               <span class="asin"><a href="https://www.amazon.com/dp/B0D268LC2Z" target="_blank" rel="noopener">B0D268LC2Z</a></span>
+              <span class="product-badges"><span class="severity bad">Sales drop</span> <span class="severity bad">Profit hit</span></span>
             </span>
           </span>
         </summary>
@@ -804,7 +814,6 @@
         </div>
       </details>
     </td>
-          <td data-label="Severity"><span class="severity bad">Sales drop</span> <span class="severity bad">Profit hit</span></td>
           <td data-label="Units" class="num"><div class="metric-value">33.00<div class="metric-delta"><span class="down">-14.00</span></div></div></td>
           <td data-label="Sales" class="num"><div class="metric-value">$557.95<div class="metric-delta"><span class="down">-$240.58</span></div></div></td>
           <td data-label="Profit" class="num"><div class="metric-value">$135.21<div class="metric-delta"><span class="down">-$154.04</span></div></div></td>
@@ -821,6 +830,7 @@
             <span class="product-meta">
               <span class="sku">NC4297_FBA</span>
               <span class="asin"><a href="https://www.amazon.com/dp/B0D978Q2WT" target="_blank" rel="noopener">B0D978Q2WT</a></span>
+              <span class="product-badges"><span class="severity bad">Sales drop</span> <span class="severity bad">Profit hit</span></span>
             </span>
           </span>
         </summary>
@@ -836,7 +846,6 @@
         </div>
       </details>
     </td>
-          <td data-label="Severity"><span class="severity bad">Sales drop</span> <span class="severity bad">Profit hit</span></td>
           <td data-label="Units" class="num"><div class="metric-value">124<div class="metric-delta"><span class="down">-22.00</span></div></div></td>
           <td data-label="Sales" class="num"><div class="metric-value">$1,238.76<div class="metric-delta"><span class="down">-$219.29</span></div></div></td>
           <td data-label="Profit" class="num"><div class="metric-value">$295.16<div class="metric-delta"><span class="down">-$123.80</span></div></div></td>
@@ -853,6 +862,7 @@
             <span class="product-meta">
               <span class="sku">PB-10_FBA</span>
               <span class="asin"><a href="https://www.amazon.com/dp/B0B7CMYRX6" target="_blank" rel="noopener">B0B7CMYRX6</a></span>
+              <span class="product-badges"><span class="severity bad">Sales drop</span> <span class="severity bad">Profit hit</span></span>
             </span>
           </span>
         </summary>
@@ -868,7 +878,6 @@
         </div>
       </details>
     </td>
-          <td data-label="Severity"><span class="severity bad">Sales drop</span> <span class="severity bad">Profit hit</span></td>
           <td data-label="Units" class="num"><div class="metric-value">66.00<div class="metric-delta"><span class="down">-27.00</span></div></div></td>
           <td data-label="Sales" class="num"><div class="metric-value">$617.12<div class="metric-delta"><span class="down">-$226.50</span></div></div></td>
           <td data-label="Profit" class="num"><div class="metric-value">$179.63<div class="metric-delta"><span class="down">-$126.45</span></div></div></td>
@@ -885,6 +894,7 @@
             <span class="product-meta">
               <span class="sku">PD-TEATREE-MCT-2oz</span>
               <span class="asin"><a href="https://www.amazon.com/dp/B0GK86VLMJ" target="_blank" rel="noopener">B0GK86VLMJ</a></span>
+              <span class="product-badges"><span class="severity bad">Profit hit</span></span>
             </span>
           </span>
         </summary>
@@ -900,7 +910,6 @@
         </div>
       </details>
     </td>
-          <td data-label="Severity"><span class="severity bad">Profit hit</span></td>
           <td data-label="Units" class="num"><div class="metric-value">89.00<div class="metric-delta"><span class="down">-6.00</span></div></div></td>
           <td data-label="Sales" class="num"><div class="metric-value">$875.14<div class="metric-delta"><span class="down">-$69.65</span></div></div></td>
           <td data-label="Profit" class="num"><div class="metric-value">$14.66<div class="metric-delta"><span class="down">-$180.20</span></div></div></td>
@@ -917,6 +926,7 @@
             <span class="product-meta">
               <span class="sku">NC4059_FBA</span>
               <span class="asin"><a href="https://www.amazon.com/dp/B0DSHDK6MJ" target="_blank" rel="noopener">B0DSHDK6MJ</a></span>
+              <span class="product-badges"><span class="severity bad">Sales drop</span> <span class="severity bad">Profit hit</span></span>
             </span>
           </span>
         </summary>
@@ -932,7 +942,6 @@
         </div>
       </details>
     </td>
-          <td data-label="Severity"><span class="severity bad">Sales drop</span> <span class="severity bad">Profit hit</span></td>
           <td data-label="Units" class="num"><div class="metric-value">54.00<div class="metric-delta"><span class="down">-6.00</span></div></div></td>
           <td data-label="Sales" class="num"><div class="metric-value">$809.46<div class="metric-delta"><span class="down">-$219.94</span></div></div></td>
           <td data-label="Profit" class="num"><div class="metric-value">$245.17<div class="metric-delta"><span class="down">-$83.60</span></div></div></td>
@@ -949,6 +958,7 @@
             <span class="product-meta">
               <span class="sku">PD-LAVENDER-MCT-10-RL</span>
               <span class="asin"><a href="https://www.amazon.com/dp/B0G63YF4ZD" target="_blank" rel="noopener">B0G63YF4ZD</a></span>
+              <span class="product-badges"><span class="severity good">Sales lift</span></span>
             </span>
           </span>
         </summary>
@@ -964,7 +974,6 @@
         </div>
       </details>
     </td>
-          <td data-label="Severity"><span class="severity good">Sales lift</span></td>
           <td data-label="Units" class="num"><div class="metric-value">56.00<div class="metric-delta"><span class="up">+24.00</span></div></div></td>
           <td data-label="Sales" class="num"><div class="metric-value">$549.42<div class="metric-delta"><span class="up">+$230.24</span></div></div></td>
           <td data-label="Profit" class="num"><div class="metric-value">$111.93<div class="metric-delta"><span class="up">+$33.70</span></div></div></td>
@@ -981,6 +990,7 @@
             <span class="product-meta">
               <span class="sku">EO-JOJOBA-1oz</span>
               <span class="asin"><a href="https://www.amazon.com/dp/B0CQZL389H" target="_blank" rel="noopener">B0CQZL389H</a></span>
+              <span class="product-badges"><span class="severity good">Sales lift</span></span>
             </span>
           </span>
         </summary>
@@ -996,7 +1006,6 @@
         </div>
       </details>
     </td>
-          <td data-label="Severity"><span class="severity good">Sales lift</span></td>
           <td data-label="Units" class="num"><div class="metric-value">155<div class="metric-delta"><span class="up">+23.00</span></div></div></td>
           <td data-label="Sales" class="num"><div class="metric-value">$1,336.85<div class="metric-delta"><span class="up">+$227.97</span></div></div></td>
           <td data-label="Profit" class="num"><div class="metric-value">$250.73<div class="metric-delta"><span class="up">+$39.19</span></div></div></td>
@@ -1036,7 +1045,6 @@
           <thead>
             <tr>
               <th class="item-col">Item</th>
-              <th>Severity</th>
               <th class="num">Sales</th>
               <th class="num">Profit</th>
               <th class="num">Ad spend</th>
@@ -1052,6 +1060,7 @@
             <span class="product-meta">
               <span class="sku">PD-LAVENDER-MCT-10-RL</span>
               <span class="asin"><a href="https://www.amazon.com/dp/B0G63YF4ZD" target="_blank" rel="noopener">B0G63YF4ZD</a></span>
+              <span class="product-badges"><span class="severity good">Sales lift</span></span>
             </span>
           </span>
         </summary>
@@ -1067,7 +1076,6 @@
         </div>
       </details>
     </td>
-          <td data-label="Severity"><span class="severity good">Sales lift</span></td>
           <td data-label="Sales" class="num"><div class="metric-value">$549.42<div class="metric-delta"><span class="up">+$230.24</span></div></div></td>
           <td data-label="Profit" class="num"><div class="metric-value">$111.93<div class="metric-delta"><span class="up">+$33.70</span></div></div></td>
           <td data-label="Ad spend" class="num"><div class="metric-value">$130.76<div class="metric-delta"><span class="up">+$41.76</span></div></div></td>
@@ -1083,6 +1091,7 @@
             <span class="product-meta">
               <span class="sku">PL6328-00G_FBA</span>
               <span class="asin"><a href="https://www.amazon.com/dp/B0CLH141QC" target="_blank" rel="noopener">B0CLH141QC</a></span>
+              <span class="product-badges"><span class="severity good">Sales lift</span></span>
             </span>
           </span>
         </summary>
@@ -1098,7 +1107,6 @@
         </div>
       </details>
     </td>
-          <td data-label="Severity"><span class="severity good">Sales lift</span></td>
           <td data-label="Sales" class="num"><div class="metric-value">$559.77<div class="metric-delta"><span class="up">+$229.91</span></div></div></td>
           <td data-label="Profit" class="num"><div class="metric-value">$158.17<div class="metric-delta"><span class="up">+$208.28</span></div></div></td>
           <td data-label="Ad spend" class="num"><div class="metric-value">$35.23<div class="metric-delta"><span class="up">+$0.34</span></div></div></td>
@@ -1114,6 +1122,7 @@
             <span class="product-meta">
               <span class="sku">KT8002-BK_FBA</span>
               <span class="asin"><a href="https://www.amazon.com/dp/B07D1WLHTG" target="_blank" rel="noopener">B07D1WLHTG</a></span>
+              <span class="product-badges"><span class="severity good">Sales lift</span></span>
             </span>
           </span>
         </summary>
@@ -1129,7 +1138,6 @@
         </div>
       </details>
     </td>
-          <td data-label="Severity"><span class="severity good">Sales lift</span></td>
           <td data-label="Sales" class="num"><div class="metric-value">$311.85<div class="metric-delta"><span class="up">+$165.92</span></div></div></td>
           <td data-label="Profit" class="num"><div class="metric-value">$60.21<div class="metric-delta"><span class="up">+$25.75</span></div></div></td>
           <td data-label="Ad spend" class="num"><div class="metric-value">$34.96<div class="metric-delta"><span class="up">+$18.68</span></div></div></td>
@@ -1145,6 +1153,7 @@
             <span class="product-meta">
               <span class="sku">NC4085_FBA</span>
               <span class="asin"><a href="https://www.amazon.com/dp/B082MV956V" target="_blank" rel="noopener">B082MV956V</a></span>
+              <span class="product-badges"><span class="severity muted-badge">Normal</span></span>
             </span>
           </span>
         </summary>
@@ -1160,7 +1169,6 @@
         </div>
       </details>
     </td>
-          <td data-label="Severity"><span class="severity muted-badge">Normal</span></td>
           <td data-label="Sales" class="num"><div class="metric-value">$99.96<div class="metric-delta"><span class="up">+$49.98</span></div></div></td>
           <td data-label="Profit" class="num"><div class="metric-value">$37.47<div class="metric-delta"><span class="up">+$12.75</span></div></div></td>
           <td data-label="Ad spend" class="num"><div class="metric-value">$15.79<div class="metric-delta"><span class="down">-$3.18</span></div></div></td>
@@ -1176,6 +1184,7 @@
             <span class="product-meta">
               <span class="sku">HS0002-10_FBA</span>
               <span class="asin"><a href="https://www.amazon.com/dp/B0C7XRRFC9" target="_blank" rel="noopener">B0C7XRRFC9</a></span>
+              <span class="product-badges"><span class="severity muted-badge">Normal</span></span>
             </span>
           </span>
         </summary>
@@ -1191,7 +1200,6 @@
         </div>
       </details>
     </td>
-          <td data-label="Severity"><span class="severity muted-badge">Normal</span></td>
           <td data-label="Sales" class="num"><div class="metric-value">$32.16<div class="metric-delta"><span class="up">+$23.17</span></div></div></td>
           <td data-label="Profit" class="num"><div class="metric-value">$13.24<div class="metric-delta"><span class="up">+$9.58</span></div></div></td>
           <td data-label="Ad spend" class="num"><div class="metric-value">$0.30<div class="metric-delta"><span class="down">-$0.30</span></div></div></td>
@@ -1207,6 +1215,7 @@
             <span class="product-meta">
               <span class="sku">HB0005_PRG</span>
               <span class="asin"><a href="https://www.amazon.com/dp/B08NDR5ZWK" target="_blank" rel="noopener">B08NDR5ZWK</a></span>
+              <span class="product-badges"><span class="severity muted-badge">Normal</span></span>
             </span>
           </span>
         </summary>
@@ -1222,7 +1231,6 @@
         </div>
       </details>
     </td>
-          <td data-label="Severity"><span class="severity muted-badge">Normal</span></td>
           <td data-label="Sales" class="num"><div class="metric-value">$27.11<div class="metric-delta"><span class="up">+$7.13</span></div></div></td>
           <td data-label="Profit" class="num"><div class="metric-value">$7.07<div class="metric-delta"><span class="down">-$1.08</span></div></div></td>
           <td data-label="Ad spend" class="num"><div class="metric-value">$5.75<div class="metric-delta"><span class="up">+$3.60</span></div></div></td>
@@ -1240,7 +1248,6 @@
           <thead>
             <tr>
               <th class="item-col">Item</th>
-              <th>Severity</th>
               <th class="num">Sales</th>
               <th class="num">Profit</th>
               <th class="num">Ad spend</th>
@@ -1256,6 +1263,7 @@
             <span class="product-meta">
               <span class="sku">HS0002-BOX_FBA</span>
               <span class="asin"><a href="https://www.amazon.com/dp/B0CT3H57C3" target="_blank" rel="noopener">B0CT3H57C3</a></span>
+              <span class="product-badges"><span class="severity bad">Sales drop</span> <span class="severity bad">Profit hit</span></span>
             </span>
           </span>
         </summary>
@@ -1271,7 +1279,6 @@
         </div>
       </details>
     </td>
-          <td data-label="Severity"><span class="severity bad">Sales drop</span> <span class="severity bad">Profit hit</span></td>
           <td data-label="Sales" class="num"><div class="metric-value">$129.00<div class="metric-delta"><span class="down">-$516.00</span></div></div></td>
           <td data-label="Profit" class="num"><div class="metric-value">$46.49<div class="metric-delta"><span class="down">-$268.71</span></div></div></td>
           <td data-label="Ad spend" class="num"><div class="metric-value">$7.66<div class="metric-delta"><span class="up">+$4.11</span></div></div></td>
@@ -1287,6 +1294,7 @@
             <span class="product-meta">
               <span class="sku">PD-6PC-SET1</span>
               <span class="asin"><a href="https://www.amazon.com/dp/PD-RL-SET" target="_blank" rel="noopener">PD-RL-SET</a></span>
+              <span class="product-badges"><span class="severity bad">Sales drop</span></span>
             </span>
           </span>
         </summary>
@@ -1302,7 +1310,6 @@
         </div>
       </details>
     </td>
-          <td data-label="Severity"><span class="severity bad">Sales drop</span></td>
           <td data-label="Sales" class="num"><div class="metric-value">$0.00<div class="metric-delta"><span class="down">-$104.97</span></div></div></td>
           <td data-label="Profit" class="num"><div class="metric-value">-$3.31<div class="metric-delta"><span class="down">-$38.06</span></div></div></td>
           <td data-label="Ad spend" class="num"><div class="metric-value">$3.31<div class="metric-delta"><span class="down">-$21.55</span></div></div></td>
@@ -1318,6 +1325,7 @@
             <span class="product-meta">
               <span class="sku">GK0858_FBA</span>
               <span class="asin"><a href="https://www.amazon.com/dp/B08CX1D4R3" target="_blank" rel="noopener">B08CX1D4R3</a></span>
+              <span class="product-badges"><span class="severity muted-badge">Normal</span></span>
             </span>
           </span>
         </summary>
@@ -1333,7 +1341,6 @@
         </div>
       </details>
     </td>
-          <td data-label="Severity"><span class="severity muted-badge">Normal</span></td>
           <td data-label="Sales" class="num"><div class="metric-value">$119.96<div class="metric-delta"><span class="down">-$89.97</span></div></div></td>
           <td data-label="Profit" class="num"><div class="metric-value">$14.72<div class="metric-delta"><span class="down">-$45.09</span></div></div></td>
           <td data-label="Ad spend" class="num"><div class="metric-value">$20.18<div class="metric-delta"><span class="up">+$2.08</span></div></div></td>
@@ -1349,6 +1356,7 @@
             <span class="product-meta">
               <span class="sku">KT8153_FBA</span>
               <span class="asin"><a href="https://www.amazon.com/dp/B07K4WPNH6" target="_blank" rel="noopener">B07K4WPNH6</a></span>
+              <span class="product-badges"><span class="severity muted-badge">Normal</span></span>
             </span>
           </span>
         </summary>
@@ -1364,7 +1372,6 @@
         </div>
       </details>
     </td>
-          <td data-label="Severity"><span class="severity muted-badge">Normal</span></td>
           <td data-label="Sales" class="num"><div class="metric-value">$79.96<div class="metric-delta"><span class="down">-$79.96</span></div></div></td>
           <td data-label="Profit" class="num"><div class="metric-value">$19.00<div class="metric-delta"><span class="down">-$8.33</span></div></div></td>
           <td data-label="Ad spend" class="num"><div class="metric-value">$7.20<div class="metric-delta"><span class="down">-$1.08</span></div></div></td>
@@ -1380,6 +1387,7 @@
             <span class="product-meta">
               <span class="sku">BN1663_FBA</span>
               <span class="asin"><a href="https://www.amazon.com/dp/B077QPVJ67" target="_blank" rel="noopener">B077QPVJ67</a></span>
+              <span class="product-badges"><span class="severity muted-badge">Normal</span></span>
             </span>
           </span>
         </summary>
@@ -1395,7 +1403,6 @@
         </div>
       </details>
     </td>
-          <td data-label="Severity"><span class="severity muted-badge">Normal</span></td>
           <td data-label="Sales" class="num"><div class="metric-value">$14.24<div class="metric-delta"><span class="down">-$30.73</span></div></div></td>
           <td data-label="Profit" class="num"><div class="metric-value">$3.67<div class="metric-delta"><span class="down">-$8.71</span></div></div></td>
           <td data-label="Ad spend" class="num"><div class="metric-value">$1.20<div class="metric-delta"><span class="down">-$2.47</span></div></div></td>
@@ -1411,6 +1418,7 @@
             <span class="product-meta">
               <span class="sku">BR3791_FBA</span>
               <span class="asin"><a href="https://www.amazon.com/dp/B077ZFZX7S" target="_blank" rel="noopener">B077ZFZX7S</a></span>
+              <span class="product-badges"><span class="severity muted-badge">Normal</span></span>
             </span>
           </span>
         </summary>
@@ -1426,7 +1434,6 @@
         </div>
       </details>
     </td>
-          <td data-label="Severity"><span class="severity muted-badge">Normal</span></td>
           <td data-label="Sales" class="num"><div class="metric-value">$11.99<div class="metric-delta"><span class="down">-$17.98</span></div></div></td>
           <td data-label="Profit" class="num"><div class="metric-value">$4.86<div class="metric-delta"><span class="down">-$1.05</span></div></div></td>
           <td data-label="Ad spend" class="num"><div class="metric-value">$0.37<div class="metric-delta"><span class="up">+$0.09</span></div></div></td>
@@ -1442,6 +1449,7 @@
             <span class="product-meta">
               <span class="sku">FJ9991-B_FBA</span>
               <span class="asin"><a href="https://www.amazon.com/dp/B0CKVFYDJZ" target="_blank" rel="noopener">B0CKVFYDJZ</a></span>
+              <span class="product-badges"><span class="severity muted-badge">Normal</span></span>
             </span>
           </span>
         </summary>
@@ -1457,7 +1465,6 @@
         </div>
       </details>
     </td>
-          <td data-label="Severity"><span class="severity muted-badge">Normal</span></td>
           <td data-label="Sales" class="num"><div class="metric-value">$0.00<div class="metric-delta"><span class="down">-$17.56</span></div></div></td>
           <td data-label="Profit" class="num"><div class="metric-value">-$1.39<div class="metric-delta"><span class="down">-$7.28</span></div></div></td>
           <td data-label="Ad spend" class="num"><div class="metric-value">$1.39<div class="metric-delta"><span class="up">+$0.84</span></div></div></td>
@@ -1478,7 +1485,6 @@
           <thead>
             <tr>
               <th class="item-col">Item</th>
-              <th>Severity</th>
               <th class="num">Units</th>
               <th class="num">Ad spend</th>
               <th class="num">Inventory</th>
@@ -1494,6 +1500,7 @@
             <span class="product-meta">
               <span class="sku">HB0024</span>
               <span class="asin"><a href="https://www.amazon.com/dp/B0D268LC2Z" target="_blank" rel="noopener">B0D268LC2Z</a></span>
+              <span class="product-badges"><span class="severity bad">Sales drop</span> <span class="severity bad">Profit hit</span></span>
             </span>
           </span>
         </summary>
@@ -1509,7 +1516,6 @@
         </div>
       </details>
     </td>
-          <td data-label="Severity"><span class="severity bad">Sales drop</span> <span class="severity bad">Profit hit</span></td>
           <td data-label="Units" class="num"><div class="metric-value">33.00<div class="metric-delta"><span class="down">-14.00</span></div></div></td>
           <td data-label="Ad spend" class="num"><div class="metric-value">$98.42<div class="metric-delta"><span class="down">-$3.41</span></div></div></td>
           <td data-label="Inventory" class="num"><div class="metric-value">662<div class="metric-delta">15.8 days cover</div></div></td>
@@ -1525,6 +1531,7 @@
             <span class="product-meta">
               <span class="sku">GK0278_FBA</span>
               <span class="asin"><a href="https://www.amazon.com/dp/B0B9QZCJQZ" target="_blank" rel="noopener">B0B9QZCJQZ</a></span>
+              <span class="product-badges"><span class="severity warn">Low stock</span></span>
             </span>
           </span>
         </summary>
@@ -1540,7 +1547,6 @@
         </div>
       </details>
     </td>
-          <td data-label="Severity"><span class="severity warn">Low stock</span></td>
           <td data-label="Units" class="num"><div class="metric-value">9.00<div class="metric-delta"><span class="down">-4.00</span></div></div></td>
           <td data-label="Ad spend" class="num"><div class="metric-value">$17.15<div class="metric-delta"><span class="up">+$4.88</span></div></div></td>
           <td data-label="Inventory" class="num"><div class="metric-value">132<div class="metric-delta">19.5 days cover</div></div></td>
@@ -1556,6 +1562,7 @@
             <span class="product-meta">
               <span class="sku">GK0954</span>
               <span class="asin"><a href="https://www.amazon.com/dp/B0D9KZXQL3" target="_blank" rel="noopener">B0D9KZXQL3</a></span>
+              <span class="product-badges"><span class="severity muted-badge">Normal</span></span>
             </span>
           </span>
         </summary>
@@ -1571,7 +1578,6 @@
         </div>
       </details>
     </td>
-          <td data-label="Severity"><span class="severity muted-badge">Normal</span></td>
           <td data-label="Units" class="num"><div class="metric-value">1.00<div class="metric-delta"><span class="up">+1.00</span></div></div></td>
           <td data-label="Ad spend" class="num"><div class="metric-value">$0.00<div class="metric-delta"><span class="flat">$0.00</span></div></div></td>
           <td data-label="Inventory" class="num"><div class="metric-value">21.00<div class="metric-delta">42.0 days cover</div></div></td>
@@ -1587,6 +1593,7 @@
             <span class="product-meta">
               <span class="sku">-</span>
               <span class="asin"><a href="https://www.amazon.com/dp/B00M8HC272" target="_blank" rel="noopener">B00M8HC272</a></span>
+              <span class="product-badges"><span class="severity muted-badge">Normal</span></span>
             </span>
           </span>
         </summary>
@@ -1602,7 +1609,6 @@
         </div>
       </details>
     </td>
-          <td data-label="Severity"><span class="severity muted-badge">Normal</span></td>
           <td data-label="Units" class="num"><div class="metric-value">0.00<div class="metric-delta"><span class="flat">0.00</span></div></div></td>
           <td data-label="Ad spend" class="num"><div class="metric-value">$0.00<div class="metric-delta"><span class="flat">$0.00</span></div></div></td>
           <td data-label="Inventory" class="num"><div class="metric-value">16.00<div class="metric-delta">480.0 days cover</div></div></td>
@@ -1618,6 +1624,7 @@
             <span class="product-meta">
               <span class="sku">-</span>
               <span class="asin"><a href="https://www.amazon.com/dp/B07BT5S1QK" target="_blank" rel="noopener">B07BT5S1QK</a></span>
+              <span class="product-badges"><span class="severity warn">Low stock</span></span>
             </span>
           </span>
         </summary>
@@ -1633,7 +1640,6 @@
         </div>
       </details>
     </td>
-          <td data-label="Severity"><span class="severity warn">Low stock</span></td>
           <td data-label="Units" class="num"><div class="metric-value">0.00<div class="metric-delta"><span class="flat">0.00</span></div></div></td>
           <td data-label="Ad spend" class="num"><div class="metric-value">$0.00<div class="metric-delta"><span class="flat">$0.00</span></div></div></td>
           <td data-label="Inventory" class="num"><div class="metric-value">0.00<div class="metric-delta">0.0 days cover</div></div></td>
@@ -1649,6 +1655,7 @@
             <span class="product-meta">
               <span class="sku">-</span>
               <span class="asin"><a href="https://www.amazon.com/dp/B082P8LS2X" target="_blank" rel="noopener">B082P8LS2X</a></span>
+              <span class="product-badges"><span class="severity warn">Low stock</span></span>
             </span>
           </span>
         </summary>
@@ -1664,7 +1671,6 @@
         </div>
       </details>
     </td>
-          <td data-label="Severity"><span class="severity warn">Low stock</span></td>
           <td data-label="Units" class="num"><div class="metric-value">0.00<div class="metric-delta"><span class="flat">0.00</span></div></div></td>
           <td data-label="Ad spend" class="num"><div class="metric-value">$0.00<div class="metric-delta"><span class="flat">$0.00</span></div></div></td>
           <td data-label="Inventory" class="num"><div class="metric-value">1.00<div class="metric-delta">15.0 days cover</div></div></td>
@@ -1680,6 +1686,7 @@
             <span class="product-meta">
               <span class="sku">-</span>
               <span class="asin"><a href="https://www.amazon.com/dp/B0CKVVV9NR" target="_blank" rel="noopener">B0CKVVV9NR</a></span>
+              <span class="product-badges"><span class="severity warn">Low stock</span></span>
             </span>
           </span>
         </summary>
@@ -1695,7 +1702,6 @@
         </div>
       </details>
     </td>
-          <td data-label="Severity"><span class="severity warn">Low stock</span></td>
           <td data-label="Units" class="num"><div class="metric-value">0.00<div class="metric-delta"><span class="flat">0.00</span></div></div></td>
           <td data-label="Ad spend" class="num"><div class="metric-value">$0.00<div class="metric-delta"><span class="flat">$0.00</span></div></div></td>
           <td data-label="Inventory" class="num"><div class="metric-value">0.00<div class="metric-delta">0.0 days cover</div></div></td>
@@ -1711,6 +1717,7 @@
             <span class="product-meta">
               <span class="sku">-</span>
               <span class="asin"><a href="https://www.amazon.com/dp/B0DCL58D4C" target="_blank" rel="noopener">B0DCL58D4C</a></span>
+              <span class="product-badges"><span class="severity warn">Low stock</span></span>
             </span>
           </span>
         </summary>
@@ -1726,7 +1733,6 @@
         </div>
       </details>
     </td>
-          <td data-label="Severity"><span class="severity warn">Low stock</span></td>
           <td data-label="Units" class="num"><div class="metric-value">0.00<div class="metric-delta"><span class="flat">0.00</span></div></div></td>
           <td data-label="Ad spend" class="num"><div class="metric-value">$0.00<div class="metric-delta"><span class="flat">$0.00</span></div></div></td>
           <td data-label="Inventory" class="num"><div class="metric-value">4.00<div class="metric-delta">10.9 days cover</div></div></td>
@@ -1742,6 +1748,7 @@
             <span class="product-meta">
               <span class="sku">-</span>
               <span class="asin"><a href="https://www.amazon.com/dp/B0DDT7GP79" target="_blank" rel="noopener">B0DDT7GP79</a></span>
+              <span class="product-badges"><span class="severity warn">Low stock</span></span>
             </span>
           </span>
         </summary>
@@ -1757,7 +1764,6 @@
         </div>
       </details>
     </td>
-          <td data-label="Severity"><span class="severity warn">Low stock</span></td>
           <td data-label="Units" class="num"><div class="metric-value">0.00<div class="metric-delta"><span class="flat">0.00</span></div></div></td>
           <td data-label="Ad spend" class="num"><div class="metric-value">$0.00<div class="metric-delta"><span class="flat">$0.00</span></div></div></td>
           <td data-label="Inventory" class="num"><div class="metric-value">4.00<div class="metric-delta">4.0 days cover</div></div></td>
@@ -1773,6 +1779,7 @@
             <span class="product-meta">
               <span class="sku">BR4238_FBA</span>
               <span class="asin"><a href="https://www.amazon.com/dp/B0F7QKYY9L" target="_blank" rel="noopener">B0F7QKYY9L</a></span>
+              <span class="product-badges"><span class="severity muted-badge">Normal</span></span>
             </span>
           </span>
         </summary>
@@ -1788,7 +1795,6 @@
         </div>
       </details>
     </td>
-          <td data-label="Severity"><span class="severity muted-badge">Normal</span></td>
           <td data-label="Units" class="num"><div class="metric-value">0.00<div class="metric-delta"><span class="flat">0.00</span></div></div></td>
           <td data-label="Ad spend" class="num"><div class="metric-value">$0.21<div class="metric-delta"><span class="flat">$0.00</span></div></div></td>
           <td data-label="Inventory" class="num"><div class="metric-value">18.00<div class="metric-delta">36.0 days cover</div></div></td>
@@ -1804,6 +1810,7 @@
             <span class="product-meta">
               <span class="sku">-</span>
               <span class="asin"><a href="https://www.amazon.com/dp/B0F8PM57CS" target="_blank" rel="noopener">B0F8PM57CS</a></span>
+              <span class="product-badges"><span class="severity muted-badge">Normal</span></span>
             </span>
           </span>
         </summary>
@@ -1819,7 +1826,6 @@
         </div>
       </details>
     </td>
-          <td data-label="Severity"><span class="severity muted-badge">Normal</span></td>
           <td data-label="Units" class="num"><div class="metric-value">0.00<div class="metric-delta"><span class="flat">0.00</span></div></div></td>
           <td data-label="Ad spend" class="num"><div class="metric-value">$0.00<div class="metric-delta"><span class="flat">$0.00</span></div></div></td>
           <td data-label="Inventory" class="num"><div class="metric-value">29.00<div class="metric-delta">39.5 days cover</div></div></td>
@@ -1835,6 +1841,7 @@
             <span class="product-meta">
               <span class="sku">HB0026</span>
               <span class="asin"><a href="https://www.amazon.com/dp/B0FFF83WFD" target="_blank" rel="noopener">B0FFF83WFD</a></span>
+              <span class="product-badges"><span class="severity muted-badge">Normal</span></span>
             </span>
           </span>
         </summary>
@@ -1850,7 +1857,6 @@
         </div>
       </details>
     </td>
-          <td data-label="Severity"><span class="severity muted-badge">Normal</span></td>
           <td data-label="Units" class="num"><div class="metric-value">0.00<div class="metric-delta"><span class="flat">0.00</span></div></div></td>
           <td data-label="Ad spend" class="num"><div class="metric-value">$1.50<div class="metric-delta"><span class="up">+$0.07</span></div></div></td>
           <td data-label="Inventory" class="num"><div class="metric-value">24.00<div class="metric-delta">120.0 days cover</div></div></td>
@@ -1970,7 +1976,6 @@
           <thead>
             <tr>
               <th class="item-col">Item</th>
-              <th>Severity</th>
               <th class="num">Units</th>
               <th class="num">Sales</th>
               <th class="num">Profit</th>
@@ -1987,6 +1992,7 @@
             <span class="product-meta">
               <span class="sku">GK0278_FBA</span>
               <span class="asin"><a href="https://www.amazon.com/dp/B0B9QZCJQZ" target="_blank" rel="noopener">B0B9QZCJQZ</a></span>
+              <span class="product-badges"><span class="severity warn">Low stock</span></span>
             </span>
           </span>
         </summary>
@@ -2002,7 +2008,6 @@
         </div>
       </details>
     </td>
-          <td data-label="Severity"><span class="severity warn">Low stock</span></td>
           <td data-label="Units" class="num"><div class="metric-value">9.00<div class="metric-delta"><span class="down">-4.00</span></div></div></td>
           <td data-label="Sales" class="num"><div class="metric-value">$162.91<div class="metric-delta"><span class="down">-$70.96</span></div></div></td>
           <td data-label="Profit" class="num"><div class="metric-value">$20.05<div class="metric-delta"><span class="down">-$28.18</span></div></div></td>
@@ -2027,7 +2032,6 @@
             <tr>
               <th class="item-col">Item</th>
               <th>Category</th>
-              <th>Severity</th>
               <th class="num">Units</th>
               <th class="num">Sales</th>
               <th class="num">Profit</th>
@@ -2048,6 +2052,7 @@
             <span class="product-meta">
               <span class="sku">HS0002_FBA</span>
               <span class="asin"><a href="https://www.amazon.com/dp/B0CSKFKGWW" target="_blank" rel="noopener">B0CSKFKGWW</a></span>
+              <span class="product-badges"><span class="severity bad">Sales drop</span></span>
             </span>
           </span>
         </summary>
@@ -2064,7 +2069,6 @@
       </details>
     </td>
           <td data-label="Category">#PA</td>
-          <td data-label="Severity"><span class="severity bad">Sales drop</span></td>
           <td data-label="Units" class="num"><div class="metric-value">487<div class="metric-delta"><span class="down">-36.77</span></div></div></td>
           <td data-label="Sales" class="num"><div class="metric-value">$4,572.53<div class="metric-delta"><span class="down">-$652.88</span></div></div></td>
           <td data-label="Profit" class="num"><div class="metric-value">$935.63<div class="metric-delta"><span class="down">-$258.96</span></div></div></td>
@@ -2085,6 +2089,7 @@
             <span class="product-meta">
               <span class="sku">EO-ROSEHIP-1oz_FBA</span>
               <span class="asin"><a href="https://www.amazon.com/dp/B0FBSPBMNN" target="_blank" rel="noopener">B0FBSPBMNN</a></span>
+              <span class="product-badges"><span class="severity good">Sales lift</span></span>
             </span>
           </span>
         </summary>
@@ -2101,7 +2106,6 @@
       </details>
     </td>
           <td data-label="Category">#EO</td>
-          <td data-label="Severity"><span class="severity good">Sales lift</span></td>
           <td data-label="Units" class="num"><div class="metric-value">166<div class="metric-delta"><span class="up">+62.63</span></div></div></td>
           <td data-label="Sales" class="num"><div class="metric-value">$1,689.04<div class="metric-delta"><span class="up">+$557.44</span></div></div></td>
           <td data-label="Profit" class="num"><div class="metric-value">$314.70<div class="metric-delta"><span class="up">+$99.99</span></div></div></td>
@@ -2122,6 +2126,7 @@
             <span class="product-meta">
               <span class="sku">GK0487_FBA</span>
               <span class="asin"><a href="https://www.amazon.com/dp/B07DT6KJWQ" target="_blank" rel="noopener">B07DT6KJWQ</a></span>
+              <span class="product-badges"><span class="severity good">Sales lift</span></span>
             </span>
           </span>
         </summary>
@@ -2138,7 +2143,6 @@
       </details>
     </td>
           <td data-label="Category">#GK</td>
-          <td data-label="Severity"><span class="severity good">Sales lift</span></td>
           <td data-label="Units" class="num"><div class="metric-value">96.00<div class="metric-delta"><span class="up">+15.23</span></div></div></td>
           <td data-label="Sales" class="num"><div class="metric-value">$1,677.99<div class="metric-delta"><span class="up">+$323.80</span></div></div></td>
           <td data-label="Profit" class="num"><div class="metric-value">$441.14<div class="metric-delta"><span class="up">+$98.58</span></div></div></td>
@@ -2159,6 +2163,7 @@
             <span class="product-meta">
               <span class="sku">NC4058_FBA</span>
               <span class="asin"><a href="https://www.amazon.com/dp/B082L68NLX" target="_blank" rel="noopener">B082L68NLX</a></span>
+              <span class="product-badges"><span class="severity muted-badge">Normal</span></span>
             </span>
           </span>
         </summary>
@@ -2175,7 +2180,6 @@
       </details>
     </td>
           <td data-label="Category">#NC</td>
-          <td data-label="Severity"><span class="severity muted-badge">Normal</span></td>
           <td data-label="Units" class="num"><div class="metric-value">77.00<div class="metric-delta"><span class="down">-7.10</span></div></div></td>
           <td data-label="Sales" class="num"><div class="metric-value">$1,538.23<div class="metric-delta"><span class="down">-$94.51</span></div></div></td>
           <td data-label="Profit" class="num"><div class="metric-value">$749.82<div class="metric-delta"><span class="down">-$15.65</span></div></div></td>
@@ -2196,6 +2200,7 @@
             <span class="product-meta">
               <span class="sku">EO-JOJOBA-1oz</span>
               <span class="asin"><a href="https://www.amazon.com/dp/B0CQZL389H" target="_blank" rel="noopener">B0CQZL389H</a></span>
+              <span class="product-badges"><span class="severity good">Sales lift</span></span>
             </span>
           </span>
         </summary>
@@ -2212,7 +2217,6 @@
       </details>
     </td>
           <td data-label="Category">#EO</td>
-          <td data-label="Severity"><span class="severity good">Sales lift</span></td>
           <td data-label="Units" class="num"><div class="metric-value">155<div class="metric-delta"><span class="up">+42.80</span></div></div></td>
           <td data-label="Sales" class="num"><div class="metric-value">$1,336.85<div class="metric-delta"><span class="up">+$390.52</span></div></div></td>
           <td data-label="Profit" class="num"><div class="metric-value">$250.73<div class="metric-delta"><span class="up">+$50.57</span></div></div></td>
@@ -2233,6 +2237,7 @@
             <span class="product-meta">
               <span class="sku">NC4297_FBA</span>
               <span class="asin"><a href="https://www.amazon.com/dp/B0D978Q2WT" target="_blank" rel="noopener">B0D978Q2WT</a></span>
+              <span class="product-badges"><span class="severity bad">Sales drop</span> <span class="severity bad">Profit hit</span></span>
             </span>
           </span>
         </summary>
@@ -2249,7 +2254,6 @@
       </details>
     </td>
           <td data-label="Category">#NC</td>
-          <td data-label="Severity"><span class="severity bad">Sales drop</span> <span class="severity bad">Profit hit</span></td>
           <td data-label="Units" class="num"><div class="metric-value">124<div class="metric-delta"><span class="down">-49.40</span></div></div></td>
           <td data-label="Sales" class="num"><div class="metric-value">$1,238.76<div class="metric-delta"><span class="down">-$487.82</span></div></div></td>
           <td data-label="Profit" class="num"><div class="metric-value">$295.16<div class="metric-delta"><span class="down">-$328.54</span></div></div></td>
@@ -2270,6 +2274,7 @@
             <span class="product-meta">
               <span class="sku">EO-CASTOR-1oz</span>
               <span class="asin"><a href="https://www.amazon.com/dp/B0DJBNM8RF" target="_blank" rel="noopener">B0DJBNM8RF</a></span>
+              <span class="product-badges"><span class="severity good">Sales lift</span></span>
             </span>
           </span>
         </summary>
@@ -2286,7 +2291,6 @@
       </details>
     </td>
           <td data-label="Category">#EO</td>
-          <td data-label="Severity"><span class="severity good">Sales lift</span></td>
           <td data-label="Units" class="num"><div class="metric-value">164<div class="metric-delta"><span class="up">+82.57</span></div></div></td>
           <td data-label="Sales" class="num"><div class="metric-value">$1,172.75<div class="metric-delta"><span class="up">+$525.39</span></div></div></td>
           <td data-label="Profit" class="num"><div class="metric-value">$129.49<div class="metric-delta"><span class="up">+$45.34</span></div></div></td>
@@ -2307,6 +2311,7 @@
             <span class="product-meta">
               <span class="sku">PD-TEATREE-MCT-2oz</span>
               <span class="asin"><a href="https://www.amazon.com/dp/B0GK86VLMJ" target="_blank" rel="noopener">B0GK86VLMJ</a></span>
+              <span class="product-badges"><span class="severity bad">Profit hit</span></span>
             </span>
           </span>
         </summary>
@@ -2323,7 +2328,6 @@
       </details>
     </td>
           <td data-label="Category">#EO</td>
-          <td data-label="Severity"><span class="severity bad">Profit hit</span></td>
           <td data-label="Units" class="num"><div class="metric-value">89.00<div class="metric-delta"><span class="up">+29.07</span></div></div></td>
           <td data-label="Sales" class="num"><div class="metric-value">$875.14<div class="metric-delta"><span class="up">+$278.51</span></div></div></td>
           <td data-label="Profit" class="num"><div class="metric-value">$14.66<div class="metric-delta"><span class="down">-$35.02</span></div></div></td>
@@ -2344,6 +2348,7 @@
             <span class="product-meta">
               <span class="sku">NC4059_FBA</span>
               <span class="asin"><a href="https://www.amazon.com/dp/B0DSHDK6MJ" target="_blank" rel="noopener">B0DSHDK6MJ</a></span>
+              <span class="product-badges"><span class="severity bad">Sales drop</span> <span class="severity bad">Profit hit</span></span>
             </span>
           </span>
         </summary>
@@ -2360,7 +2365,6 @@
       </details>
     </td>
           <td data-label="Category">#NC</td>
-          <td data-label="Severity"><span class="severity bad">Sales drop</span> <span class="severity bad">Profit hit</span></td>
           <td data-label="Units" class="num"><div class="metric-value">54.00<div class="metric-delta"><span class="up">+6.53</span></div></div></td>
           <td data-label="Sales" class="num"><div class="metric-value">$809.46<div class="metric-delta"><span class="up">+$43.31</span></div></div></td>
           <td data-label="Profit" class="num"><div class="metric-value">$245.17<div class="metric-delta"><span class="up">+$8.37</span></div></div></td>
@@ -2381,6 +2385,7 @@
             <span class="product-meta">
               <span class="sku">PB-10_FBA</span>
               <span class="asin"><a href="https://www.amazon.com/dp/B0B7CMYRX6" target="_blank" rel="noopener">B0B7CMYRX6</a></span>
+              <span class="product-badges"><span class="severity bad">Sales drop</span> <span class="severity bad">Profit hit</span></span>
             </span>
           </span>
         </summary>
@@ -2397,7 +2402,6 @@
       </details>
     </td>
           <td data-label="Category">#PA</td>
-          <td data-label="Severity"><span class="severity bad">Sales drop</span> <span class="severity bad">Profit hit</span></td>
           <td data-label="Units" class="num"><div class="metric-value">66.00<div class="metric-delta"><span class="down">-34.17</span></div></div></td>
           <td data-label="Sales" class="num"><div class="metric-value">$617.12<div class="metric-delta"><span class="down">-$366.66</span></div></div></td>
           <td data-label="Profit" class="num"><div class="metric-value">$179.63<div class="metric-delta"><span class="down">-$38.17</span></div></div></td>
@@ -2418,6 +2422,7 @@
             <span class="product-meta">
               <span class="sku">PL6328-00G_FBA</span>
               <span class="asin"><a href="https://www.amazon.com/dp/B0CLH141QC" target="_blank" rel="noopener">B0CLH141QC</a></span>
+              <span class="product-badges"><span class="severity good">Sales lift</span></span>
             </span>
           </span>
         </summary>
@@ -2434,7 +2439,6 @@
       </details>
     </td>
           <td data-label="Category">#GK</td>
-          <td data-label="Severity"><span class="severity good">Sales lift</span></td>
           <td data-label="Units" class="num"><div class="metric-value">23.00<div class="metric-delta"><span class="up">+4.97</span></div></div></td>
           <td data-label="Sales" class="num"><div class="metric-value">$559.77<div class="metric-delta"><span class="up">+$163.69</span></div></div></td>
           <td data-label="Profit" class="num"><div class="metric-value">$158.17<div class="metric-delta"><span class="up">+$88.68</span></div></div></td>
@@ -2455,6 +2459,7 @@
             <span class="product-meta">
               <span class="sku">HB0024</span>
               <span class="asin"><a href="https://www.amazon.com/dp/B0D268LC2Z" target="_blank" rel="noopener">B0D268LC2Z</a></span>
+              <span class="product-badges"><span class="severity bad">Sales drop</span> <span class="severity bad">Profit hit</span></span>
             </span>
           </span>
         </summary>
@@ -2471,7 +2476,6 @@
       </details>
     </td>
           <td data-label="Category">#PA</td>
-          <td data-label="Severity"><span class="severity bad">Sales drop</span> <span class="severity bad">Profit hit</span></td>
           <td data-label="Units" class="num"><div class="metric-value">33.00<div class="metric-delta"><span class="down">-8.83</span></div></div></td>
           <td data-label="Sales" class="num"><div class="metric-value">$557.95<div class="metric-delta"><span class="down">-$129.32</span></div></div></td>
           <td data-label="Profit" class="num"><div class="metric-value">$135.21<div class="metric-delta"><span class="down">-$55.02</span></div></div></td>
@@ -2492,6 +2496,7 @@
             <span class="product-meta">
               <span class="sku">PD-LAVENDER-MCT-10-RL</span>
               <span class="asin"><a href="https://www.amazon.com/dp/B0G63YF4ZD" target="_blank" rel="noopener">B0G63YF4ZD</a></span>
+              <span class="product-badges"><span class="severity good">Sales lift</span></span>
             </span>
           </span>
         </summary>
@@ -2508,7 +2513,6 @@
       </details>
     </td>
           <td data-label="Category">#EO</td>
-          <td data-label="Severity"><span class="severity good">Sales lift</span></td>
           <td data-label="Units" class="num"><div class="metric-value">56.00<div class="metric-delta"><span class="up">+18.20</span></div></div></td>
           <td data-label="Sales" class="num"><div class="metric-value">$549.42<div class="metric-delta"><span class="up">+$176.75</span></div></div></td>
           <td data-label="Profit" class="num"><div class="metric-value">$111.93<div class="metric-delta"><span class="up">+$38.31</span></div></div></td>
@@ -2529,6 +2533,7 @@
             <span class="product-meta">
               <span class="sku">PN18G-10</span>
               <span class="asin"><a href="https://www.amazon.com/dp/B0B781QSH6" target="_blank" rel="noopener">B0B781QSH6</a></span>
+              <span class="product-badges"><span class="severity muted-badge">Normal</span></span>
             </span>
           </span>
         </summary>
@@ -2545,7 +2550,6 @@
       </details>
     </td>
           <td data-label="Category">#BJ</td>
-          <td data-label="Severity"><span class="severity muted-badge">Normal</span></td>
           <td data-label="Units" class="num"><div class="metric-value">85.00<div class="metric-delta"><span class="down">-1.27</span></div></div></td>
           <td data-label="Sales" class="num"><div class="metric-value">$484.69<div class="metric-delta"><span class="down">-$25.53</span></div></div></td>
           <td data-label="Profit" class="num"><div class="metric-value">$124.38<div class="metric-delta"><span class="down">-$13.70</span></div></div></td>
@@ -2566,6 +2570,7 @@
             <span class="product-meta">
               <span class="sku">GK0541_FBA</span>
               <span class="asin"><a href="https://www.amazon.com/dp/B08VFBQDPF" target="_blank" rel="noopener">B08VFBQDPF</a></span>
+              <span class="product-badges"><span class="severity muted-badge">Normal</span></span>
             </span>
           </span>
         </summary>
@@ -2582,7 +2587,6 @@
       </details>
     </td>
           <td data-label="Category">#GK</td>
-          <td data-label="Severity"><span class="severity muted-badge">Normal</span></td>
           <td data-label="Units" class="num"><div class="metric-value">21.00<div class="metric-delta"><span class="up">+2.43</span></div></div></td>
           <td data-label="Sales" class="num"><div class="metric-value">$435.79<div class="metric-delta"><span class="up">+$53.27</span></div></div></td>
           <td data-label="Profit" class="num"><div class="metric-value">$71.08<div class="metric-delta"><span class="down">-$13.42</span></div></div></td>
@@ -2603,6 +2607,7 @@
             <span class="product-meta">
               <span class="sku">KT8002-BK_FBA</span>
               <span class="asin"><a href="https://www.amazon.com/dp/B07D1WLHTG" target="_blank" rel="noopener">B07D1WLHTG</a></span>
+              <span class="product-badges"><span class="severity good">Sales lift</span></span>
             </span>
           </span>
         </summary>
@@ -2619,7 +2624,6 @@
       </details>
     </td>
           <td data-label="Category">#GK</td>
-          <td data-label="Severity"><span class="severity good">Sales lift</span></td>
           <td data-label="Units" class="num"><div class="metric-value">15.00<div class="metric-delta"><span class="up">+6.90</span></div></div></td>
           <td data-label="Sales" class="num"><div class="metric-value">$311.85<div class="metric-delta"><span class="up">+$145.72</span></div></div></td>
           <td data-label="Profit" class="num"><div class="metric-value">$60.21<div class="metric-delta"><span class="up">+$34.95</span></div></div></td>
@@ -2640,6 +2644,7 @@
             <span class="product-meta">
               <span class="sku">GK0715_FBA</span>
               <span class="asin"><a href="https://www.amazon.com/dp/B0863C6PQS" target="_blank" rel="noopener">B0863C6PQS</a></span>
+              <span class="product-badges"><span class="severity muted-badge">Normal</span></span>
             </span>
           </span>
         </summary>
@@ -2656,7 +2661,6 @@
       </details>
     </td>
           <td data-label="Category">#GK</td>
-          <td data-label="Severity"><span class="severity muted-badge">Normal</span></td>
           <td data-label="Units" class="num"><div class="metric-value">14.00<div class="metric-delta"><span class="up">+5.83</span></div></div></td>
           <td data-label="Sales" class="num"><div class="metric-value">$287.86<div class="metric-delta"><span class="up">+$121.27</span></div></div></td>
           <td data-label="Profit" class="num"><div class="metric-value">$106.12<div class="metric-delta"><span class="up">+$55.60</span></div></div></td>
@@ -2677,6 +2681,7 @@
             <span class="product-meta">
               <span class="sku">HB0006_FBA</span>
               <span class="asin"><a href="https://www.amazon.com/dp/B0B7RC5ZX5" target="_blank" rel="noopener">B0B7RC5ZX5</a></span>
+              <span class="product-badges"><span class="severity muted-badge">Normal</span></span>
             </span>
           </span>
         </summary>
@@ -2693,7 +2698,6 @@
       </details>
     </td>
           <td data-label="Category">#PA</td>
-          <td data-label="Severity"><span class="severity muted-badge">Normal</span></td>
           <td data-label="Units" class="num"><div class="metric-value">14.00<div class="metric-delta"><span class="up">+3.37</span></div></div></td>
           <td data-label="Sales" class="num"><div class="metric-value">$221.86<div class="metric-delta"><span class="up">+$60.43</span></div></div></td>
           <td data-label="Profit" class="num"><div class="metric-value">$76.60<div class="metric-delta"><span class="up">+$25.31</span></div></div></td>
@@ -2714,6 +2718,7 @@
             <span class="product-meta">
               <span class="sku">NC4388</span>
               <span class="asin"><a href="https://www.amazon.com/dp/B0CYQ1NCCC" target="_blank" rel="noopener">B0CYQ1NCCC</a></span>
+              <span class="product-badges"><span class="severity muted-badge">Normal</span></span>
             </span>
           </span>
         </summary>
@@ -2730,7 +2735,6 @@
       </details>
     </td>
           <td data-label="Category">#NC</td>
-          <td data-label="Severity"><span class="severity muted-badge">Normal</span></td>
           <td data-label="Units" class="num"><div class="metric-value">22.00<div class="metric-delta"><span class="up">+4.20</span></div></div></td>
           <td data-label="Sales" class="num"><div class="metric-value">$219.78<div class="metric-delta"><span class="up">+$43.02</span></div></div></td>
           <td data-label="Profit" class="num"><div class="metric-value">$81.77<div class="metric-delta"><span class="up">+$16.69</span></div></div></td>
@@ -2751,6 +2755,7 @@
             <span class="product-meta">
               <span class="sku">GK0278_FBA</span>
               <span class="asin"><a href="https://www.amazon.com/dp/B0B9QZCJQZ" target="_blank" rel="noopener">B0B9QZCJQZ</a></span>
+              <span class="product-badges"><span class="severity warn">Low stock</span></span>
             </span>
           </span>
         </summary>
@@ -2767,7 +2772,6 @@
       </details>
     </td>
           <td data-label="Category">#GK</td>
-          <td data-label="Severity"><span class="severity warn">Low stock</span></td>
           <td data-label="Units" class="num"><div class="metric-value">9.00<div class="metric-delta"><span class="up">+2.23</span></div></div></td>
           <td data-label="Sales" class="num"><div class="metric-value">$162.91<div class="metric-delta"><span class="up">+$43.97</span></div></div></td>
           <td data-label="Profit" class="num"><div class="metric-value">$20.05<div class="metric-delta"><span class="up">+$1.70</span></div></div></td>
@@ -2788,6 +2792,7 @@
             <span class="product-meta">
               <span class="sku">FJ9804_FBA</span>
               <span class="asin"><a href="https://www.amazon.com/dp/B072JBNW1W" target="_blank" rel="noopener">B072JBNW1W</a></span>
+              <span class="product-badges"><span class="severity muted-badge">Normal</span></span>
             </span>
           </span>
         </summary>
@@ -2804,7 +2809,6 @@
       </details>
     </td>
           <td data-label="Category">#FJ</td>
-          <td data-label="Severity"><span class="severity muted-badge">Normal</span></td>
           <td data-label="Units" class="num"><div class="metric-value">4.00<div class="metric-delta"><span class="up">+2.33</span></div></div></td>
           <td data-label="Sales" class="num"><div class="metric-value">$159.96<div class="metric-delta"><span class="up">+$95.04</span></div></div></td>
           <td data-label="Profit" class="num"><div class="metric-value">$81.87<div class="metric-delta"><span class="up">+$52.15</span></div></div></td>
@@ -2825,6 +2829,7 @@
             <span class="product-meta">
               <span class="sku">JOJOBA_FBA</span>
               <span class="asin"><a href="https://www.amazon.com/dp/B095YP4V34" target="_blank" rel="noopener">B095YP4V34</a></span>
+              <span class="product-badges"><span class="severity muted-badge">Normal</span></span>
             </span>
           </span>
         </summary>
@@ -2841,7 +2846,6 @@
       </details>
     </td>
           <td data-label="Category">#PA</td>
-          <td data-label="Severity"><span class="severity muted-badge">Normal</span></td>
           <td data-label="Units" class="num"><div class="metric-value">18.00<div class="metric-delta"><span class="down">-3.63</span></div></div></td>
           <td data-label="Sales" class="num"><div class="metric-value">$148.82<div class="metric-delta"><span class="down">-$31.66</span></div></div></td>
           <td data-label="Profit" class="num"><div class="metric-value">$50.23<div class="metric-delta"><span class="down">-$11.90</span></div></div></td>
@@ -2862,6 +2866,7 @@
             <span class="product-meta">
               <span class="sku">HS0002-BOX_FBA</span>
               <span class="asin"><a href="https://www.amazon.com/dp/B0CT3H57C3" target="_blank" rel="noopener">B0CT3H57C3</a></span>
+              <span class="product-badges"><span class="severity bad">Sales drop</span> <span class="severity bad">Profit hit</span></span>
             </span>
           </span>
         </summary>
@@ -2878,7 +2883,6 @@
       </details>
     </td>
           <td data-label="Category">#PA</td>
-          <td data-label="Severity"><span class="severity bad">Sales drop</span> <span class="severity bad">Profit hit</span></td>
           <td data-label="Units" class="num"><div class="metric-value">1.00<div class="metric-delta"><span class="down">-1.30</span></div></div></td>
           <td data-label="Sales" class="num"><div class="metric-value">$129.00<div class="metric-delta"><span class="down">-$159.70</span></div></div></td>
           <td data-label="Profit" class="num"><div class="metric-value">$46.49<div class="metric-delta"><span class="down">-$89.44</span></div></div></td>
@@ -2899,6 +2903,7 @@
             <span class="product-meta">
               <span class="sku">GK0858_FBA</span>
               <span class="asin"><a href="https://www.amazon.com/dp/B08CX1D4R3" target="_blank" rel="noopener">B08CX1D4R3</a></span>
+              <span class="product-badges"><span class="severity muted-badge">Normal</span></span>
             </span>
           </span>
         </summary>
@@ -2915,7 +2920,6 @@
       </details>
     </td>
           <td data-label="Category">#GK</td>
-          <td data-label="Severity"><span class="severity muted-badge">Normal</span></td>
           <td data-label="Units" class="num"><div class="metric-value">4.00<div class="metric-delta"><span class="down">-4.10</span></div></div></td>
           <td data-label="Sales" class="num"><div class="metric-value">$119.96<div class="metric-delta"><span class="down">-$122.68</span></div></div></td>
           <td data-label="Profit" class="num"><div class="metric-value">$14.72<div class="metric-delta"><span class="down">-$41.11</span></div></div></td>
@@ -2936,6 +2940,7 @@
             <span class="product-meta">
               <span class="sku">NC4328_FBA</span>
               <span class="asin"><a href="https://www.amazon.com/dp/B0CYT45ZJM" target="_blank" rel="noopener">B0CYT45ZJM</a></span>
+              <span class="product-badges"><span class="severity muted-badge">Normal</span></span>
             </span>
           </span>
         </summary>
@@ -2952,7 +2957,6 @@
       </details>
     </td>
           <td data-label="Category">#NC</td>
-          <td data-label="Severity"><span class="severity muted-badge">Normal</span></td>
           <td data-label="Units" class="num"><div class="metric-value">12.00<div class="metric-delta"><span class="up">+5.70</span></div></div></td>
           <td data-label="Sales" class="num"><div class="metric-value">$119.88<div class="metric-delta"><span class="up">+$56.11</span></div></div></td>
           <td data-label="Profit" class="num"><div class="metric-value">$49.18<div class="metric-delta"><span class="up">+$29.61</span></div></div></td>
@@ -2973,6 +2977,7 @@
             <span class="product-meta">
               <span class="sku">NC4085_FBA</span>
               <span class="asin"><a href="https://www.amazon.com/dp/B082MV956V" target="_blank" rel="noopener">B082MV956V</a></span>
+              <span class="product-badges"><span class="severity muted-badge">Normal</span></span>
             </span>
           </span>
         </summary>
@@ -2989,7 +2994,6 @@
       </details>
     </td>
           <td data-label="Category">#NC</td>
-          <td data-label="Severity"><span class="severity muted-badge">Normal</span></td>
           <td data-label="Units" class="num"><div class="metric-value">4.00<div class="metric-delta"><span class="down">-6.97</span></div></div></td>
           <td data-label="Sales" class="num"><div class="metric-value">$99.96<div class="metric-delta"><span class="down">-$169.27</span></div></div></td>
           <td data-label="Profit" class="num"><div class="metric-value">$37.47<div class="metric-delta"><span class="down">-$77.86</span></div></div></td>
@@ -3010,6 +3014,7 @@
             <span class="product-meta">
               <span class="sku">EO-CASTOR-1.7oz-RL</span>
               <span class="asin"><a href="https://www.amazon.com/dp/B0GK71XT2L" target="_blank" rel="noopener">B0GK71XT2L</a></span>
+              <span class="product-badges"><span class="severity muted-badge">Normal</span></span>
             </span>
           </span>
         </summary>
@@ -3026,7 +3031,6 @@
       </details>
     </td>
           <td data-label="Category">#EO</td>
-          <td data-label="Severity"><span class="severity muted-badge">Normal</span></td>
           <td data-label="Units" class="num"><div class="metric-value">5.00<div class="metric-delta"><span class="down">-2.63</span></div></div></td>
           <td data-label="Sales" class="num"><div class="metric-value">$99.95<div class="metric-delta"><span class="down">-$49.81</span></div></div></td>
           <td data-label="Profit" class="num"><div class="metric-value">$10.88<div class="metric-delta"><span class="down">-$30.50</span></div></div></td>
@@ -3047,6 +3051,7 @@
             <span class="product-meta">
               <span class="sku">KT8153_FBA</span>
               <span class="asin"><a href="https://www.amazon.com/dp/B07K4WPNH6" target="_blank" rel="noopener">B07K4WPNH6</a></span>
+              <span class="product-badges"><span class="severity muted-badge">Normal</span></span>
             </span>
           </span>
         </summary>
@@ -3063,7 +3068,6 @@
       </details>
     </td>
           <td data-label="Category">#BJ</td>
-          <td data-label="Severity"><span class="severity muted-badge">Normal</span></td>
           <td data-label="Units" class="num"><div class="metric-value">4.00<div class="metric-delta"><span class="up">+0.30</span></div></div></td>
           <td data-label="Sales" class="num"><div class="metric-value">$79.96<div class="metric-delta"><span class="up">+$5.10</span></div></div></td>
           <td data-label="Profit" class="num"><div class="metric-value">$19.00<div class="metric-delta"><span class="up">+$5.24</span></div></div></td>
@@ -3084,6 +3088,7 @@
             <span class="product-meta">
               <span class="sku">KT8100_FBA</span>
               <span class="asin"><a href="https://www.amazon.com/dp/B0B7M64LGZ" target="_blank" rel="noopener">B0B7M64LGZ</a></span>
+              <span class="product-badges"><span class="severity muted-badge">Normal</span></span>
             </span>
           </span>
         </summary>
@@ -3100,7 +3105,6 @@
       </details>
     </td>
           <td data-label="Category">#BJ</td>
-          <td data-label="Severity"><span class="severity muted-badge">Normal</span></td>
           <td data-label="Units" class="num"><div class="metric-value">4.00<div class="metric-delta"><span class="up">+0.53</span></div></div></td>
           <td data-label="Sales" class="num"><div class="metric-value">$67.96<div class="metric-delta"><span class="up">+$9.15</span></div></div></td>
           <td data-label="Profit" class="num"><div class="metric-value">$20.32<div class="metric-delta"><span class="up">+$4.95</span></div></div></td>
@@ -3121,6 +3125,7 @@
             <span class="product-meta">
               <span class="sku">HS0002-10_FBA</span>
               <span class="asin"><a href="https://www.amazon.com/dp/B0C7XRRFC9" target="_blank" rel="noopener">B0C7XRRFC9</a></span>
+              <span class="product-badges"><span class="severity muted-badge">Normal</span></span>
             </span>
           </span>
         </summary>
@@ -3137,7 +3142,6 @@
       </details>
     </td>
           <td data-label="Category">#PA</td>
-          <td data-label="Severity"><span class="severity muted-badge">Normal</span></td>
           <td data-label="Units" class="num"><div class="metric-value">4.00<div class="metric-delta"><span class="up">+0.77</span></div></div></td>
           <td data-label="Sales" class="num"><div class="metric-value">$32.16<div class="metric-delta"><span class="up">+$4.43</span></div></div></td>
           <td data-label="Profit" class="num"><div class="metric-value">$13.24<div class="metric-delta"><span class="up">+$8.61</span></div></div></td>
@@ -3158,6 +3162,7 @@
             <span class="product-meta">
               <span class="sku">HB0005_PRG</span>
               <span class="asin"><a href="https://www.amazon.com/dp/B08NDR5ZWK" target="_blank" rel="noopener">B08NDR5ZWK</a></span>
+              <span class="product-badges"><span class="severity muted-badge">Normal</span></span>
             </span>
           </span>
         </summary>
@@ -3174,7 +3179,6 @@
       </details>
     </td>
           <td data-label="Category">#PA</td>
-          <td data-label="Severity"><span class="severity muted-badge">Normal</span></td>
           <td data-label="Units" class="num"><div class="metric-value">3.00<div class="metric-delta"><span class="down">-1.20</span></div></div></td>
           <td data-label="Sales" class="num"><div class="metric-value">$27.11<div class="metric-delta"><span class="down">-$13.68</span></div></div></td>
           <td data-label="Profit" class="num"><div class="metric-value">$7.07<div class="metric-delta"><span class="down">-$8.27</span></div></div></td>
@@ -3195,6 +3199,7 @@
             <span class="product-meta">
               <span class="sku">HA-4oz-SP</span>
               <span class="asin"><a href="https://www.amazon.com/dp/B0F13L4L69" target="_blank" rel="noopener">B0F13L4L69</a></span>
+              <span class="product-badges"><span class="severity muted-badge">Normal</span></span>
             </span>
           </span>
         </summary>
@@ -3211,7 +3216,6 @@
       </details>
     </td>
           <td data-label="Category">#PA</td>
-          <td data-label="Severity"><span class="severity muted-badge">Normal</span></td>
           <td data-label="Units" class="num"><div class="metric-value">2.00<div class="metric-delta"><span class="up">+1.07</span></div></div></td>
           <td data-label="Sales" class="num"><div class="metric-value">$23.90<div class="metric-delta"><span class="up">+$11.99</span></div></div></td>
           <td data-label="Profit" class="num"><div class="metric-value">$7.06<div class="metric-delta"><span class="up">+$5.62</span></div></div></td>
@@ -3232,6 +3236,7 @@
             <span class="product-meta">
               <span class="sku">GK0954</span>
               <span class="asin"><a href="https://www.amazon.com/dp/B0D9KZXQL3" target="_blank" rel="noopener">B0D9KZXQL3</a></span>
+              <span class="product-badges"><span class="severity muted-badge">Normal</span></span>
             </span>
           </span>
         </summary>
@@ -3248,7 +3253,6 @@
       </details>
     </td>
           <td data-label="Category">#GK</td>
-          <td data-label="Severity"><span class="severity muted-badge">Normal</span></td>
           <td data-label="Units" class="num"><div class="metric-value">1.00<div class="metric-delta"><span class="up">+0.50</span></div></div></td>
           <td data-label="Sales" class="num"><div class="metric-value">$19.99<div class="metric-delta"><span class="up">+$9.99</span></div></div></td>
           <td data-label="Profit" class="num"><div class="metric-value">$6.13<div class="metric-delta"><span class="up">+$3.08</span></div></div></td>
@@ -3269,6 +3273,7 @@
             <span class="product-meta">
               <span class="sku">BN1798_FBA</span>
               <span class="asin"><a href="https://www.amazon.com/dp/B07CT714N2" target="_blank" rel="noopener">B07CT714N2</a></span>
+              <span class="product-badges"><span class="severity muted-badge">Normal</span></span>
             </span>
           </span>
         </summary>
@@ -3285,7 +3290,6 @@
       </details>
     </td>
           <td data-label="Category">#BJ</td>
-          <td data-label="Severity"><span class="severity muted-badge">Normal</span></td>
           <td data-label="Units" class="num"><div class="metric-value">2.00<div class="metric-delta"><span class="up">+0.60</span></div></div></td>
           <td data-label="Sales" class="num"><div class="metric-value">$19.98<div class="metric-delta"><span class="up">+$6.53</span></div></div></td>
           <td data-label="Profit" class="num"><div class="metric-value">-$0.71<div class="metric-delta"><span class="down">-$3.44</span></div></div></td>
@@ -3306,6 +3310,7 @@
             <span class="product-meta">
               <span class="sku">BN1663_FBA</span>
               <span class="asin"><a href="https://www.amazon.com/dp/B077QPVJ67" target="_blank" rel="noopener">B077QPVJ67</a></span>
+              <span class="product-badges"><span class="severity muted-badge">Normal</span></span>
             </span>
           </span>
         </summary>
@@ -3322,7 +3327,6 @@
       </details>
     </td>
           <td data-label="Category">#BJ</td>
-          <td data-label="Severity"><span class="severity muted-badge">Normal</span></td>
           <td data-label="Units" class="num"><div class="metric-value">1.00<div class="metric-delta"><span class="down">-0.17</span></div></div></td>
           <td data-label="Sales" class="num"><div class="metric-value">$14.24<div class="metric-delta"><span class="down">-$3.25</span></div></div></td>
           <td data-label="Profit" class="num"><div class="metric-value">$3.67<div class="metric-delta"><span class="up">+$1.32</span></div></div></td>
@@ -3343,6 +3347,7 @@
             <span class="product-meta">
               <span class="sku">BR3791_FBA</span>
               <span class="asin"><a href="https://www.amazon.com/dp/B077ZFZX7S" target="_blank" rel="noopener">B077ZFZX7S</a></span>
+              <span class="product-badges"><span class="severity muted-badge">Normal</span></span>
             </span>
           </span>
         </summary>
@@ -3359,7 +3364,6 @@
       </details>
     </td>
           <td data-label="Category">#BJ</td>
-          <td data-label="Severity"><span class="severity muted-badge">Normal</span></td>
           <td data-label="Units" class="num"><div class="metric-value">1.00<div class="metric-delta"><span class="down">-2.27</span></div></div></td>
           <td data-label="Sales" class="num"><div class="metric-value">$11.99<div class="metric-delta"><span class="down">-$23.56</span></div></div></td>
           <td data-label="Profit" class="num"><div class="metric-value">$4.86<div class="metric-delta"><span class="down">-$9.08</span></div></div></td>
@@ -3380,6 +3384,7 @@
             <span class="product-meta">
               <span class="sku">-</span>
               <span class="asin"><a href="https://www.amazon.com/dp/B00M8HC272" target="_blank" rel="noopener">B00M8HC272</a></span>
+              <span class="product-badges"><span class="severity muted-badge">Normal</span></span>
             </span>
           </span>
         </summary>
@@ -3396,7 +3401,6 @@
       </details>
     </td>
           <td data-label="Category">#GK</td>
-          <td data-label="Severity"><span class="severity muted-badge">Normal</span></td>
           <td data-label="Units" class="num"><div class="metric-value">0.00<div class="metric-delta"><span class="down">-0.03</span></div></div></td>
           <td data-label="Sales" class="num"><div class="metric-value">$0.00<div class="metric-delta"><span class="down">-$0.57</span></div></div></td>
           <td data-label="Profit" class="num"><div class="metric-value">$0.00<div class="metric-delta"><span class="down">-$0.06</span></div></div></td>
@@ -3417,6 +3421,7 @@
             <span class="product-meta">
               <span class="sku">-</span>
               <span class="asin"><a href="https://www.amazon.com/dp/B00XK3GUI0" target="_blank" rel="noopener">B00XK3GUI0</a></span>
+              <span class="product-badges"><span class="severity muted-badge">Normal</span></span>
             </span>
           </span>
         </summary>
@@ -3433,7 +3438,6 @@
       </details>
     </td>
           <td data-label="Category">#GK</td>
-          <td data-label="Severity"><span class="severity muted-badge">Normal</span></td>
           <td data-label="Units" class="num"><div class="metric-value">0.00<div class="metric-delta"><span class="down">-0.03</span></div></div></td>
           <td data-label="Sales" class="num"><div class="metric-value">$0.00<div class="metric-delta"><span class="down">-$0.47</span></div></div></td>
           <td data-label="Profit" class="num"><div class="metric-value">$0.00<div class="metric-delta"><span class="up">+$0.63</span></div></div></td>
@@ -3454,6 +3458,7 @@
             <span class="product-meta">
               <span class="sku">-</span>
               <span class="asin"><a href="https://www.amazon.com/dp/B016YL499G" target="_blank" rel="noopener">B016YL499G</a></span>
+              <span class="product-badges"><span class="severity muted-badge">Normal</span></span>
             </span>
           </span>
         </summary>
@@ -3470,7 +3475,6 @@
       </details>
     </td>
           <td data-label="Category">#BJ</td>
-          <td data-label="Severity"><span class="severity muted-badge">Normal</span></td>
           <td data-label="Units" class="num"><div class="metric-value">0.00<div class="metric-delta"><span class="flat">0.00</span></div></div></td>
           <td data-label="Sales" class="num"><div class="metric-value">$0.00<div class="metric-delta"><span class="flat">$0.00</span></div></div></td>
           <td data-label="Profit" class="num"><div class="metric-value">$0.00<div class="metric-delta"><span class="up">+$0.13</span></div></div></td>
@@ -3491,6 +3495,7 @@
             <span class="product-meta">
               <span class="sku">-</span>
               <span class="asin"><a href="https://www.amazon.com/dp/B01EGMDDUQ" target="_blank" rel="noopener">B01EGMDDUQ</a></span>
+              <span class="product-badges"><span class="severity muted-badge">Normal</span></span>
             </span>
           </span>
         </summary>
@@ -3507,7 +3512,6 @@
       </details>
     </td>
           <td data-label="Category">#BJ</td>
-          <td data-label="Severity"><span class="severity muted-badge">Normal</span></td>
           <td data-label="Units" class="num"><div class="metric-value">0.00<div class="metric-delta"><span class="down">-0.40</span></div></div></td>
           <td data-label="Sales" class="num"><div class="metric-value">$0.00<div class="metric-delta"><span class="down">-$4.20</span></div></div></td>
           <td data-label="Profit" class="num"><div class="metric-value">$0.00<div class="metric-delta"><span class="down">-$0.72</span></div></div></td>
@@ -3528,6 +3532,7 @@
             <span class="product-meta">
               <span class="sku">-</span>
               <span class="asin"><a href="https://www.amazon.com/dp/B079F1VG49" target="_blank" rel="noopener">B079F1VG49</a></span>
+              <span class="product-badges"><span class="severity muted-badge">Normal</span></span>
             </span>
           </span>
         </summary>
@@ -3544,7 +3549,6 @@
       </details>
     </td>
           <td data-label="Category">#GK</td>
-          <td data-label="Severity"><span class="severity muted-badge">Normal</span></td>
           <td data-label="Units" class="num"><div class="metric-value">0.00<div class="metric-delta"><span class="flat">0.00</span></div></div></td>
           <td data-label="Sales" class="num"><div class="metric-value">$0.00<div class="metric-delta"><span class="flat">$0.00</span></div></div></td>
           <td data-label="Profit" class="num"><div class="metric-value">$0.00<div class="metric-delta"><span class="up">+$0.29</span></div></div></td>
@@ -3565,6 +3569,7 @@
             <span class="product-meta">
               <span class="sku">-</span>
               <span class="asin"><a href="https://www.amazon.com/dp/B07BT5S1QK" target="_blank" rel="noopener">B07BT5S1QK</a></span>
+              <span class="product-badges"><span class="severity warn">Low stock</span></span>
             </span>
           </span>
         </summary>
@@ -3581,7 +3586,6 @@
       </details>
     </td>
           <td data-label="Category">#GK</td>
-          <td data-label="Severity"><span class="severity warn">Low stock</span></td>
           <td data-label="Units" class="num"><div class="metric-value">0.00<div class="metric-delta"><span class="down">-0.03</span></div></div></td>
           <td data-label="Sales" class="num"><div class="metric-value">$0.00<div class="metric-delta"><span class="down">-$0.43</span></div></div></td>
           <td data-label="Profit" class="num"><div class="metric-value">$0.00<div class="metric-delta"><span class="down">-$0.09</span></div></div></td>
@@ -3602,6 +3606,7 @@
             <span class="product-meta">
               <span class="sku">-</span>
               <span class="asin"><a href="https://www.amazon.com/dp/B07CGPHFTY" target="_blank" rel="noopener">B07CGPHFTY</a></span>
+              <span class="product-badges"><span class="severity muted-badge">Normal</span></span>
             </span>
           </span>
         </summary>
@@ -3618,7 +3623,6 @@
       </details>
     </td>
           <td data-label="Category">#BJ</td>
-          <td data-label="Severity"><span class="severity muted-badge">Normal</span></td>
           <td data-label="Units" class="num"><div class="metric-value">0.00<div class="metric-delta"><span class="flat">0.00</span></div></div></td>
           <td data-label="Sales" class="num"><div class="metric-value">$0.00<div class="metric-delta"><span class="flat">$0.00</span></div></div></td>
           <td data-label="Profit" class="num"><div class="metric-value">$0.00<div class="metric-delta"><span class="up">+$0.04</span></div></div></td>
@@ -3639,6 +3643,7 @@
             <span class="product-meta">
               <span class="sku">-</span>
               <span class="asin"><a href="https://www.amazon.com/dp/B07F1FKCDH" target="_blank" rel="noopener">B07F1FKCDH</a></span>
+              <span class="product-badges"><span class="severity muted-badge">Normal</span></span>
             </span>
           </span>
         </summary>
@@ -3655,7 +3660,6 @@
       </details>
     </td>
           <td data-label="Category">#BJ</td>
-          <td data-label="Severity"><span class="severity muted-badge">Normal</span></td>
           <td data-label="Units" class="num"><div class="metric-value">0.00<div class="metric-delta"><span class="flat">0.00</span></div></div></td>
           <td data-label="Sales" class="num"><div class="metric-value">$0.00<div class="metric-delta"><span class="flat">$0.00</span></div></div></td>
           <td data-label="Profit" class="num"><div class="metric-value">$0.00<div class="metric-delta"><span class="up">+$0.01</span></div></div></td>
@@ -3676,6 +3680,7 @@
             <span class="product-meta">
               <span class="sku">-</span>
               <span class="asin"><a href="https://www.amazon.com/dp/B07K819DSN" target="_blank" rel="noopener">B07K819DSN</a></span>
+              <span class="product-badges"><span class="severity muted-badge">Normal</span></span>
             </span>
           </span>
         </summary>
@@ -3692,7 +3697,6 @@
       </details>
     </td>
           <td data-label="Category">#BJ</td>
-          <td data-label="Severity"><span class="severity muted-badge">Normal</span></td>
           <td data-label="Units" class="num"><div class="metric-value">0.00<div class="metric-delta"><span class="flat">0.00</span></div></div></td>
           <td data-label="Sales" class="num"><div class="metric-value">$0.00<div class="metric-delta"><span class="flat">$0.00</span></div></div></td>
           <td data-label="Profit" class="num"><div class="metric-value">$0.00<div class="metric-delta"><span class="up">+$0.01</span></div></div></td>
@@ -3713,6 +3717,7 @@
             <span class="product-meta">
               <span class="sku">-</span>
               <span class="asin"><a href="https://www.amazon.com/dp/B081B7C2FP" target="_blank" rel="noopener">B081B7C2FP</a></span>
+              <span class="product-badges"><span class="severity muted-badge">Normal</span></span>
             </span>
           </span>
         </summary>
@@ -3729,7 +3734,6 @@
       </details>
     </td>
           <td data-label="Category">#GK</td>
-          <td data-label="Severity"><span class="severity muted-badge">Normal</span></td>
           <td data-label="Units" class="num"><div class="metric-value">0.00<div class="metric-delta"><span class="flat">0.00</span></div></div></td>
           <td data-label="Sales" class="num"><div class="metric-value">$0.00<div class="metric-delta"><span class="flat">$0.00</span></div></div></td>
           <td data-label="Profit" class="num"><div class="metric-value">$0.00<div class="metric-delta"><span class="up">+$0.01</span></div></div></td>
@@ -3750,6 +3754,7 @@
             <span class="product-meta">
               <span class="sku">-</span>
               <span class="asin"><a href="https://www.amazon.com/dp/B082P8LS2X" target="_blank" rel="noopener">B082P8LS2X</a></span>
+              <span class="product-badges"><span class="severity warn">Low stock</span></span>
             </span>
           </span>
         </summary>
@@ -3766,7 +3771,6 @@
       </details>
     </td>
           <td data-label="Category">#NC</td>
-          <td data-label="Severity"><span class="severity warn">Low stock</span></td>
           <td data-label="Units" class="num"><div class="metric-value">0.00<div class="metric-delta"><span class="down">-0.07</span></div></div></td>
           <td data-label="Sales" class="num"><div class="metric-value">$0.00<div class="metric-delta"><span class="down">-$1.33</span></div></div></td>
           <td data-label="Profit" class="num"><div class="metric-value">$0.00<div class="metric-delta"><span class="down">-$1.01</span></div></div></td>
@@ -3787,6 +3791,7 @@
             <span class="product-meta">
               <span class="sku">-</span>
               <span class="asin"><a href="https://www.amazon.com/dp/B09VJV491B" target="_blank" rel="noopener">B09VJV491B</a></span>
+              <span class="product-badges"><span class="severity muted-badge">Normal</span></span>
             </span>
           </span>
         </summary>
@@ -3803,7 +3808,6 @@
       </details>
     </td>
           <td data-label="Category">#BJ</td>
-          <td data-label="Severity"><span class="severity muted-badge">Normal</span></td>
           <td data-label="Units" class="num"><div class="metric-value">0.00<div class="metric-delta"><span class="flat">0.00</span></div></div></td>
           <td data-label="Sales" class="num"><div class="metric-value">$0.00<div class="metric-delta"><span class="flat">$0.00</span></div></div></td>
           <td data-label="Profit" class="num"><div class="metric-value">$0.00<div class="metric-delta"><span class="up">+$0.17</span></div></div></td>
@@ -3824,6 +3828,7 @@
             <span class="product-meta">
               <span class="sku">-</span>
               <span class="asin"><a href="https://www.amazon.com/dp/B0CG1QB37V" target="_blank" rel="noopener">B0CG1QB37V</a></span>
+              <span class="product-badges"><span class="severity muted-badge">Normal</span></span>
             </span>
           </span>
         </summary>
@@ -3840,7 +3845,6 @@
       </details>
     </td>
           <td data-label="Category">#PA</td>
-          <td data-label="Severity"><span class="severity muted-badge">Normal</span></td>
           <td data-label="Units" class="num"><div class="metric-value">0.00<div class="metric-delta"><span class="flat">0.00</span></div></div></td>
           <td data-label="Sales" class="num"><div class="metric-value">$0.00<div class="metric-delta"><span class="flat">$0.00</span></div></div></td>
           <td data-label="Profit" class="num"><div class="metric-value">$0.00<div class="metric-delta"><span class="up">+$0.40</span></div></div></td>
@@ -3861,6 +3865,7 @@
             <span class="product-meta">
               <span class="sku">-</span>
               <span class="asin"><a href="https://www.amazon.com/dp/B0CJ1MKYQD" target="_blank" rel="noopener">B0CJ1MKYQD</a></span>
+              <span class="product-badges"><span class="severity muted-badge">Normal</span></span>
             </span>
           </span>
         </summary>
@@ -3877,7 +3882,6 @@
       </details>
     </td>
           <td data-label="Category">#GK</td>
-          <td data-label="Severity"><span class="severity muted-badge">Normal</span></td>
           <td data-label="Units" class="num"><div class="metric-value">0.00<div class="metric-delta"><span class="flat">0.00</span></div></div></td>
           <td data-label="Sales" class="num"><div class="metric-value">$0.00<div class="metric-delta"><span class="flat">$0.00</span></div></div></td>
           <td data-label="Profit" class="num"><div class="metric-value">$0.00<div class="metric-delta"><span class="up">+$0.01</span></div></div></td>
@@ -3898,6 +3902,7 @@
             <span class="product-meta">
               <span class="sku">FJ9991-B_FBA</span>
               <span class="asin"><a href="https://www.amazon.com/dp/B0CKVFYDJZ" target="_blank" rel="noopener">B0CKVFYDJZ</a></span>
+              <span class="product-badges"><span class="severity muted-badge">Normal</span></span>
             </span>
           </span>
         </summary>
@@ -3914,7 +3919,6 @@
       </details>
     </td>
           <td data-label="Category">#FJ</td>
-          <td data-label="Severity"><span class="severity muted-badge">Normal</span></td>
           <td data-label="Units" class="num"><div class="metric-value">0.00<div class="metric-delta"><span class="down">-0.27</span></div></div></td>
           <td data-label="Sales" class="num"><div class="metric-value">$0.00<div class="metric-delta"><span class="down">-$4.64</span></div></div></td>
           <td data-label="Profit" class="num"><div class="metric-value">-$1.39<div class="metric-delta"><span class="up">+$0.28</span></div></div></td>
@@ -3935,6 +3939,7 @@
             <span class="product-meta">
               <span class="sku">-</span>
               <span class="asin"><a href="https://www.amazon.com/dp/B0CKVVV9NR" target="_blank" rel="noopener">B0CKVVV9NR</a></span>
+              <span class="product-badges"><span class="severity warn">Low stock</span></span>
             </span>
           </span>
         </summary>
@@ -3951,7 +3956,6 @@
       </details>
     </td>
           <td data-label="Category">#FJ</td>
-          <td data-label="Severity"><span class="severity warn">Low stock</span></td>
           <td data-label="Units" class="num"><div class="metric-value">0.00<div class="metric-delta"><span class="down">-0.03</span></div></div></td>
           <td data-label="Sales" class="num"><div class="metric-value">$0.00<div class="metric-delta"><span class="down">-$0.63</span></div></div></td>
           <td data-label="Profit" class="num"><div class="metric-value">$0.00<div class="metric-delta"><span class="down">-$0.27</span></div></div></td>
@@ -3972,6 +3976,7 @@
             <span class="product-meta">
               <span class="sku">-</span>
               <span class="asin"><a href="https://www.amazon.com/dp/B0DCL58D4C" target="_blank" rel="noopener">B0DCL58D4C</a></span>
+              <span class="product-badges"><span class="severity warn">Low stock</span></span>
             </span>
           </span>
         </summary>
@@ -3988,7 +3993,6 @@
       </details>
     </td>
           <td data-label="Category">#PA</td>
-          <td data-label="Severity"><span class="severity warn">Low stock</span></td>
           <td data-label="Units" class="num"><div class="metric-value">0.00<div class="metric-delta"><span class="down">-0.37</span></div></div></td>
           <td data-label="Sales" class="num"><div class="metric-value">$0.00<div class="metric-delta"><span class="down">-$40.66</span></div></div></td>
           <td data-label="Profit" class="num"><div class="metric-value">$0.00<div class="metric-delta"><span class="down">-$21.96</span></div></div></td>
@@ -4009,6 +4013,7 @@
             <span class="product-meta">
               <span class="sku">-</span>
               <span class="asin"><a href="https://www.amazon.com/dp/B0DDT7GP79" target="_blank" rel="noopener">B0DDT7GP79</a></span>
+              <span class="product-badges"><span class="severity warn">Low stock</span></span>
             </span>
           </span>
         </summary>
@@ -4025,7 +4030,6 @@
       </details>
     </td>
           <td data-label="Category">#EO</td>
-          <td data-label="Severity"><span class="severity warn">Low stock</span></td>
           <td data-label="Units" class="num"><div class="metric-value">0.00<div class="metric-delta"><span class="down">-1.00</span></div></div></td>
           <td data-label="Sales" class="num"><div class="metric-value">$0.00<div class="metric-delta"><span class="down">-$9.71</span></div></div></td>
           <td data-label="Profit" class="num"><div class="metric-value">$0.00<div class="metric-delta"><span class="down">-$4.13</span></div></div></td>
@@ -4046,6 +4050,7 @@
             <span class="product-meta">
               <span class="sku">-</span>
               <span class="asin"><a href="https://www.amazon.com/dp/B0DRMPQGPF" target="_blank" rel="noopener">B0DRMPQGPF</a></span>
+              <span class="product-badges"><span class="severity muted-badge">Normal</span></span>
             </span>
           </span>
         </summary>
@@ -4062,7 +4067,6 @@
       </details>
     </td>
           <td data-label="Category">#EO</td>
-          <td data-label="Severity"><span class="severity muted-badge">Normal</span></td>
           <td data-label="Units" class="num"><div class="metric-value">0.00<div class="metric-delta"><span class="flat">0.00</span></div></div></td>
           <td data-label="Sales" class="num"><div class="metric-value">$0.00<div class="metric-delta"><span class="flat">$0.00</span></div></div></td>
           <td data-label="Profit" class="num"><div class="metric-value">$0.00<div class="metric-delta"><span class="up">+$0.00</span></div></div></td>
@@ -4083,6 +4087,7 @@
             <span class="product-meta">
               <span class="sku">BR4238_FBA</span>
               <span class="asin"><a href="https://www.amazon.com/dp/B0F7QKYY9L" target="_blank" rel="noopener">B0F7QKYY9L</a></span>
+              <span class="product-badges"><span class="severity muted-badge">Normal</span></span>
             </span>
           </span>
         </summary>
@@ -4099,7 +4104,6 @@
       </details>
     </td>
           <td data-label="Category">#BJ</td>
-          <td data-label="Severity"><span class="severity muted-badge">Normal</span></td>
           <td data-label="Units" class="num"><div class="metric-value">0.00<div class="metric-delta"><span class="down">-0.50</span></div></div></td>
           <td data-label="Sales" class="num"><div class="metric-value">$0.00<div class="metric-delta"><span class="down">-$9.96</span></div></div></td>
           <td data-label="Profit" class="num"><div class="metric-value">-$0.21<div class="metric-delta"><span class="down">-$4.30</span></div></div></td>
@@ -4120,6 +4124,7 @@
             <span class="product-meta">
               <span class="sku">-</span>
               <span class="asin"><a href="https://www.amazon.com/dp/B0F8PM57CS" target="_blank" rel="noopener">B0F8PM57CS</a></span>
+              <span class="product-badges"><span class="severity muted-badge">Normal</span></span>
             </span>
           </span>
         </summary>
@@ -4136,7 +4141,6 @@
       </details>
     </td>
           <td data-label="Category">#EO</td>
-          <td data-label="Severity"><span class="severity muted-badge">Normal</span></td>
           <td data-label="Units" class="num"><div class="metric-value">0.00<div class="metric-delta"><span class="down">-0.73</span></div></div></td>
           <td data-label="Sales" class="num"><div class="metric-value">$0.00<div class="metric-delta"><span class="down">-$9.40</span></div></div></td>
           <td data-label="Profit" class="num"><div class="metric-value">$0.00<div class="metric-delta"><span class="down">-$3.62</span></div></div></td>
@@ -4157,6 +4161,7 @@
             <span class="product-meta">
               <span class="sku">-</span>
               <span class="asin"><a href="https://www.amazon.com/dp/B0F9KT4YN9" target="_blank" rel="noopener">B0F9KT4YN9</a></span>
+              <span class="product-badges"><span class="severity muted-badge">Normal</span></span>
             </span>
           </span>
         </summary>
@@ -4173,7 +4178,6 @@
       </details>
     </td>
           <td data-label="Category">#EO</td>
-          <td data-label="Severity"><span class="severity muted-badge">Normal</span></td>
           <td data-label="Units" class="num"><div class="metric-value">0.00<div class="metric-delta"><span class="flat">0.00</span></div></div></td>
           <td data-label="Sales" class="num"><div class="metric-value">$0.00<div class="metric-delta"><span class="flat">$0.00</span></div></div></td>
           <td data-label="Profit" class="num"><div class="metric-value">$0.00<div class="metric-delta"><span class="up">+$0.20</span></div></div></td>
@@ -4194,6 +4198,7 @@
             <span class="product-meta">
               <span class="sku">HB0026</span>
               <span class="asin"><a href="https://www.amazon.com/dp/B0FFF83WFD" target="_blank" rel="noopener">B0FFF83WFD</a></span>
+              <span class="product-badges"><span class="severity muted-badge">Normal</span></span>
             </span>
           </span>
         </summary>
@@ -4210,7 +4215,6 @@
       </details>
     </td>
           <td data-label="Category">#PA</td>
-          <td data-label="Severity"><span class="severity muted-badge">Normal</span></td>
           <td data-label="Units" class="num"><div class="metric-value">0.00<div class="metric-delta"><span class="down">-0.20</span></div></div></td>
           <td data-label="Sales" class="num"><div class="metric-value">$0.00<div class="metric-delta"><span class="down">-$4.00</span></div></div></td>
           <td data-label="Profit" class="num"><div class="metric-value">-$1.50<div class="metric-delta"><span class="down">-$0.77</span></div></div></td>
@@ -4231,6 +4235,7 @@
             <span class="product-meta">
               <span class="sku">-</span>
               <span class="asin"><a href="https://www.amazon.com/dp/B0FHW7GJL1" target="_blank" rel="noopener">B0FHW7GJL1</a></span>
+              <span class="product-badges"><span class="severity muted-badge">Normal</span></span>
             </span>
           </span>
         </summary>
@@ -4247,7 +4252,6 @@
       </details>
     </td>
           <td data-label="Category">#EO</td>
-          <td data-label="Severity"><span class="severity muted-badge">Normal</span></td>
           <td data-label="Units" class="num"><div class="metric-value">0.00<div class="metric-delta"><span class="down">-0.10</span></div></div></td>
           <td data-label="Sales" class="num"><div class="metric-value">$0.00<div class="metric-delta"><span class="down">-$1.97</span></div></div></td>
           <td data-label="Profit" class="num"><div class="metric-value">$0.00<div class="metric-delta"><span class="up">+$0.05</span></div></div></td>
@@ -4268,6 +4272,7 @@
             <span class="product-meta">
               <span class="sku">EO-JOJOBA-1oz-KIT</span>
               <span class="asin"><a href="https://www.amazon.com/dp/B0FKD8FVQM" target="_blank" rel="noopener">B0FKD8FVQM</a></span>
+              <span class="product-badges"><span class="severity muted-badge">Normal</span></span>
             </span>
           </span>
         </summary>
@@ -4284,7 +4289,6 @@
       </details>
     </td>
           <td data-label="Category">#EO</td>
-          <td data-label="Severity"><span class="severity muted-badge">Normal</span></td>
           <td data-label="Units" class="num"><div class="metric-value">1.00<div class="metric-delta"><span class="down">-0.40</span></div></div></td>
           <td data-label="Sales" class="num"><div class="metric-value">$0.00<div class="metric-delta"><span class="down">-$13.65</span></div></div></td>
           <td data-label="Profit" class="num"><div class="metric-value">-$1.50<div class="metric-delta"><span class="down">-$6.15</span></div></div></td>
@@ -4305,6 +4309,7 @@
             <span class="product-meta">
               <span class="sku">KT8215_FBA</span>
               <span class="asin"><a href="https://www.amazon.com/dp/BJ" target="_blank" rel="noopener">BJ</a></span>
+              <span class="product-badges"><span class="severity muted-badge">Normal</span></span>
             </span>
           </span>
         </summary>
@@ -4321,7 +4326,6 @@
       </details>
     </td>
           <td data-label="Category">#BJ</td>
-          <td data-label="Severity"><span class="severity muted-badge">Normal</span></td>
           <td data-label="Units" class="num"><div class="metric-value">0.00<div class="metric-delta"><span class="down">-0.67</span></div></div></td>
           <td data-label="Sales" class="num"><div class="metric-value">$0.00<div class="metric-delta"><span class="down">-$15.78</span></div></div></td>
           <td data-label="Profit" class="num"><div class="metric-value">-$0.91<div class="metric-delta"><span class="down">-$5.95</span></div></div></td>
@@ -4342,6 +4346,7 @@
             <span class="product-meta">
               <span class="sku">-</span>
               <span class="asin"><a href="https://www.amazon.com/dp/GK" target="_blank" rel="noopener">GK</a></span>
+              <span class="product-badges"><span class="severity muted-badge">Normal</span></span>
             </span>
           </span>
         </summary>
@@ -4358,7 +4363,6 @@
       </details>
     </td>
           <td data-label="Category">#GK</td>
-          <td data-label="Severity"><span class="severity muted-badge">Normal</span></td>
           <td data-label="Units" class="num"><div class="metric-value">0.00<div class="metric-delta"><span class="down">-0.13</span></div></div></td>
           <td data-label="Sales" class="num"><div class="metric-value">$0.00<div class="metric-delta"><span class="down">-$2.13</span></div></div></td>
           <td data-label="Profit" class="num"><div class="metric-value">$0.00<div class="metric-delta"><span class="up">+$0.47</span></div></div></td>
@@ -4379,6 +4383,7 @@
             <span class="product-meta">
               <span class="sku">-</span>
               <span class="asin"><a href="https://www.amazon.com/dp/NULL" target="_blank" rel="noopener">NULL</a></span>
+              <span class="product-badges"><span class="severity muted-badge">Normal</span></span>
             </span>
           </span>
         </summary>
@@ -4395,7 +4400,6 @@
       </details>
     </td>
           <td data-label="Category">#FJ</td>
-          <td data-label="Severity"><span class="severity muted-badge">Normal</span></td>
           <td data-label="Units" class="num"><div class="metric-value">0.00<div class="metric-delta"><span class="flat">0.00</span></div></div></td>
           <td data-label="Sales" class="num"><div class="metric-value">$0.00<div class="metric-delta"><span class="flat">$0.00</span></div></div></td>
           <td data-label="Profit" class="num"><div class="metric-value">$0.00<div class="metric-delta"><span class="up">+$0.06</span></div></div></td>
@@ -4416,6 +4420,7 @@
             <span class="product-meta">
               <span class="sku">PD-6PC-SET1</span>
               <span class="asin"><a href="https://www.amazon.com/dp/PD-RL-SET" target="_blank" rel="noopener">PD-RL-SET</a></span>
+              <span class="product-badges"><span class="severity bad">Sales drop</span></span>
             </span>
           </span>
         </summary>
@@ -4432,7 +4437,6 @@
       </details>
     </td>
           <td data-label="Category">#EO</td>
-          <td data-label="Severity"><span class="severity bad">Sales drop</span></td>
           <td data-label="Units" class="num"><div class="metric-value">0.00<div class="metric-delta"><span class="down">-0.73</span></div></div></td>
           <td data-label="Sales" class="num"><div class="metric-value">$0.00<div class="metric-delta"><span class="down">-$26.83</span></div></div></td>
           <td data-label="Profit" class="num"><div class="metric-value">-$3.31<div class="metric-delta"><span class="down">-$4.68</span></div></div></td>
