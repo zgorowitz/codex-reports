@@ -1,0 +1,2069 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>FBA Inventory Management Report - 2026-05-18</title>
+  <style>
+:root {
+  --bg: #f6f8fc;
+  --panel: #ffffff;
+  --text: #142033;
+  --muted: #687386;
+  --line: #e5eaf3;
+  --line-dark: #d1d8e6;
+  --blue: #2b5cff;
+  --blue-soft: #eef3ff;
+  --red: #b42318;
+  --red-bg: #fff1f1;
+  --amber: #9a5d00;
+  --amber-bg: #fff7e6;
+  --green: #236a3b;
+  --green-bg: #edf8f0;
+  --shadow: 0 18px 45px rgba(20, 32, 51, .08);
+}
+* { box-sizing: border-box; }
+html { scroll-behavior: smooth; }
+body {
+  margin: 0;
+  background:
+    radial-gradient(circle at top left, rgba(43, 92, 255, .10), transparent 34rem),
+    linear-gradient(180deg, #f9fbff 0%, var(--bg) 34%);
+  color: var(--text);
+  font-family: ui-sans-serif, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+}
+header {
+  background: linear-gradient(120deg, #13223c, #27436f);
+  color: #fff;
+  padding: 34px 28px 24px;
+}
+.header-inner, main { max-width: 1440px; margin: 0 auto; }
+h1 { margin: 0 0 8px; font-size: clamp(27px, 4vw, 42px); letter-spacing: -.04em; }
+.subtitle { color: #dce6ff; line-height: 1.45; max-width: 980px; }
+.toolbar { display: flex; flex-wrap: wrap; gap: 10px; margin-top: 20px; align-items: center; }
+.search {
+  flex: 1 1 300px;
+  max-width: 560px;
+  border: 1px solid rgba(255,255,255,.28);
+  border-radius: 14px;
+  padding: 12px 14px;
+  color: #fff;
+  background: rgba(255,255,255,.11);
+  outline: none;
+}
+.search::placeholder { color: #dce6ff; }
+.filter {
+  border: 1px solid rgba(255,255,255,.34);
+  border-radius: 999px;
+  padding: 10px 14px;
+  color: #fff;
+  background: rgba(255,255,255,.08);
+  cursor: pointer;
+}
+.filter.active { background: #fff; color: #182943; }
+main { padding: 22px 28px 52px; }
+.nav {
+  display: flex;
+  gap: 8px;
+  overflow-x: auto;
+  margin-bottom: 18px;
+  padding-bottom: 6px;
+}
+.nav a {
+  color: var(--text);
+  background: var(--panel);
+  border: 1px solid var(--line);
+  border-radius: 999px;
+  padding: 8px 12px;
+  text-decoration: none;
+  white-space: nowrap;
+}
+.cards {
+  display: grid;
+  grid-template-columns: repeat(5, minmax(150px, 1fr));
+  gap: 14px;
+  margin-bottom: 20px;
+}
+.card {
+  background: var(--panel);
+  border: 1px solid var(--line);
+  border-radius: 18px;
+  padding: 17px;
+  box-shadow: var(--shadow);
+}
+.label { color: var(--muted); font-size: 12px; text-transform: uppercase; letter-spacing: .08em; }
+.value { font-size: clamp(23px, 3vw, 34px); font-weight: 780; letter-spacing: -.03em; margin-top: 5px; }
+.hint { color: var(--muted); margin-top: 3px; font-size: 13px; }
+.section {
+  background: var(--panel);
+  border: 1px solid var(--line);
+  border-radius: 20px;
+  box-shadow: var(--shadow);
+  margin-top: 18px;
+  overflow: hidden;
+}
+.section-head {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: 14px;
+  padding: 18px 20px;
+  border-bottom: 1px solid var(--line);
+}
+h2 { margin: 0; font-size: 20px; letter-spacing: -.02em; }
+.section-head p { margin: 4px 0 0; color: var(--muted); }
+.section-link, .count-pill {
+  color: var(--blue);
+  background: var(--blue-soft);
+  border-radius: 999px;
+  padding: 8px 11px;
+  text-decoration: none;
+  font-weight: 700;
+  font-size: 13px;
+  white-space: nowrap;
+}
+.table-wrap {
+  overflow-x: auto;
+  -webkit-overflow-scrolling: touch;
+}
+table {
+  width: 100%;
+  min-width: 1080px;
+  border-collapse: collapse;
+  table-layout: fixed;
+}
+th, td {
+  border-bottom: 1px solid var(--line);
+  padding: 10px 9px;
+  text-align: left;
+  vertical-align: middle;
+}
+th {
+  position: sticky;
+  top: 0;
+  z-index: 2;
+  background: #f8fafd;
+  color: var(--muted);
+  font-size: 11px;
+  font-weight: 760;
+  letter-spacing: .06em;
+  text-transform: uppercase;
+}
+.item-col, .item-cell { width: 230px; min-width: 230px; max-width: 230px; }
+.item-cell, .item-col {
+  position: sticky;
+  left: 0;
+  z-index: 3;
+  background: var(--panel);
+  box-shadow: 1px 0 0 var(--line);
+}
+th.item-col { background: #f8fafd; z-index: 4; }
+.num {
+  width: 8ch;
+  min-width: 8ch;
+  max-width: 8ch;
+  text-align: right;
+  white-space: nowrap;
+  font-variant-numeric: tabular-nums;
+}
+.product {
+  display: flex;
+  align-items: center;
+  gap: 9px;
+  min-width: 0;
+}
+.product img {
+  width: 42px;
+  height: 42px;
+  object-fit: cover;
+  border-radius: 10px;
+  border: 1px solid var(--line);
+  background: #fff;
+}
+.product-meta { min-width: 0; display: grid; gap: 2px; }
+.product-meta strong, .product-meta span {
+  max-width: 18ch;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+.product-meta span, .product-meta a { color: var(--muted); font-size: 12px; text-decoration: none; }
+.product-meta a:hover { color: var(--blue); text-decoration: underline; }
+.pill, .status {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: 999px;
+  padding: 5px 8px;
+  font-weight: 780;
+  font-size: 12px;
+}
+.pill.critical, .status.critical { background: var(--red-bg); color: var(--red); }
+.pill.soon, .status.soon { background: var(--amber-bg); color: var(--amber); }
+.pill.watch, .status.watch { background: var(--blue-soft); color: var(--blue); }
+.pill.unknown, .status.unknown { background: #eef2f6; color: var(--muted); }
+.data-row:hover td { background: #fbfdff; }
+.send { font-weight: 800; color: var(--blue); }
+.parent-row td {
+  background: #f8fafd;
+  padding: 13px 14px;
+}
+.parent-card {
+  display: flex;
+  align-items: center;
+  gap: 14px;
+}
+.parent-img {
+  width: 54px;
+  height: 54px;
+  border-radius: 14px;
+  object-fit: cover;
+  border: 1px solid var(--line-dark);
+  background: #fff;
+}
+.parent-meta { min-width: 0; display: grid; gap: 2px; }
+.parent-meta span { color: var(--muted); font-size: 11px; text-transform: uppercase; letter-spacing: .08em; }
+.parent-meta strong a { color: var(--text); text-decoration: none; }
+.parent-meta em { color: var(--muted); font-style: normal; font-size: 13px; }
+.parent-stats {
+  margin-left: auto;
+  display: grid;
+  grid-template-columns: repeat(3, minmax(90px, 1fr));
+  gap: 10px;
+}
+.parent-stats span {
+  display: grid;
+  gap: 2px;
+  padding: 9px 11px;
+  border-radius: 14px;
+  background: #fff;
+  border: 1px solid var(--line);
+}
+.parent-stats strong { font-size: 17px; }
+.parent-stats em { color: var(--muted); font-size: 11px; font-style: normal; }
+.empty { padding: 22px; color: var(--muted); }
+.footer-note {
+  color: var(--muted);
+  font-size: 12px;
+  margin-top: 18px;
+}
+@media (max-width: 860px) {
+  header { padding: 26px 16px 20px; }
+  main { padding: 16px 12px 36px; }
+  .cards {
+    display: flex;
+    gap: 12px;
+    overflow-x: auto;
+    scroll-snap-type: x mandatory;
+    padding-bottom: 8px;
+  }
+  .card { flex: 0 0 min(78vw, 260px); scroll-snap-align: start; }
+  .section-head { align-items: flex-start; padding: 15px; }
+  table { width: max-content; min-width: 980px; }
+  .item-col, .item-cell { width: 68px; min-width: 68px; max-width: 68px; }
+  .product { width: 48px; }
+  .product img { width: 42px; height: 42px; }
+  .product-meta { display: none; }
+  .parent-card { align-items: flex-start; }
+  .parent-stats { grid-template-columns: 1fr; margin-left: 0; width: 100%; }
+}
+</style>
+</head>
+<body>
+  <header>
+    <div class="header-inner">
+      <h1>FBA Inventory Management</h1>
+      <div class="subtitle">
+        Latest snapshot 2026-05-18 · Target 45 days of FBA cover · Includes child ASINs with more than 100 units sold in the last 30 days and a calculated send-in need.
+        Generated 2026-05-18 16:44 EDT.
+      </div>
+      <div class="toolbar">
+        <input id="search" class="search" type="search" placeholder="Search parent, child ASIN, or SKU...">
+        <button class="filter active" type="button" data-filter="all">All</button>
+        <button class="filter" type="button" data-filter="critical">Critical</button>
+        <button class="filter" type="button" data-filter="soon">Soon</button>
+        <button class="filter" type="button" data-filter="watch">Low &lt;45d</button>
+      </div>
+    </div>
+  </header>
+  <main>
+    <nav class="nav" aria-label="Report sections">
+      <a href="#critical">Most critical</a>
+      <a href="#best-sellers">Best-selling low stock</a>
+      <a href="#all">Parent groups</a>
+    </nav>
+    <div class="cards">
+      <div class="card"><div class="label">Units to send</div><div class="value">12,067</div><div class="hint">to reach 45 days</div></div>
+      <div class="card"><div class="label">Child ASINs</div><div class="value">33</div><div class="hint">sold &gt;100 in 30d and below target</div></div>
+      <div class="card"><div class="label">Parent ASINs</div><div class="value">20</div><div class="hint">grouped by urgency</div></div>
+      <div class="card"><div class="label">Critical items</div><div class="value">8</div><div class="hint">24% at 21 days or less</div></div>
+      <div class="card"><div class="label">30d units</div><div class="value">36,512</div><div class="hint">across listed children</div></div>
+    </div>
+    
+      <section id="critical" class="section">
+        <div class="section-head">
+          <div>
+            <h2>Most critical</h2>
+            <p>Child ASINs at 21 days of cover or less, sorted by lowest days available.</p>
+          </div>
+          <a class="section-link" href="#all">View all</a>
+        </div>
+        <div class="table-wrap" role="region" aria-label="Most critical table" tabindex="0">
+          <table>
+            
+      <thead>
+        <tr>
+          <th class="item-col">Item</th>
+          <th class="num">Days</th>
+          <th class="num">Send</th>
+          <th class="num">30d units</th>
+          <th class="num">Avg/day</th>
+          <th class="num">FBA total</th>
+          <th class="num">Fulfillable</th>
+          <th class="num">Reserved</th>
+          <th class="num">Future</th>
+          <th class="num">Recommended</th>
+          <th>Status</th>
+        </tr>
+      </thead>
+    
+            <tbody>
+      <tr class="data-row critical" data-status="critical" data-search="b0fbspbmnn b0dytsb2wn eo-rosehip-2oz critical">
+        <td data-label="Item" class="item-cell">
+      <span class="product">
+        <img src="https://m.media-amazon.com/images/I/61cDc-rzhcL.jpg" alt="" loading="lazy" onerror="this.style.display='none'">
+        <span class="product-meta">
+          <strong>EO-ROSEHIP-2oz</strong>
+          <span><a href="https://www.amazon.com/dp/B0DYTSB2WN" target="_blank" rel="noopener">B0DYTSB2WN</a></span>
+        </span>
+      </span>
+    </td>
+        <td data-label="Days" class="num days"><span class="pill critical">6.2d</span></td>
+        <td data-label="Send" class="num send">227</td>
+        <td data-label="30d units" class="num">175</td>
+        <td data-label="Avg/day" class="num">5.8</td>
+        <td data-label="FBA total" class="num">36</td>
+        <td data-label="Fulfillable" class="num">23</td>
+        <td data-label="Reserved" class="num">10</td>
+        <td data-label="Future" class="num">0</td>
+        <td data-label="Recommended" class="num">437</td>
+        <td data-label="Status"><span class="status critical">Critical</span></td>
+      </tr>
+    
+
+      <tr class="data-row critical" data-status="critical" data-search="b0g63yf4zd b0fx6ntjm4 pd-eucalyptus-mct-10-rl critical">
+        <td data-label="Item" class="item-cell">
+      <span class="product">
+        <img src="https://m.media-amazon.com/images/I/71t6Xkkb95L.jpg" alt="" loading="lazy" onerror="this.style.display='none'">
+        <span class="product-meta">
+          <strong>PD-EUCALYPTUS-MCT-10-RL</strong>
+          <span><a href="https://www.amazon.com/dp/B0FX6NTJM4" target="_blank" rel="noopener">B0FX6NTJM4</a></span>
+        </span>
+      </span>
+    </td>
+        <td data-label="Days" class="num days"><span class="pill critical">10.3d</span></td>
+        <td data-label="Send" class="num send">118</td>
+        <td data-label="30d units" class="num">102</td>
+        <td data-label="Avg/day" class="num">3.4</td>
+        <td data-label="FBA total" class="num">35</td>
+        <td data-label="Fulfillable" class="num">25</td>
+        <td data-label="Reserved" class="num">4</td>
+        <td data-label="Future" class="num">0</td>
+        <td data-label="Recommended" class="num">211</td>
+        <td data-label="Status"><span class="status critical">Critical</span></td>
+      </tr>
+    
+
+      <tr class="data-row critical" data-status="critical" data-search="b07dt6kjwq b0853dncbx gk0712_fba critical">
+        <td data-label="Item" class="item-cell">
+      <span class="product">
+        <img src="https://m.media-amazon.com/images/I/81DJq75ccpL.jpg" alt="" loading="lazy" onerror="this.style.display='none'">
+        <span class="product-meta">
+          <strong>GK0712_FBA</strong>
+          <span><a href="https://www.amazon.com/dp/B0853DNCBX" target="_blank" rel="noopener">B0853DNCBX</a></span>
+        </span>
+      </span>
+    </td>
+        <td data-label="Days" class="num days"><span class="pill critical">11.0d</span></td>
+        <td data-label="Send" class="num send">245</td>
+        <td data-label="30d units" class="num">216</td>
+        <td data-label="Avg/day" class="num">7.2</td>
+        <td data-label="FBA total" class="num">79</td>
+        <td data-label="Fulfillable" class="num">66</td>
+        <td data-label="Reserved" class="num">9</td>
+        <td data-label="Future" class="num">3</td>
+        <td data-label="Recommended" class="num">350</td>
+        <td data-label="Status"><span class="status critical">Critical</span></td>
+      </tr>
+    
+
+      <tr class="data-row critical" data-status="critical" data-search="b0cskfkgww b0cqm26ggf hs0002-3 critical">
+        <td data-label="Item" class="item-cell">
+      <span class="product">
+        <img src="https://m.media-amazon.com/images/I/71dYiG7yzQL.jpg" alt="" loading="lazy" onerror="this.style.display='none'">
+        <span class="product-meta">
+          <strong>HS0002-3</strong>
+          <span><a href="https://www.amazon.com/dp/B0CQM26GGF" target="_blank" rel="noopener">B0CQM26GGF</a></span>
+        </span>
+      </span>
+    </td>
+        <td data-label="Days" class="num days"><span class="pill critical">14.3d</span></td>
+        <td data-label="Send" class="num send">274</td>
+        <td data-label="30d units" class="num">267</td>
+        <td data-label="Avg/day" class="num">8.9</td>
+        <td data-label="FBA total" class="num">127</td>
+        <td data-label="Fulfillable" class="num">97</td>
+        <td data-label="Reserved" class="num">28</td>
+        <td data-label="Future" class="num">0</td>
+        <td data-label="Recommended" class="num">410</td>
+        <td data-label="Status"><span class="status critical">Critical</span></td>
+      </tr>
+    
+
+      <tr class="data-row critical" data-status="critical" data-search="b0d268lc2z b0d268lc2z hb0024 critical">
+        <td data-label="Item" class="item-cell">
+      <span class="product">
+        <img src="https://m.media-amazon.com/images/I/71mZ3GlUcYL.jpg" alt="" loading="lazy" onerror="this.style.display='none'">
+        <span class="product-meta">
+          <strong>HB0024</strong>
+          <span><a href="https://www.amazon.com/dp/B0D268LC2Z" target="_blank" rel="noopener">B0D268LC2Z</a></span>
+        </span>
+      </span>
+    </td>
+        <td data-label="Days" class="num days"><span class="pill critical">15.0d</span></td>
+        <td data-label="Send" class="num send">1,212</td>
+        <td data-label="30d units" class="num">1,210</td>
+        <td data-label="Avg/day" class="num">40.3</td>
+        <td data-label="FBA total" class="num">603</td>
+        <td data-label="Fulfillable" class="num">509</td>
+        <td data-label="Reserved" class="num">75</td>
+        <td data-label="Future" class="num">16</td>
+        <td data-label="Recommended" class="num">2,274</td>
+        <td data-label="Status"><span class="status critical">Critical</span></td>
+      </tr>
+    
+
+      <tr class="data-row critical" data-status="critical" data-search="b0gk71xt2l b0gk4x72yf eo-rosehip-1.7oz-rl critical">
+        <td data-label="Item" class="item-cell">
+      <span class="product">
+        <img src="https://m.media-amazon.com/images/I/71+7Cuqet5L.jpg" alt="" loading="lazy" onerror="this.style.display='none'">
+        <span class="product-meta">
+          <strong>EO-ROSEHIP-1.7oz-RL</strong>
+          <span><a href="https://www.amazon.com/dp/B0GK4X72YF" target="_blank" rel="noopener">B0GK4X72YF</a></span>
+        </span>
+      </span>
+    </td>
+        <td data-label="Days" class="num days"><span class="pill critical">15.7d</span></td>
+        <td data-label="Send" class="num send">99</td>
+        <td data-label="30d units" class="num">101</td>
+        <td data-label="Avg/day" class="num">3.4</td>
+        <td data-label="FBA total" class="num">53</td>
+        <td data-label="Fulfillable" class="num">33</td>
+        <td data-label="Reserved" class="num">5</td>
+        <td data-label="Future" class="num">0</td>
+        <td data-label="Recommended" class="num">206</td>
+        <td data-label="Status"><span class="status critical">Critical</span></td>
+      </tr>
+    
+
+      <tr class="data-row critical" data-status="critical" data-search="b095yp4v34 b0cq58jjgc jojoba-10-db critical">
+        <td data-label="Item" class="item-cell">
+      <span class="product">
+        <img src="https://m.media-amazon.com/images/I/61ECxZ365+L.jpg" alt="" loading="lazy" onerror="this.style.display='none'">
+        <span class="product-meta">
+          <strong>JOJOBA-10-DB</strong>
+          <span><a href="https://www.amazon.com/dp/B0CQ58JJGC" target="_blank" rel="noopener">B0CQ58JJGC</a></span>
+        </span>
+      </span>
+    </td>
+        <td data-label="Days" class="num days"><span class="pill critical">18.5d</span></td>
+        <td data-label="Send" class="num send">122</td>
+        <td data-label="30d units" class="num">138</td>
+        <td data-label="Avg/day" class="num">4.6</td>
+        <td data-label="FBA total" class="num">85</td>
+        <td data-label="Fulfillable" class="num">71</td>
+        <td data-label="Reserved" class="num">13</td>
+        <td data-label="Future" class="num">0</td>
+        <td data-label="Recommended" class="num">207</td>
+        <td data-label="Status"><span class="status critical">Critical</span></td>
+      </tr>
+    
+
+      <tr class="data-row critical" data-status="critical" data-search="b07d1wlhtg b006p2vuf6 kt8002-bk_fba critical">
+        <td data-label="Item" class="item-cell">
+      <span class="product">
+        <img src="https://m.media-amazon.com/images/I/71KvodAJwTL.jpg" alt="" loading="lazy" onerror="this.style.display='none'">
+        <span class="product-meta">
+          <strong>KT8002-BK_FBA</strong>
+          <span><a href="https://www.amazon.com/dp/B006P2VUF6" target="_blank" rel="noopener">B006P2VUF6</a></span>
+        </span>
+      </span>
+    </td>
+        <td data-label="Days" class="num days"><span class="pill critical">19.1d</span></td>
+        <td data-label="Send" class="num send">138</td>
+        <td data-label="30d units" class="num">159</td>
+        <td data-label="Avg/day" class="num">5.3</td>
+        <td data-label="FBA total" class="num">101</td>
+        <td data-label="Fulfillable" class="num">85</td>
+        <td data-label="Reserved" class="num">12</td>
+        <td data-label="Future" class="num">0</td>
+        <td data-label="Recommended" class="num">200</td>
+        <td data-label="Status"><span class="status critical">Critical</span></td>
+      </tr>
+    </tbody>
+          </table>
+        </div>
+      </section>
+    
+    
+      <section id="best-sellers" class="section">
+        <div class="section-head">
+          <div>
+            <h2>Best-selling low-stock items</h2>
+            <p>High velocity items that still need FBA send-in to reach the target cover.</p>
+          </div>
+          <a class="section-link" href="#all">View all</a>
+        </div>
+        <div class="table-wrap" role="region" aria-label="Best-selling low-stock items table" tabindex="0">
+          <table>
+            
+      <thead>
+        <tr>
+          <th class="item-col">Item</th>
+          <th class="num">Days</th>
+          <th class="num">Send</th>
+          <th class="num">30d units</th>
+          <th class="num">Avg/day</th>
+          <th class="num">FBA total</th>
+          <th class="num">Fulfillable</th>
+          <th class="num">Reserved</th>
+          <th class="num">Future</th>
+          <th class="num">Recommended</th>
+          <th>Status</th>
+        </tr>
+      </thead>
+    
+            <tbody>
+      <tr class="data-row watch" data-status="watch" data-search="b0cskfkgww b08s3jctkc hs0002_fba low &lt;45d">
+        <td data-label="Item" class="item-cell">
+      <span class="product">
+        <img src="https://m.media-amazon.com/images/I/61A+a5naUAL.jpg" alt="" loading="lazy" onerror="this.style.display='none'">
+        <span class="product-meta">
+          <strong>HS0002_FBA</strong>
+          <span><a href="https://www.amazon.com/dp/B08S3JCTKC" target="_blank" rel="noopener">B08S3JCTKC</a></span>
+        </span>
+      </span>
+    </td>
+        <td data-label="Days" class="num days"><span class="pill watch">37.2d</span></td>
+        <td data-label="Send" class="num send">3,813</td>
+        <td data-label="30d units" class="num">14,746</td>
+        <td data-label="Avg/day" class="num">491.5</td>
+        <td data-label="FBA total" class="num">18,306</td>
+        <td data-label="Fulfillable" class="num">9,769</td>
+        <td data-label="Reserved" class="num">1,864</td>
+        <td data-label="Future" class="num">1,372</td>
+        <td data-label="Recommended" class="num">7,340</td>
+        <td data-label="Status"><span class="status watch">Low &lt;45d</span></td>
+      </tr>
+    
+
+      <tr class="data-row watch" data-status="watch" data-search="b0cqzl389h b0drml3zmm eo-jojoba-1oz low &lt;45d">
+        <td data-label="Item" class="item-cell">
+      <span class="product">
+        <img src="https://m.media-amazon.com/images/I/71LRhF96QGL.jpg" alt="" loading="lazy" onerror="this.style.display='none'">
+        <span class="product-meta">
+          <strong>EO-JOJOBA-1oz</strong>
+          <span><a href="https://www.amazon.com/dp/B0DRML3ZMM" target="_blank" rel="noopener">B0DRML3ZMM</a></span>
+        </span>
+      </span>
+    </td>
+        <td data-label="Days" class="num days"><span class="pill watch">39.4d</span></td>
+        <td data-label="Send" class="num send">573</td>
+        <td data-label="30d units" class="num">3,057</td>
+        <td data-label="Avg/day" class="num">101.9</td>
+        <td data-label="FBA total" class="num">4,013</td>
+        <td data-label="Fulfillable" class="num">2,157</td>
+        <td data-label="Reserved" class="num">144</td>
+        <td data-label="Future" class="num">260</td>
+        <td data-label="Recommended" class="num">889</td>
+        <td data-label="Status"><span class="status watch">Low &lt;45d</span></td>
+      </tr>
+    
+
+      <tr class="data-row watch" data-status="watch" data-search="b0b7cmyrx6 b0b57pwjw2 pb-10_fba low &lt;45d">
+        <td data-label="Item" class="item-cell">
+      <span class="product">
+        <img src="https://m.media-amazon.com/images/I/61wl2x2oTxL.jpg" alt="" loading="lazy" onerror="this.style.display='none'">
+        <span class="product-meta">
+          <strong>PB-10_FBA</strong>
+          <span><a href="https://www.amazon.com/dp/B0B57PWJW2" target="_blank" rel="noopener">B0B57PWJW2</a></span>
+        </span>
+      </span>
+    </td>
+        <td data-label="Days" class="num days"><span class="pill watch">36.1d</span></td>
+        <td data-label="Send" class="num send">812</td>
+        <td data-label="30d units" class="num">2,734</td>
+        <td data-label="Avg/day" class="num">91.1</td>
+        <td data-label="FBA total" class="num">3,289</td>
+        <td data-label="Fulfillable" class="num">2,637</td>
+        <td data-label="Reserved" class="num">190</td>
+        <td data-label="Future" class="num">428</td>
+        <td data-label="Recommended" class="num">610</td>
+        <td data-label="Status"><span class="status watch">Low &lt;45d</span></td>
+      </tr>
+    
+
+      <tr class="data-row watch" data-status="watch" data-search="b0fbspbmnn b0fbytkgd6 eo-rosehip-1oz_fba low &lt;45d">
+        <td data-label="Item" class="item-cell">
+      <span class="product">
+        <img src="https://m.media-amazon.com/images/I/61ol9szfEFL.jpg" alt="" loading="lazy" onerror="this.style.display='none'">
+        <span class="product-meta">
+          <strong>EO-ROSEHIP-1oz_FBA</strong>
+          <span><a href="https://www.amazon.com/dp/B0FBYTKGD6" target="_blank" rel="noopener">B0FBYTKGD6</a></span>
+        </span>
+      </span>
+    </td>
+        <td data-label="Days" class="num days"><span class="pill watch">40.2d</span></td>
+        <td data-label="Send" class="num send">404</td>
+        <td data-label="30d units" class="num">2,506</td>
+        <td data-label="Avg/day" class="num">83.5</td>
+        <td data-label="FBA total" class="num">3,355</td>
+        <td data-label="Fulfillable" class="num">3,147</td>
+        <td data-label="Reserved" class="num">138</td>
+        <td data-label="Future" class="num">38</td>
+        <td data-label="Recommended" class="num">1,668</td>
+        <td data-label="Status"><span class="status watch">Low &lt;45d</span></td>
+      </tr>
+    
+
+      <tr class="data-row watch" data-status="watch" data-search="b0gk86vlmj b0fzhs9tb6 pd-teatree-mct-2oz low &lt;45d">
+        <td data-label="Item" class="item-cell">
+      <span class="product">
+        <img src="https://m.media-amazon.com/images/I/71Cw9sUaOrL.jpg" alt="" loading="lazy" onerror="this.style.display='none'">
+        <span class="product-meta">
+          <strong>PD-TEATREE-MCT-2oz</strong>
+          <span><a href="https://www.amazon.com/dp/B0FZHS9TB6" target="_blank" rel="noopener">B0FZHS9TB6</a></span>
+        </span>
+      </span>
+    </td>
+        <td data-label="Days" class="num days"><span class="pill watch">37.4d</span></td>
+        <td data-label="Send" class="num send">487</td>
+        <td data-label="30d units" class="num">1,934</td>
+        <td data-label="Avg/day" class="num">64.5</td>
+        <td data-label="FBA total" class="num">2,414</td>
+        <td data-label="Fulfillable" class="num">1,163</td>
+        <td data-label="Reserved" class="num">62</td>
+        <td data-label="Future" class="num">749</td>
+        <td data-label="Recommended" class="num">1,146</td>
+        <td data-label="Status"><span class="status watch">Low &lt;45d</span></td>
+      </tr>
+    
+
+      <tr class="data-row watch" data-status="watch" data-search="b0djbnm8rf b0ddt7gp79 eo-castor-4oz-usda low &lt;45d">
+        <td data-label="Item" class="item-cell">
+      <span class="product">
+        <img src="https://m.media-amazon.com/images/I/61KiVlqS-eL.jpg" alt="" loading="lazy" onerror="this.style.display='none'">
+        <span class="product-meta">
+          <strong>EO-CASTOR-4oz-USDA</strong>
+          <span><a href="https://www.amazon.com/dp/B0DDT7GP79" target="_blank" rel="noopener">B0DDT7GP79</a></span>
+        </span>
+      </span>
+    </td>
+        <td data-label="Days" class="num days"><span class="pill watch">33.1d</span></td>
+        <td data-label="Send" class="num send">594</td>
+        <td data-label="30d units" class="num">1,495</td>
+        <td data-label="Avg/day" class="num">49.8</td>
+        <td data-label="FBA total" class="num">1,649</td>
+        <td data-label="Fulfillable" class="num">1,300</td>
+        <td data-label="Reserved" class="num">110</td>
+        <td data-label="Future" class="num">178</td>
+        <td data-label="Recommended" class="num">1,819</td>
+        <td data-label="Status"><span class="status watch">Low &lt;45d</span></td>
+      </tr>
+    
+
+      <tr class="data-row watch" data-status="watch" data-search="b07dt6kjwq b07dt6zdp5 gk0487_fba low &lt;45d">
+        <td data-label="Item" class="item-cell">
+      <span class="product">
+        <img src="https://m.media-amazon.com/images/I/81Pvab5mJCL.jpg" alt="" loading="lazy" onerror="this.style.display='none'">
+        <span class="product-meta">
+          <strong>GK0487_FBA</strong>
+          <span><a href="https://www.amazon.com/dp/B07DT6ZDP5" target="_blank" rel="noopener">B07DT6ZDP5</a></span>
+        </span>
+      </span>
+    </td>
+        <td data-label="Days" class="num days"><span class="pill watch">33.4d</span></td>
+        <td data-label="Send" class="num send">516</td>
+        <td data-label="30d units" class="num">1,335</td>
+        <td data-label="Avg/day" class="num">44.5</td>
+        <td data-label="FBA total" class="num">1,487</td>
+        <td data-label="Fulfillable" class="num">658</td>
+        <td data-label="Reserved" class="num">34</td>
+        <td data-label="Future" class="num">693</td>
+        <td data-label="Recommended" class="num">970</td>
+        <td data-label="Status"><span class="status watch">Low &lt;45d</span></td>
+      </tr>
+    
+
+      <tr class="data-row critical" data-status="critical" data-search="b0d268lc2z b0d268lc2z hb0024 critical">
+        <td data-label="Item" class="item-cell">
+      <span class="product">
+        <img src="https://m.media-amazon.com/images/I/71mZ3GlUcYL.jpg" alt="" loading="lazy" onerror="this.style.display='none'">
+        <span class="product-meta">
+          <strong>HB0024</strong>
+          <span><a href="https://www.amazon.com/dp/B0D268LC2Z" target="_blank" rel="noopener">B0D268LC2Z</a></span>
+        </span>
+      </span>
+    </td>
+        <td data-label="Days" class="num days"><span class="pill critical">15.0d</span></td>
+        <td data-label="Send" class="num send">1,212</td>
+        <td data-label="30d units" class="num">1,210</td>
+        <td data-label="Avg/day" class="num">40.3</td>
+        <td data-label="FBA total" class="num">603</td>
+        <td data-label="Fulfillable" class="num">509</td>
+        <td data-label="Reserved" class="num">75</td>
+        <td data-label="Future" class="num">16</td>
+        <td data-label="Recommended" class="num">2,274</td>
+        <td data-label="Status"><span class="status critical">Critical</span></td>
+      </tr>
+    
+
+      <tr class="data-row watch" data-status="watch" data-search="b0b781qsh6 b004mzmb3s pn18g-10 low &lt;45d">
+        <td data-label="Item" class="item-cell">
+      <span class="product">
+        <img src="https://m.media-amazon.com/images/I/61ezmem+otL.jpg" alt="" loading="lazy" onerror="this.style.display='none'">
+        <span class="product-meta">
+          <strong>PN18G-10</strong>
+          <span><a href="https://www.amazon.com/dp/B004MZMB3S" target="_blank" rel="noopener">B004MZMB3S</a></span>
+        </span>
+      </span>
+    </td>
+        <td data-label="Days" class="num days"><span class="pill watch">36.2d</span></td>
+        <td data-label="Send" class="num send">293</td>
+        <td data-label="30d units" class="num">1,002</td>
+        <td data-label="Avg/day" class="num">33.4</td>
+        <td data-label="FBA total" class="num">1,210</td>
+        <td data-label="Fulfillable" class="num">1,125</td>
+        <td data-label="Reserved" class="num">59</td>
+        <td data-label="Future" class="num">0</td>
+        <td data-label="Recommended" class="num">250</td>
+        <td data-label="Status"><span class="status watch">Low &lt;45d</span></td>
+      </tr>
+    
+
+      <tr class="data-row watch" data-status="watch" data-search="b0djbnm8rf b0czd3zl5s eo-castor-1oz low &lt;45d">
+        <td data-label="Item" class="item-cell">
+      <span class="product">
+        <img src="https://m.media-amazon.com/images/I/716u3d0yLPL.jpg" alt="" loading="lazy" onerror="this.style.display='none'">
+        <span class="product-meta">
+          <strong>EO-CASTOR-1oz</strong>
+          <span><a href="https://www.amazon.com/dp/B0CZD3ZL5S" target="_blank" rel="noopener">B0CZD3ZL5S</a></span>
+        </span>
+      </span>
+    </td>
+        <td data-label="Days" class="num days"><span class="pill watch">38.3d</span></td>
+        <td data-label="Send" class="num send">218</td>
+        <td data-label="30d units" class="num">978</td>
+        <td data-label="Avg/day" class="num">32.6</td>
+        <td data-label="FBA total" class="num">1,249</td>
+        <td data-label="Fulfillable" class="num">147</td>
+        <td data-label="Reserved" class="num">254</td>
+        <td data-label="Future" class="num">168</td>
+        <td data-label="Recommended" class="num">1,484</td>
+        <td data-label="Status"><span class="status watch">Low &lt;45d</span></td>
+      </tr>
+    
+
+      <tr class="data-row soon" data-status="soon" data-search="b0g63yf4zd b0fx6n2dpn pd-frank-castor-mct-10-rl soon">
+        <td data-label="Item" class="item-cell">
+      <span class="product">
+        <img src="https://m.media-amazon.com/images/I/81ekfPEgdFL.jpg" alt="" loading="lazy" onerror="this.style.display='none'">
+        <span class="product-meta">
+          <strong>PD-FRANK-CASTOR-MCT-10-RL</strong>
+          <span><a href="https://www.amazon.com/dp/B0FX6N2DPN" target="_blank" rel="noopener">B0FX6N2DPN</a></span>
+        </span>
+      </span>
+    </td>
+        <td data-label="Days" class="num days"><span class="pill soon">22.2d</span></td>
+        <td data-label="Send" class="num send">405</td>
+        <td data-label="30d units" class="num">534</td>
+        <td data-label="Avg/day" class="num">17.8</td>
+        <td data-label="FBA total" class="num">396</td>
+        <td data-label="Fulfillable" class="num">54</td>
+        <td data-label="Reserved" class="num">38</td>
+        <td data-label="Future" class="num">299</td>
+        <td data-label="Recommended" class="num">931</td>
+        <td data-label="Status"><span class="status soon">Soon</span></td>
+      </tr>
+    
+
+      <tr class="data-row watch" data-status="watch" data-search="b095yp4v34 b084rm4qr9 jojoba_fba low &lt;45d">
+        <td data-label="Item" class="item-cell">
+      <span class="product">
+        <img src="https://m.media-amazon.com/images/I/71LL3UeNxEL.jpg" alt="" loading="lazy" onerror="this.style.display='none'">
+        <span class="product-meta">
+          <strong>JOJOBA_FBA</strong>
+          <span><a href="https://www.amazon.com/dp/B084RM4QR9" target="_blank" rel="noopener">B084RM4QR9</a></span>
+        </span>
+      </span>
+    </td>
+        <td data-label="Days" class="num days"><span class="pill watch">30.6d</span></td>
+        <td data-label="Send" class="num send">223</td>
+        <td data-label="30d units" class="num">464</td>
+        <td data-label="Avg/day" class="num">15.5</td>
+        <td data-label="FBA total" class="num">473</td>
+        <td data-label="Fulfillable" class="num">407</td>
+        <td data-label="Reserved" class="num">59</td>
+        <td data-label="Future" class="num">0</td>
+        <td data-label="Recommended" class="num">270</td>
+        <td data-label="Status"><span class="status watch">Low &lt;45d</span></td>
+      </tr>
+    </tbody>
+          </table>
+        </div>
+      </section>
+    
+    
+      <section id="all" class="section">
+        <div class="section-head">
+          <div>
+            <h2>All replenishment needs by parent ASIN</h2>
+            <p>Grouped by parent, ordered by the lowest FBA days available.</p>
+          </div>
+          <span id="visibleCount" class="count-pill">33 rows</span>
+        </div>
+        <div class="table-wrap" role="region" aria-label="All replenishment needs by parent ASIN" tabindex="0">
+          <table id="mainTable">
+            
+      <thead>
+        <tr>
+          <th class="item-col">Item</th>
+          <th class="num">Days</th>
+          <th class="num">Send</th>
+          <th class="num">30d units</th>
+          <th class="num">Avg/day</th>
+          <th class="num">FBA total</th>
+          <th class="num">Fulfillable</th>
+          <th class="num">Reserved</th>
+          <th class="num">Future</th>
+          <th class="num">Recommended</th>
+          <th>Status</th>
+        </tr>
+      </thead>
+    
+            
+      <tbody class="parent-group" data-search="b0fbspbmnn b0dytsb2wn b0fbytkgd6 eo-rosehip-2oz eo-rosehip-1oz_fba" data-status="critical watch">
+        <tr class="parent-row">
+          <td colspan="11">
+            <div class="parent-card">
+              <img class="parent-img" src="https://m.media-amazon.com/images/I/61ol9szfEFL.jpg" alt="" loading="lazy" onerror="this.style.display='none'">
+              <div class="parent-meta">
+                <span>Parent ASIN</span>
+                <strong><a href="https://www.amazon.com/dp/B0FBSPBMNN" target="_blank" rel="noopener">B0FBSPBMNN</a></strong>
+                <em>2 child ASINs needing FBA send-in</em>
+              </div>
+              <div class="parent-stats">
+                <span><strong>6.2d</strong><em>lowest cover</em></span>
+                <span><strong>631</strong><em>send units</em></span>
+                <span><strong>2,681</strong><em>30d units</em></span>
+              </div>
+            </div>
+          </td>
+        </tr>
+        
+      <tr class="data-row critical" data-status="critical" data-search="b0fbspbmnn b0dytsb2wn eo-rosehip-2oz critical">
+        <td data-label="Item" class="item-cell">
+      <span class="product">
+        <img src="https://m.media-amazon.com/images/I/61cDc-rzhcL.jpg" alt="" loading="lazy" onerror="this.style.display='none'">
+        <span class="product-meta">
+          <strong>EO-ROSEHIP-2oz</strong>
+          <span><a href="https://www.amazon.com/dp/B0DYTSB2WN" target="_blank" rel="noopener">B0DYTSB2WN</a></span>
+        </span>
+      </span>
+    </td>
+        <td data-label="Days" class="num days"><span class="pill critical">6.2d</span></td>
+        <td data-label="Send" class="num send">227</td>
+        <td data-label="30d units" class="num">175</td>
+        <td data-label="Avg/day" class="num">5.8</td>
+        <td data-label="FBA total" class="num">36</td>
+        <td data-label="Fulfillable" class="num">23</td>
+        <td data-label="Reserved" class="num">10</td>
+        <td data-label="Future" class="num">0</td>
+        <td data-label="Recommended" class="num">437</td>
+        <td data-label="Status"><span class="status critical">Critical</span></td>
+      </tr>
+    
+      <tr class="data-row watch" data-status="watch" data-search="b0fbspbmnn b0fbytkgd6 eo-rosehip-1oz_fba low &lt;45d">
+        <td data-label="Item" class="item-cell">
+      <span class="product">
+        <img src="https://m.media-amazon.com/images/I/61ol9szfEFL.jpg" alt="" loading="lazy" onerror="this.style.display='none'">
+        <span class="product-meta">
+          <strong>EO-ROSEHIP-1oz_FBA</strong>
+          <span><a href="https://www.amazon.com/dp/B0FBYTKGD6" target="_blank" rel="noopener">B0FBYTKGD6</a></span>
+        </span>
+      </span>
+    </td>
+        <td data-label="Days" class="num days"><span class="pill watch">40.2d</span></td>
+        <td data-label="Send" class="num send">404</td>
+        <td data-label="30d units" class="num">2,506</td>
+        <td data-label="Avg/day" class="num">83.5</td>
+        <td data-label="FBA total" class="num">3,355</td>
+        <td data-label="Fulfillable" class="num">3,147</td>
+        <td data-label="Reserved" class="num">138</td>
+        <td data-label="Future" class="num">38</td>
+        <td data-label="Recommended" class="num">1,668</td>
+        <td data-label="Status"><span class="status watch">Low &lt;45d</span></td>
+      </tr>
+    
+      </tbody>
+    
+
+      <tbody class="parent-group" data-search="b0g63yf4zd b0fx6ntjm4 b0fx6n2dpn pd-eucalyptus-mct-10-rl pd-frank-castor-mct-10-rl" data-status="critical soon">
+        <tr class="parent-row">
+          <td colspan="11">
+            <div class="parent-card">
+              <img class="parent-img" src="https://m.media-amazon.com/images/I/81ekfPEgdFL.jpg" alt="" loading="lazy" onerror="this.style.display='none'">
+              <div class="parent-meta">
+                <span>Parent ASIN</span>
+                <strong><a href="https://www.amazon.com/dp/B0G63YF4ZD" target="_blank" rel="noopener">B0G63YF4ZD</a></strong>
+                <em>2 child ASINs needing FBA send-in</em>
+              </div>
+              <div class="parent-stats">
+                <span><strong>10.3d</strong><em>lowest cover</em></span>
+                <span><strong>523</strong><em>send units</em></span>
+                <span><strong>636</strong><em>30d units</em></span>
+              </div>
+            </div>
+          </td>
+        </tr>
+        
+      <tr class="data-row critical" data-status="critical" data-search="b0g63yf4zd b0fx6ntjm4 pd-eucalyptus-mct-10-rl critical">
+        <td data-label="Item" class="item-cell">
+      <span class="product">
+        <img src="https://m.media-amazon.com/images/I/71t6Xkkb95L.jpg" alt="" loading="lazy" onerror="this.style.display='none'">
+        <span class="product-meta">
+          <strong>PD-EUCALYPTUS-MCT-10-RL</strong>
+          <span><a href="https://www.amazon.com/dp/B0FX6NTJM4" target="_blank" rel="noopener">B0FX6NTJM4</a></span>
+        </span>
+      </span>
+    </td>
+        <td data-label="Days" class="num days"><span class="pill critical">10.3d</span></td>
+        <td data-label="Send" class="num send">118</td>
+        <td data-label="30d units" class="num">102</td>
+        <td data-label="Avg/day" class="num">3.4</td>
+        <td data-label="FBA total" class="num">35</td>
+        <td data-label="Fulfillable" class="num">25</td>
+        <td data-label="Reserved" class="num">4</td>
+        <td data-label="Future" class="num">0</td>
+        <td data-label="Recommended" class="num">211</td>
+        <td data-label="Status"><span class="status critical">Critical</span></td>
+      </tr>
+    
+      <tr class="data-row soon" data-status="soon" data-search="b0g63yf4zd b0fx6n2dpn pd-frank-castor-mct-10-rl soon">
+        <td data-label="Item" class="item-cell">
+      <span class="product">
+        <img src="https://m.media-amazon.com/images/I/81ekfPEgdFL.jpg" alt="" loading="lazy" onerror="this.style.display='none'">
+        <span class="product-meta">
+          <strong>PD-FRANK-CASTOR-MCT-10-RL</strong>
+          <span><a href="https://www.amazon.com/dp/B0FX6N2DPN" target="_blank" rel="noopener">B0FX6N2DPN</a></span>
+        </span>
+      </span>
+    </td>
+        <td data-label="Days" class="num days"><span class="pill soon">22.2d</span></td>
+        <td data-label="Send" class="num send">405</td>
+        <td data-label="30d units" class="num">534</td>
+        <td data-label="Avg/day" class="num">17.8</td>
+        <td data-label="FBA total" class="num">396</td>
+        <td data-label="Fulfillable" class="num">54</td>
+        <td data-label="Reserved" class="num">38</td>
+        <td data-label="Future" class="num">299</td>
+        <td data-label="Recommended" class="num">931</td>
+        <td data-label="Status"><span class="status soon">Soon</span></td>
+      </tr>
+    
+      </tbody>
+    
+
+      <tbody class="parent-group" data-search="b07dt6kjwq b0853dncbx b09bvwyfn3 b09cdzbkq7 b07dt6zdp5 gk0712_fba gk0907_fba gk0910_fba gk0487_fba" data-status="critical soon watch">
+        <tr class="parent-row">
+          <td colspan="11">
+            <div class="parent-card">
+              <img class="parent-img" src="https://m.media-amazon.com/images/I/81Pvab5mJCL.jpg" alt="" loading="lazy" onerror="this.style.display='none'">
+              <div class="parent-meta">
+                <span>Parent ASIN</span>
+                <strong><a href="https://www.amazon.com/dp/B07DT6KJWQ" target="_blank" rel="noopener">B07DT6KJWQ</a></strong>
+                <em>4 child ASINs needing FBA send-in</em>
+              </div>
+              <div class="parent-stats">
+                <span><strong>11.0d</strong><em>lowest cover</em></span>
+                <span><strong>981</strong><em>send units</em></span>
+                <span><strong>1,926</strong><em>30d units</em></span>
+              </div>
+            </div>
+          </td>
+        </tr>
+        
+      <tr class="data-row critical" data-status="critical" data-search="b07dt6kjwq b0853dncbx gk0712_fba critical">
+        <td data-label="Item" class="item-cell">
+      <span class="product">
+        <img src="https://m.media-amazon.com/images/I/81DJq75ccpL.jpg" alt="" loading="lazy" onerror="this.style.display='none'">
+        <span class="product-meta">
+          <strong>GK0712_FBA</strong>
+          <span><a href="https://www.amazon.com/dp/B0853DNCBX" target="_blank" rel="noopener">B0853DNCBX</a></span>
+        </span>
+      </span>
+    </td>
+        <td data-label="Days" class="num days"><span class="pill critical">11.0d</span></td>
+        <td data-label="Send" class="num send">245</td>
+        <td data-label="30d units" class="num">216</td>
+        <td data-label="Avg/day" class="num">7.2</td>
+        <td data-label="FBA total" class="num">79</td>
+        <td data-label="Fulfillable" class="num">66</td>
+        <td data-label="Reserved" class="num">9</td>
+        <td data-label="Future" class="num">3</td>
+        <td data-label="Recommended" class="num">350</td>
+        <td data-label="Status"><span class="status critical">Critical</span></td>
+      </tr>
+    
+      <tr class="data-row soon" data-status="soon" data-search="b07dt6kjwq b09bvwyfn3 gk0907_fba soon">
+        <td data-label="Item" class="item-cell">
+      <span class="product">
+        <img src="https://m.media-amazon.com/images/I/914BlwK0OkL.jpg" alt="" loading="lazy" onerror="this.style.display='none'">
+        <span class="product-meta">
+          <strong>GK0907_FBA</strong>
+          <span><a href="https://www.amazon.com/dp/B09BVWYFN3" target="_blank" rel="noopener">B09BVWYFN3</a></span>
+        </span>
+      </span>
+    </td>
+        <td data-label="Days" class="num days"><span class="pill soon">26.6d</span></td>
+        <td data-label="Send" class="num send">153</td>
+        <td data-label="30d units" class="num">249</td>
+        <td data-label="Avg/day" class="num">8.3</td>
+        <td data-label="FBA total" class="num">221</td>
+        <td data-label="Fulfillable" class="num">208</td>
+        <td data-label="Reserved" class="num">9</td>
+        <td data-label="Future" class="num">0</td>
+        <td data-label="Recommended" class="num">110</td>
+        <td data-label="Status"><span class="status soon">Soon</span></td>
+      </tr>
+    
+      <tr class="data-row soon" data-status="soon" data-search="b07dt6kjwq b09cdzbkq7 gk0910_fba soon">
+        <td data-label="Item" class="item-cell">
+      <span class="product">
+        <img src="https://m.media-amazon.com/images/I/81oGJdSevfL.jpg" alt="" loading="lazy" onerror="this.style.display='none'">
+        <span class="product-meta">
+          <strong>GK0910_FBA</strong>
+          <span><a href="https://www.amazon.com/dp/B09CDZBKQ7" target="_blank" rel="noopener">B09CDZBKQ7</a></span>
+        </span>
+      </span>
+    </td>
+        <td data-label="Days" class="num days"><span class="pill soon">29.0d</span></td>
+        <td data-label="Send" class="num send">67</td>
+        <td data-label="30d units" class="num">126</td>
+        <td data-label="Avg/day" class="num">4.2</td>
+        <td data-label="FBA total" class="num">122</td>
+        <td data-label="Fulfillable" class="num">105</td>
+        <td data-label="Reserved" class="num">8</td>
+        <td data-label="Future" class="num">8</td>
+        <td data-label="Recommended" class="num">200</td>
+        <td data-label="Status"><span class="status soon">Soon</span></td>
+      </tr>
+    
+      <tr class="data-row watch" data-status="watch" data-search="b07dt6kjwq b07dt6zdp5 gk0487_fba low &lt;45d">
+        <td data-label="Item" class="item-cell">
+      <span class="product">
+        <img src="https://m.media-amazon.com/images/I/81Pvab5mJCL.jpg" alt="" loading="lazy" onerror="this.style.display='none'">
+        <span class="product-meta">
+          <strong>GK0487_FBA</strong>
+          <span><a href="https://www.amazon.com/dp/B07DT6ZDP5" target="_blank" rel="noopener">B07DT6ZDP5</a></span>
+        </span>
+      </span>
+    </td>
+        <td data-label="Days" class="num days"><span class="pill watch">33.4d</span></td>
+        <td data-label="Send" class="num send">516</td>
+        <td data-label="30d units" class="num">1,335</td>
+        <td data-label="Avg/day" class="num">44.5</td>
+        <td data-label="FBA total" class="num">1,487</td>
+        <td data-label="Fulfillable" class="num">658</td>
+        <td data-label="Reserved" class="num">34</td>
+        <td data-label="Future" class="num">693</td>
+        <td data-label="Recommended" class="num">970</td>
+        <td data-label="Status"><span class="status watch">Low &lt;45d</span></td>
+      </tr>
+    
+      </tbody>
+    
+
+      <tbody class="parent-group" data-search="b0cskfkgww b0cqm26ggf b09rssl9s7 b08s3jctkc hs0002-3 hs0002-2_fba hs0002_fba" data-status="critical soon watch">
+        <tr class="parent-row">
+          <td colspan="11">
+            <div class="parent-card">
+              <img class="parent-img" src="https://m.media-amazon.com/images/I/61A+a5naUAL.jpg" alt="" loading="lazy" onerror="this.style.display='none'">
+              <div class="parent-meta">
+                <span>Parent ASIN</span>
+                <strong><a href="https://www.amazon.com/dp/B0CSKFKGWW" target="_blank" rel="noopener">B0CSKFKGWW</a></strong>
+                <em>3 child ASINs needing FBA send-in</em>
+              </div>
+              <div class="parent-stats">
+                <span><strong>14.3d</strong><em>lowest cover</em></span>
+                <span><strong>4,363</strong><em>send units</em></span>
+                <span><strong>15,401</strong><em>30d units</em></span>
+              </div>
+            </div>
+          </td>
+        </tr>
+        
+      <tr class="data-row critical" data-status="critical" data-search="b0cskfkgww b0cqm26ggf hs0002-3 critical">
+        <td data-label="Item" class="item-cell">
+      <span class="product">
+        <img src="https://m.media-amazon.com/images/I/71dYiG7yzQL.jpg" alt="" loading="lazy" onerror="this.style.display='none'">
+        <span class="product-meta">
+          <strong>HS0002-3</strong>
+          <span><a href="https://www.amazon.com/dp/B0CQM26GGF" target="_blank" rel="noopener">B0CQM26GGF</a></span>
+        </span>
+      </span>
+    </td>
+        <td data-label="Days" class="num days"><span class="pill critical">14.3d</span></td>
+        <td data-label="Send" class="num send">274</td>
+        <td data-label="30d units" class="num">267</td>
+        <td data-label="Avg/day" class="num">8.9</td>
+        <td data-label="FBA total" class="num">127</td>
+        <td data-label="Fulfillable" class="num">97</td>
+        <td data-label="Reserved" class="num">28</td>
+        <td data-label="Future" class="num">0</td>
+        <td data-label="Recommended" class="num">410</td>
+        <td data-label="Status"><span class="status critical">Critical</span></td>
+      </tr>
+    
+      <tr class="data-row soon" data-status="soon" data-search="b0cskfkgww b09rssl9s7 hs0002-2_fba soon">
+        <td data-label="Item" class="item-cell">
+      <span class="product">
+        <img src="https://m.media-amazon.com/images/I/71JjVPJf4-L.jpg" alt="" loading="lazy" onerror="this.style.display='none'">
+        <span class="product-meta">
+          <strong>HS0002-2_FBA</strong>
+          <span><a href="https://www.amazon.com/dp/B09RSSL9S7" target="_blank" rel="noopener">B09RSSL9S7</a></span>
+        </span>
+      </span>
+    </td>
+        <td data-label="Days" class="num days"><span class="pill soon">23.7d</span></td>
+        <td data-label="Send" class="num send">276</td>
+        <td data-label="30d units" class="num">388</td>
+        <td data-label="Avg/day" class="num">12.9</td>
+        <td data-label="FBA total" class="num">306</td>
+        <td data-label="Fulfillable" class="num">288</td>
+        <td data-label="Reserved" class="num">16</td>
+        <td data-label="Future" class="num">0</td>
+        <td data-label="Recommended" class="num">490</td>
+        <td data-label="Status"><span class="status soon">Soon</span></td>
+      </tr>
+    
+      <tr class="data-row watch" data-status="watch" data-search="b0cskfkgww b08s3jctkc hs0002_fba low &lt;45d">
+        <td data-label="Item" class="item-cell">
+      <span class="product">
+        <img src="https://m.media-amazon.com/images/I/61A+a5naUAL.jpg" alt="" loading="lazy" onerror="this.style.display='none'">
+        <span class="product-meta">
+          <strong>HS0002_FBA</strong>
+          <span><a href="https://www.amazon.com/dp/B08S3JCTKC" target="_blank" rel="noopener">B08S3JCTKC</a></span>
+        </span>
+      </span>
+    </td>
+        <td data-label="Days" class="num days"><span class="pill watch">37.2d</span></td>
+        <td data-label="Send" class="num send">3,813</td>
+        <td data-label="30d units" class="num">14,746</td>
+        <td data-label="Avg/day" class="num">491.5</td>
+        <td data-label="FBA total" class="num">18,306</td>
+        <td data-label="Fulfillable" class="num">9,769</td>
+        <td data-label="Reserved" class="num">1,864</td>
+        <td data-label="Future" class="num">1,372</td>
+        <td data-label="Recommended" class="num">7,340</td>
+        <td data-label="Status"><span class="status watch">Low &lt;45d</span></td>
+      </tr>
+    
+      </tbody>
+    
+
+      <tbody class="parent-group" data-search="b0d268lc2z b0d268lc2z hb0024" data-status="critical">
+        <tr class="parent-row">
+          <td colspan="11">
+            <div class="parent-card">
+              <img class="parent-img" src="https://m.media-amazon.com/images/I/71mZ3GlUcYL.jpg" alt="" loading="lazy" onerror="this.style.display='none'">
+              <div class="parent-meta">
+                <span>Parent ASIN</span>
+                <strong><a href="https://www.amazon.com/dp/B0D268LC2Z" target="_blank" rel="noopener">B0D268LC2Z</a></strong>
+                <em>1 child ASIN needing FBA send-in</em>
+              </div>
+              <div class="parent-stats">
+                <span><strong>15.0d</strong><em>lowest cover</em></span>
+                <span><strong>1,212</strong><em>send units</em></span>
+                <span><strong>1,210</strong><em>30d units</em></span>
+              </div>
+            </div>
+          </td>
+        </tr>
+        
+      <tr class="data-row critical" data-status="critical" data-search="b0d268lc2z b0d268lc2z hb0024 critical">
+        <td data-label="Item" class="item-cell">
+      <span class="product">
+        <img src="https://m.media-amazon.com/images/I/71mZ3GlUcYL.jpg" alt="" loading="lazy" onerror="this.style.display='none'">
+        <span class="product-meta">
+          <strong>HB0024</strong>
+          <span><a href="https://www.amazon.com/dp/B0D268LC2Z" target="_blank" rel="noopener">B0D268LC2Z</a></span>
+        </span>
+      </span>
+    </td>
+        <td data-label="Days" class="num days"><span class="pill critical">15.0d</span></td>
+        <td data-label="Send" class="num send">1,212</td>
+        <td data-label="30d units" class="num">1,210</td>
+        <td data-label="Avg/day" class="num">40.3</td>
+        <td data-label="FBA total" class="num">603</td>
+        <td data-label="Fulfillable" class="num">509</td>
+        <td data-label="Reserved" class="num">75</td>
+        <td data-label="Future" class="num">16</td>
+        <td data-label="Recommended" class="num">2,274</td>
+        <td data-label="Status"><span class="status critical">Critical</span></td>
+      </tr>
+    
+      </tbody>
+    
+
+      <tbody class="parent-group" data-search="b0gk71xt2l b0gk4x72yf b0fy2j57wb eo-rosehip-1.7oz-rl eo-castor-1.7oz-rl" data-status="critical watch">
+        <tr class="parent-row">
+          <td colspan="11">
+            <div class="parent-card">
+              <img class="parent-img" src="https://m.media-amazon.com/images/I/71kGKtStmSL.jpg" alt="" loading="lazy" onerror="this.style.display='none'">
+              <div class="parent-meta">
+                <span>Parent ASIN</span>
+                <strong><a href="https://www.amazon.com/dp/B0GK71XT2L" target="_blank" rel="noopener">B0GK71XT2L</a></strong>
+                <em>2 child ASINs needing FBA send-in</em>
+              </div>
+              <div class="parent-stats">
+                <span><strong>15.7d</strong><em>lowest cover</em></span>
+                <span><strong>115</strong><em>send units</em></span>
+                <span><strong>211</strong><em>30d units</em></span>
+              </div>
+            </div>
+          </td>
+        </tr>
+        
+      <tr class="data-row critical" data-status="critical" data-search="b0gk71xt2l b0gk4x72yf eo-rosehip-1.7oz-rl critical">
+        <td data-label="Item" class="item-cell">
+      <span class="product">
+        <img src="https://m.media-amazon.com/images/I/71+7Cuqet5L.jpg" alt="" loading="lazy" onerror="this.style.display='none'">
+        <span class="product-meta">
+          <strong>EO-ROSEHIP-1.7oz-RL</strong>
+          <span><a href="https://www.amazon.com/dp/B0GK4X72YF" target="_blank" rel="noopener">B0GK4X72YF</a></span>
+        </span>
+      </span>
+    </td>
+        <td data-label="Days" class="num days"><span class="pill critical">15.7d</span></td>
+        <td data-label="Send" class="num send">99</td>
+        <td data-label="30d units" class="num">101</td>
+        <td data-label="Avg/day" class="num">3.4</td>
+        <td data-label="FBA total" class="num">53</td>
+        <td data-label="Fulfillable" class="num">33</td>
+        <td data-label="Reserved" class="num">5</td>
+        <td data-label="Future" class="num">0</td>
+        <td data-label="Recommended" class="num">206</td>
+        <td data-label="Status"><span class="status critical">Critical</span></td>
+      </tr>
+    
+      <tr class="data-row watch" data-status="watch" data-search="b0gk71xt2l b0fy2j57wb eo-castor-1.7oz-rl low &lt;45d">
+        <td data-label="Item" class="item-cell">
+      <span class="product">
+        <img src="https://m.media-amazon.com/images/I/71kGKtStmSL.jpg" alt="" loading="lazy" onerror="this.style.display='none'">
+        <span class="product-meta">
+          <strong>EO-CASTOR-1.7oz-RL</strong>
+          <span><a href="https://www.amazon.com/dp/B0FY2J57WB" target="_blank" rel="noopener">B0FY2J57WB</a></span>
+        </span>
+      </span>
+    </td>
+        <td data-label="Days" class="num days"><span class="pill watch">40.6d</span></td>
+        <td data-label="Send" class="num send">16</td>
+        <td data-label="30d units" class="num">110</td>
+        <td data-label="Avg/day" class="num">3.7</td>
+        <td data-label="FBA total" class="num">149</td>
+        <td data-label="Fulfillable" class="num">101</td>
+        <td data-label="Reserved" class="num">12</td>
+        <td data-label="Future" class="num">36</td>
+        <td data-label="Recommended" class="num">28</td>
+        <td data-label="Status"><span class="status watch">Low &lt;45d</span></td>
+      </tr>
+    
+      </tbody>
+    
+
+      <tbody class="parent-group" data-search="b095yp4v34 b0cq58jjgc b084rm4qr9 jojoba-10-db jojoba_fba" data-status="critical watch">
+        <tr class="parent-row">
+          <td colspan="11">
+            <div class="parent-card">
+              <img class="parent-img" src="https://m.media-amazon.com/images/I/71LL3UeNxEL.jpg" alt="" loading="lazy" onerror="this.style.display='none'">
+              <div class="parent-meta">
+                <span>Parent ASIN</span>
+                <strong><a href="https://www.amazon.com/dp/B095YP4V34" target="_blank" rel="noopener">B095YP4V34</a></strong>
+                <em>2 child ASINs needing FBA send-in</em>
+              </div>
+              <div class="parent-stats">
+                <span><strong>18.5d</strong><em>lowest cover</em></span>
+                <span><strong>345</strong><em>send units</em></span>
+                <span><strong>602</strong><em>30d units</em></span>
+              </div>
+            </div>
+          </td>
+        </tr>
+        
+      <tr class="data-row critical" data-status="critical" data-search="b095yp4v34 b0cq58jjgc jojoba-10-db critical">
+        <td data-label="Item" class="item-cell">
+      <span class="product">
+        <img src="https://m.media-amazon.com/images/I/61ECxZ365+L.jpg" alt="" loading="lazy" onerror="this.style.display='none'">
+        <span class="product-meta">
+          <strong>JOJOBA-10-DB</strong>
+          <span><a href="https://www.amazon.com/dp/B0CQ58JJGC" target="_blank" rel="noopener">B0CQ58JJGC</a></span>
+        </span>
+      </span>
+    </td>
+        <td data-label="Days" class="num days"><span class="pill critical">18.5d</span></td>
+        <td data-label="Send" class="num send">122</td>
+        <td data-label="30d units" class="num">138</td>
+        <td data-label="Avg/day" class="num">4.6</td>
+        <td data-label="FBA total" class="num">85</td>
+        <td data-label="Fulfillable" class="num">71</td>
+        <td data-label="Reserved" class="num">13</td>
+        <td data-label="Future" class="num">0</td>
+        <td data-label="Recommended" class="num">207</td>
+        <td data-label="Status"><span class="status critical">Critical</span></td>
+      </tr>
+    
+      <tr class="data-row watch" data-status="watch" data-search="b095yp4v34 b084rm4qr9 jojoba_fba low &lt;45d">
+        <td data-label="Item" class="item-cell">
+      <span class="product">
+        <img src="https://m.media-amazon.com/images/I/71LL3UeNxEL.jpg" alt="" loading="lazy" onerror="this.style.display='none'">
+        <span class="product-meta">
+          <strong>JOJOBA_FBA</strong>
+          <span><a href="https://www.amazon.com/dp/B084RM4QR9" target="_blank" rel="noopener">B084RM4QR9</a></span>
+        </span>
+      </span>
+    </td>
+        <td data-label="Days" class="num days"><span class="pill watch">30.6d</span></td>
+        <td data-label="Send" class="num send">223</td>
+        <td data-label="30d units" class="num">464</td>
+        <td data-label="Avg/day" class="num">15.5</td>
+        <td data-label="FBA total" class="num">473</td>
+        <td data-label="Fulfillable" class="num">407</td>
+        <td data-label="Reserved" class="num">59</td>
+        <td data-label="Future" class="num">0</td>
+        <td data-label="Recommended" class="num">270</td>
+        <td data-label="Status"><span class="status watch">Low &lt;45d</span></td>
+      </tr>
+    
+      </tbody>
+    
+
+      <tbody class="parent-group" data-search="b07d1wlhtg b006p2vuf6 kt8002-bk_fba" data-status="critical">
+        <tr class="parent-row">
+          <td colspan="11">
+            <div class="parent-card">
+              <img class="parent-img" src="https://m.media-amazon.com/images/I/71KvodAJwTL.jpg" alt="" loading="lazy" onerror="this.style.display='none'">
+              <div class="parent-meta">
+                <span>Parent ASIN</span>
+                <strong><a href="https://www.amazon.com/dp/B07D1WLHTG" target="_blank" rel="noopener">B07D1WLHTG</a></strong>
+                <em>1 child ASIN needing FBA send-in</em>
+              </div>
+              <div class="parent-stats">
+                <span><strong>19.1d</strong><em>lowest cover</em></span>
+                <span><strong>138</strong><em>send units</em></span>
+                <span><strong>159</strong><em>30d units</em></span>
+              </div>
+            </div>
+          </td>
+        </tr>
+        
+      <tr class="data-row critical" data-status="critical" data-search="b07d1wlhtg b006p2vuf6 kt8002-bk_fba critical">
+        <td data-label="Item" class="item-cell">
+      <span class="product">
+        <img src="https://m.media-amazon.com/images/I/71KvodAJwTL.jpg" alt="" loading="lazy" onerror="this.style.display='none'">
+        <span class="product-meta">
+          <strong>KT8002-BK_FBA</strong>
+          <span><a href="https://www.amazon.com/dp/B006P2VUF6" target="_blank" rel="noopener">B006P2VUF6</a></span>
+        </span>
+      </span>
+    </td>
+        <td data-label="Days" class="num days"><span class="pill critical">19.1d</span></td>
+        <td data-label="Send" class="num send">138</td>
+        <td data-label="30d units" class="num">159</td>
+        <td data-label="Avg/day" class="num">5.3</td>
+        <td data-label="FBA total" class="num">101</td>
+        <td data-label="Fulfillable" class="num">85</td>
+        <td data-label="Reserved" class="num">12</td>
+        <td data-label="Future" class="num">0</td>
+        <td data-label="Recommended" class="num">200</td>
+        <td data-label="Status"><span class="status critical">Critical</span></td>
+      </tr>
+    
+      </tbody>
+    
+
+      <tbody class="parent-group" data-search="b0d978q2wt b0dgwdsskw b09825srfq b0bzb723jd nc4290-1 nc4303_fba nc4367_fba" data-status="soon watch">
+        <tr class="parent-row">
+          <td colspan="11">
+            <div class="parent-card">
+              <img class="parent-img" src="https://m.media-amazon.com/images/I/61pQUpRXq6L.jpg" alt="" loading="lazy" onerror="this.style.display='none'">
+              <div class="parent-meta">
+                <span>Parent ASIN</span>
+                <strong><a href="https://www.amazon.com/dp/B0D978Q2WT" target="_blank" rel="noopener">B0D978Q2WT</a></strong>
+                <em>3 child ASINs needing FBA send-in</em>
+              </div>
+              <div class="parent-stats">
+                <span><strong>21.2d</strong><em>lowest cover</em></span>
+                <span><strong>316</strong><em>send units</em></span>
+                <span><strong>986</strong><em>30d units</em></span>
+              </div>
+            </div>
+          </td>
+        </tr>
+        
+      <tr class="data-row soon" data-status="soon" data-search="b0d978q2wt b0dgwdsskw nc4290-1 soon">
+        <td data-label="Item" class="item-cell">
+      <span class="product">
+        <img src="https://m.media-amazon.com/images/I/71QUeDxAo2L.jpg" alt="" loading="lazy" onerror="this.style.display='none'">
+        <span class="product-meta">
+          <strong>NC4290-1</strong>
+          <span><a href="https://www.amazon.com/dp/B0DGWDSSKW" target="_blank" rel="noopener">B0DGWDSSKW</a></span>
+        </span>
+      </span>
+    </td>
+        <td data-label="Days" class="num days"><span class="pill soon">21.2d</span></td>
+        <td data-label="Send" class="num send">289</td>
+        <td data-label="30d units" class="num">364</td>
+        <td data-label="Avg/day" class="num">12.1</td>
+        <td data-label="FBA total" class="num">257</td>
+        <td data-label="Fulfillable" class="num">142</td>
+        <td data-label="Reserved" class="num">3</td>
+        <td data-label="Future" class="num">28</td>
+        <td data-label="Recommended" class="num">346</td>
+        <td data-label="Status"><span class="status soon">Soon</span></td>
+      </tr>
+    
+      <tr class="data-row watch" data-status="watch" data-search="b0d978q2wt b09825srfq nc4303_fba low &lt;45d">
+        <td data-label="Item" class="item-cell">
+      <span class="product">
+        <img src="https://m.media-amazon.com/images/I/71jnOPJiS2S.jpg" alt="" loading="lazy" onerror="this.style.display='none'">
+        <span class="product-meta">
+          <strong>NC4303_FBA</strong>
+          <span><a href="https://www.amazon.com/dp/B09825SRFQ" target="_blank" rel="noopener">B09825SRFQ</a></span>
+        </span>
+      </span>
+    </td>
+        <td data-label="Days" class="num days"><span class="pill watch">41.7d</span></td>
+        <td data-label="Send" class="num send">19</td>
+        <td data-label="30d units" class="num">174</td>
+        <td data-label="Avg/day" class="num">5.8</td>
+        <td data-label="FBA total" class="num">242</td>
+        <td data-label="Fulfillable" class="num">224</td>
+        <td data-label="Reserved" class="num">8</td>
+        <td data-label="Future" class="num">0</td>
+        <td data-label="Recommended" class="num">85</td>
+        <td data-label="Status"><span class="status watch">Low &lt;45d</span></td>
+      </tr>
+    
+      <tr class="data-row watch" data-status="watch" data-search="b0d978q2wt b0bzb723jd nc4367_fba low &lt;45d">
+        <td data-label="Item" class="item-cell">
+      <span class="product">
+        <img src="https://m.media-amazon.com/images/I/61pQUpRXq6L.jpg" alt="" loading="lazy" onerror="this.style.display='none'">
+        <span class="product-meta">
+          <strong>NC4367_FBA</strong>
+          <span><a href="https://www.amazon.com/dp/B0BZB723JD" target="_blank" rel="noopener">B0BZB723JD</a></span>
+        </span>
+      </span>
+    </td>
+        <td data-label="Days" class="num days"><span class="pill watch">44.5d</span></td>
+        <td data-label="Send" class="num send">8</td>
+        <td data-label="30d units" class="num">448</td>
+        <td data-label="Avg/day" class="num">14.9</td>
+        <td data-label="FBA total" class="num">664</td>
+        <td data-label="Fulfillable" class="num">645</td>
+        <td data-label="Reserved" class="num">13</td>
+        <td data-label="Future" class="num">0</td>
+        <td data-label="Recommended" class="num">40</td>
+        <td data-label="Status"><span class="status watch">Low &lt;45d</span></td>
+      </tr>
+    
+      </tbody>
+    
+
+      <tbody class="parent-group" data-search="b0b7rc5zx5 b084rxrzwm hb0006_fba" data-status="soon">
+        <tr class="parent-row">
+          <td colspan="11">
+            <div class="parent-card">
+              <img class="parent-img" src="https://m.media-amazon.com/images/I/71NAirbcH3L.jpg" alt="" loading="lazy" onerror="this.style.display='none'">
+              <div class="parent-meta">
+                <span>Parent ASIN</span>
+                <strong><a href="https://www.amazon.com/dp/B0B7RC5ZX5" target="_blank" rel="noopener">B0B7RC5ZX5</a></strong>
+                <em>1 child ASIN needing FBA send-in</em>
+              </div>
+              <div class="parent-stats">
+                <span><strong>26.5d</strong><em>lowest cover</em></span>
+                <span><strong>168</strong><em>send units</em></span>
+                <span><strong>271</strong><em>30d units</em></span>
+              </div>
+            </div>
+          </td>
+        </tr>
+        
+      <tr class="data-row soon" data-status="soon" data-search="b0b7rc5zx5 b084rxrzwm hb0006_fba soon">
+        <td data-label="Item" class="item-cell">
+      <span class="product">
+        <img src="https://m.media-amazon.com/images/I/71NAirbcH3L.jpg" alt="" loading="lazy" onerror="this.style.display='none'">
+        <span class="product-meta">
+          <strong>HB0006_FBA</strong>
+          <span><a href="https://www.amazon.com/dp/B084RXRZWM" target="_blank" rel="noopener">B084RXRZWM</a></span>
+        </span>
+      </span>
+    </td>
+        <td data-label="Days" class="num days"><span class="pill soon">26.5d</span></td>
+        <td data-label="Send" class="num send">168</td>
+        <td data-label="30d units" class="num">271</td>
+        <td data-label="Avg/day" class="num">9.0</td>
+        <td data-label="FBA total" class="num">239</td>
+        <td data-label="Fulfillable" class="num">167</td>
+        <td data-label="Reserved" class="num">32</td>
+        <td data-label="Future" class="num">40</td>
+        <td data-label="Recommended" class="num">180</td>
+        <td data-label="Status"><span class="status soon">Soon</span></td>
+      </tr>
+    
+      </tbody>
+    
+
+      <tbody class="parent-group" data-search="b08vfbqdpf b07n8mnwyk gk0541_fba" data-status="watch">
+        <tr class="parent-row">
+          <td colspan="11">
+            <div class="parent-card">
+              <img class="parent-img" src="https://m.media-amazon.com/images/I/81qT68bXdAL.jpg" alt="" loading="lazy" onerror="this.style.display='none'">
+              <div class="parent-meta">
+                <span>Parent ASIN</span>
+                <strong><a href="https://www.amazon.com/dp/B08VFBQDPF" target="_blank" rel="noopener">B08VFBQDPF</a></strong>
+                <em>1 child ASIN needing FBA send-in</em>
+              </div>
+              <div class="parent-stats">
+                <span><strong>32.6d</strong><em>lowest cover</em></span>
+                <span><strong>141</strong><em>send units</em></span>
+                <span><strong>340</strong><em>30d units</em></span>
+              </div>
+            </div>
+          </td>
+        </tr>
+        
+      <tr class="data-row watch" data-status="watch" data-search="b08vfbqdpf b07n8mnwyk gk0541_fba low &lt;45d">
+        <td data-label="Item" class="item-cell">
+      <span class="product">
+        <img src="https://m.media-amazon.com/images/I/81qT68bXdAL.jpg" alt="" loading="lazy" onerror="this.style.display='none'">
+        <span class="product-meta">
+          <strong>GK0541_FBA</strong>
+          <span><a href="https://www.amazon.com/dp/B07N8MNWYK" target="_blank" rel="noopener">B07N8MNWYK</a></span>
+        </span>
+      </span>
+    </td>
+        <td data-label="Days" class="num days"><span class="pill watch">32.6d</span></td>
+        <td data-label="Send" class="num send">141</td>
+        <td data-label="30d units" class="num">340</td>
+        <td data-label="Avg/day" class="num">11.3</td>
+        <td data-label="FBA total" class="num">369</td>
+        <td data-label="Fulfillable" class="num">287</td>
+        <td data-label="Reserved" class="num">19</td>
+        <td data-label="Future" class="num">20</td>
+        <td data-label="Recommended" class="num">220</td>
+        <td data-label="Status"><span class="status watch">Low &lt;45d</span></td>
+      </tr>
+    
+      </tbody>
+    
+
+      <tbody class="parent-group" data-search="b0b781qsh6 b004mzmbc4 b004mzmb3s pn14g-10 pn18g-10" data-status="watch">
+        <tr class="parent-row">
+          <td colspan="11">
+            <div class="parent-card">
+              <img class="parent-img" src="https://m.media-amazon.com/images/I/61ezmem+otL.jpg" alt="" loading="lazy" onerror="this.style.display='none'">
+              <div class="parent-meta">
+                <span>Parent ASIN</span>
+                <strong><a href="https://www.amazon.com/dp/B0B781QSH6" target="_blank" rel="noopener">B0B781QSH6</a></strong>
+                <em>2 child ASINs needing FBA send-in</em>
+              </div>
+              <div class="parent-stats">
+                <span><strong>32.8d</strong><em>lowest cover</em></span>
+                <span><strong>392</strong><em>send units</em></span>
+                <span><strong>1,246</strong><em>30d units</em></span>
+              </div>
+            </div>
+          </td>
+        </tr>
+        
+      <tr class="data-row watch" data-status="watch" data-search="b0b781qsh6 b004mzmbc4 pn14g-10 low &lt;45d">
+        <td data-label="Item" class="item-cell">
+      <span class="product">
+        <img src="https://m.media-amazon.com/images/I/61ezmem+otL.jpg" alt="" loading="lazy" onerror="this.style.display='none'">
+        <span class="product-meta">
+          <strong>PN14G-10</strong>
+          <span><a href="https://www.amazon.com/dp/B004MZMBC4" target="_blank" rel="noopener">B004MZMBC4</a></span>
+        </span>
+      </span>
+    </td>
+        <td data-label="Days" class="num days"><span class="pill watch">32.8d</span></td>
+        <td data-label="Send" class="num send">99</td>
+        <td data-label="30d units" class="num">244</td>
+        <td data-label="Avg/day" class="num">8.1</td>
+        <td data-label="FBA total" class="num">267</td>
+        <td data-label="Fulfillable" class="num">233</td>
+        <td data-label="Reserved" class="num">28</td>
+        <td data-label="Future" class="num">0</td>
+        <td data-label="Recommended" class="num">305</td>
+        <td data-label="Status"><span class="status watch">Low &lt;45d</span></td>
+      </tr>
+    
+      <tr class="data-row watch" data-status="watch" data-search="b0b781qsh6 b004mzmb3s pn18g-10 low &lt;45d">
+        <td data-label="Item" class="item-cell">
+      <span class="product">
+        <img src="https://m.media-amazon.com/images/I/61ezmem+otL.jpg" alt="" loading="lazy" onerror="this.style.display='none'">
+        <span class="product-meta">
+          <strong>PN18G-10</strong>
+          <span><a href="https://www.amazon.com/dp/B004MZMB3S" target="_blank" rel="noopener">B004MZMB3S</a></span>
+        </span>
+      </span>
+    </td>
+        <td data-label="Days" class="num days"><span class="pill watch">36.2d</span></td>
+        <td data-label="Send" class="num send">293</td>
+        <td data-label="30d units" class="num">1,002</td>
+        <td data-label="Avg/day" class="num">33.4</td>
+        <td data-label="FBA total" class="num">1,210</td>
+        <td data-label="Fulfillable" class="num">1,125</td>
+        <td data-label="Reserved" class="num">59</td>
+        <td data-label="Future" class="num">0</td>
+        <td data-label="Recommended" class="num">250</td>
+        <td data-label="Status"><span class="status watch">Low &lt;45d</span></td>
+      </tr>
+    
+      </tbody>
+    
+
+      <tbody class="parent-group" data-search="b0djbnm8rf b0ddt7gp79 b0czd3zl5s eo-castor-4oz-usda eo-castor-1oz" data-status="watch">
+        <tr class="parent-row">
+          <td colspan="11">
+            <div class="parent-card">
+              <img class="parent-img" src="https://m.media-amazon.com/images/I/61KiVlqS-eL.jpg" alt="" loading="lazy" onerror="this.style.display='none'">
+              <div class="parent-meta">
+                <span>Parent ASIN</span>
+                <strong><a href="https://www.amazon.com/dp/B0DJBNM8RF" target="_blank" rel="noopener">B0DJBNM8RF</a></strong>
+                <em>2 child ASINs needing FBA send-in</em>
+              </div>
+              <div class="parent-stats">
+                <span><strong>33.1d</strong><em>lowest cover</em></span>
+                <span><strong>812</strong><em>send units</em></span>
+                <span><strong>2,473</strong><em>30d units</em></span>
+              </div>
+            </div>
+          </td>
+        </tr>
+        
+      <tr class="data-row watch" data-status="watch" data-search="b0djbnm8rf b0ddt7gp79 eo-castor-4oz-usda low &lt;45d">
+        <td data-label="Item" class="item-cell">
+      <span class="product">
+        <img src="https://m.media-amazon.com/images/I/61KiVlqS-eL.jpg" alt="" loading="lazy" onerror="this.style.display='none'">
+        <span class="product-meta">
+          <strong>EO-CASTOR-4oz-USDA</strong>
+          <span><a href="https://www.amazon.com/dp/B0DDT7GP79" target="_blank" rel="noopener">B0DDT7GP79</a></span>
+        </span>
+      </span>
+    </td>
+        <td data-label="Days" class="num days"><span class="pill watch">33.1d</span></td>
+        <td data-label="Send" class="num send">594</td>
+        <td data-label="30d units" class="num">1,495</td>
+        <td data-label="Avg/day" class="num">49.8</td>
+        <td data-label="FBA total" class="num">1,649</td>
+        <td data-label="Fulfillable" class="num">1,300</td>
+        <td data-label="Reserved" class="num">110</td>
+        <td data-label="Future" class="num">178</td>
+        <td data-label="Recommended" class="num">1,819</td>
+        <td data-label="Status"><span class="status watch">Low &lt;45d</span></td>
+      </tr>
+    
+      <tr class="data-row watch" data-status="watch" data-search="b0djbnm8rf b0czd3zl5s eo-castor-1oz low &lt;45d">
+        <td data-label="Item" class="item-cell">
+      <span class="product">
+        <img src="https://m.media-amazon.com/images/I/716u3d0yLPL.jpg" alt="" loading="lazy" onerror="this.style.display='none'">
+        <span class="product-meta">
+          <strong>EO-CASTOR-1oz</strong>
+          <span><a href="https://www.amazon.com/dp/B0CZD3ZL5S" target="_blank" rel="noopener">B0CZD3ZL5S</a></span>
+        </span>
+      </span>
+    </td>
+        <td data-label="Days" class="num days"><span class="pill watch">38.3d</span></td>
+        <td data-label="Send" class="num send">218</td>
+        <td data-label="30d units" class="num">978</td>
+        <td data-label="Avg/day" class="num">32.6</td>
+        <td data-label="FBA total" class="num">1,249</td>
+        <td data-label="Fulfillable" class="num">147</td>
+        <td data-label="Reserved" class="num">254</td>
+        <td data-label="Future" class="num">168</td>
+        <td data-label="Recommended" class="num">1,484</td>
+        <td data-label="Status"><span class="status watch">Low &lt;45d</span></td>
+      </tr>
+    
+      </tbody>
+    
+
+      <tbody class="parent-group" data-search="b0b7cmyrx6 b0b57pwjw2 pb-10_fba" data-status="watch">
+        <tr class="parent-row">
+          <td colspan="11">
+            <div class="parent-card">
+              <img class="parent-img" src="https://m.media-amazon.com/images/I/61wl2x2oTxL.jpg" alt="" loading="lazy" onerror="this.style.display='none'">
+              <div class="parent-meta">
+                <span>Parent ASIN</span>
+                <strong><a href="https://www.amazon.com/dp/B0B7CMYRX6" target="_blank" rel="noopener">B0B7CMYRX6</a></strong>
+                <em>1 child ASIN needing FBA send-in</em>
+              </div>
+              <div class="parent-stats">
+                <span><strong>36.1d</strong><em>lowest cover</em></span>
+                <span><strong>812</strong><em>send units</em></span>
+                <span><strong>2,734</strong><em>30d units</em></span>
+              </div>
+            </div>
+          </td>
+        </tr>
+        
+      <tr class="data-row watch" data-status="watch" data-search="b0b7cmyrx6 b0b57pwjw2 pb-10_fba low &lt;45d">
+        <td data-label="Item" class="item-cell">
+      <span class="product">
+        <img src="https://m.media-amazon.com/images/I/61wl2x2oTxL.jpg" alt="" loading="lazy" onerror="this.style.display='none'">
+        <span class="product-meta">
+          <strong>PB-10_FBA</strong>
+          <span><a href="https://www.amazon.com/dp/B0B57PWJW2" target="_blank" rel="noopener">B0B57PWJW2</a></span>
+        </span>
+      </span>
+    </td>
+        <td data-label="Days" class="num days"><span class="pill watch">36.1d</span></td>
+        <td data-label="Send" class="num send">812</td>
+        <td data-label="30d units" class="num">2,734</td>
+        <td data-label="Avg/day" class="num">91.1</td>
+        <td data-label="FBA total" class="num">3,289</td>
+        <td data-label="Fulfillable" class="num">2,637</td>
+        <td data-label="Reserved" class="num">190</td>
+        <td data-label="Future" class="num">428</td>
+        <td data-label="Recommended" class="num">610</td>
+        <td data-label="Status"><span class="status watch">Low &lt;45d</span></td>
+      </tr>
+    
+      </tbody>
+    
+
+      <tbody class="parent-group" data-search="b0gk86vlmj b0fzhs9tb6 pd-teatree-mct-2oz" data-status="watch">
+        <tr class="parent-row">
+          <td colspan="11">
+            <div class="parent-card">
+              <img class="parent-img" src="https://m.media-amazon.com/images/I/71Cw9sUaOrL.jpg" alt="" loading="lazy" onerror="this.style.display='none'">
+              <div class="parent-meta">
+                <span>Parent ASIN</span>
+                <strong><a href="https://www.amazon.com/dp/B0GK86VLMJ" target="_blank" rel="noopener">B0GK86VLMJ</a></strong>
+                <em>1 child ASIN needing FBA send-in</em>
+              </div>
+              <div class="parent-stats">
+                <span><strong>37.4d</strong><em>lowest cover</em></span>
+                <span><strong>487</strong><em>send units</em></span>
+                <span><strong>1,934</strong><em>30d units</em></span>
+              </div>
+            </div>
+          </td>
+        </tr>
+        
+      <tr class="data-row watch" data-status="watch" data-search="b0gk86vlmj b0fzhs9tb6 pd-teatree-mct-2oz low &lt;45d">
+        <td data-label="Item" class="item-cell">
+      <span class="product">
+        <img src="https://m.media-amazon.com/images/I/71Cw9sUaOrL.jpg" alt="" loading="lazy" onerror="this.style.display='none'">
+        <span class="product-meta">
+          <strong>PD-TEATREE-MCT-2oz</strong>
+          <span><a href="https://www.amazon.com/dp/B0FZHS9TB6" target="_blank" rel="noopener">B0FZHS9TB6</a></span>
+        </span>
+      </span>
+    </td>
+        <td data-label="Days" class="num days"><span class="pill watch">37.4d</span></td>
+        <td data-label="Send" class="num send">487</td>
+        <td data-label="30d units" class="num">1,934</td>
+        <td data-label="Avg/day" class="num">64.5</td>
+        <td data-label="FBA total" class="num">2,414</td>
+        <td data-label="Fulfillable" class="num">1,163</td>
+        <td data-label="Reserved" class="num">62</td>
+        <td data-label="Future" class="num">749</td>
+        <td data-label="Recommended" class="num">1,146</td>
+        <td data-label="Status"><span class="status watch">Low &lt;45d</span></td>
+      </tr>
+    
+      </tbody>
+    
+
+      <tbody class="parent-group" data-search="b0863c6pqs b085syxfdv gk0715_fba" data-status="watch">
+        <tr class="parent-row">
+          <td colspan="11">
+            <div class="parent-card">
+              <img class="parent-img" src="https://m.media-amazon.com/images/I/81DKCqyShkL.jpg" alt="" loading="lazy" onerror="this.style.display='none'">
+              <div class="parent-meta">
+                <span>Parent ASIN</span>
+                <strong><a href="https://www.amazon.com/dp/B0863C6PQS" target="_blank" rel="noopener">B0863C6PQS</a></strong>
+                <em>1 child ASIN needing FBA send-in</em>
+              </div>
+              <div class="parent-stats">
+                <span><strong>38.8d</strong><em>lowest cover</em></span>
+                <span><strong>40</strong><em>send units</em></span>
+                <span><strong>191</strong><em>30d units</em></span>
+              </div>
+            </div>
+          </td>
+        </tr>
+        
+      <tr class="data-row watch" data-status="watch" data-search="b0863c6pqs b085syxfdv gk0715_fba low &lt;45d">
+        <td data-label="Item" class="item-cell">
+      <span class="product">
+        <img src="https://m.media-amazon.com/images/I/81DKCqyShkL.jpg" alt="" loading="lazy" onerror="this.style.display='none'">
+        <span class="product-meta">
+          <strong>GK0715_FBA</strong>
+          <span><a href="https://www.amazon.com/dp/B085SYXFDV" target="_blank" rel="noopener">B085SYXFDV</a></span>
+        </span>
+      </span>
+    </td>
+        <td data-label="Days" class="num days"><span class="pill watch">38.8d</span></td>
+        <td data-label="Send" class="num send">40</td>
+        <td data-label="30d units" class="num">191</td>
+        <td data-label="Avg/day" class="num">6.4</td>
+        <td data-label="FBA total" class="num">247</td>
+        <td data-label="Fulfillable" class="num">232</td>
+        <td data-label="Reserved" class="num">12</td>
+        <td data-label="Future" class="num">0</td>
+        <td data-label="Recommended" class="num">70</td>
+        <td data-label="Status"><span class="status watch">Low &lt;45d</span></td>
+      </tr>
+    
+      </tbody>
+    
+
+      <tbody class="parent-group" data-search="b0cqzl389h b0drml3zmm eo-jojoba-1oz" data-status="watch">
+        <tr class="parent-row">
+          <td colspan="11">
+            <div class="parent-card">
+              <img class="parent-img" src="https://m.media-amazon.com/images/I/71LRhF96QGL.jpg" alt="" loading="lazy" onerror="this.style.display='none'">
+              <div class="parent-meta">
+                <span>Parent ASIN</span>
+                <strong><a href="https://www.amazon.com/dp/B0CQZL389H" target="_blank" rel="noopener">B0CQZL389H</a></strong>
+                <em>1 child ASIN needing FBA send-in</em>
+              </div>
+              <div class="parent-stats">
+                <span><strong>39.4d</strong><em>lowest cover</em></span>
+                <span><strong>573</strong><em>send units</em></span>
+                <span><strong>3,057</strong><em>30d units</em></span>
+              </div>
+            </div>
+          </td>
+        </tr>
+        
+      <tr class="data-row watch" data-status="watch" data-search="b0cqzl389h b0drml3zmm eo-jojoba-1oz low &lt;45d">
+        <td data-label="Item" class="item-cell">
+      <span class="product">
+        <img src="https://m.media-amazon.com/images/I/71LRhF96QGL.jpg" alt="" loading="lazy" onerror="this.style.display='none'">
+        <span class="product-meta">
+          <strong>EO-JOJOBA-1oz</strong>
+          <span><a href="https://www.amazon.com/dp/B0DRML3ZMM" target="_blank" rel="noopener">B0DRML3ZMM</a></span>
+        </span>
+      </span>
+    </td>
+        <td data-label="Days" class="num days"><span class="pill watch">39.4d</span></td>
+        <td data-label="Send" class="num send">573</td>
+        <td data-label="30d units" class="num">3,057</td>
+        <td data-label="Avg/day" class="num">101.9</td>
+        <td data-label="FBA total" class="num">4,013</td>
+        <td data-label="Fulfillable" class="num">2,157</td>
+        <td data-label="Reserved" class="num">144</td>
+        <td data-label="Future" class="num">260</td>
+        <td data-label="Recommended" class="num">889</td>
+        <td data-label="Status"><span class="status watch">Low &lt;45d</span></td>
+      </tr>
+    
+      </tbody>
+    
+
+      <tbody class="parent-group" data-search="b08ndr5zwk b01b1y48ag hb0005_prg" data-status="watch">
+        <tr class="parent-row">
+          <td colspan="11">
+            <div class="parent-card">
+              <img class="parent-img" src="https://m.media-amazon.com/images/I/71a5eedi2bL.jpg" alt="" loading="lazy" onerror="this.style.display='none'">
+              <div class="parent-meta">
+                <span>Parent ASIN</span>
+                <strong><a href="https://www.amazon.com/dp/B08NDR5ZWK" target="_blank" rel="noopener">B08NDR5ZWK</a></strong>
+                <em>1 child ASIN needing FBA send-in</em>
+              </div>
+              <div class="parent-stats">
+                <span><strong>42.7d</strong><em>lowest cover</em></span>
+                <span><strong>11</strong><em>send units</em></span>
+                <span><strong>144</strong><em>30d units</em></span>
+              </div>
+            </div>
+          </td>
+        </tr>
+        
+      <tr class="data-row watch" data-status="watch" data-search="b08ndr5zwk b01b1y48ag hb0005_prg low &lt;45d">
+        <td data-label="Item" class="item-cell">
+      <span class="product">
+        <img src="https://m.media-amazon.com/images/I/71a5eedi2bL.jpg" alt="" loading="lazy" onerror="this.style.display='none'">
+        <span class="product-meta">
+          <strong>HB0005_PRG</strong>
+          <span><a href="https://www.amazon.com/dp/B01B1Y48AG" target="_blank" rel="noopener">B01B1Y48AG</a></span>
+        </span>
+      </span>
+    </td>
+        <td data-label="Days" class="num days"><span class="pill watch">42.7d</span></td>
+        <td data-label="Send" class="num send">11</td>
+        <td data-label="30d units" class="num">144</td>
+        <td data-label="Avg/day" class="num">4.8</td>
+        <td data-label="FBA total" class="num">205</td>
+        <td data-label="Fulfillable" class="num">175</td>
+        <td data-label="Reserved" class="num">25</td>
+        <td data-label="Future" class="num">0</td>
+        <td data-label="Recommended" class="num">40</td>
+        <td data-label="Status"><span class="status watch">Low &lt;45d</span></td>
+      </tr>
+    
+      </tbody>
+    
+
+      <tbody class="parent-group" data-search="b08cx1d4r3 b08hjs4g9r gk0858_fba" data-status="watch">
+        <tr class="parent-row">
+          <td colspan="11">
+            <div class="parent-card">
+              <img class="parent-img" src="https://m.media-amazon.com/images/I/71M6OWV4SLL.jpg" alt="" loading="lazy" onerror="this.style.display='none'">
+              <div class="parent-meta">
+                <span>Parent ASIN</span>
+                <strong><a href="https://www.amazon.com/dp/B08CX1D4R3" target="_blank" rel="noopener">B08CX1D4R3</a></strong>
+                <em>1 child ASIN needing FBA send-in</em>
+              </div>
+              <div class="parent-stats">
+                <span><strong>44.0d</strong><em>lowest cover</em></span>
+                <span><strong>5</strong><em>send units</em></span>
+                <span><strong>150</strong><em>30d units</em></span>
+              </div>
+            </div>
+          </td>
+        </tr>
+        
+      <tr class="data-row watch" data-status="watch" data-search="b08cx1d4r3 b08hjs4g9r gk0858_fba low &lt;45d">
+        <td data-label="Item" class="item-cell">
+      <span class="product">
+        <img src="https://m.media-amazon.com/images/I/71M6OWV4SLL.jpg" alt="" loading="lazy" onerror="this.style.display='none'">
+        <span class="product-meta">
+          <strong>GK0858_FBA</strong>
+          <span><a href="https://www.amazon.com/dp/B08HJS4G9R" target="_blank" rel="noopener">B08HJS4G9R</a></span>
+        </span>
+      </span>
+    </td>
+        <td data-label="Days" class="num days"><span class="pill watch">44.0d</span></td>
+        <td data-label="Send" class="num send">5</td>
+        <td data-label="30d units" class="num">150</td>
+        <td data-label="Avg/day" class="num">5.0</td>
+        <td data-label="FBA total" class="num">220</td>
+        <td data-label="Fulfillable" class="num">215</td>
+        <td data-label="Reserved" class="num">4</td>
+        <td data-label="Future" class="num">0</td>
+        <td data-label="Recommended" class="num">150</td>
+        <td data-label="Status"><span class="status watch">Low &lt;45d</span></td>
+      </tr>
+    
+      </tbody>
+    
+
+      <tbody class="parent-group" data-search="b082mv956v b0ddt2tspk nc4085-1" data-status="watch">
+        <tr class="parent-row">
+          <td colspan="11">
+            <div class="parent-card">
+              <img class="parent-img" src="https://m.media-amazon.com/images/I/81TOUVFCjfL.jpg" alt="" loading="lazy" onerror="this.style.display='none'">
+              <div class="parent-meta">
+                <span>Parent ASIN</span>
+                <strong><a href="https://www.amazon.com/dp/B082MV956V" target="_blank" rel="noopener">B082MV956V</a></strong>
+                <em>1 child ASIN needing FBA send-in</em>
+              </div>
+              <div class="parent-stats">
+                <span><strong>44.6d</strong><em>lowest cover</em></span>
+                <span><strong>2</strong><em>send units</em></span>
+                <span><strong>160</strong><em>30d units</em></span>
+              </div>
+            </div>
+          </td>
+        </tr>
+        
+      <tr class="data-row watch" data-status="watch" data-search="b082mv956v b0ddt2tspk nc4085-1 low &lt;45d">
+        <td data-label="Item" class="item-cell">
+      <span class="product">
+        <img src="https://m.media-amazon.com/images/I/81TOUVFCjfL.jpg" alt="" loading="lazy" onerror="this.style.display='none'">
+        <span class="product-meta">
+          <strong>NC4085-1</strong>
+          <span><a href="https://www.amazon.com/dp/B0DDT2TSPK" target="_blank" rel="noopener">B0DDT2TSPK</a></span>
+        </span>
+      </span>
+    </td>
+        <td data-label="Days" class="num days"><span class="pill watch">44.6d</span></td>
+        <td data-label="Send" class="num send">2</td>
+        <td data-label="30d units" class="num">160</td>
+        <td data-label="Avg/day" class="num">5.3</td>
+        <td data-label="FBA total" class="num">238</td>
+        <td data-label="Fulfillable" class="num">28</td>
+        <td data-label="Reserved" class="num">10</td>
+        <td data-label="Future" class="num">76</td>
+        <td data-label="Recommended" class="num">125</td>
+        <td data-label="Status"><span class="status watch">Low &lt;45d</span></td>
+      </tr>
+    
+      </tbody>
+    
+          </table>
+        </div>
+      </section>
+    
+    <p class="footer-note">Calculated FBA days available = FBA total quantity divided by trailing 30-day average daily units. Send units = units needed to reach the configured target days of cover.</p>
+  </main>
+  <script>
+const search = document.getElementById('search');
+const filters = Array.from(document.querySelectorAll('[data-filter]'));
+const visibleCount = document.getElementById('visibleCount');
+let activeFilter = 'all';
+
+function rowMatches(row, query) {
+  const searchText = row.dataset.search || '';
+  const status = row.dataset.status || '';
+  const queryOk = !query || searchText.includes(query);
+  const filterOk = activeFilter === 'all' || status === activeFilter;
+  return queryOk && filterOk;
+}
+
+function applyFilters() {
+  const query = (search.value || '').trim().toLowerCase();
+  let visible = 0;
+  document.querySelectorAll('.parent-group').forEach(group => {
+    let groupVisible = false;
+    group.querySelectorAll('.data-row').forEach(row => {
+      const show = rowMatches(row, query);
+      row.style.display = show ? '' : 'none';
+      if (show) {
+        groupVisible = true;
+        visible += 1;
+      }
+    });
+    group.style.display = groupVisible ? '' : 'none';
+  });
+  if (visibleCount) visibleCount.textContent = `${visible.toLocaleString()} rows`;
+}
+
+filters.forEach(button => {
+  button.addEventListener('click', () => {
+    activeFilter = button.dataset.filter;
+    filters.forEach(item => item.classList.toggle('active', item === button));
+    applyFilters();
+  });
+});
+search.addEventListener('input', applyFilters);
+applyFilters();
+</script>
+</body>
+</html>
