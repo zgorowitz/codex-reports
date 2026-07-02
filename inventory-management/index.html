@@ -3,7 +3,7 @@
 <head>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
-  <title>FBA Inventory Management Report - 2026-07-01</title>
+  <title>FBA Inventory Management Report - 2026-07-02</title>
   <style>
 :root {
   --bg: #f6f8fc;
@@ -274,8 +274,8 @@ th.item-col { background: #f8fafd; z-index: 4; }
     <div class="header-inner">
       <h1>FBA Inventory Management</h1>
       <div class="subtitle">
-        Latest snapshot 2026-07-01 · Target 45 days of FBA cover · Includes child ASINs with more than 100 units sold in the last 30 days and a calculated send-in need.
-        Generated 2026-07-01 08:16 EDT.
+        Latest snapshot 2026-07-02 · Target 45 days of FBA cover · Includes child ASINs with more than 100 units sold in the last 30 days and a calculated send-in need.
+        Generated 2026-07-02 08:20 EDT.
       </div>
       <div class="toolbar">
         <input id="search" class="search" type="search" placeholder="Search parent, child ASIN, or SKU...">
@@ -293,11 +293,11 @@ th.item-col { background: #f8fafd; z-index: 4; }
       <a href="#all">Parent groups</a>
     </nav>
     <div class="cards">
-      <div class="card"><div class="label">Units to send</div><div class="value">8,236</div><div class="hint">to reach 45 days</div></div>
-      <div class="card"><div class="label">Child ASINs</div><div class="value">23</div><div class="hint">sold &gt;100 in 30d and below target</div></div>
-      <div class="card"><div class="label">Parent ASINs</div><div class="value">17</div><div class="hint">grouped by urgency</div></div>
-      <div class="card"><div class="label">Critical items</div><div class="value">8</div><div class="hint">35% at 21 days or less</div></div>
-      <div class="card"><div class="label">30d units</div><div class="value">19,941</div><div class="hint">across listed children</div></div>
+      <div class="card"><div class="label">Units to send</div><div class="value">8,233</div><div class="hint">to reach 45 days</div></div>
+      <div class="card"><div class="label">Child ASINs</div><div class="value">24</div><div class="hint">sold &gt;100 in 30d and below target</div></div>
+      <div class="card"><div class="label">Parent ASINs</div><div class="value">18</div><div class="hint">grouped by urgency</div></div>
+      <div class="card"><div class="label">Critical items</div><div class="value">9</div><div class="hint">38% at 21 days or less</div></div>
+      <div class="card"><div class="label">30d units</div><div class="value">16,841</div><div class="hint">across listed children</div></div>
     </div>
     
       <section id="critical" class="section">
@@ -341,14 +341,39 @@ th.item-col { background: #f8fafd; z-index: 4; }
       </span>
     </td>
         <td data-label="Days" class="num days"><span class="pill critical">0.0d</span></td>
-        <td data-label="Send" class="num send">204</td>
-        <td data-label="30d units" class="num">142</td>
-        <td data-label="Avg/day" class="num">4.7</td>
-        <td data-label="Total units" class="num">9</td>
+        <td data-label="Send" class="num send">197</td>
+        <td data-label="30d units" class="num">136</td>
+        <td data-label="Avg/day" class="num">4.5</td>
+        <td data-label="Total units" class="num">7</td>
         <td data-label="Inbound" class="num">0</td>
         <td data-label="Available" class="num">0</td>
         <td data-label="Transfer" class="num">0</td>
-        <td data-label="Processing" class="num">7</td>
+        <td data-label="Processing" class="num">6</td>
+        <td data-label="Working" class="num">0</td>
+        <td data-label="Receiving" class="num">0</td>
+        <td data-label="Status"><span class="status critical">Critical</span></td>
+      </tr>
+    
+
+      <tr class="data-row critical" data-status="critical" data-search="b07dt6kjwq b07nzyjp79 gk0565_fba critical">
+        <td data-label="Item" class="item-cell">
+      <span class="product">
+        <img src="https://m.media-amazon.com/images/I/81BuLAnm-LL.jpg" alt="" loading="lazy" onerror="this.style.display='none'">
+        <span class="product-meta">
+          <strong>GK0565_FBA</strong>
+          <span><a href="https://www.amazon.com/dp/B07NZYJP79" target="_blank" rel="noopener">B07NZYJP79</a></span>
+        </span>
+      </span>
+    </td>
+        <td data-label="Days" class="num days"><span class="pill critical">16.0d</span></td>
+        <td data-label="Send" class="num send">81</td>
+        <td data-label="30d units" class="num">101</td>
+        <td data-label="Avg/day" class="num">3.4</td>
+        <td data-label="Total units" class="num">71</td>
+        <td data-label="Inbound" class="num">0</td>
+        <td data-label="Available" class="num">67</td>
+        <td data-label="Transfer" class="num">1</td>
+        <td data-label="Processing" class="num">2</td>
         <td data-label="Working" class="num">0</td>
         <td data-label="Receiving" class="num">0</td>
         <td data-label="Status"><span class="status critical">Critical</span></td>
@@ -366,8 +391,8 @@ th.item-col { background: #f8fafd; z-index: 4; }
       </span>
     </td>
         <td data-label="Days" class="num days"><span class="pill critical">0.0d</span></td>
-        <td data-label="Send" class="num send">188</td>
-        <td data-label="30d units" class="num">127</td>
+        <td data-label="Send" class="num send">186</td>
+        <td data-label="30d units" class="num">126</td>
         <td data-label="Avg/day" class="num">4.2</td>
         <td data-label="Total units" class="num">3</td>
         <td data-label="Inbound" class="num">1</td>
@@ -390,15 +415,15 @@ th.item-col { background: #f8fafd; z-index: 4; }
         </span>
       </span>
     </td>
-        <td data-label="Days" class="num days"><span class="pill critical">3.0d</span></td>
-        <td data-label="Send" class="num send">155</td>
-        <td data-label="30d units" class="num">112</td>
-        <td data-label="Avg/day" class="num">3.7</td>
-        <td data-label="Total units" class="num">13</td>
+        <td data-label="Days" class="num days"><span class="pill critical">2.0d</span></td>
+        <td data-label="Send" class="num send">164</td>
+        <td data-label="30d units" class="num">116</td>
+        <td data-label="Avg/day" class="num">3.9</td>
+        <td data-label="Total units" class="num">10</td>
         <td data-label="Inbound" class="num">0</td>
-        <td data-label="Available" class="num">8</td>
+        <td data-label="Available" class="num">4</td>
         <td data-label="Transfer" class="num">1</td>
-        <td data-label="Processing" class="num">2</td>
+        <td data-label="Processing" class="num">1</td>
         <td data-label="Working" class="num">0</td>
         <td data-label="Receiving" class="num">0</td>
         <td data-label="Status"><span class="status critical">Critical</span></td>
@@ -415,13 +440,13 @@ th.item-col { background: #f8fafd; z-index: 4; }
         </span>
       </span>
     </td>
-        <td data-label="Days" class="num days"><span class="pill critical">7.0d</span></td>
-        <td data-label="Send" class="num send">621</td>
-        <td data-label="30d units" class="num">489</td>
-        <td data-label="Avg/day" class="num">16.3</td>
-        <td data-label="Total units" class="num">113</td>
+        <td data-label="Days" class="num days"><span class="pill critical">6.0d</span></td>
+        <td data-label="Send" class="num send">663</td>
+        <td data-label="30d units" class="num">507</td>
+        <td data-label="Avg/day" class="num">16.9</td>
+        <td data-label="Total units" class="num">98</td>
         <td data-label="Inbound" class="num">9</td>
-        <td data-label="Available" class="num">79</td>
+        <td data-label="Available" class="num">70</td>
         <td data-label="Transfer" class="num">4</td>
         <td data-label="Processing" class="num">11</td>
         <td data-label="Working" class="num">0</td>
@@ -440,15 +465,15 @@ th.item-col { background: #f8fafd; z-index: 4; }
         </span>
       </span>
     </td>
-        <td data-label="Days" class="num days"><span class="pill critical">9.0d</span></td>
-        <td data-label="Send" class="num send">174</td>
-        <td data-label="30d units" class="num">159</td>
-        <td data-label="Avg/day" class="num">5.3</td>
-        <td data-label="Total units" class="num">65</td>
+        <td data-label="Days" class="num days"><span class="pill critical">8.0d</span></td>
+        <td data-label="Send" class="num send">189</td>
+        <td data-label="30d units" class="num">166</td>
+        <td data-label="Avg/day" class="num">5.5</td>
+        <td data-label="Total units" class="num">60</td>
         <td data-label="Inbound" class="num">1</td>
-        <td data-label="Available" class="num">56</td>
+        <td data-label="Available" class="num">49</td>
         <td data-label="Transfer" class="num">1</td>
-        <td data-label="Processing" class="num">5</td>
+        <td data-label="Processing" class="num">7</td>
         <td data-label="Working" class="num">0</td>
         <td data-label="Receiving" class="num">1</td>
         <td data-label="Status"><span class="status critical">Critical</span></td>
@@ -465,15 +490,15 @@ th.item-col { background: #f8fafd; z-index: 4; }
         </span>
       </span>
     </td>
-        <td data-label="Days" class="num days"><span class="pill critical">12.0d</span></td>
-        <td data-label="Send" class="num send">420</td>
-        <td data-label="30d units" class="num">385</td>
-        <td data-label="Avg/day" class="num">12.8</td>
-        <td data-label="Total units" class="num">158</td>
+        <td data-label="Days" class="num days"><span class="pill critical">11.0d</span></td>
+        <td data-label="Send" class="num send">450</td>
+        <td data-label="30d units" class="num">395</td>
+        <td data-label="Avg/day" class="num">13.2</td>
+        <td data-label="Total units" class="num">143</td>
         <td data-label="Inbound" class="num">2</td>
-        <td data-label="Available" class="num">137</td>
-        <td data-label="Transfer" class="num">2</td>
-        <td data-label="Processing" class="num">13</td>
+        <td data-label="Available" class="num">123</td>
+        <td data-label="Transfer" class="num">4</td>
+        <td data-label="Processing" class="num">11</td>
         <td data-label="Working" class="num">0</td>
         <td data-label="Receiving" class="num">2</td>
         <td data-label="Status"><span class="status critical">Critical</span></td>
@@ -490,17 +515,17 @@ th.item-col { background: #f8fafd; z-index: 4; }
         </span>
       </span>
     </td>
-        <td data-label="Days" class="num days"><span class="pill critical">18.0d</span></td>
-        <td data-label="Send" class="num send">89</td>
-        <td data-label="30d units" class="num">216</td>
-        <td data-label="Avg/day" class="num">7.2</td>
-        <td data-label="Total units" class="num">235</td>
-        <td data-label="Inbound" class="num">195</td>
+        <td data-label="Days" class="num days"><span class="pill critical">17.0d</span></td>
+        <td data-label="Send" class="num send">103</td>
+        <td data-label="30d units" class="num">223</td>
+        <td data-label="Avg/day" class="num">7.4</td>
+        <td data-label="Total units" class="num">232</td>
+        <td data-label="Inbound" class="num">193</td>
         <td data-label="Available" class="num">0</td>
-        <td data-label="Transfer" class="num">19</td>
-        <td data-label="Processing" class="num">6</td>
+        <td data-label="Transfer" class="num">12</td>
+        <td data-label="Processing" class="num">3</td>
         <td data-label="Working" class="num">0</td>
-        <td data-label="Receiving" class="num">149</td>
+        <td data-label="Receiving" class="num">147</td>
         <td data-label="Status"><span class="status critical">Critical</span></td>
       </tr>
     
@@ -515,15 +540,15 @@ th.item-col { background: #f8fafd; z-index: 4; }
         </span>
       </span>
     </td>
-        <td data-label="Days" class="num days"><span class="pill critical">20.0d</span></td>
-        <td data-label="Send" class="num send">107</td>
-        <td data-label="30d units" class="num">160</td>
-        <td data-label="Avg/day" class="num">5.3</td>
-        <td data-label="Total units" class="num">133</td>
+        <td data-label="Days" class="num days"><span class="pill critical">19.0d</span></td>
+        <td data-label="Send" class="num send">109</td>
+        <td data-label="30d units" class="num">157</td>
+        <td data-label="Avg/day" class="num">5.2</td>
+        <td data-label="Total units" class="num">127</td>
         <td data-label="Inbound" class="num">100</td>
-        <td data-label="Available" class="num">17</td>
+        <td data-label="Available" class="num">12</td>
         <td data-label="Transfer" class="num">1</td>
-        <td data-label="Processing" class="num">11</td>
+        <td data-label="Processing" class="num">10</td>
         <td data-label="Working" class="num">0</td>
         <td data-label="Receiving" class="num">0</td>
         <td data-label="Status"><span class="status critical">Critical</span></td>
@@ -575,41 +600,16 @@ th.item-col { background: #f8fafd; z-index: 4; }
       </span>
     </td>
         <td data-label="Days" class="num days"><span class="pill watch">31.0d</span></td>
-        <td data-label="Send" class="num send">1,086</td>
-        <td data-label="30d units" class="num">4,406</td>
-        <td data-label="Avg/day" class="num">146.9</td>
-        <td data-label="Total units" class="num">5,523</td>
-        <td data-label="Inbound" class="num">942</td>
-        <td data-label="Available" class="num">2,693</td>
-        <td data-label="Transfer" class="num">1,336</td>
-        <td data-label="Processing" class="num">462</td>
+        <td data-label="Send" class="num send">1,645</td>
+        <td data-label="30d units" class="num">4,598</td>
+        <td data-label="Avg/day" class="num">153.3</td>
+        <td data-label="Total units" class="num">5,252</td>
+        <td data-label="Inbound" class="num">780</td>
+        <td data-label="Available" class="num">2,726</td>
+        <td data-label="Transfer" class="num">1,402</td>
+        <td data-label="Processing" class="num">263</td>
         <td data-label="Working" class="num">0</td>
-        <td data-label="Receiving" class="num">0</td>
-        <td data-label="Status"><span class="status watch">Low &lt;45d</span></td>
-      </tr>
-    
-
-      <tr class="data-row watch" data-status="watch" data-search="b0cqzl389h b0drml3zmm eo-jojoba-1oz low &lt;45d">
-        <td data-label="Item" class="item-cell">
-      <span class="product">
-        <img src="https://m.media-amazon.com/images/I/71LRhF96QGL.jpg" alt="" loading="lazy" onerror="this.style.display='none'">
-        <span class="product-meta">
-          <strong>EO-JOJOBA-1oz</strong>
-          <span><a href="https://www.amazon.com/dp/B0DRML3ZMM" target="_blank" rel="noopener">B0DRML3ZMM</a></span>
-        </span>
-      </span>
-    </td>
-        <td data-label="Days" class="num days"><span class="pill watch">34.0d</span></td>
-        <td data-label="Send" class="num send">1,269</td>
-        <td data-label="30d units" class="num">3,617</td>
-        <td data-label="Avg/day" class="num">120.6</td>
-        <td data-label="Total units" class="num">4,157</td>
-        <td data-label="Inbound" class="num">418</td>
-        <td data-label="Available" class="num">3,457</td>
-        <td data-label="Transfer" class="num">54</td>
-        <td data-label="Processing" class="num">145</td>
-        <td data-label="Working" class="num">0</td>
-        <td data-label="Receiving" class="num">210</td>
+        <td data-label="Receiving" class="num">10</td>
         <td data-label="Status"><span class="status watch">Low &lt;45d</span></td>
       </tr>
     
@@ -624,15 +624,15 @@ th.item-col { background: #f8fafd; z-index: 4; }
         </span>
       </span>
     </td>
-        <td data-label="Days" class="num days"><span class="pill soon">27.0d</span></td>
-        <td data-label="Send" class="num send">1,394</td>
-        <td data-label="30d units" class="num">2,992</td>
-        <td data-label="Avg/day" class="num">99.7</td>
-        <td data-label="Total units" class="num">3,094</td>
-        <td data-label="Inbound" class="num">244</td>
-        <td data-label="Available" class="num">2,013</td>
-        <td data-label="Transfer" class="num">613</td>
-        <td data-label="Processing" class="num">160</td>
+        <td data-label="Days" class="num days"><span class="pill soon">26.0d</span></td>
+        <td data-label="Send" class="num send">1,536</td>
+        <td data-label="30d units" class="num">3,007</td>
+        <td data-label="Avg/day" class="num">100.2</td>
+        <td data-label="Total units" class="num">2,975</td>
+        <td data-label="Inbound" class="num">140</td>
+        <td data-label="Available" class="num">1,954</td>
+        <td data-label="Transfer" class="num">623</td>
+        <td data-label="Processing" class="num">183</td>
         <td data-label="Working" class="num">0</td>
         <td data-label="Receiving" class="num">0</td>
         <td data-label="Status"><span class="status soon">Soon</span></td>
@@ -649,14 +649,14 @@ th.item-col { background: #f8fafd; z-index: 4; }
         </span>
       </span>
     </td>
-        <td data-label="Days" class="num days"><span class="pill watch">37.0d</span></td>
-        <td data-label="Send" class="num send">469</td>
-        <td data-label="30d units" class="num">1,573</td>
-        <td data-label="Avg/day" class="num">52.4</td>
-        <td data-label="Total units" class="num">1,891</td>
+        <td data-label="Days" class="num days"><span class="pill watch">36.0d</span></td>
+        <td data-label="Send" class="num send">603</td>
+        <td data-label="30d units" class="num">1,620</td>
+        <td data-label="Avg/day" class="num">54.0</td>
+        <td data-label="Total units" class="num">1,827</td>
         <td data-label="Inbound" class="num">0</td>
-        <td data-label="Available" class="num">1,784</td>
-        <td data-label="Transfer" class="num">8</td>
+        <td data-label="Available" class="num">1,719</td>
+        <td data-label="Transfer" class="num">12</td>
         <td data-label="Processing" class="num">73</td>
         <td data-label="Working" class="num">0</td>
         <td data-label="Receiving" class="num">0</td>
@@ -674,22 +674,22 @@ th.item-col { background: #f8fafd; z-index: 4; }
         </span>
       </span>
     </td>
-        <td data-label="Days" class="num days"><span class="pill watch">37.0d</span></td>
-        <td data-label="Send" class="num send">139</td>
-        <td data-label="30d units" class="num">1,114</td>
-        <td data-label="Avg/day" class="num">37.1</td>
-        <td data-label="Total units" class="num">1,532</td>
+        <td data-label="Days" class="num days"><span class="pill watch">36.0d</span></td>
+        <td data-label="Send" class="num send">186</td>
+        <td data-label="30d units" class="num">1,120</td>
+        <td data-label="Avg/day" class="num">37.3</td>
+        <td data-label="Total units" class="num">1,494</td>
         <td data-label="Inbound" class="num">1,000</td>
-        <td data-label="Available" class="num">489</td>
-        <td data-label="Transfer" class="num">8</td>
-        <td data-label="Processing" class="num">22</td>
+        <td data-label="Available" class="num">458</td>
+        <td data-label="Transfer" class="num">3</td>
+        <td data-label="Processing" class="num">19</td>
         <td data-label="Working" class="num">0</td>
         <td data-label="Receiving" class="num">0</td>
         <td data-label="Status"><span class="status watch">Low &lt;45d</span></td>
       </tr>
     
 
-      <tr class="data-row watch" data-status="watch" data-search="b0b781qsh6 b004mzmb74 pn16g-10 low &lt;45d">
+      <tr class="data-row soon" data-status="soon" data-search="b0b781qsh6 b004mzmb74 pn16g-10 soon">
         <td data-label="Item" class="item-cell">
       <span class="product">
         <img src="https://m.media-amazon.com/images/I/71WDOcSjxSL.jpg" alt="" loading="lazy" onerror="this.style.display='none'">
@@ -699,18 +699,18 @@ th.item-col { background: #f8fafd; z-index: 4; }
         </span>
       </span>
     </td>
-        <td data-label="Days" class="num days"><span class="pill watch">31.0d</span></td>
-        <td data-label="Send" class="num send">296</td>
-        <td data-label="30d units" class="num">1,071</td>
-        <td data-label="Avg/day" class="num">35.7</td>
-        <td data-label="Total units" class="num">1,311</td>
+        <td data-label="Days" class="num days"><span class="pill soon">30.0d</span></td>
+        <td data-label="Send" class="num send">316</td>
+        <td data-label="30d units" class="num">1,065</td>
+        <td data-label="Avg/day" class="num">35.5</td>
+        <td data-label="Total units" class="num">1,282</td>
         <td data-label="Inbound" class="num">1,000</td>
-        <td data-label="Available" class="num">200</td>
-        <td data-label="Transfer" class="num">10</td>
-        <td data-label="Processing" class="num">77</td>
+        <td data-label="Available" class="num">163</td>
+        <td data-label="Transfer" class="num">13</td>
+        <td data-label="Processing" class="num">82</td>
         <td data-label="Working" class="num">0</td>
         <td data-label="Receiving" class="num">0</td>
-        <td data-label="Status"><span class="status watch">Low &lt;45d</span></td>
+        <td data-label="Status"><span class="status soon">Soon</span></td>
       </tr>
     
 
@@ -724,15 +724,15 @@ th.item-col { background: #f8fafd; z-index: 4; }
         </span>
       </span>
     </td>
-        <td data-label="Days" class="num days"><span class="pill watch">33.0d</span></td>
-        <td data-label="Send" class="num send">311</td>
-        <td data-label="30d units" class="num">938</td>
-        <td data-label="Avg/day" class="num">31.3</td>
-        <td data-label="Total units" class="num">1,096</td>
+        <td data-label="Days" class="num days"><span class="pill watch">32.0d</span></td>
+        <td data-label="Send" class="num send">344</td>
+        <td data-label="30d units" class="num">942</td>
+        <td data-label="Avg/day" class="num">31.4</td>
+        <td data-label="Total units" class="num">1,069</td>
         <td data-label="Inbound" class="num">0</td>
-        <td data-label="Available" class="num">846</td>
-        <td data-label="Transfer" class="num">175</td>
-        <td data-label="Processing" class="num">47</td>
+        <td data-label="Available" class="num">844</td>
+        <td data-label="Transfer" class="num">145</td>
+        <td data-label="Processing" class="num">51</td>
         <td data-label="Working" class="num">0</td>
         <td data-label="Receiving" class="num">0</td>
         <td data-label="Status"><span class="status watch">Low &lt;45d</span></td>
@@ -749,15 +749,15 @@ th.item-col { background: #f8fafd; z-index: 4; }
         </span>
       </span>
     </td>
-        <td data-label="Days" class="num days"><span class="pill watch">35.0d</span></td>
-        <td data-label="Send" class="num send">177</td>
-        <td data-label="30d units" class="num">508</td>
-        <td data-label="Avg/day" class="num">16.9</td>
-        <td data-label="Total units" class="num">585</td>
+        <td data-label="Days" class="num days"><span class="pill watch">34.0d</span></td>
+        <td data-label="Send" class="num send">207</td>
+        <td data-label="30d units" class="num">518</td>
+        <td data-label="Avg/day" class="num">17.3</td>
+        <td data-label="Total units" class="num">570</td>
         <td data-label="Inbound" class="num">0</td>
         <td data-label="Available" class="num">449</td>
-        <td data-label="Transfer" class="num">97</td>
-        <td data-label="Processing" class="num">27</td>
+        <td data-label="Transfer" class="num">78</td>
+        <td data-label="Processing" class="num">34</td>
         <td data-label="Working" class="num">0</td>
         <td data-label="Receiving" class="num">0</td>
         <td data-label="Status"><span class="status watch">Low &lt;45d</span></td>
@@ -774,13 +774,13 @@ th.item-col { background: #f8fafd; z-index: 4; }
         </span>
       </span>
     </td>
-        <td data-label="Days" class="num days"><span class="pill critical">7.0d</span></td>
-        <td data-label="Send" class="num send">621</td>
-        <td data-label="30d units" class="num">489</td>
-        <td data-label="Avg/day" class="num">16.3</td>
-        <td data-label="Total units" class="num">113</td>
+        <td data-label="Days" class="num days"><span class="pill critical">6.0d</span></td>
+        <td data-label="Send" class="num send">663</td>
+        <td data-label="30d units" class="num">507</td>
+        <td data-label="Avg/day" class="num">16.9</td>
+        <td data-label="Total units" class="num">98</td>
         <td data-label="Inbound" class="num">9</td>
-        <td data-label="Available" class="num">79</td>
+        <td data-label="Available" class="num">70</td>
         <td data-label="Transfer" class="num">4</td>
         <td data-label="Processing" class="num">11</td>
         <td data-label="Working" class="num">0</td>
@@ -800,13 +800,13 @@ th.item-col { background: #f8fafd; z-index: 4; }
       </span>
     </td>
         <td data-label="Days" class="num days"><span class="pill watch">37.0d</span></td>
-        <td data-label="Send" class="num send">423</td>
-        <td data-label="30d units" class="num">440</td>
-        <td data-label="Avg/day" class="num">14.7</td>
-        <td data-label="Total units" class="num">237</td>
-        <td data-label="Inbound" class="num">96</td>
-        <td data-label="Available" class="num">32</td>
-        <td data-label="Transfer" class="num">95</td>
+        <td data-label="Send" class="num send">409</td>
+        <td data-label="30d units" class="num">429</td>
+        <td data-label="Avg/day" class="num">14.3</td>
+        <td data-label="Total units" class="num">235</td>
+        <td data-label="Inbound" class="num">48</td>
+        <td data-label="Available" class="num">42</td>
+        <td data-label="Transfer" class="num">132</td>
         <td data-label="Processing" class="num">6</td>
         <td data-label="Working" class="num">0</td>
         <td data-label="Receiving" class="num">0</td>
@@ -824,15 +824,15 @@ th.item-col { background: #f8fafd; z-index: 4; }
         </span>
       </span>
     </td>
-        <td data-label="Days" class="num days"><span class="pill soon">27.0d</span></td>
-        <td data-label="Send" class="num send">226</td>
-        <td data-label="30d units" class="num">395</td>
-        <td data-label="Avg/day" class="num">13.2</td>
-        <td data-label="Total units" class="num">367</td>
+        <td data-label="Days" class="num days"><span class="pill soon">26.0d</span></td>
+        <td data-label="Send" class="num send">245</td>
+        <td data-label="30d units" class="num">399</td>
+        <td data-label="Avg/day" class="num">13.3</td>
+        <td data-label="Total units" class="num">354</td>
         <td data-label="Inbound" class="num">60</td>
-        <td data-label="Available" class="num">191</td>
-        <td data-label="Transfer" class="num">103</td>
-        <td data-label="Processing" class="num">6</td>
+        <td data-label="Available" class="num">170</td>
+        <td data-label="Transfer" class="num">98</td>
+        <td data-label="Processing" class="num">17</td>
         <td data-label="Working" class="num">0</td>
         <td data-label="Receiving" class="num">0</td>
         <td data-label="Status"><span class="status soon">Soon</span></td>
@@ -849,18 +849,43 @@ th.item-col { background: #f8fafd; z-index: 4; }
         </span>
       </span>
     </td>
-        <td data-label="Days" class="num days"><span class="pill critical">12.0d</span></td>
-        <td data-label="Send" class="num send">420</td>
-        <td data-label="30d units" class="num">385</td>
-        <td data-label="Avg/day" class="num">12.8</td>
-        <td data-label="Total units" class="num">158</td>
+        <td data-label="Days" class="num days"><span class="pill critical">11.0d</span></td>
+        <td data-label="Send" class="num send">450</td>
+        <td data-label="30d units" class="num">395</td>
+        <td data-label="Avg/day" class="num">13.2</td>
+        <td data-label="Total units" class="num">143</td>
         <td data-label="Inbound" class="num">2</td>
-        <td data-label="Available" class="num">137</td>
-        <td data-label="Transfer" class="num">2</td>
-        <td data-label="Processing" class="num">13</td>
+        <td data-label="Available" class="num">123</td>
+        <td data-label="Transfer" class="num">4</td>
+        <td data-label="Processing" class="num">11</td>
         <td data-label="Working" class="num">0</td>
         <td data-label="Receiving" class="num">2</td>
         <td data-label="Status"><span class="status critical">Critical</span></td>
+      </tr>
+    
+
+      <tr class="data-row soon" data-status="soon" data-search="b0b781qsh6 b004mzmbc4 pn14g-10 soon">
+        <td data-label="Item" class="item-cell">
+      <span class="product">
+        <img src="https://m.media-amazon.com/images/I/61ezmem+otL.jpg" alt="" loading="lazy" onerror="this.style.display='none'">
+        <span class="product-meta">
+          <strong>PN14G-10</strong>
+          <span><a href="https://www.amazon.com/dp/B004MZMBC4" target="_blank" rel="noopener">B004MZMBC4</a></span>
+        </span>
+      </span>
+    </td>
+        <td data-label="Days" class="num days"><span class="pill soon">24.0d</span></td>
+        <td data-label="Send" class="num send">187</td>
+        <td data-label="30d units" class="num">338</td>
+        <td data-label="Avg/day" class="num">11.3</td>
+        <td data-label="Total units" class="num">320</td>
+        <td data-label="Inbound" class="num">200</td>
+        <td data-label="Available" class="num">94</td>
+        <td data-label="Transfer" class="num">0</td>
+        <td data-label="Processing" class="num">23</td>
+        <td data-label="Working" class="num">0</td>
+        <td data-label="Receiving" class="num">0</td>
+        <td data-label="Status"><span class="status soon">Soon</span></td>
       </tr>
     </tbody>
           </table>
@@ -874,7 +899,7 @@ th.item-col { background: #f8fafd; z-index: 4; }
             <h2>All replenishment needs by parent ASIN</h2>
             <p>Grouped by parent, ordered by the lowest FBA days available.</p>
           </div>
-          <span id="visibleCount" class="count-pill">23 rows</span>
+          <span id="visibleCount" class="count-pill">24 rows</span>
         </div>
         <div class="table-wrap" role="region" aria-label="All replenishment needs by parent ASIN" tabindex="0">
           <table id="mainTable">
@@ -898,7 +923,7 @@ th.item-col { background: #f8fafd; z-index: 4; }
       </thead>
     
             
-      <tbody class="parent-group" data-search="b07dt6kjwq b09cdzbkq7 b07dt6zdp5 gk0910_fba gk0487_fba" data-status="critical watch">
+      <tbody class="parent-group" data-search="b07dt6kjwq b09cdzbkq7 b07nzyjp79 b07dt6zdp5 gk0910_fba gk0565_fba gk0487_fba" data-status="critical watch">
         <tr class="parent-row">
           <td colspan="13">
             <div class="parent-card">
@@ -906,12 +931,12 @@ th.item-col { background: #f8fafd; z-index: 4; }
               <div class="parent-meta">
                 <span>Parent ASIN</span>
                 <strong><a href="https://www.amazon.com/dp/B07DT6KJWQ" target="_blank" rel="noopener">B07DT6KJWQ</a></strong>
-                <em>2 child ASINs needing FBA send-in</em>
+                <em>3 child ASINs needing FBA send-in</em>
               </div>
               <div class="parent-stats">
                 <span><strong>0.0d</strong><em>lowest cover</em></span>
-                <span><strong>343</strong><em>send units</em></span>
-                <span><strong>1,256</strong><em>30d units</em></span>
+                <span><strong>464</strong><em>send units</em></span>
+                <span><strong>1,357</strong><em>30d units</em></span>
               </div>
             </div>
           </td>
@@ -928,14 +953,38 @@ th.item-col { background: #f8fafd; z-index: 4; }
       </span>
     </td>
         <td data-label="Days" class="num days"><span class="pill critical">0.0d</span></td>
-        <td data-label="Send" class="num send">204</td>
-        <td data-label="30d units" class="num">142</td>
-        <td data-label="Avg/day" class="num">4.7</td>
-        <td data-label="Total units" class="num">9</td>
+        <td data-label="Send" class="num send">197</td>
+        <td data-label="30d units" class="num">136</td>
+        <td data-label="Avg/day" class="num">4.5</td>
+        <td data-label="Total units" class="num">7</td>
         <td data-label="Inbound" class="num">0</td>
         <td data-label="Available" class="num">0</td>
         <td data-label="Transfer" class="num">0</td>
-        <td data-label="Processing" class="num">7</td>
+        <td data-label="Processing" class="num">6</td>
+        <td data-label="Working" class="num">0</td>
+        <td data-label="Receiving" class="num">0</td>
+        <td data-label="Status"><span class="status critical">Critical</span></td>
+      </tr>
+    
+      <tr class="data-row critical" data-status="critical" data-search="b07dt6kjwq b07nzyjp79 gk0565_fba critical">
+        <td data-label="Item" class="item-cell">
+      <span class="product">
+        <img src="https://m.media-amazon.com/images/I/81BuLAnm-LL.jpg" alt="" loading="lazy" onerror="this.style.display='none'">
+        <span class="product-meta">
+          <strong>GK0565_FBA</strong>
+          <span><a href="https://www.amazon.com/dp/B07NZYJP79" target="_blank" rel="noopener">B07NZYJP79</a></span>
+        </span>
+      </span>
+    </td>
+        <td data-label="Days" class="num days"><span class="pill critical">16.0d</span></td>
+        <td data-label="Send" class="num send">81</td>
+        <td data-label="30d units" class="num">101</td>
+        <td data-label="Avg/day" class="num">3.4</td>
+        <td data-label="Total units" class="num">71</td>
+        <td data-label="Inbound" class="num">0</td>
+        <td data-label="Available" class="num">67</td>
+        <td data-label="Transfer" class="num">1</td>
+        <td data-label="Processing" class="num">2</td>
         <td data-label="Working" class="num">0</td>
         <td data-label="Receiving" class="num">0</td>
         <td data-label="Status"><span class="status critical">Critical</span></td>
@@ -951,15 +1000,15 @@ th.item-col { background: #f8fafd; z-index: 4; }
         </span>
       </span>
     </td>
-        <td data-label="Days" class="num days"><span class="pill watch">37.0d</span></td>
-        <td data-label="Send" class="num send">139</td>
-        <td data-label="30d units" class="num">1,114</td>
-        <td data-label="Avg/day" class="num">37.1</td>
-        <td data-label="Total units" class="num">1,532</td>
+        <td data-label="Days" class="num days"><span class="pill watch">36.0d</span></td>
+        <td data-label="Send" class="num send">186</td>
+        <td data-label="30d units" class="num">1,120</td>
+        <td data-label="Avg/day" class="num">37.3</td>
+        <td data-label="Total units" class="num">1,494</td>
         <td data-label="Inbound" class="num">1,000</td>
-        <td data-label="Available" class="num">489</td>
-        <td data-label="Transfer" class="num">8</td>
-        <td data-label="Processing" class="num">22</td>
+        <td data-label="Available" class="num">458</td>
+        <td data-label="Transfer" class="num">3</td>
+        <td data-label="Processing" class="num">19</td>
         <td data-label="Working" class="num">0</td>
         <td data-label="Receiving" class="num">0</td>
         <td data-label="Status"><span class="status watch">Low &lt;45d</span></td>
@@ -968,7 +1017,7 @@ th.item-col { background: #f8fafd; z-index: 4; }
       </tbody>
     
 
-      <tbody class="parent-group" data-search="b0d978q2wt b0cdbrw16q b09ftq6g3f b0bkkq79fb b08q2wmf25 nc4379_fba nc4314_fba nc4364_fba nc4285_fba" data-status="critical watch">
+      <tbody class="parent-group" data-search="b0d978q2wt b0cdbrw16q b09ftq6g3f b0bkkq79fb b08q2wmf25 nc4379_fba nc4314_fba nc4364_fba nc4285_fba" data-status="critical soon watch">
         <tr class="parent-row">
           <td colspan="13">
             <div class="parent-card">
@@ -980,8 +1029,8 @@ th.item-col { background: #f8fafd; z-index: 4; }
               </div>
               <div class="parent-stats">
                 <span><strong>0.0d</strong><em>lowest cover</em></span>
-                <span><strong>853</strong><em>send units</em></span>
-                <span><strong>1,918</strong><em>30d units</em></span>
+                <span><strong>994</strong><em>send units</em></span>
+                <span><strong>1,968</strong><em>30d units</em></span>
               </div>
             </div>
           </td>
@@ -998,8 +1047,8 @@ th.item-col { background: #f8fafd; z-index: 4; }
       </span>
     </td>
         <td data-label="Days" class="num days"><span class="pill critical">0.0d</span></td>
-        <td data-label="Send" class="num send">188</td>
-        <td data-label="30d units" class="num">127</td>
+        <td data-label="Send" class="num send">186</td>
+        <td data-label="30d units" class="num">126</td>
         <td data-label="Avg/day" class="num">4.2</td>
         <td data-label="Total units" class="num">3</td>
         <td data-label="Inbound" class="num">1</td>
@@ -1021,21 +1070,21 @@ th.item-col { background: #f8fafd; z-index: 4; }
         </span>
       </span>
     </td>
-        <td data-label="Days" class="num days"><span class="pill critical">3.0d</span></td>
-        <td data-label="Send" class="num send">155</td>
-        <td data-label="30d units" class="num">112</td>
-        <td data-label="Avg/day" class="num">3.7</td>
-        <td data-label="Total units" class="num">13</td>
+        <td data-label="Days" class="num days"><span class="pill critical">2.0d</span></td>
+        <td data-label="Send" class="num send">164</td>
+        <td data-label="30d units" class="num">116</td>
+        <td data-label="Avg/day" class="num">3.9</td>
+        <td data-label="Total units" class="num">10</td>
         <td data-label="Inbound" class="num">0</td>
-        <td data-label="Available" class="num">8</td>
+        <td data-label="Available" class="num">4</td>
         <td data-label="Transfer" class="num">1</td>
-        <td data-label="Processing" class="num">2</td>
+        <td data-label="Processing" class="num">1</td>
         <td data-label="Working" class="num">0</td>
         <td data-label="Receiving" class="num">0</td>
         <td data-label="Status"><span class="status critical">Critical</span></td>
       </tr>
     
-      <tr class="data-row watch" data-status="watch" data-search="b0d978q2wt b0bkkq79fb nc4364_fba low &lt;45d">
+      <tr class="data-row soon" data-status="soon" data-search="b0d978q2wt b0bkkq79fb nc4364_fba soon">
         <td data-label="Item" class="item-cell">
       <span class="product">
         <img src="https://m.media-amazon.com/images/I/61OgEXepi+L.jpg" alt="" loading="lazy" onerror="this.style.display='none'">
@@ -1045,18 +1094,18 @@ th.item-col { background: #f8fafd; z-index: 4; }
         </span>
       </span>
     </td>
-        <td data-label="Days" class="num days"><span class="pill watch">31.0d</span></td>
+        <td data-label="Days" class="num days"><span class="pill soon">30.0d</span></td>
         <td data-label="Send" class="num send">41</td>
         <td data-label="30d units" class="num">106</td>
         <td data-label="Avg/day" class="num">3.5</td>
         <td data-label="Total units" class="num">118</td>
         <td data-label="Inbound" class="num">2</td>
-        <td data-label="Available" class="num">113</td>
+        <td data-label="Available" class="num">110</td>
         <td data-label="Transfer" class="num">0</td>
-        <td data-label="Processing" class="num">2</td>
+        <td data-label="Processing" class="num">4</td>
         <td data-label="Working" class="num">0</td>
         <td data-label="Receiving" class="num">2</td>
-        <td data-label="Status"><span class="status watch">Low &lt;45d</span></td>
+        <td data-label="Status"><span class="status soon">Soon</span></td>
       </tr>
     
       <tr class="data-row watch" data-status="watch" data-search="b0d978q2wt b08q2wmf25 nc4285_fba low &lt;45d">
@@ -1069,14 +1118,14 @@ th.item-col { background: #f8fafd; z-index: 4; }
         </span>
       </span>
     </td>
-        <td data-label="Days" class="num days"><span class="pill watch">37.0d</span></td>
-        <td data-label="Send" class="num send">469</td>
-        <td data-label="30d units" class="num">1,573</td>
-        <td data-label="Avg/day" class="num">52.4</td>
-        <td data-label="Total units" class="num">1,891</td>
+        <td data-label="Days" class="num days"><span class="pill watch">36.0d</span></td>
+        <td data-label="Send" class="num send">603</td>
+        <td data-label="30d units" class="num">1,620</td>
+        <td data-label="Avg/day" class="num">54.0</td>
+        <td data-label="Total units" class="num">1,827</td>
         <td data-label="Inbound" class="num">0</td>
-        <td data-label="Available" class="num">1,784</td>
-        <td data-label="Transfer" class="num">8</td>
+        <td data-label="Available" class="num">1,719</td>
+        <td data-label="Transfer" class="num">12</td>
         <td data-label="Processing" class="num">73</td>
         <td data-label="Working" class="num">0</td>
         <td data-label="Receiving" class="num">0</td>
@@ -1097,9 +1146,9 @@ th.item-col { background: #f8fafd; z-index: 4; }
                 <em>1 child ASIN needing FBA send-in</em>
               </div>
               <div class="parent-stats">
-                <span><strong>7.0d</strong><em>lowest cover</em></span>
-                <span><strong>621</strong><em>send units</em></span>
-                <span><strong>489</strong><em>30d units</em></span>
+                <span><strong>6.0d</strong><em>lowest cover</em></span>
+                <span><strong>663</strong><em>send units</em></span>
+                <span><strong>507</strong><em>30d units</em></span>
               </div>
             </div>
           </td>
@@ -1115,13 +1164,13 @@ th.item-col { background: #f8fafd; z-index: 4; }
         </span>
       </span>
     </td>
-        <td data-label="Days" class="num days"><span class="pill critical">7.0d</span></td>
-        <td data-label="Send" class="num send">621</td>
-        <td data-label="30d units" class="num">489</td>
-        <td data-label="Avg/day" class="num">16.3</td>
-        <td data-label="Total units" class="num">113</td>
+        <td data-label="Days" class="num days"><span class="pill critical">6.0d</span></td>
+        <td data-label="Send" class="num send">663</td>
+        <td data-label="30d units" class="num">507</td>
+        <td data-label="Avg/day" class="num">16.9</td>
+        <td data-label="Total units" class="num">98</td>
         <td data-label="Inbound" class="num">9</td>
-        <td data-label="Available" class="num">79</td>
+        <td data-label="Available" class="num">70</td>
         <td data-label="Transfer" class="num">4</td>
         <td data-label="Processing" class="num">11</td>
         <td data-label="Working" class="num">0</td>
@@ -1143,9 +1192,9 @@ th.item-col { background: #f8fafd; z-index: 4; }
                 <em>1 child ASIN needing FBA send-in</em>
               </div>
               <div class="parent-stats">
-                <span><strong>9.0d</strong><em>lowest cover</em></span>
-                <span><strong>174</strong><em>send units</em></span>
-                <span><strong>159</strong><em>30d units</em></span>
+                <span><strong>8.0d</strong><em>lowest cover</em></span>
+                <span><strong>189</strong><em>send units</em></span>
+                <span><strong>166</strong><em>30d units</em></span>
               </div>
             </div>
           </td>
@@ -1161,15 +1210,15 @@ th.item-col { background: #f8fafd; z-index: 4; }
         </span>
       </span>
     </td>
-        <td data-label="Days" class="num days"><span class="pill critical">9.0d</span></td>
-        <td data-label="Send" class="num send">174</td>
-        <td data-label="30d units" class="num">159</td>
-        <td data-label="Avg/day" class="num">5.3</td>
-        <td data-label="Total units" class="num">65</td>
+        <td data-label="Days" class="num days"><span class="pill critical">8.0d</span></td>
+        <td data-label="Send" class="num send">189</td>
+        <td data-label="30d units" class="num">166</td>
+        <td data-label="Avg/day" class="num">5.5</td>
+        <td data-label="Total units" class="num">60</td>
         <td data-label="Inbound" class="num">1</td>
-        <td data-label="Available" class="num">56</td>
+        <td data-label="Available" class="num">49</td>
         <td data-label="Transfer" class="num">1</td>
-        <td data-label="Processing" class="num">5</td>
+        <td data-label="Processing" class="num">7</td>
         <td data-label="Working" class="num">0</td>
         <td data-label="Receiving" class="num">1</td>
         <td data-label="Status"><span class="status critical">Critical</span></td>
@@ -1189,9 +1238,9 @@ th.item-col { background: #f8fafd; z-index: 4; }
                 <em>1 child ASIN needing FBA send-in</em>
               </div>
               <div class="parent-stats">
-                <span><strong>12.0d</strong><em>lowest cover</em></span>
-                <span><strong>420</strong><em>send units</em></span>
-                <span><strong>385</strong><em>30d units</em></span>
+                <span><strong>11.0d</strong><em>lowest cover</em></span>
+                <span><strong>450</strong><em>send units</em></span>
+                <span><strong>395</strong><em>30d units</em></span>
               </div>
             </div>
           </td>
@@ -1207,15 +1256,15 @@ th.item-col { background: #f8fafd; z-index: 4; }
         </span>
       </span>
     </td>
-        <td data-label="Days" class="num days"><span class="pill critical">12.0d</span></td>
-        <td data-label="Send" class="num send">420</td>
-        <td data-label="30d units" class="num">385</td>
-        <td data-label="Avg/day" class="num">12.8</td>
-        <td data-label="Total units" class="num">158</td>
+        <td data-label="Days" class="num days"><span class="pill critical">11.0d</span></td>
+        <td data-label="Send" class="num send">450</td>
+        <td data-label="30d units" class="num">395</td>
+        <td data-label="Avg/day" class="num">13.2</td>
+        <td data-label="Total units" class="num">143</td>
         <td data-label="Inbound" class="num">2</td>
-        <td data-label="Available" class="num">137</td>
-        <td data-label="Transfer" class="num">2</td>
-        <td data-label="Processing" class="num">13</td>
+        <td data-label="Available" class="num">123</td>
+        <td data-label="Transfer" class="num">4</td>
+        <td data-label="Processing" class="num">11</td>
         <td data-label="Working" class="num">0</td>
         <td data-label="Receiving" class="num">2</td>
         <td data-label="Status"><span class="status critical">Critical</span></td>
@@ -1235,9 +1284,9 @@ th.item-col { background: #f8fafd; z-index: 4; }
                 <em>1 child ASIN needing FBA send-in</em>
               </div>
               <div class="parent-stats">
-                <span><strong>18.0d</strong><em>lowest cover</em></span>
-                <span><strong>89</strong><em>send units</em></span>
-                <span><strong>216</strong><em>30d units</em></span>
+                <span><strong>17.0d</strong><em>lowest cover</em></span>
+                <span><strong>103</strong><em>send units</em></span>
+                <span><strong>223</strong><em>30d units</em></span>
               </div>
             </div>
           </td>
@@ -1253,17 +1302,17 @@ th.item-col { background: #f8fafd; z-index: 4; }
         </span>
       </span>
     </td>
-        <td data-label="Days" class="num days"><span class="pill critical">18.0d</span></td>
-        <td data-label="Send" class="num send">89</td>
-        <td data-label="30d units" class="num">216</td>
-        <td data-label="Avg/day" class="num">7.2</td>
-        <td data-label="Total units" class="num">235</td>
-        <td data-label="Inbound" class="num">195</td>
+        <td data-label="Days" class="num days"><span class="pill critical">17.0d</span></td>
+        <td data-label="Send" class="num send">103</td>
+        <td data-label="30d units" class="num">223</td>
+        <td data-label="Avg/day" class="num">7.4</td>
+        <td data-label="Total units" class="num">232</td>
+        <td data-label="Inbound" class="num">193</td>
         <td data-label="Available" class="num">0</td>
-        <td data-label="Transfer" class="num">19</td>
-        <td data-label="Processing" class="num">6</td>
+        <td data-label="Transfer" class="num">12</td>
+        <td data-label="Processing" class="num">3</td>
         <td data-label="Working" class="num">0</td>
-        <td data-label="Receiving" class="num">149</td>
+        <td data-label="Receiving" class="num">147</td>
         <td data-label="Status"><span class="status critical">Critical</span></td>
       </tr>
     
@@ -1281,9 +1330,9 @@ th.item-col { background: #f8fafd; z-index: 4; }
                 <em>1 child ASIN needing FBA send-in</em>
               </div>
               <div class="parent-stats">
-                <span><strong>20.0d</strong><em>lowest cover</em></span>
-                <span><strong>107</strong><em>send units</em></span>
-                <span><strong>160</strong><em>30d units</em></span>
+                <span><strong>19.0d</strong><em>lowest cover</em></span>
+                <span><strong>109</strong><em>send units</em></span>
+                <span><strong>157</strong><em>30d units</em></span>
               </div>
             </div>
           </td>
@@ -1299,15 +1348,15 @@ th.item-col { background: #f8fafd; z-index: 4; }
         </span>
       </span>
     </td>
-        <td data-label="Days" class="num days"><span class="pill critical">20.0d</span></td>
-        <td data-label="Send" class="num send">107</td>
-        <td data-label="30d units" class="num">160</td>
-        <td data-label="Avg/day" class="num">5.3</td>
-        <td data-label="Total units" class="num">133</td>
+        <td data-label="Days" class="num days"><span class="pill critical">19.0d</span></td>
+        <td data-label="Send" class="num send">109</td>
+        <td data-label="30d units" class="num">157</td>
+        <td data-label="Avg/day" class="num">5.2</td>
+        <td data-label="Total units" class="num">127</td>
         <td data-label="Inbound" class="num">100</td>
-        <td data-label="Available" class="num">17</td>
+        <td data-label="Available" class="num">12</td>
         <td data-label="Transfer" class="num">1</td>
-        <td data-label="Processing" class="num">11</td>
+        <td data-label="Processing" class="num">10</td>
         <td data-label="Working" class="num">0</td>
         <td data-label="Receiving" class="num">0</td>
         <td data-label="Status"><span class="status critical">Critical</span></td>
@@ -1327,9 +1376,9 @@ th.item-col { background: #f8fafd; z-index: 4; }
                 <em>1 child ASIN needing FBA send-in</em>
               </div>
               <div class="parent-stats">
-                <span><strong>23.0d</strong><em>lowest cover</em></span>
-                <span><strong>127</strong><em>send units</em></span>
-                <span><strong>175</strong><em>30d units</em></span>
+                <span><strong>22.0d</strong><em>lowest cover</em></span>
+                <span><strong>131</strong><em>send units</em></span>
+                <span><strong>174</strong><em>30d units</em></span>
               </div>
             </div>
           </td>
@@ -1345,14 +1394,14 @@ th.item-col { background: #f8fafd; z-index: 4; }
         </span>
       </span>
     </td>
-        <td data-label="Days" class="num days"><span class="pill soon">23.0d</span></td>
-        <td data-label="Send" class="num send">127</td>
-        <td data-label="30d units" class="num">175</td>
+        <td data-label="Days" class="num days"><span class="pill soon">22.0d</span></td>
+        <td data-label="Send" class="num send">131</td>
+        <td data-label="30d units" class="num">174</td>
         <td data-label="Avg/day" class="num">5.8</td>
-        <td data-label="Total units" class="num">136</td>
+        <td data-label="Total units" class="num">130</td>
         <td data-label="Inbound" class="num">20</td>
-        <td data-label="Available" class="num">90</td>
-        <td data-label="Transfer" class="num">18</td>
+        <td data-label="Available" class="num">89</td>
+        <td data-label="Transfer" class="num">15</td>
         <td data-label="Processing" class="num">5</td>
         <td data-label="Working" class="num">0</td>
         <td data-label="Receiving" class="num">0</td>
@@ -1362,71 +1411,47 @@ th.item-col { background: #f8fafd; z-index: 4; }
       </tbody>
     
 
-      <tbody class="parent-group" data-search="b0b781qsh6 b004mzmbc4 b004mzmb74 pn14g-10 pn16g-10" data-status="soon watch">
+      <tbody class="parent-group" data-search="b0b7m64lgz b0742qyggn kt8100_fba" data-status="soon">
         <tr class="parent-row">
           <td colspan="13">
             <div class="parent-card">
-              <img class="parent-img" src="https://m.media-amazon.com/images/I/71WDOcSjxSL.jpg" alt="" loading="lazy" onerror="this.style.display='none'">
+              <img class="parent-img" src="https://m.media-amazon.com/images/I/71ofJ4UMa3L.jpg" alt="" loading="lazy" onerror="this.style.display='none'">
               <div class="parent-meta">
                 <span>Parent ASIN</span>
-                <strong><a href="https://www.amazon.com/dp/B0B781QSH6" target="_blank" rel="noopener">B0B781QSH6</a></strong>
-                <em>2 child ASINs needing FBA send-in</em>
+                <strong><a href="https://www.amazon.com/dp/B0B7M64LGZ" target="_blank" rel="noopener">B0B7M64LGZ</a></strong>
+                <em>1 child ASIN needing FBA send-in</em>
               </div>
               <div class="parent-stats">
-                <span><strong>24.0d</strong><em>lowest cover</em></span>
-                <span><strong>456</strong><em>send units</em></span>
-                <span><strong>1,400</strong><em>30d units</em></span>
+                <span><strong>22.0d</strong><em>lowest cover</em></span>
+                <span><strong>53</strong><em>send units</em></span>
+                <span><strong>104</strong><em>30d units</em></span>
               </div>
             </div>
           </td>
         </tr>
         
-      <tr class="data-row soon" data-status="soon" data-search="b0b781qsh6 b004mzmbc4 pn14g-10 soon">
+      <tr class="data-row soon" data-status="soon" data-search="b0b7m64lgz b0742qyggn kt8100_fba soon">
         <td data-label="Item" class="item-cell">
       <span class="product">
-        <img src="https://m.media-amazon.com/images/I/61ezmem+otL.jpg" alt="" loading="lazy" onerror="this.style.display='none'">
+        <img src="https://m.media-amazon.com/images/I/71ofJ4UMa3L.jpg" alt="" loading="lazy" onerror="this.style.display='none'">
         <span class="product-meta">
-          <strong>PN14G-10</strong>
-          <span><a href="https://www.amazon.com/dp/B004MZMBC4" target="_blank" rel="noopener">B004MZMBC4</a></span>
+          <strong>KT8100_FBA</strong>
+          <span><a href="https://www.amazon.com/dp/B0742QYGGN" target="_blank" rel="noopener">B0742QYGGN</a></span>
         </span>
       </span>
     </td>
-        <td data-label="Days" class="num days"><span class="pill soon">24.0d</span></td>
-        <td data-label="Send" class="num send">160</td>
-        <td data-label="30d units" class="num">329</td>
-        <td data-label="Avg/day" class="num">11.0</td>
-        <td data-label="Total units" class="num">334</td>
-        <td data-label="Inbound" class="num">200</td>
-        <td data-label="Available" class="num">105</td>
-        <td data-label="Transfer" class="num">0</td>
-        <td data-label="Processing" class="num">26</td>
+        <td data-label="Days" class="num days"><span class="pill soon">22.0d</span></td>
+        <td data-label="Send" class="num send">53</td>
+        <td data-label="30d units" class="num">104</td>
+        <td data-label="Avg/day" class="num">3.5</td>
+        <td data-label="Total units" class="num">103</td>
+        <td data-label="Inbound" class="num">1</td>
+        <td data-label="Available" class="num">97</td>
+        <td data-label="Transfer" class="num">1</td>
+        <td data-label="Processing" class="num">3</td>
         <td data-label="Working" class="num">0</td>
-        <td data-label="Receiving" class="num">0</td>
+        <td data-label="Receiving" class="num">1</td>
         <td data-label="Status"><span class="status soon">Soon</span></td>
-      </tr>
-    
-      <tr class="data-row watch" data-status="watch" data-search="b0b781qsh6 b004mzmb74 pn16g-10 low &lt;45d">
-        <td data-label="Item" class="item-cell">
-      <span class="product">
-        <img src="https://m.media-amazon.com/images/I/71WDOcSjxSL.jpg" alt="" loading="lazy" onerror="this.style.display='none'">
-        <span class="product-meta">
-          <strong>PN16G-10</strong>
-          <span><a href="https://www.amazon.com/dp/B004MZMB74" target="_blank" rel="noopener">B004MZMB74</a></span>
-        </span>
-      </span>
-    </td>
-        <td data-label="Days" class="num days"><span class="pill watch">31.0d</span></td>
-        <td data-label="Send" class="num send">296</td>
-        <td data-label="30d units" class="num">1,071</td>
-        <td data-label="Avg/day" class="num">35.7</td>
-        <td data-label="Total units" class="num">1,311</td>
-        <td data-label="Inbound" class="num">1,000</td>
-        <td data-label="Available" class="num">200</td>
-        <td data-label="Transfer" class="num">10</td>
-        <td data-label="Processing" class="num">77</td>
-        <td data-label="Working" class="num">0</td>
-        <td data-label="Receiving" class="num">0</td>
-        <td data-label="Status"><span class="status watch">Low &lt;45d</span></td>
       </tr>
     
       </tbody>
@@ -1443,8 +1468,8 @@ th.item-col { background: #f8fafd; z-index: 4; }
                 <em>1 child ASIN needing FBA send-in</em>
               </div>
               <div class="parent-stats">
-                <span><strong>25.0d</strong><em>lowest cover</em></span>
-                <span><strong>108</strong><em>send units</em></span>
+                <span><strong>24.0d</strong><em>lowest cover</em></span>
+                <span><strong>112</strong><em>send units</em></span>
                 <span><strong>164</strong><em>30d units</em></span>
               </div>
             </div>
@@ -1461,15 +1486,85 @@ th.item-col { background: #f8fafd; z-index: 4; }
         </span>
       </span>
     </td>
-        <td data-label="Days" class="num days"><span class="pill soon">25.0d</span></td>
-        <td data-label="Send" class="num send">108</td>
+        <td data-label="Days" class="num days"><span class="pill soon">24.0d</span></td>
+        <td data-label="Send" class="num send">112</td>
         <td data-label="30d units" class="num">164</td>
         <td data-label="Avg/day" class="num">5.5</td>
-        <td data-label="Total units" class="num">138</td>
+        <td data-label="Total units" class="num">134</td>
         <td data-label="Inbound" class="num">0</td>
-        <td data-label="Available" class="num">130</td>
+        <td data-label="Available" class="num">124</td>
         <td data-label="Transfer" class="num">1</td>
-        <td data-label="Processing" class="num">4</td>
+        <td data-label="Processing" class="num">6</td>
+        <td data-label="Working" class="num">0</td>
+        <td data-label="Receiving" class="num">0</td>
+        <td data-label="Status"><span class="status soon">Soon</span></td>
+      </tr>
+    
+      </tbody>
+    
+
+      <tbody class="parent-group" data-search="b0b781qsh6 b004mzmbc4 b004mzmb74 pn14g-10 pn16g-10" data-status="soon">
+        <tr class="parent-row">
+          <td colspan="13">
+            <div class="parent-card">
+              <img class="parent-img" src="https://m.media-amazon.com/images/I/71WDOcSjxSL.jpg" alt="" loading="lazy" onerror="this.style.display='none'">
+              <div class="parent-meta">
+                <span>Parent ASIN</span>
+                <strong><a href="https://www.amazon.com/dp/B0B781QSH6" target="_blank" rel="noopener">B0B781QSH6</a></strong>
+                <em>2 child ASINs needing FBA send-in</em>
+              </div>
+              <div class="parent-stats">
+                <span><strong>24.0d</strong><em>lowest cover</em></span>
+                <span><strong>503</strong><em>send units</em></span>
+                <span><strong>1,403</strong><em>30d units</em></span>
+              </div>
+            </div>
+          </td>
+        </tr>
+        
+      <tr class="data-row soon" data-status="soon" data-search="b0b781qsh6 b004mzmbc4 pn14g-10 soon">
+        <td data-label="Item" class="item-cell">
+      <span class="product">
+        <img src="https://m.media-amazon.com/images/I/61ezmem+otL.jpg" alt="" loading="lazy" onerror="this.style.display='none'">
+        <span class="product-meta">
+          <strong>PN14G-10</strong>
+          <span><a href="https://www.amazon.com/dp/B004MZMBC4" target="_blank" rel="noopener">B004MZMBC4</a></span>
+        </span>
+      </span>
+    </td>
+        <td data-label="Days" class="num days"><span class="pill soon">24.0d</span></td>
+        <td data-label="Send" class="num send">187</td>
+        <td data-label="30d units" class="num">338</td>
+        <td data-label="Avg/day" class="num">11.3</td>
+        <td data-label="Total units" class="num">320</td>
+        <td data-label="Inbound" class="num">200</td>
+        <td data-label="Available" class="num">94</td>
+        <td data-label="Transfer" class="num">0</td>
+        <td data-label="Processing" class="num">23</td>
+        <td data-label="Working" class="num">0</td>
+        <td data-label="Receiving" class="num">0</td>
+        <td data-label="Status"><span class="status soon">Soon</span></td>
+      </tr>
+    
+      <tr class="data-row soon" data-status="soon" data-search="b0b781qsh6 b004mzmb74 pn16g-10 soon">
+        <td data-label="Item" class="item-cell">
+      <span class="product">
+        <img src="https://m.media-amazon.com/images/I/71WDOcSjxSL.jpg" alt="" loading="lazy" onerror="this.style.display='none'">
+        <span class="product-meta">
+          <strong>PN16G-10</strong>
+          <span><a href="https://www.amazon.com/dp/B004MZMB74" target="_blank" rel="noopener">B004MZMB74</a></span>
+        </span>
+      </span>
+    </td>
+        <td data-label="Days" class="num days"><span class="pill soon">30.0d</span></td>
+        <td data-label="Send" class="num send">316</td>
+        <td data-label="30d units" class="num">1,065</td>
+        <td data-label="Avg/day" class="num">35.5</td>
+        <td data-label="Total units" class="num">1,282</td>
+        <td data-label="Inbound" class="num">1,000</td>
+        <td data-label="Available" class="num">163</td>
+        <td data-label="Transfer" class="num">13</td>
+        <td data-label="Processing" class="num">82</td>
         <td data-label="Working" class="num">0</td>
         <td data-label="Receiving" class="num">0</td>
         <td data-label="Status"><span class="status soon">Soon</span></td>
@@ -1489,9 +1584,9 @@ th.item-col { background: #f8fafd; z-index: 4; }
                 <em>1 child ASIN needing FBA send-in</em>
               </div>
               <div class="parent-stats">
-                <span><strong>27.0d</strong><em>lowest cover</em></span>
-                <span><strong>226</strong><em>send units</em></span>
-                <span><strong>395</strong><em>30d units</em></span>
+                <span><strong>26.0d</strong><em>lowest cover</em></span>
+                <span><strong>245</strong><em>send units</em></span>
+                <span><strong>399</strong><em>30d units</em></span>
               </div>
             </div>
           </td>
@@ -1507,15 +1602,15 @@ th.item-col { background: #f8fafd; z-index: 4; }
         </span>
       </span>
     </td>
-        <td data-label="Days" class="num days"><span class="pill soon">27.0d</span></td>
-        <td data-label="Send" class="num send">226</td>
-        <td data-label="30d units" class="num">395</td>
-        <td data-label="Avg/day" class="num">13.2</td>
-        <td data-label="Total units" class="num">367</td>
+        <td data-label="Days" class="num days"><span class="pill soon">26.0d</span></td>
+        <td data-label="Send" class="num send">245</td>
+        <td data-label="30d units" class="num">399</td>
+        <td data-label="Avg/day" class="num">13.3</td>
+        <td data-label="Total units" class="num">354</td>
         <td data-label="Inbound" class="num">60</td>
-        <td data-label="Available" class="num">191</td>
-        <td data-label="Transfer" class="num">103</td>
-        <td data-label="Processing" class="num">6</td>
+        <td data-label="Available" class="num">170</td>
+        <td data-label="Transfer" class="num">98</td>
+        <td data-label="Processing" class="num">17</td>
         <td data-label="Working" class="num">0</td>
         <td data-label="Receiving" class="num">0</td>
         <td data-label="Status"><span class="status soon">Soon</span></td>
@@ -1535,9 +1630,9 @@ th.item-col { background: #f8fafd; z-index: 4; }
                 <em>1 child ASIN needing FBA send-in</em>
               </div>
               <div class="parent-stats">
-                <span><strong>27.0d</strong><em>lowest cover</em></span>
-                <span><strong>1,394</strong><em>send units</em></span>
-                <span><strong>2,992</strong><em>30d units</em></span>
+                <span><strong>26.0d</strong><em>lowest cover</em></span>
+                <span><strong>1,536</strong><em>send units</em></span>
+                <span><strong>3,007</strong><em>30d units</em></span>
               </div>
             </div>
           </td>
@@ -1553,15 +1648,15 @@ th.item-col { background: #f8fafd; z-index: 4; }
         </span>
       </span>
     </td>
-        <td data-label="Days" class="num days"><span class="pill soon">27.0d</span></td>
-        <td data-label="Send" class="num send">1,394</td>
-        <td data-label="30d units" class="num">2,992</td>
-        <td data-label="Avg/day" class="num">99.7</td>
-        <td data-label="Total units" class="num">3,094</td>
-        <td data-label="Inbound" class="num">244</td>
-        <td data-label="Available" class="num">2,013</td>
-        <td data-label="Transfer" class="num">613</td>
-        <td data-label="Processing" class="num">160</td>
+        <td data-label="Days" class="num days"><span class="pill soon">26.0d</span></td>
+        <td data-label="Send" class="num send">1,536</td>
+        <td data-label="30d units" class="num">3,007</td>
+        <td data-label="Avg/day" class="num">100.2</td>
+        <td data-label="Total units" class="num">2,975</td>
+        <td data-label="Inbound" class="num">140</td>
+        <td data-label="Available" class="num">1,954</td>
+        <td data-label="Transfer" class="num">623</td>
+        <td data-label="Processing" class="num">183</td>
         <td data-label="Working" class="num">0</td>
         <td data-label="Receiving" class="num">0</td>
         <td data-label="Status"><span class="status soon">Soon</span></td>
@@ -1582,8 +1677,8 @@ th.item-col { background: #f8fafd; z-index: 4; }
               </div>
               <div class="parent-stats">
                 <span><strong>31.0d</strong><em>lowest cover</em></span>
-                <span><strong>1,086</strong><em>send units</em></span>
-                <span><strong>4,406</strong><em>30d units</em></span>
+                <span><strong>1,645</strong><em>send units</em></span>
+                <span><strong>4,598</strong><em>30d units</em></span>
               </div>
             </div>
           </td>
@@ -1600,16 +1695,16 @@ th.item-col { background: #f8fafd; z-index: 4; }
       </span>
     </td>
         <td data-label="Days" class="num days"><span class="pill watch">31.0d</span></td>
-        <td data-label="Send" class="num send">1,086</td>
-        <td data-label="30d units" class="num">4,406</td>
-        <td data-label="Avg/day" class="num">146.9</td>
-        <td data-label="Total units" class="num">5,523</td>
-        <td data-label="Inbound" class="num">942</td>
-        <td data-label="Available" class="num">2,693</td>
-        <td data-label="Transfer" class="num">1,336</td>
-        <td data-label="Processing" class="num">462</td>
+        <td data-label="Send" class="num send">1,645</td>
+        <td data-label="30d units" class="num">4,598</td>
+        <td data-label="Avg/day" class="num">153.3</td>
+        <td data-label="Total units" class="num">5,252</td>
+        <td data-label="Inbound" class="num">780</td>
+        <td data-label="Available" class="num">2,726</td>
+        <td data-label="Transfer" class="num">1,402</td>
+        <td data-label="Processing" class="num">263</td>
         <td data-label="Working" class="num">0</td>
-        <td data-label="Receiving" class="num">0</td>
+        <td data-label="Receiving" class="num">10</td>
         <td data-label="Status"><span class="status watch">Low &lt;45d</span></td>
       </tr>
     
@@ -1627,9 +1722,9 @@ th.item-col { background: #f8fafd; z-index: 4; }
                 <em>1 child ASIN needing FBA send-in</em>
               </div>
               <div class="parent-stats">
-                <span><strong>33.0d</strong><em>lowest cover</em></span>
-                <span><strong>311</strong><em>send units</em></span>
-                <span><strong>938</strong><em>30d units</em></span>
+                <span><strong>32.0d</strong><em>lowest cover</em></span>
+                <span><strong>344</strong><em>send units</em></span>
+                <span><strong>942</strong><em>30d units</em></span>
               </div>
             </div>
           </td>
@@ -1645,87 +1740,17 @@ th.item-col { background: #f8fafd; z-index: 4; }
         </span>
       </span>
     </td>
-        <td data-label="Days" class="num days"><span class="pill watch">33.0d</span></td>
-        <td data-label="Send" class="num send">311</td>
-        <td data-label="30d units" class="num">938</td>
-        <td data-label="Avg/day" class="num">31.3</td>
-        <td data-label="Total units" class="num">1,096</td>
+        <td data-label="Days" class="num days"><span class="pill watch">32.0d</span></td>
+        <td data-label="Send" class="num send">344</td>
+        <td data-label="30d units" class="num">942</td>
+        <td data-label="Avg/day" class="num">31.4</td>
+        <td data-label="Total units" class="num">1,069</td>
         <td data-label="Inbound" class="num">0</td>
-        <td data-label="Available" class="num">846</td>
-        <td data-label="Transfer" class="num">175</td>
-        <td data-label="Processing" class="num">47</td>
+        <td data-label="Available" class="num">844</td>
+        <td data-label="Transfer" class="num">145</td>
+        <td data-label="Processing" class="num">51</td>
         <td data-label="Working" class="num">0</td>
         <td data-label="Receiving" class="num">0</td>
-        <td data-label="Status"><span class="status watch">Low &lt;45d</span></td>
-      </tr>
-    
-      </tbody>
-    
-
-      <tbody class="parent-group" data-search="b0cqzl389h b0drml3zmm b0cqtmbrzt eo-jojoba-1oz eo-jojoba-4oz-sp_upc" data-status="watch">
-        <tr class="parent-row">
-          <td colspan="13">
-            <div class="parent-card">
-              <img class="parent-img" src="https://m.media-amazon.com/images/I/71LRhF96QGL.jpg" alt="" loading="lazy" onerror="this.style.display='none'">
-              <div class="parent-meta">
-                <span>Parent ASIN</span>
-                <strong><a href="https://www.amazon.com/dp/B0CQZL389H" target="_blank" rel="noopener">B0CQZL389H</a></strong>
-                <em>2 child ASINs needing FBA send-in</em>
-              </div>
-              <div class="parent-stats">
-                <span><strong>34.0d</strong><em>lowest cover</em></span>
-                <span><strong>1,321</strong><em>send units</em></span>
-                <span><strong>3,940</strong><em>30d units</em></span>
-              </div>
-            </div>
-          </td>
-        </tr>
-        
-      <tr class="data-row watch" data-status="watch" data-search="b0cqzl389h b0drml3zmm eo-jojoba-1oz low &lt;45d">
-        <td data-label="Item" class="item-cell">
-      <span class="product">
-        <img src="https://m.media-amazon.com/images/I/71LRhF96QGL.jpg" alt="" loading="lazy" onerror="this.style.display='none'">
-        <span class="product-meta">
-          <strong>EO-JOJOBA-1oz</strong>
-          <span><a href="https://www.amazon.com/dp/B0DRML3ZMM" target="_blank" rel="noopener">B0DRML3ZMM</a></span>
-        </span>
-      </span>
-    </td>
-        <td data-label="Days" class="num days"><span class="pill watch">34.0d</span></td>
-        <td data-label="Send" class="num send">1,269</td>
-        <td data-label="30d units" class="num">3,617</td>
-        <td data-label="Avg/day" class="num">120.6</td>
-        <td data-label="Total units" class="num">4,157</td>
-        <td data-label="Inbound" class="num">418</td>
-        <td data-label="Available" class="num">3,457</td>
-        <td data-label="Transfer" class="num">54</td>
-        <td data-label="Processing" class="num">145</td>
-        <td data-label="Working" class="num">0</td>
-        <td data-label="Receiving" class="num">210</td>
-        <td data-label="Status"><span class="status watch">Low &lt;45d</span></td>
-      </tr>
-    
-      <tr class="data-row watch" data-status="watch" data-search="b0cqzl389h b0cqtmbrzt eo-jojoba-4oz-sp_upc low &lt;45d">
-        <td data-label="Item" class="item-cell">
-      <span class="product">
-        <img src="https://m.media-amazon.com/images/I/71G1tf5zaCL.jpg" alt="" loading="lazy" onerror="this.style.display='none'">
-        <span class="product-meta">
-          <strong>EO-JOJOBA-4oz-SP_UPC</strong>
-          <span><a href="https://www.amazon.com/dp/B0CQTMBRZT" target="_blank" rel="noopener">B0CQTMBRZT</a></span>
-        </span>
-      </span>
-    </td>
-        <td data-label="Days" class="num days"><span class="pill watch">51.0d</span></td>
-        <td data-label="Send" class="num send">52</td>
-        <td data-label="30d units" class="num">323</td>
-        <td data-label="Avg/day" class="num">10.8</td>
-        <td data-label="Total units" class="num">433</td>
-        <td data-label="Inbound" class="num">251</td>
-        <td data-label="Available" class="num">163</td>
-        <td data-label="Transfer" class="num">2</td>
-        <td data-label="Processing" class="num">13</td>
-        <td data-label="Working" class="num">0</td>
-        <td data-label="Receiving" class="num">1</td>
         <td data-label="Status"><span class="status watch">Low &lt;45d</span></td>
       </tr>
     
@@ -1743,9 +1768,9 @@ th.item-col { background: #f8fafd; z-index: 4; }
                 <em>1 child ASIN needing FBA send-in</em>
               </div>
               <div class="parent-stats">
-                <span><strong>35.0d</strong><em>lowest cover</em></span>
-                <span><strong>177</strong><em>send units</em></span>
-                <span><strong>508</strong><em>30d units</em></span>
+                <span><strong>34.0d</strong><em>lowest cover</em></span>
+                <span><strong>207</strong><em>send units</em></span>
+                <span><strong>518</strong><em>30d units</em></span>
               </div>
             </div>
           </td>
@@ -1761,15 +1786,15 @@ th.item-col { background: #f8fafd; z-index: 4; }
         </span>
       </span>
     </td>
-        <td data-label="Days" class="num days"><span class="pill watch">35.0d</span></td>
-        <td data-label="Send" class="num send">177</td>
-        <td data-label="30d units" class="num">508</td>
-        <td data-label="Avg/day" class="num">16.9</td>
-        <td data-label="Total units" class="num">585</td>
+        <td data-label="Days" class="num days"><span class="pill watch">34.0d</span></td>
+        <td data-label="Send" class="num send">207</td>
+        <td data-label="30d units" class="num">518</td>
+        <td data-label="Avg/day" class="num">17.3</td>
+        <td data-label="Total units" class="num">570</td>
         <td data-label="Inbound" class="num">0</td>
         <td data-label="Available" class="num">449</td>
-        <td data-label="Transfer" class="num">97</td>
-        <td data-label="Processing" class="num">27</td>
+        <td data-label="Transfer" class="num">78</td>
+        <td data-label="Processing" class="num">34</td>
         <td data-label="Working" class="num">0</td>
         <td data-label="Receiving" class="num">0</td>
         <td data-label="Status"><span class="status watch">Low &lt;45d</span></td>
@@ -1790,8 +1815,8 @@ th.item-col { background: #f8fafd; z-index: 4; }
               </div>
               <div class="parent-stats">
                 <span><strong>37.0d</strong><em>lowest cover</em></span>
-                <span><strong>423</strong><em>send units</em></span>
-                <span><strong>440</strong><em>30d units</em></span>
+                <span><strong>409</strong><em>send units</em></span>
+                <span><strong>429</strong><em>30d units</em></span>
               </div>
             </div>
           </td>
@@ -1808,16 +1833,62 @@ th.item-col { background: #f8fafd; z-index: 4; }
       </span>
     </td>
         <td data-label="Days" class="num days"><span class="pill watch">37.0d</span></td>
-        <td data-label="Send" class="num send">423</td>
-        <td data-label="30d units" class="num">440</td>
-        <td data-label="Avg/day" class="num">14.7</td>
-        <td data-label="Total units" class="num">237</td>
-        <td data-label="Inbound" class="num">96</td>
-        <td data-label="Available" class="num">32</td>
-        <td data-label="Transfer" class="num">95</td>
+        <td data-label="Send" class="num send">409</td>
+        <td data-label="30d units" class="num">429</td>
+        <td data-label="Avg/day" class="num">14.3</td>
+        <td data-label="Total units" class="num">235</td>
+        <td data-label="Inbound" class="num">48</td>
+        <td data-label="Available" class="num">42</td>
+        <td data-label="Transfer" class="num">132</td>
         <td data-label="Processing" class="num">6</td>
         <td data-label="Working" class="num">0</td>
         <td data-label="Receiving" class="num">0</td>
+        <td data-label="Status"><span class="status watch">Low &lt;45d</span></td>
+      </tr>
+    
+      </tbody>
+    
+
+      <tbody class="parent-group" data-search="b0cqzl389h b0cqtmbrzt eo-jojoba-4oz-sp_upc" data-status="watch">
+        <tr class="parent-row">
+          <td colspan="13">
+            <div class="parent-card">
+              <img class="parent-img" src="https://m.media-amazon.com/images/I/71G1tf5zaCL.jpg" alt="" loading="lazy" onerror="this.style.display='none'">
+              <div class="parent-meta">
+                <span>Parent ASIN</span>
+                <strong><a href="https://www.amazon.com/dp/B0CQZL389H" target="_blank" rel="noopener">B0CQZL389H</a></strong>
+                <em>1 child ASIN needing FBA send-in</em>
+              </div>
+              <div class="parent-stats">
+                <span><strong>50.0d</strong><em>lowest cover</em></span>
+                <span><strong>76</strong><em>send units</em></span>
+                <span><strong>330</strong><em>30d units</em></span>
+              </div>
+            </div>
+          </td>
+        </tr>
+        
+      <tr class="data-row watch" data-status="watch" data-search="b0cqzl389h b0cqtmbrzt eo-jojoba-4oz-sp_upc low &lt;45d">
+        <td data-label="Item" class="item-cell">
+      <span class="product">
+        <img src="https://m.media-amazon.com/images/I/71G1tf5zaCL.jpg" alt="" loading="lazy" onerror="this.style.display='none'">
+        <span class="product-meta">
+          <strong>EO-JOJOBA-4oz-SP_UPC</strong>
+          <span><a href="https://www.amazon.com/dp/B0CQTMBRZT" target="_blank" rel="noopener">B0CQTMBRZT</a></span>
+        </span>
+      </span>
+    </td>
+        <td data-label="Days" class="num days"><span class="pill watch">50.0d</span></td>
+        <td data-label="Send" class="num send">76</td>
+        <td data-label="30d units" class="num">330</td>
+        <td data-label="Avg/day" class="num">11.0</td>
+        <td data-label="Total units" class="num">419</td>
+        <td data-label="Inbound" class="num">251</td>
+        <td data-label="Available" class="num">155</td>
+        <td data-label="Transfer" class="num">2</td>
+        <td data-label="Processing" class="num">5</td>
+        <td data-label="Working" class="num">0</td>
+        <td data-label="Receiving" class="num">1</td>
         <td data-label="Status"><span class="status watch">Low &lt;45d</span></td>
       </tr>
     
